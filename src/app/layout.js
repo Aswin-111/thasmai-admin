@@ -25,13 +25,14 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
-        <Navbar heading={"Financial"} />
-
-        <div className="flex m-0 p-0">
-          <div className="w-[18%] m-0">
-            <SideBar />
-          </div>  
-          <div className="m-0 bg-emerald-300 w-[82%] h-[100px]   flex items-center">{children}</div>
+      <div className="m-0 p-0 flex h-[100vh] overflow-hidden">
+          <div className="m-0 w-[18%] h-[100%]">
+            <SideBar/>  
+          </div>
+          <div className="w-[82%] h-[100%]">
+            <Navbar/>
+            <div className="border-solid border-t-4 border-l-4 h-[100%] py-5 px-2 bg-[#F3F3F3]">{ children }</div>
+          </div>
         </div>
       </body>
     </html>

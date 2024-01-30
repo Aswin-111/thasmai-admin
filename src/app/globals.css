@@ -1,10 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,400&display=swap');
-
-*{
-    font-family: "Poppins" ,sans-serif;
+ 
+.link{
+  border-radius:7px;
+  text-decoration: none;
 }
 
+
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+   border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
+.rounded-class{
+  border-radius: 10px;
+}
 

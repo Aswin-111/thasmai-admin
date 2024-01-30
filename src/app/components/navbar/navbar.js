@@ -1,14 +1,15 @@
+"use client"
 import React from "react";
-
-function Navbar({heading}) {
+import {useStore} from '../../state/navbar-state'
+function Navbar() {
+  const nav_text  = useStore(state => state.navbar_text)
   return (
-    <nav className="navbar w-full h-10 bg-white flex justify-between">
-      <div className="w-[18rem]"></div>
-      <div className="w-[82rem] px-10 flex justify-between">
-        <h1>{heading}</h1>
-        <h1>Thasmai</h1>
-      </div>
-    </nav>
+    <nav className="navbar w-full h-10 px-10 bg-white flex justify-between">
+      
+    <h1>{nav_text}</h1>
+    <h1>Thasmai</h1>
+
+</nav>
   );
 }
 

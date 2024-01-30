@@ -1,9 +1,7 @@
-import Image from 'next/image'
+"use client"
 
-export default function Home() {
+export default function Home({ Component, pageProps }) {
   return (
-   <div>
-    <h1 className='text-3xl font-bold text-indigo-600'>Main page</h1>
-   </div>
+<h1>shu </h1>
   )
 }
