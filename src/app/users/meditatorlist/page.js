@@ -9,11 +9,13 @@ import data from "./data.json";
 import { useEffect, useRef } from "react";
 import DatePicker from "./datepicker";
 import FilterChip from "./filterchips";
+
+
+
 function MeditatorList() {
+
   const fieldRef = useRef()
   const operatorRef = useRef()
- 
-
   const dataRef = useRef()
 
   const filterState = useFilterStore((state) => {
@@ -30,15 +32,18 @@ function MeditatorList() {
 
 useEffect(()=>{console.log('hi',filterState.FieldValue);filterState.setFieldText(filterState.FieldValue)},[])
 useEffect(()=>{filterState.setFieldText(filterState.FieldValue)},[filterState.FieldValue])  
+
   const setNavbarText = useStore((state) => state.setNavbarText);
   
-
   setNavbarText("Users");
+  
   function handleFieldChange(e) {
     const value = e.target.value;
     // console.log(value, filterState);
     filterState.setFieldText(value);
   }
+
+  
   return (
     <div className="px-7">
       <div className="flex items-center justify-between ">
@@ -47,13 +52,12 @@ useEffect(()=>{filterState.setFieldText(filterState.FieldValue)},[filterState.Fi
       </div>
 
       <div className="mt-5 w-full flex justify-between bg-slate-100">
+
         <select ref = {fieldRef}
           className="px-5 h-10 focus:outline-none  rounded-xl shadow-lg bg-white text-black"
           onChange={(e) => {
             handleFieldChange(e);
           }}
-         
-          
           onLoad={(e) => {
             // handleFieldChange(e);
             
@@ -157,7 +161,7 @@ useEffect(()=>{filterState.setFieldText(filterState.FieldValue)},[filterState.Fi
           Save
         </button>
       </div>
-      <div className="w-full h-[10vh] max-h-48 bg-[#5799FD] rounded-xl overflow-y-auto shadow my-5 grid grid-cols-2 items-center snap-mandatory snap-y py-11">
+      <div className="w-full h-[10vh] max-h-48 bg-[#5799FD] rounded-xl overflow-y-auto shadow my-5 grid grid-cols-2 items-center snap-mandatory snap-y py-10">
 
         {filterState.filters.map((i,index) => {
           return (

@@ -1,5 +1,6 @@
 "use client";
 import { create } from "zustand";
+
 export const useFilterStore = create((set) => ({
   FieldValues :["DOJ","Name","Id","Coupon","Phone","Email","Status"],
   dojOperator: [

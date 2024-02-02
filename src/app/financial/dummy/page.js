@@ -5,11 +5,9 @@ import React, { useEffect, useRef } from "react";
 import NavLink from '../navlink/navlink';
 import Filterchip from "../filterchip/filterchip";
 import Image from "next/image";
-import FeesTable from "@/app/components/datatable/feesTable";
-import data from "./data.json"
 
 
-function Fees() {
+function Distribution() {
 
  
 
@@ -110,7 +108,7 @@ function Fees() {
         </div>
 
 
-        <FeesTable data={data}/>
+
 
       </div> {/* ----close table container----*/}
 
@@ -121,4 +119,4 @@ function Fees() {
   )
 }
 
-export default Fees
+export default Distribution
