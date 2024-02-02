@@ -41,8 +41,6 @@ function FeesTable({ data }) {
                 <td className="text-center">{i.latestFee} </td>
                 <td className="text-center">{i.distCoupons} </td>
                 <td className="text-center">{i.availCoupons} </td>
-
-                
               </tr>
             );
           })}
