@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* overridden number arrows  */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+ 
+.link{
+  border-radius:7px;
+  text-decoration: none;
+}
+
+/* * :root {
+  --primary: transparent;
+  --secondary: #8686862f;
+} */
+
+*{
+  font-family: "Poppins" ,sans-serif;
+  /* scrollbar-width: thin; */
+ /* scrollbar-color: var(--secondary) var(--primary); */
+} 
+
+*::-webkit-scrollbar {
+  width: 4px;
+
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+   border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
+.rounded-class{
+  border-radius: 10px;
+}
+

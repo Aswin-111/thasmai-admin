@@ -1,0 +1,93 @@
+[
+    {
+        "id" : 1,
+        "userName" : "Jasmine",
+        "date": "21-02-2024",
+        "checkInDate" : "21-02-2024",
+        "checkOutDate" : "28-02-2024",
+        "status" : "21-02-2024"
+        
+
+
+        
+    },
+    {
+        "id" : 2,
+        "userName" : "Jasmine",
+        "date": "21-02-2024",
+        "checkInDate" : "21-02-2024",
+        "checkOutDate" : "28-02-2024",
+        "status" : "21-02-2024"
+        
+
+
+        
+    }, {
+        "id" : 3,
+        "userName" : "Jasmine",
+        "date": "21-02-2024",
+        "checkInDate" : "21-02-2024",
+        "checkOutDate" : "28-02-2024",
+        "status" : "21-02-2024"
+        
+
+
+        
+    }, {
+        "id" : 4,
+        "userName" : "Jasmine",
+        "date": "21-02-2024",
+        "checkInDate" : "21-02-2024",
+        "checkOutDate" : "28-02-2024",
+        "status" : "21-02-2024"
+        
+
+
+        
+    }, {
+        "id" : 5,
+        "userName" : "Jasmine",
+        "date": "21-02-2024",
+        "checkInDate" : "21-02-2024",
+        "checkOutDate" : "28-02-2024",
+        "status" : "21-02-2024"
+        
+
+
+        
+    }, {
+        "id" : 6,
+        "userName" : "Jasmine",
+        "date": "21-02-2024",
+        "checkInDate" : "21-02-2024",
+        "checkOutDate" : "28-02-2024",
+        "status" : "21-02-2024"
+        
+
+
+        
+    }, {
+        "id" : 7,
+        "userName" : "Jasmine",
+        "date": "21-02-2024",
+        "checkInDate" : "21-02-2024",
+        "checkOutDate" : "28-02-2024",
+        "status" : "21-02-2024"
+        
+
+
+        
+    }, {
+        "id" : 8,
+        "userName" : "Jasmine",
+        "date": "21-02-2024",
+        "checkInDate" : "21-02-2024",
+        "checkOutDate" : "28-02-2024",
+        "status" : "21-02-2024"
+        
+
+
+        
+    }
+    
+]
