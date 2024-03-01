@@ -286,15 +286,24 @@ function AppointmentsTable() {
 
 
   useEffect(() =>{
-    fetchData()
+    fetchData();
+    return () => {
+      return;
+    }
     
   }, [appointmentState.appointments])
 
-  async function fetchData(){
+  async function fetchData() {
+   try {
+    
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);
     appointmentState.setAppointments(response.data.data);
-    console.log(`${process.env.NEXT_PUBLIC_API_URL}`)
-    return;
+    
+   } catch (error) {
+
+     console.log(error);
+   }
+      
 
   }
 
@@ -324,26 +333,25 @@ function AppointmentsTable() {
    
 
   return (
-    <div className="overflow-scroll h-[80%] px-3 ">
-      <table className="table rounded-3xl">
+    <div className="h-80 ">
+      <table className="table  rounded-3xl max-h-[10vh]">
         <thead
           className="bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
           style={{ borderRadius: "11px" }}
         >
           <tr className="rounded-3xl">
-            <th className="text-center">Id</th>
+            <th className="text-center ">Id</th>
             <th className="text-center">Date</th>
             <th className="text-center">Username</th>
             <th className="text-center">Check In</th>
             <th className="text-center">Check Out</th>
             <th className="text-center">Status</th>
             <th className="text-center">Change Status</th>
-
             <th className="text-center">Details</th>
            
           </tr>
         </thead>
-        <tbody className="my-10">
+        <tbody className=" overflow-scroll">
           {
            appointmentState.appointments.map((appointment, index) => {
 
@@ -415,9 +423,9 @@ function AppointmentsTable() {
                     ("N/A")
                   }
 
-
                 </td>
                 
+
 
                 <td className="text-center">
                   <button 
@@ -430,7 +438,9 @@ function AppointmentsTable() {
                   </button>                
                 </td>
 
+                
 
+               
 
                             
                 

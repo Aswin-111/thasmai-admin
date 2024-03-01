@@ -6,6 +6,7 @@ import NavLink from '../navlink/navlink'
 import AppointmentsTable from '@/app/components/operator/operatorTable'
 import AppointmentView from '@/app/components/operator/appointmentView'
 import CheckoutPayment from '@/app/components/operator/checkoutPayment'
+import FeedbackView from '@/app/components/feedback/FeedbackView'
 import axios from 'axios';
 import { useAppointmentStore } from './appointmentState'
 
@@ -40,19 +41,19 @@ function Appointments() {
 
 
   return (
-    <div className="px-7 h-full">
+    <div className="px-7 h-full ">
       <div className="w-[60%] flex items-center justify-between ">
         <NavLink />
       </div>
-      <div className='w-full h-[75%] mt-10 p-3 pt-5 bg-white rounded-[8px] shadow drop-shadow-md'>
+      <div className='w-full mt-10 h-[500px]  bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll'>
           <AppointmentsTable />
 
-          <div className='w-full h-[20%] pe-10 flex justify-end items-center'>
+         
+      </div>
+      {/* <div className='w-full h-[20%] pe-10 flex justify-end items-center'>
             <button className='w-[120px] h-[35px] bg-[#66A2FA] text-[14px] text-white rounded me-3'>Back</button>
             <button className='w-[120px] h-[35px] bg-[#66A2FA] text-[14px] text-white rounded'>Next</button>
-          </div>
-      </div>
-
+          </div> */}
       {
         appointmentState.appointmentViewToggle && <AppointmentView />   
       }
@@ -60,6 +61,11 @@ function Appointments() {
       {
         appointmentState.paymentToggle && <CheckoutPayment />
       }
+      
+      {
+        appointmentState.feedbackViewToggle && <FeedbackView />
+      }
+
     </div>
 
   )

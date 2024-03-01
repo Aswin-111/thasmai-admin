@@ -119,6 +119,18 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
                        <div className='font-bold  text-blue-900'>Classes Attended</div>
                        <div>{profile.classAttended}</div>
                    </div>
+                   <div className='mb-3'>
+                       <div className='font-bold  text-blue-900'>Meditation Cycle</div>
+                       <div>{profile.cycle}</div>
+                   </div>
+                   <div className='mb-3'>
+                       <div className='font-bold  text-blue-900'>Meditation Days</div>
+                       <div>{profile.day}</div>
+                   </div>
+                   <div className='mb-3'>
+                       <div className='font-bold  text-blue-900'>Session NO</div>
+                       <div>{profile.session_num}</div>
+                   </div>
                    
                    
           </div>

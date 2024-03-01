@@ -112,7 +112,7 @@ function SideBar() {
 
   return (
     <div>
-      <div className="bg-white h-screen flex flex-col items-center py-8 ">
+      <div className="bg-white h-screen flex flex-col items-center py-8  ">
         <div className="logo px-5">
           <img src="/logo.png" className="h-16" />
         </div>
@@ -141,7 +141,7 @@ function SideBar() {
                 <Link href="/operator/appointments">
                   <li className={`${pathname.startsWith('/operator') ? ' bg-[#5799FD] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Operator Management</li>
                 </Link>
-                <Link href="/feedback">
+                <Link href="/feedback/appointmentFeedback">
                   <li className={`${pathname.startsWith('/feedback') ? ' bg-[#5799FD] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Feedback Views</li>
                 </Link>
                 <Link href="/logging">
@@ -152,9 +152,14 @@ function SideBar() {
                 </Link>
               </>
             ) : (
+              <>
               <Link href="/operator/appointments">
                 <li className={`${pathname.startsWith('/operator') ? ' bg-[#5799FD] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Operator Management</li>
               </Link>
+              <Link href="/feedback/appointmentFeedback">
+              <li className={`${pathname.startsWith('/feedback') ? ' bg-[#5799FD] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Feedback Views</li>
+            </Link>
+            </>
             )}
           </ul>
         </div>

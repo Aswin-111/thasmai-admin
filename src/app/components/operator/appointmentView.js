@@ -34,10 +34,10 @@ function AppointmentView() {
   return (
     <div className='w-[100vw] h-[100vh] backdrop-blur-sm bg-[#0000003b] absolute top-0 left-0 flex justify-center items-center '>
         <div className='w-[1000px] h-[500px] bg-white rounded'>
-            <div className='bg-[#5799FD] h-[85px]'>
+            <div className='bg-[#5799FD] h-[85px] relative'>
                 <h1 className='text-white text-3xl ps-10 py-6 '>Appointment Details</h1>
                 <button 
-                    className='h-8 w-8 bg-white text-2xl absolute right-[290px] top-[140px] rounded hover:bg-blue-700 hover:text-white'
+                    className='h-8 w-8 bg-white text-2xl absolute right-[20px] top-[20px] rounded hover:bg-blue-700 hover:text-white'
                     onClick = {(e) => { appointmentState.setAppointmentViewToggle(false, undefined); }}
                 >x</button>
             </div>

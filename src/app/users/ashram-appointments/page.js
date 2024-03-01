@@ -71,16 +71,16 @@ function Appointments() {
       <div className="w-[60%] flex items-center justify-between ">
         <NavLink />
       </div>
-      <div className='w-full h-[75%] mt-10 p-3 pt-5 bg-white rounded-[8px] shadow drop-shadow-md'>
+      <div className='w-full h-[70vh] mt-10  bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll '>
           <AppointmentsTables setSelectedId={setSelectedId} handleCheckIn= {handleCheckIn} setUId={setUId} setViewProfile={setViewProfile}/>
           
 
-          <div className='w-full h-[20%] pe-10 flex justify-end items-center'>
+          
+      </div>
+      {/* <div className='w-full h-[10vh] flex justify-end items-center'>
             <button className='w-[120px] h-[35px] bg-[#66A2FA] text-[14px] text-white rounded me-3'>Back</button>
             <button className='w-[120px] h-[35px] bg-[#66A2FA] text-[14px] text-white rounded'>Next</button>
-          </div>
-      </div>
-
+          </div> */}
       {
         appointmentState.viewAppointment && <AppointmentView selectedId={selectedId}  />   
       }

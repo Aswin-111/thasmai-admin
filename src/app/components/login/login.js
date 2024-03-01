@@ -68,17 +68,17 @@ console.log('userdata')
         <div className='w-full h-[85%] flex justify-center items-center '>
          <div className='w-[28rem] h-[28rem] border-gray-950 shadow-xl flex flex-col rounded  items-center bg-white'>
           <h1 className='my-10 font-semibold text-2xl'> Login</h1>
-          <input ref = {userRef} className='px-10 py-2 mt-10 rounded outline-none   border-rad'
+          <input ref = {userRef} className='px-10 py-2 mt-10 rounded outline-black   border-black border-2'
           placeholder='Username'
            type='text'/>
-           <input ref = {passRef} className='px-10 py-2 my-3 rounded outline-none  border-rad'
+           <input ref = {passRef} className='px-10 py-2 my-3 rounded outline-black  border-black border-2'
            placeholder='Password'
            type='password'/>
 
            <button className='px-[8rem] py-2 mt-10 bg-emerald-500 text-white text-md border-rad' onClick={(e)=>{
             console.log('login')
             handleLogin(
-            userRef.current.value,passRef.current.value
+              userRef.current.value,passRef.current.value
             )}}>
               Login</button>
          </div>

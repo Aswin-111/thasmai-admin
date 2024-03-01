@@ -1,21 +1,15 @@
 "use client";
+
+
 import { create } from "zustand";
 
-export const useAppointmentStore = create((set) => ({
+export const useAppointmentFeedbackStore = create((set) => ({
 
 
-    appointments : [],
+  appointments : [],
   setAppointments : (data) => set(state =>{return ({ appointments : data })}),
 
-  paymentToggle: false,
-  setPaymentToggle : (toggle, appointment) => set((state) => { 
-    let order_id = "";
-    if(appointment) {
-      order_id = appointment
-    } else {
-      order_id = state.id
-    } 
-    return ({paymentToggle : toggle, id : order_id})}),
+  
 
   id: "",
   setId :   (newId) => set((state) =>{ return ({ id:newId })}),

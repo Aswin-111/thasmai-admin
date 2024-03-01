@@ -44,7 +44,7 @@ useEffect(()=>{
  
   }
   return (
-    <div className="overflow-scroll h-[80%] px-3 ">
+    <div className="  ">
       <table className="table rounded-3xl">
         <thead
           className="bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
@@ -112,7 +112,7 @@ useEffect(()=>{
                   onChange={
                     (e)=>setdisc(e.target.value)
                   }
-                  className="w-[6rem] py-1 rounded placeholder:text-[.7rem] border-none bg-slate-200"
+                  className="w-[6rem] py-1 ps-2 rounded placeholder:text-[.7rem] border-none bg-slate-200"
                   placeholder="C.amount"
                   />
                    </td>
