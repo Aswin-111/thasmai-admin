@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useAppointmentFeedbackStore } from '@/app/feedback/appointmentFeedback/appointFeedbackState'
+import { useAppointmentFeedbackStore } from '@/app/feedback/ashramStayFeedback/individualFeedback/appointFeedbackState'
 
 
 function FeedbackView() {
@@ -19,7 +19,7 @@ function FeedbackView() {
         const fetchData = async () => {
           try {
               const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-appointment/${feedbackState.id}`);
-              setData(response.data);
+              setData(response.data.appointment);
   
           } catch (error) {
             console.error('Error fetching data:', error);

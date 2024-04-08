@@ -223,16 +223,20 @@ function CheckoutPayment() {
  
     const [image, setImage] = useState(null);
  
+    const [finalPayment,setFinalPayment] = useState(0)
     console.log("Image STATE", image);
  
     const paymentAmountRef = useRef("")
     const paymentMethodRef = useRef("")
+
+    console.log(paymentAmountRef);
  
     // const appointmentImageRef = useRef("")
  
     // console.log(appointmentImageRef.current.value);
  
     const discount = data.discount;
+    // console.log(discount);
  
     useEffect(() => {
  
@@ -288,14 +292,16 @@ function CheckoutPayment() {
         `${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-appointment/${appointmentState.id}`
       );
       console.log(response.data);
-      setData(response.data);
-      let startDate = response.data.appointmentDate.split("/");
-      let endDate = response.data.check_out.split("/");
+      setData(response.data.appointment);
+
+      let startDate = response.data.appointment.appointmentDate.split("/");
+      let endDate = response.data.appointment.check_out.split("/");
  
       startDate = `${startDate[2]}/${startDate[1]}/${startDate[0]}`;
       endDate = `${endDate[2]}/${endDate[1]}/${endDate[0]}`;
  
       console.log(startDate, endDate);
+
       var checkInDate = new Date(startDate); // Check-in date
       var checkOutDate = new Date(endDate); // Check-out date
  
@@ -336,21 +342,29 @@ function CheckoutPayment() {
                             <p className='w-[50%]'>Appointment payment</p>
  
                             <input 
-                                className="h-[35px] rounded-[6px] outline-black" 
+                                className="h-[35px] ps-3 rounded-[6px] outline-black" 
                                 type="number" 
                                 name="payment"
                                 placeholder='₹ 0000'
                                 ref={paymentAmountRef}
  
+
+                                    onChange = { ()=>{
+                                        console.log(paymentAmountRef.current.value)
+                                        let final = String((Number(paymentAmountRef.current.value) - discount)).startsWith('-') ? 0 : String((Number(paymentAmountRef.current.value) - discount))
+                                        console.log(final);
+                                        setFinalPayment(final)
+                                    }}
                             />
                         </div>
                         <div className='flex pt-4'>
                             <p className='w-[50%]'>Reward/Discount received</p>
-                            <p>: ₹ {data.discount?data.discount:"0"}</p>
+                            <p>: ₹ {data.discount ? data.discount : "0"}</p>
                         </div>
                         <div className='flex pt-4'>
                             <p className='w-[50%] font-semibold'>Total payment</p>
-                            <p>: ₹ {String((Number(paymentAmountRef.current.value) - discount)).startsWith('-') ? 0 : String((Number(paymentAmountRef.current.value) - discount))}</p>
+                            <p>: ₹ { finalPayment}
+                            </p>
                         </div>  
                         <div className='flex pt-4'>
                             <p className='w-[50%]'>Type of Payment</p>
@@ -392,7 +406,7 @@ function CheckoutPayment() {
                         paymentClickHandler(String((Number(paymentAmountRef.current.value) - discount)), paymentMethodRef.current.value, "Completed", date)
                     }}
                 >
-                    Payment of ₹ {String((Number(paymentAmountRef.current.value) - discount)).startsWith('-') ? "" : String((Number(paymentAmountRef.current.value) - discount))}
+                    Payment of ₹ { String((Number(paymentAmountRef.current.value) - discount)).startsWith('-') ? "" : String((Number(paymentAmountRef.current.value) - discount)) }
                 </button>
  
             </div>

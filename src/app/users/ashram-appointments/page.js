@@ -28,8 +28,8 @@ function Appointments() {
     const fetchData = async () => {
       try {
           const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);
-          appointmentState.setAppointments(response.data.data);
-          console.log("page use line 29",response.data, appointmentState.appointments);
+          appointmentState.setAppointments(response.data.appointments);
+          console.log("page use line 29", response.data, appointmentState.appointments);
         
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -73,14 +73,15 @@ function Appointments() {
       </div>
       <div className='w-full h-[70vh] mt-10  bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll '>
           <AppointmentsTables setSelectedId={setSelectedId} handleCheckIn= {handleCheckIn} setUId={setUId} setViewProfile={setViewProfile}/>
-          
-
-          
+                    
       </div>
+
+
       {/* <div className='w-full h-[10vh] flex justify-end items-center'>
             <button className='w-[120px] h-[35px] bg-[#66A2FA] text-[14px] text-white rounded me-3'>Back</button>
             <button className='w-[120px] h-[35px] bg-[#66A2FA] text-[14px] text-white rounded'>Next</button>
           </div> */}
+
       {
         appointmentState.viewAppointment && <AppointmentView selectedId={selectedId}  />   
       }
@@ -88,12 +89,10 @@ function Appointments() {
       {
         viewProfile && <ProfileView selectedId={selectedId} UId={UId} setViewProfile={setViewProfile}/>
       }
+      
+
     </div>
     
-
-    
-
-
 
   )
 }

@@ -27,12 +27,12 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
       <div className="m-0 p-0 flex h-[100vh] overflow-hidden">
-          <div className="m-0 w-[18%] h-[100%]">
+          <div className="m-0 w-[18%] h-full">
             <SideBar/>  
           </div>
-          <div className="w-[82%] h-[100%]">
+          <div className="w-[82%] h-full">
             <Navbar/>
-            <div className="border-solid border-t-4 border-l-4 h-[100%] py-5 px-2 bg-[#F3F3F3]">{ 
+            <div className="border-solid border-t-4 border-l-4 h-full py-5 px-2 bg-[#F3F3F3]">{ 
            <ProtectedRoutes> {children}</ProtectedRoutes>
            
              }</div>

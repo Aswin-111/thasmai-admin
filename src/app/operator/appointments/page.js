@@ -20,21 +20,21 @@ function Appointments() {
 
   // console.log(appointmentState); 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);
-          appointmentState.setAppointments(response.data.data);
-          // console.log(response.data, appointmentState.appointments);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);
+  //         appointmentState.setAppointments(response.data.appointments);
+  //         // console.log(response.data, appointmentState.appointments);
           
         
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [appointmentState.appointments, appointmentState.appointmentStatus]);
+  //   fetchData();
+  // }, [appointmentState.appointments, appointmentState.appointmentStatus]);
 
 
 
@@ -45,15 +45,17 @@ function Appointments() {
       <div className="w-[60%] flex items-center justify-between ">
         <NavLink />
       </div>
-      <div className='w-full mt-10 h-[500px]  bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll'>
+      <div className='w-full h-[500px] mt-3 bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll'>
           <AppointmentsTable />
-
-         
       </div>
+
+      
       {/* <div className='w-full h-[20%] pe-10 flex justify-end items-center'>
             <button className='w-[120px] h-[35px] bg-[#66A2FA] text-[14px] text-white rounded me-3'>Back</button>
             <button className='w-[120px] h-[35px] bg-[#66A2FA] text-[14px] text-white rounded'>Next</button>
           </div> */}
+
+
       {
         appointmentState.appointmentViewToggle && <AppointmentView />   
       }

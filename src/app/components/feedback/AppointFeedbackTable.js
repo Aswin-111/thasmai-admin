@@ -5,7 +5,7 @@
 
 
 import React, { useRef, useEffect } from "react";
-import { useAppointmentFeedbackStore } from "@/app/feedback/appointmentFeedback/appointFeedbackState";
+import { useAppointmentFeedbackStore } from "@/app/feedback/ashramStayFeedback/individualFeedback/appointFeedbackState";
 import axios from "axios";
 import moment from 'moment'
 
@@ -28,18 +28,18 @@ function AppointFeedbackTable() {
       return;
     }
     
-  }, [feedbackState.appointments])
+  }, [])
 
   async function fetchData() {
    try {
     
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);
 
-    console.log(response.data.data);
+    console.log(response.data.appointments);
 
-    const data = response.data.data;
+    const data = response.data.appointments;
     const filteredData = data.filter((i) => {
-      return i.appointment_status === "Completed";
+      return i.appointment.appointment_status === "Completed";
     })
 
     feedbackState.setAppointments(filteredData);
@@ -96,17 +96,17 @@ function AppointFeedbackTable() {
         </thead>
         <tbody className=" overflow-scroll">
           {
-           feedbackState.appointments.map((appointment, index) => {
+           feedbackState.appointments.map((i, index) => {
 
             return (
               <tr
                 key={index}
-                className="font-semibold text-[0.8rem] text-black my-10 "
+                className="font-medium text-[0.8rem] text-black my-10 "
               > 
                 
-                <td className="text-center">{appointment.UId} </td>
-                <td className="text-center text-indigo-600">{appointment.user_name} </td>
-                <td className="text-center">{appointment.check_out} </td>
+                <td className="text-center">{i.appointment.UId} </td>
+                <td className="text-center text-indigo-600">{i.appointment.user_name} </td>
+                <td className="text-center">{i.appointment.check_out} </td>
                 
 
 
@@ -121,7 +121,7 @@ function AppointFeedbackTable() {
                   <button 
                     className='w-[90px] h-[35px] rounded-3xl border-black border-[0.5px] hover:bg-slate-200'
                     onClick={ () => {
-                      feedbackState.setAppointmentViewToggle(true, appointment.id);
+                      feedbackState.setAppointmentViewToggle(true, i.appointment.id);
                     }}
                   >
                     View
@@ -131,12 +131,12 @@ function AppointFeedbackTable() {
                 
 
                 {
-                  appointment.appointment_status.startsWith("Completed") ? (
+                  i.appointment.appointment_status.startsWith("Completed") ? (
                     <td className="text-center">
                       <button 
                         className="w-[120px] h-[35px] rounded-3xl border-black border-[0.5px] hover:bg-slate-200"
                         onClick={() => {
-                          feedbackState.setFeedbackViewToggle(true, appointment.id);
+                          feedbackState.setFeedbackViewToggle(true, i.appointment.id);
                         }}
                       >Feedback</button>
                     </td>

@@ -5,7 +5,12 @@ export const useAppointmentStore = create((set) => ({
 
 
     appointments : [],
-  setAppointments : (data) => set(state =>{return ({ appointments : data })}),
+  setAppointments : (data) => {
+
+    console.log(data);
+    set(state =>{return ({ appointments : data })})
+    
+},
 
   paymentToggle: false,
   setPaymentToggle : (toggle, appointment) => set((state) => { 

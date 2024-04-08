@@ -283,7 +283,8 @@ function AppointmentsTable() {
     return state;
   });
    
-
+  // console.log(appointmentState.appointments);
+  
 
   useEffect(() =>{
     fetchData();
@@ -291,13 +292,13 @@ function AppointmentsTable() {
       return;
     }
     
-  }, [appointmentState.appointments])
+  }, [])
 
   async function fetchData() {
    try {
     
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);
-    appointmentState.setAppointments(response.data.data);
+    appointmentState.setAppointments(response.data.appointments);
     
    } catch (error) {
 
@@ -352,29 +353,30 @@ function AppointmentsTable() {
           </tr>
         </thead>
         <tbody className=" overflow-scroll">
-          {
-           appointmentState.appointments.map((appointment, index) => {
-
+          { 
+          appointmentState.appointments[0] &&
+           appointmentState.appointments.map((appoint, index) => {
+            
             return (
               <tr
                 key={index}
-                className="font-semibold text-[0.8rem] text-black my-10 "
+                className="font-medium text-[0.8rem] text-black my-10 "
               > 
                 
-                <td className="text-center">{appointment.UId} </td>
-                <td className="text-center">{appointment.register_date} </td>
-                <td className="text-center text-indigo-600">{appointment.user_name} </td>
-                <td className="text-center">{appointment.appointmentDate}</td>
-                <td className="text-center">{appointment.check_out} </td>
+                <td className="text-center">{appoint.appointment.UId} </td>
+                <td className="text-center">{appoint.appointment.register_date} </td>
+                <td className="text-center text-indigo-600">{appoint.appointment.user_name} </td>
+                <td className="text-center">{appoint.appointment.appointmentDate}</td>
+                <td className="text-center">{appoint.appointment.check_out} </td>
                 <td className="text-center flex justify-center">
                   
-                  <div className={ appointment.appointment_status === "Not Arrived" && "w-[120px] h-[35px] m-0  text-amber-500 flex justify-center items-cente"
-                                || appointment.appointment_status === "Checked In" && "w-[120px] h-[35px] m-0  text-[#23A058] flex justify-center items-center"
-                                || appointment.appointment_status === "Checked Out" && "w-[120px] h-[35px] m-0  text-[#CB4335] flex justify-center items-center"
-                                || appointment.appointment_status === "Completed" && "w-[120px] h-[35px] m-0 text-black  flex justify-center items-center"
+                  <div className={ appoint.appointment.appointment_status === "Not Arrived" && "w-[120px] h-[35px] m-0  text-amber-500 flex justify-center items-cente"
+                                || appoint.appointment.appointment_status === "Checked In" && "w-[120px] h-[35px] m-0  text-[#23A058] flex justify-center items-center"
+                                || appoint.appointment.appointment_status === "Checked Out" && "w-[120px] h-[35px] m-0  text-[#CB4335] flex justify-center items-center"
+                                || appoint.appointment.appointment_status === "Completed" && "w-[120px] h-[35px] m-0 text-black  flex justify-center items-center"
                   }>
                     
-                    {appointment.appointment_status}
+                    {appoint.appointment.appointment_status}
 
                   </div>
 
@@ -387,39 +389,44 @@ function AppointmentsTable() {
                 <td className="text-center">
 
                   {
-                    appointment.appointment_status.startsWith("Not Arrived") && 
+                    // appoint.appointment.appointment_status.startsWith("Not Arrived") && 
+                    appoint.appointment.appointment_status === "Not Arrived" && 
+
                       <button 
                         className="w-[90px] h-[35px] rounded-3xl text-white bg-green-500 hover:bg-green-700"
                         onClick={(e) => {
-                          handleCheckInClick(appointment.id, "Checked In")
+                          handleCheckInClick(appoint.appointment.id, "Checked In")
                         }}
                       >Check In</button> 
                   }
 
                   {
-                    appointment.appointment_status.startsWith("Checked In") && 
+                    // appoint.appointment.appointment_status.startsWith("Checked In") &&
+                    appoint.appointment.appointment_status === "Checked In" &&  
                       <button 
                         className="w-[90px] h-[35px] rounded-3xl text-white bg-red-500 hover:bg-red-700"
                         onClick={(e) => {
-                          handleCheckOutClick(appointment.id, "Checked Out")
+                          handleCheckOutClick(appoint.appointment.id, "Checked Out")
                         }}
                       >Check Out</button>
                      
                   }
 
                   {
-                    appointment.appointment_status.startsWith("Checked Out") && 
+                    // appoint.appointment.appointment_status.startsWith("Checked Out") &&
+                    appoint.appointment.appointment_status === "Checked Out" &&  
                       <button 
                         className="w-[90px] h-[35px] rounded-3xl text-white bg-blue-500 hover:bg-blue-700"
                         onClick={(e) => {
-                          appointmentState.setPaymentToggle(true, appointment.id);
+                          appointmentState.setPaymentToggle(true, appoint.appointment.id);
                         }}
                       >Payment</button>
                      
                   }
 
                   {
-                    appointment.appointment_status.startsWith("Completed") && 
+                    // appoint.appointment.appointment_status.startsWith("Completed") &&
+                    appoint.appointment.appointment_status === "Completed" &&  
                     ("N/A")
                   }
 
@@ -431,7 +438,7 @@ function AppointmentsTable() {
                   <button 
                     className='w-[90px] h-[35px] rounded-3xl border-black border-[0.5px] hover:bg-slate-200'
                     onClick={ () => {
-                      appointmentState.setAppointmentViewToggle(true, appointment.id);
+                      appointmentState.setAppointmentViewToggle(true, appoint.appointment.id);
                     }}
                   >
                     View

@@ -52,6 +52,7 @@ useEffect(()=>{
         >
           <tr className="rounded-3xl">
             <th className="text-center">Id</th>
+
             <th className="text-center">Date</th>
             <th className="text-center">Username</th>
             <th className="text-center">Check In</th>
@@ -68,30 +69,41 @@ useEffect(()=>{
         </thead>
         <tbody className="my-10">
           {appointmentState.appointments &&
-           appointmentState.appointments.map((appointment, index) => {
+           appointmentState.appointments.map((appoint, index) => {
  
             return (
               <tr
                 key={index}
-                className="font-semibold text-[0.8rem] text-black my-10 "
+                className="font-medium text-[0.8rem] text-black my-10 "
               > 
  
-                <td className="text-center">{appointment.UId} </td>
-                <td className="text-center">{appointment.register_date} </td>
+                <td className="text-center">{appoint.UId} </td>
+                <td className="text-center">{appoint.register_date} </td>
                 <td 
-                  className="text-center text-indigo-600 hover:text-indigo-800 cursor-pointer"
+                  className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
                   onClick = {() => {
                     setViewProfile(true);
-                    setSelectedId(appointment.id);
-                    setUId(appointment.UId);
+                    setSelectedId(appoint.id);
+                    setUId(appoint.UId);
                   }}
                 >
-                  {appointment.user_name} 
+                  {appoint.user_name} 
                 </td>
-                <td className="text-center">{appointment.appointmentDate}</td>
+                <td className="text-center">{appoint.appointmentDate}</td>
                 
-                <td className="text-center">{appointment.appointment_status} </td>
-                <td className="text-center flex justify-center">{appointment.userCoupons} </td>
+                <td 
+                  className={
+                    appoint.appointment_status === "Not Arrived" && "text-amber-500 text-center"
+                    || appoint.appointment_status === "Checked In" && "text-[#23A058] text-center"
+                    || appoint.appointment_status === "Checked Out" && "text-[#CB4335] text-center"
+                    || appoint.appointment_status === "Completed" && "text-black text-center"
+                  }
+                >
+                  {appoint.appointment_status} 
+                </td>
+                <td className="text-center flex justify-center">{ appoint.userCoupons ? appoint.userCoupons : 0 }</td>
+                {/* <td className="text-center flex justify-center">0</td> */}
+
  
                 <td className="text-center">
                   <button 
@@ -99,7 +111,7 @@ useEffect(()=>{
                     onClick={ () => {
                       appointmentState.setViewAppointment(true);
                       // appointmentState.setSelectedAppointmentId(appointment.id);
-                      setSelectedId(appointment.id);
+                      setSelectedId(appoint.id);
                     } }
                   >
                     View
@@ -107,22 +119,44 @@ useEffect(()=>{
                 </td>
  
                 <td className="text-center flex justify-center">
-                  <input 
-                  type="number"
-                  onChange={
-                    (e)=>setdisc(e.target.value)
+                  {
+                    appoint.appointment_status === "Checked Out" ? (
+                      <input 
+                        type="number"
+                        onChange={
+                          (e)=>setdisc(e.target.value)
+                        }
+                        className="w-[6rem] py-1 rounded placeholder:text-[.7rem] border-black border-[1px]  text-center"
+                        placeholder="C.amount"
+                      />
+                    ) : (
+                      <input 
+                        type="number"
+                        disabled
+                        className="w-[6rem] py-1 rounded placeholder:text-[.7rem] border-none bg-slate-200 placeholder:text-center"
+                        placeholder="N/A"
+                      />
+                    )
                   }
-                  className="w-[6rem] py-1 ps-2 rounded placeholder:text-[.7rem] border-none bg-slate-200"
-                  placeholder="C.amount"
-                  />
-                   </td>
+                  
+                </td>
  
                 <td className="text-center">
-                  <button className=" px-5 py-1 text-white rounded bg-emerald-500" onClick={function (){
- 
-                    handleSubmitClick(appointment.UId,disc,appointment.id)
+                  {
+                    appoint.appointment_status === "Checked Out" ? (
+                      <button className=" px-5 py-1 text-white rounded bg-emerald-500 hover:scale-105" 
+                        onClick={() => {
+                          handleSubmitClick(appoint.UId, disc, appoint.id)
+                        }}
+                      >Submit</button>
+                    ) : (
+                      <button className=" px-5 py-1 text-green-200 rounded bg-emerald-300" 
+                      disabled
+                      >Submit</button>
+                      // ""
+                    )
                   }
-                    }>Submit</button>
+                  
                 </td>
  
  
