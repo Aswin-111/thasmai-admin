@@ -144,7 +144,7 @@ function AppointmentCheckOut() {
                             <p className='w-[50%]'>Appointment payment</p>
  
                             <input 
-                                className="h-[35px] ps-3 rounded-[6px] outline-black" 
+                                className="h-[35px] ps-3 rounded-[6px] outline-black bg-white text-black border-black border-[1px]" 
                                 type="number" 
                                 name="payment"
                                 placeholder='₹ 0000'
@@ -172,7 +172,7 @@ function AppointmentCheckOut() {
                             <p className='w-[50%]'>Type of Payment</p>
                             {/* <p>: njhgfd</p> */}
                             <select 
-                                className='w-[150px] h-[35px] p-0 ps-2 rounded-[6px] outline-black'  
+                                className='w-[150px] h-[35px] p-0 ps-2 rounded-[6px] outline-black bg-white text-black border-black border-[1px]'  
                                 name="payment_method" 
                                 ref={paymentMethodRef}
                             > Select

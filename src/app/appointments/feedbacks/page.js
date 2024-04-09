@@ -106,8 +106,8 @@ function AshramAppointments() {
 
 
   return (
-    <div className="w-full h-[85vh] px-7">
-      <div className="w-[40%] flex items-center justify-between ">
+    <div className="w-full h-[85vh] px-7 overflow-y-auto">
+      <div className="w-full sticky top-0">
         <NavLink />
       </div>
 
@@ -262,8 +262,8 @@ function AshramAppointments() {
             {
               feedbackState.FieldValue === "" && (
                 <>
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] text-black  border-none text-slate-100"'></div>
+                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] text-black border-none text-slate-100"'></div>
                 </>
               )
             }
@@ -300,14 +300,14 @@ function AshramAppointments() {
             {
               ( feedbackState.FieldValue === "Appointment Date" && feedbackState.operatorValue === "equal to") &&
                 <>
-                  <input type="date" ref = {dataRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white border-[1px] border-[#44474E]' />
+                  <input type="date" ref = {dataRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
                   <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                 </>
             }
             {   ( feedbackState.FieldValue === "Appointment Date" && feedbackState.operatorValue === "between") && 
                 <>
-                  <input type="date" ref={startDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white border-[1px] border-[#44474E]' />
-                  <input type="date" ref={endDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white border-[1px] border-[#44474E]' />
+                  <input type="date" ref={startDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                  <input type="date" ref={endDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
                 </>
             }
 
@@ -321,14 +321,14 @@ function AshramAppointments() {
             {
               ( feedbackState.FieldValue === "Checkout Date" && feedbackState.operatorValue === "equal to") &&
                 <>
-                  <input type="date" ref = {dataRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white border-[1px] border-[#44474E]' />
+                  <input type="date" ref = {dataRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
                   <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                 </>
             }
             {   ( feedbackState.FieldValue === "Checkout Date" && feedbackState.operatorValue === "between") && 
                 <>
-                  <input type="date" ref={startDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white border-[1px] border-[#44474E]' />
-                  <input type="date" ref={endDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white border-[1px] border-[#44474E]' />
+                  <input type="date" ref={startDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                  <input type="date" ref={endDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
                 </>
             }
 

@@ -67,11 +67,11 @@ function Appointments() {
 
 
   return (
-    <div className="px-7 h-full">
-      <div className="w-[60%] flex items-center justify-between ">
+    <div className="w-full h-[85vh] px-7 overflow-y-auto">
+      <div className="w-full sticky top-0 ">
         <NavLink />
       </div>
-      <div className='w-full h-[70vh] mt-10  bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll '>
+      <div className='w-full h-[90%] mt-5  bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll '>
           <AppointmentsTables setSelectedId={setSelectedId} handleCheckIn= {handleCheckIn} setUId={setUId} setViewProfile={setViewProfile}/>
                     
       </div>

@@ -9,8 +9,8 @@ function IndividualMessaging() {
   const [isViewChat, setIsViewChat] = useState(false);
 
   return (
-    <div className="w-full h-[85vh] px-7">
-      <div className="w-[50%] h-[6%]">
+    <div className="w-full h-[85vh] px-7 overflow-y-auto">
+      <div className="w-full sticky top-0">
         <NavLink />
       </div>
       <div className='w-full h-[90%] mt-5 p-4 bg-white rounded shadow drop-shadow-md'>

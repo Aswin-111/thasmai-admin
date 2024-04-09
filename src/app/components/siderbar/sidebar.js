@@ -113,61 +113,61 @@ function SideBar() {
   return (
     <div>
       <div className="bg-white h-screen flex flex-col items-center py-8  ">
-        <div className="logo px-5">
+        <div className="logo px-5 sticky top-1 bg-white">
           <img src="/logo.png" className="h-16" />
         </div>
-        <div className="navitems w-full">
-          <ul className="sidebar">
+        <div className="navitems w-full overflow-y-auto">
+          <ul className="sidebar ">
             {role === 'admin' ? (
               <>
                 <Link href="/overview">
-                  <li className={`${pathname.startsWith('/overview') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Overview</li>
+                  <li className={`${pathname.startsWith('/overview') ? ' bg-[#005DB8] text-white py-3 px-5 ' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Overview</li>
                 </Link>
                 <Link href="/users/meditatorlist">
-                  <li className={`${pathname.startsWith('/users') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5  hover:bg-[#dbeafe]'}`}>Users</li>
+                  <li className={`${pathname.startsWith('/users') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black  hover:bg-[#dbeafe]'}`}>Users</li>
                 </Link>
                 <Link href="/financial/distribution">
-                  <li className={`${pathname.startsWith('/financial') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Financial</li>
+                  <li className={`${pathname.startsWith('/financial') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Financial</li>
                 </Link>
                 <Link href="/message/global">
-                  <li className={`${pathname.startsWith('/message') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Message</li>
+                  <li className={`${pathname.startsWith('/message') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Message</li>
                 </Link>
                 <Link href="/appointments/appointments">
-                  <li className={`${pathname.startsWith('/appointments') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Appointments</li>
+                  <li className={`${pathname.startsWith('/appointments') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Appointments</li>
                 </Link>
                 {/* <Link href="/analytics">
-                  <li className={`${pathname.startsWith('/analytics') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Analytics / Insights</li>
+                  <li className={`${pathname.startsWith('/analytics') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Analytics / Insights</li>
                 </Link> */}
                 
                 <Link href="/configuration/financial">
-                  <li className={`${pathname.startsWith('/configuration') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Configuration Parameters</li>
+                  <li className={`${pathname.startsWith('/configuration') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Configuration Parameters</li>
                 </Link>
                 <Link href="/notifications/notifications">
-                  <li className={`${pathname.startsWith('/notifications') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Notifications / Broadcast</li>
+                  <li className={`${pathname.startsWith('/notifications') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Notifications / Broadcast</li>
                 </Link>
                 <Link href="/operator/appointments">
-                  <li className={`${pathname.startsWith('/operator') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Operator Management</li>
+                  <li className={`${pathname.startsWith('/operator') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Operator Management</li>
                 </Link>
                 <Link href="/feedback/meditationFeedback">
-                  <li className={`${pathname.startsWith('/feedback') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Feedback Views</li>
+                  <li className={`${pathname.startsWith('/feedback') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Feedback Views</li>
                 </Link>
                 <Link href="/logging">
-                  <li className={`${pathname.startsWith('/logging') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Logging / Error Handling</li>
+                  <li className={`${pathname.startsWith('/logging') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Logging / Error Handling</li>
                 </Link>
                 <Link href="/support">
-                  <li className={`${pathname.startsWith('/support') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Support & Contact</li>
+                  <li className={`${pathname.startsWith('/support') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Support & Contact</li>
                 </Link>
               </>
             ) : (
               <>
               <Link href="/appointments/appointments">
-                  <li className={`${pathname.startsWith('/appointments') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Appointments</li>
+                  <li className={`${pathname.startsWith('/appointments') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Appointments</li>
               </Link>
               <Link href="/operator/appointments">
-                <li className={`${pathname.startsWith('/operator') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Operator Management</li>
+                <li className={`${pathname.startsWith('/operator') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Operator Management</li>
               </Link>
               <Link href="/feedback/appointmentFeedback">
-                <li className={`${pathname.startsWith('/feedback') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 hover:bg-[#dbeafe]'}`}>Feedback Views</li>
+                <li className={`${pathname.startsWith('/feedback') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Feedback Views</li>
               </Link>
             </>
             )}

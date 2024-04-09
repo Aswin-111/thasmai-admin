@@ -46,7 +46,7 @@ function Appointments() {
         <NavLink />
       </div>
       <div className='w-full h-[500px] mt-3 bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll'>
-          <AppointmentsTable />
+          {/* <AppointmentsTable /> */}
       </div>
 
       

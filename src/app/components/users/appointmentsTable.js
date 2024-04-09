@@ -126,7 +126,7 @@ useEffect(()=>{
                         onChange={
                           (e)=>setdisc(e.target.value)
                         }
-                        className="w-[6rem] py-1 rounded placeholder:text-[.7rem] border-black border-[1px]  text-center"
+                        className="w-[6rem] py-1 bg-white rounded placeholder:text-[.7rem] border-black border-[1px]  text-center"
                         placeholder="C.amount"
                       />
                     ) : (

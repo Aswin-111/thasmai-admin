@@ -90,13 +90,13 @@ function GurujiAvalability() {
 
 
   return (
-    <div className='w-full min-h-full m-0 px-7'>
+    <div className='w-full h-[85vh] m-0 px-7 overflow-y-auto'>
 
-        <div className="w-[40%] h-[10%] flex items-center justify-between ">
+        <div className="w-full sticky top-0">
             <NavLink />
         </div>
 
-      <div className='w-full h-[80%] mt-5 p-5 bg-white rounded shadow drop-shadow-md flex'>
+      <div className='w-full mt-5 p-5 bg-white rounded shadow drop-shadow-md flex'>
 
         <div className="w-[60%] h-full">
 
