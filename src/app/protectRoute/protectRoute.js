@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect , useState} from 'react'
 import { usePathname,useRouter } from 'next/navigation';
-import Login from '../components/login/login';
+// import Login from '../components/login/login';
 import { useLoginStore } from '../loginstate/loginState';
 
 function ProtectedRoutes({children}) {
@@ -16,20 +16,23 @@ function ProtectedRoutes({children}) {
         const username = localStorage.getItem('userdata')
         console.log(username);
         if (!username){
-            state.setIsloggedin(false)
-            
+            // state.setIsloggedin(false)
+            return router.push('/login')
         }
-        else {
-          // if (!state.isloggedin){
-            state.setIsloggedin(true)
+
+
+        // else {
+        //   // if (!state.isloggedin){
+        //     state.setIsloggedin(true)
             
-          // }
+        //   // }
             
-        }
+        // }
         
     },[])
   return (
-    <div>{state.isloggedin ? children : <Login loginToggle = {state.setIsloggedin}/> }</div>
+    // <div>{state.isloggedin ? children : <Login loginToggle = {state.setIsloggedin}/> }</div>
+    <div> { children }</div>
     
 
   )

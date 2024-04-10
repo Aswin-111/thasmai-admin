@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, use } from 'react'
 import {useAdminAppointmentStore} from '@/app/users/ashram-appointments/appointmentState'
 import axios from 'axios'
 
@@ -9,6 +9,13 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
     const [profile, setProfile] = useState({});
     const [meditationDetails, setMeditationDetails] = useState({})
     const [bankDetails, setBankDetails] = useState({})
+    
+    
+    
+    
+    
+
+    const [profilePic,setProfilePic] = useState("")
 
     const [isProfile, setIsProfile] = useState(true);
     const [isMeditation, setIsMeditation] = useState(false);
@@ -31,6 +38,7 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
       async function fetchData(){
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/profiledetails/${UId}`);
         setProfile(response.data.user);
+        setProfilePic(response.data.profilePic)
         setMeditationDetails(response.data.meditationData)
         setBankDetails(response.data.bankDetails)
         console.log(response.data);
@@ -157,7 +165,7 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
 
         <div className='w-[30%] h-full p-2 shadow-lg'>
           <div className='w-full h-[50%] flex justify-center items-center bg-[#E0E2EC]'>
-            <img className='rounded-full h-[180px] w-[180px] border-4 object-cover' src={profile.profilePicUrl? `${profile.profilePicUrl}` : "/profile_dummy.jpeg"} alt='Profile photo' />
+            <img className='rounded-full h-[180px] w-[180px] border-4 object-cover' src={profilePic? `${profilePic}` : "/profile_dummy.jpeg"} alt='Profile photo' />
                {/* sometimes need to paste " data:image/png;base64, " infront of base64 code */}
           </div>
           <div className='w-full h-[50%] p-3 pt-5'>

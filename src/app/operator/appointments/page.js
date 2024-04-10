@@ -9,6 +9,7 @@ import CheckoutPayment from '@/app/components/operator/checkoutPayment'
 import FeedbackView from '@/app/components/feedback/FeedbackView'
 import axios from 'axios';
 import { useAppointmentStore } from './appointmentState'
+import { useRouter } from 'next/navigation'
 
 
 function Appointments() {
@@ -17,10 +18,21 @@ function Appointments() {
   const appointmentState = useAppointmentStore((state) => {
     return state;
   });
-
+  
+//  const router =useRouter()
   // console.log(appointmentState); 
 
-  // useEffect(() => {
+//   useEffect(() => {
+//     router.refresh()
+  
+//   }
+
+
+//   ,[]
+
+  
+// )
+  
   //   const fetchData = async () => {
   //     try {
   //         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);

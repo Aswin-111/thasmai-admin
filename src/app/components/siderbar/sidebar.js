@@ -91,14 +91,15 @@
 
 import { useLoginStore } from "@/app/loginstate/loginState";
 import Link from "next/link";
-import { usePathname } from 'next/navigation';
+import { usePathname,useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 
 function SideBar() {
   const [role, setRole] = useState('');
   const pathname = usePathname();
-  
+  const router = useRouter()
   useEffect(() => {
+    setRole('')
     let role_text = localStorage.getItem('userdata');
     console.log("Role from local storage:", role_text); // Log the role_text to check if it's retrieved correctly
     if (role_text) {
@@ -108,7 +109,7 @@ function SideBar() {
     }
   }, []);
 
-  console.log("Current role:", role); // Log the current role state
+  // console.log("Current role:", role); // Log the current role state
 
   return (
     <div>
@@ -118,7 +119,7 @@ function SideBar() {
         </div>
         <div className="navitems w-full overflow-y-auto">
           <ul className="sidebar ">
-            {role === 'admin' ? (
+            {role === 'admin' && (
               <>
                 <Link href="/overview">
                   <li className={`${pathname.startsWith('/overview') ? ' bg-[#005DB8] text-white py-3 px-5 ' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Overview</li>
@@ -158,8 +159,14 @@ function SideBar() {
                   <li className={`${pathname.startsWith('/support') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Support & Contact</li>
                 </Link>
               </>
-            ) : (
+            ) }
+
+                {role === 'operator' && (
+            
               <>
+              <Link href="/overview">
+                  <li className={`${pathname.startsWith('/overview') ? ' bg-[#005DB8] text-white py-3 px-5 ' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Overview</li>
+                </Link>
               <Link href="/appointments/appointments">
                   <li className={`${pathname.startsWith('/appointments') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Appointments</li>
               </Link>
@@ -169,6 +176,13 @@ function SideBar() {
               <Link href="/feedback/appointmentFeedback">
                 <li className={`${pathname.startsWith('/feedback') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Feedback Views</li>
               </Link>
+              <Link href="/message/global">
+                  <li className={`${pathname.startsWith('/message') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Message</li>
+                </Link>
+              <Link href="/notifications/notifications">
+                  <li className={`${pathname.startsWith('/notifications') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Notifications / Broadcast</li>
+                </Link>
+              
             </>
             )}
           </ul>
