@@ -40,7 +40,7 @@ import Link from "next/link";
     },
   };
    
-  export default function Example() {
+  export default function PieChart() {
     return (
       <Card className="h-[100%]">
         {/* <CardHeader

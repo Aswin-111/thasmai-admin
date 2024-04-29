@@ -38,13 +38,13 @@ console.log(userData,"dfghjkl;lkjhg")
   if (userData.role === 'operator'){
   
     //  router.push('/operator/appointments')
-    return location.href ='/overview'
+    return window.location.href ='/overview'
     
   }
 
    else if (userData.role === 'admin'){
   
-    return location.href ='/overview'
+    return window.location.href ='/overview'
     
   }
   // else{

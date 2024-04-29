@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect} from 'react'
 import axios from "axios";
 
@@ -16,7 +18,7 @@ function MeditationCount() {
             try {
                 const response1 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/this-month`);
                 // console.log(response1);
-                // setNewJoineesCount(response.data.events);
+                setNewJoineesCount(response.data.events);
     
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -60,7 +62,7 @@ function MeditationCount() {
     <>
         <div className="flex justify- items-center bg-white p-2 h-[80%] w-[22%] rounded-xl shadow-md">
                     <div className="rounded-full bg-[#A2BCFF] w-[25%] p-3">
-                        <img className="w-[100%] rounded-full" src="../new-joinees.png" alt="" />
+                        <img className="w-[100%] rounded-full" src="/new-joinees.png" alt="" />
                         
                     </div>
                     <div className="w-[75%] ps-2">
@@ -70,7 +72,7 @@ function MeditationCount() {
                 </div>
                 <div className="flex justify- items-center bg-white p-2 h-[80%] w-[22%] rounded-xl shadow-md">
                     <div className="rounded-full bg-[#A2BCFF] w-[25%] p-3">
-                        <img className="w-full" src="../beneficiary.png" alt="" />
+                        <img className="w-full" src="/beneficiary.png" alt="" />
                         
                     </div>
                     <div className="w-[75%] ps-2">
@@ -80,7 +82,7 @@ function MeditationCount() {
                 </div>
                 <div className="flex justify- items-center bg-white p-2 h-[80%] w-[22%] rounded-xl shadow-md">
                     <div className="rounded-full bg-[#A2BCFF] w-[25%] p-3">
-                        <img className="w-[100%]" src="../total-meditators.png" alt="" />   
+                        <img className="w-[100%]" src="/total-meditators.png" alt="" />   
                     </div>
                     <div className="w-[75%] ps-2">
                         <h3 className="text-[28px] font-medium">{ totalMeditatorsCount }</h3>
@@ -89,7 +91,7 @@ function MeditationCount() {
                 </div>
                 <div className="flex justify- items-center bg-white p-2 h-[80%] w-[22%] rounded-xl shadow-md">
                     <div className="rounded-full bg-[#A2BCFF] w-[25%] p-3">
-                        <img className="w-[100%]" src="../waiting-list.png" alt="" />    
+                        <img className="w-[100%]" src="/waiting-list.png" alt="" />    
                     </div>
                     <div className="w-[75%] ps-2">
                         <h3 className="text-[28px] font-medium">{ waitingListCount }</h3>

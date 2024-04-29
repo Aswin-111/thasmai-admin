@@ -1,11 +1,10 @@
 "use client"
 
+import React from 'react';
 import ColumnChart from "@/app/components/overview/ColumnChart/ColumnChart"
 import PieChart from "@/app/components/overview/PieChart/PieChart"
 import CarouselDefault from "@/app/components/overview/CarouselDefault/CarouselDefault"
 import MeditationCount from "@/app/components/overview/MeditationCount/MeditationCount"
-
-
 
 
 export default function Overview(){
@@ -36,7 +35,7 @@ export default function Overview(){
                         <div className="w-full min-h-[80px] bg-red-400 mb-2 rounded flex">
                             <div className="w-[15%] flex justify-center items-center">
                                 <div className="rounded-full bg-[#A2BCFF] w-[50px] h-[50px]">
-                                    <img className="w-full" src="../images/meditator.png" alt="" />   
+                                    <img className="w-full" src="" alt="" />   
                                 </div>
                             </div>
                             <div className="w-[85%]">
@@ -53,7 +52,7 @@ export default function Overview(){
                         <div className="w-full min-h-[80px] bg-blue-400 mb-2 rounded flex">
                             <div className="w-[15%] flex justify-center items-center">
                                 <div className="rounded-full bg-[#caf8d5] w-[50px] h-[50px]">
-                                    <img className="w-full" src="../images/meditator.png" alt="" />   
+                                    <img className="w-full" src="" alt="" />   
                                 </div>
                             </div>
                             <div className="w-[85%]">
