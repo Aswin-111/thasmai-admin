@@ -447,7 +447,7 @@ function AshramAppointments() {
               })
 
             ) : (
-              <p className="ms-3 text-slate-400 font-light">No filters applied</p>
+              <p className="ms-3 text-[#94a3b8] font-light">No filters applied</p>
             )
           
           }
@@ -456,7 +456,21 @@ function AshramAppointments() {
 
 
         <div className='w-full h-[80%] mt-2'>
-          <AppointFeedbackTable  filterToggle={filterToggle}/>
+          	<AppointFeedbackTable  filterToggle={filterToggle}/>
+
+		  	<div className="w-full h-[10%] px-2 flex justify-between items-center">
+			  	<p className="text-sm text-gray-500">Page 1 of 1</p>
+		  		<div>
+					<button
+						className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+						// onClick={ handlePreviousPage }
+					>Previous</button>
+					<button
+						className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+						// onClick={ handleNextPage }
+					>Next</button>
+				</div>
+          	</div>
         </div>
       
 

@@ -3,6 +3,7 @@ import NavLink from '../navlink/navlink'
 
 
 function Notifications() {
+  
   return (
     <div className="w-full h-[85vh] px-7">
     <div className="w-[25%] h-[6%] mb-2" >
@@ -17,7 +18,7 @@ function Notifications() {
           <h1>Unread:</h1>
           <h1>Total:</h1>
         </div>
-       </div>
+       </div> 
         <div className='m-4'>
         <table className='w-full overflow-scroll '>
             <thead>

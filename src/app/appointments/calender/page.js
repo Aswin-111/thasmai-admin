@@ -90,7 +90,7 @@ function GurujiAvalability() {
 
 
   return (
-    <div className='w-full h-[85vh] m-0 px-7 overflow-y-auto'>
+    <div className='w-full h-[85vh] m-0 px-7 overflow-y-auto '>
 
         <div className="w-full sticky top-0">
             <NavLink />

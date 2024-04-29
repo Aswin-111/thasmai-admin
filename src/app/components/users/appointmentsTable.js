@@ -144,13 +144,13 @@ useEffect(()=>{
                 <td className="text-center">
                   {
                     appoint.appointment_status === "Checked Out" ? (
-                      <button className=" px-5 py-1 text-white rounded bg-emerald-500 hover:scale-105" 
+                      <button className=" px-5 py-1 text-white rounded bg-[#10b981] hover:scale-105" 
                         onClick={() => {
                           handleSubmitClick(appoint.UId, disc, appoint.id)
                         }}
                       >Submit</button>
                     ) : (
-                      <button className=" px-5 py-1 text-green-200 rounded bg-emerald-300" 
+                      <button className=" px-5 py-1 text-[#a7f3d0] rounded bg-[#6ee7b7]" 
                       disabled
                       >Submit</button>
                       // ""

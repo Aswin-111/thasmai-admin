@@ -67,7 +67,7 @@ function AppointmentsTable({filterToggle}) {
    
 
   return (
-    <div className="h-full overflow-scroll">
+    <div className="h-[85%] overflow-scroll">
       <table className="table  rounded-3xl max-h-[10vh]">
         <thead
           className="bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
