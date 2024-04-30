@@ -3,6 +3,8 @@
  import React, { useState, useEffect} from 'react'
  import { BiCloudUpload } from "react-icons/bi";
  import axios from 'axios'
+ import { toast } from 'react-hot-toast'
+
 
 
  function EditPopUp(props) {
@@ -23,7 +25,7 @@
           const eventId = props.eventId;
 
           const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/get-event/${eventId}`);
-          console.log(response.data.user);
+        //   console.log(response.data.user);
           setEventData(response.data.user);
           setEdittedData(response.data.user);
 
@@ -68,7 +70,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
 
     const eventId = props.eventId;
-    console.log((eventId));
+    // console.log((eventId));
 
     const { event_name, event_description, priority, place, date, image, event_time } = edittedData;
 
@@ -82,18 +84,21 @@ const handleSubmit = async (e) => {
       formData.append('image', image);
       formData.append('event_time', event_time);
 
-      console.log(formData);
+    //   console.log(formData);
 
       try {
         const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-event/${eventId}`, formData);
         console.log(response);
-        alert(response.data.message);
+        // alert(response.data.message);
+        toast.success(response.data.message);
         window.location = "/users/eventdetails";
         
       } catch (error) {
         console.error('Error uploading event:', error);
         // Log the error to the console
-        alert("Error uploading event. Please try again."); // Optionally, inform the user about the error
+        // alert("Error uploading event. Please try again."); // Optionally, inform the user about the error
+        toast.error("Error uploading event. Please try again.");
+
       }
     
   };

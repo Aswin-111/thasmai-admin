@@ -1,6 +1,7 @@
 "use client"
 
 import React, {useState, useEffect } from 'react';
+import Link from "next/link";
 import axios from 'axios';
 import { Carousel } from "@material-tailwind/react";
  
@@ -41,6 +42,8 @@ export default function CarouselDefault() {
             events[0] && 
 			events.map((i, index) => {
 				return (
+          <Link href="/users/eventdetails" className="w-full h-full">
+
 					<div className="h-full flex justify-center items-center bg-blue-gray-100">
             			<div className="w-[35%] h-full flex justify-end items-center pe-5">
                 			<img className="w-32 h-32 object-cover" src={i.image} alt="" />
@@ -54,6 +57,7 @@ export default function CarouselDefault() {
                 			<p className="text-[#1A69A6]">{i.place}</p>
             			</div>
         			</div>
+              </Link>
 				)
 			})
         }

@@ -6,6 +6,8 @@ import DatePanel from 'react-multi-date-picker/plugins/date_panel'
 // import DatePicker from "react-multi-date-picker";
 import { Calendar } from "react-multi-date-picker";
 import axios from 'axios';
+import { toast } from 'react-hot-toast'
+
 
 
 function GurujiAvalability() {
@@ -51,15 +53,15 @@ function GurujiAvalability() {
         const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-gurujidate`, {
           values : newDates
         });
-        // window.location.reload();
+        toast.success("Updated unavailable dates");
         setValue([]);
         setIsDateUpdated(!isDateUpdated);
       } catch (error) {
         console.error('Error uploading date:', error);
-        // alert("Error uploading dates.")
+        toast.error("Error uploading dates.")
       }
     } else {
-      alert("Please select a date");
+      toast("Please select a date 📆");
     }
 
   }
@@ -170,7 +172,7 @@ function GurujiAvalability() {
       return {
         disabled: true,
         style: { color: "#ddd" },
-        onClick: () => alert("This date is unavailable")
+        onClick: () => toast("The selected date is unavailable 📆")
       };
     }
   }}

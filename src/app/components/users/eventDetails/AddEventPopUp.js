@@ -367,6 +367,7 @@ import React, { useState } from 'react';
 import { BiCloudUpload } from "react-icons/bi";
 import axios from 'axios';
 import moment from 'moment';
+import { toast } from 'react-hot-toast'
 
 function AddEventPopUp(props) {
 
@@ -447,19 +448,21 @@ function AddEventPopUp(props) {
       try {
 
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/add-event`, formData);
-        console.log('Success:', response.data);
+        // console.log('Success:', response.data);
         props.setAddEventStatus(false);
-        alert(response.data.message);
+        // alert(response.data.message);
+        toast.success(response.data.message);
         window.location = "/users/eventdetails";
 
       } catch (error) {
-        console.error('Error uploading event:', error);
+        // console.error('Error uploading event:', error);
         // Log the error to the console
-        alert("Error uploading event. Please try again."); // Optionally, inform the user about the error
+        // alert("Error uploading event. Please try again."); // Optionally, inform the user about the error
+        toast.error("Error uploading event. Please try again.");
       }
       
     } else {
-      alert("Enter the required information");
+      toast("Enter the required information📌📍");
     }
   };
 

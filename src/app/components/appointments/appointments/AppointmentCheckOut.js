@@ -4,7 +4,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 // import { useAppointStore } from '@/app/appointments/appointments/ashramAppointmentState';
 import { useAppointFilterStore } from "@/app/appointments/appointments/filterstate";
-
+import { toast } from 'react-hot-toast'
 import axios  from 'axios';
  
  
@@ -76,12 +76,14 @@ function AppointmentCheckOut() {
  
             try {
                 const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${filterState.id}`, formData);
+                toast.success("Payment updated successfully!")
                 window.location.reload();
             } catch (error) {
-                console.error('Error uploading payment:', error);
+                // console.error('Error uploading payment:', error);
+                toast.error("Error while uploading payment details.");
             }
         } else {
-            alert("Please upload appointment bill image");
+            toast("Please upload appointment bill image");
         }
     }
  

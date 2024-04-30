@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react';
+import Link from "next/link";
 import ColumnChart from "@/app/components/overview/ColumnChart/ColumnChart"
 import PieChart from "@/app/components/overview/PieChart/PieChart"
 import CarouselDefault from "@/app/components/overview/CarouselDefault/CarouselDefault"
@@ -11,7 +12,7 @@ export default function Overview(){
     
 
     return (
-        <div className="w-full h-[85vh] p-0 m-0">
+        <div className="w-full h-[85vh] pb-1">
             <div className="w-full h-[40%] flex justify-around">
                 <div className="w-[47%] h-full">
                     <ColumnChart/>
@@ -75,8 +76,11 @@ export default function Overview(){
 
 
                 <div className="w-[40%] h-[100%] bg-white rounded-xl shadow-md py-2 ps-4 pe-3">
-                    <h3 className="h-[15%] font-bold">Recent Event List</h3>
+                    <Link href="/users/eventdetails" className="w-full">
+                        <h3 className="h-[15%] font-bold">Recent Event List</h3>
+                    </Link>
                     <CarouselDefault/>
+                    
                 </div>
 
             </div>

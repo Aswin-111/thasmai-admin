@@ -42,7 +42,7 @@ function AppointmentsTable({filterToggle}) {
   }
 
 
-  async function handleCheckInClick(id, status){
+  async function handleCheckInClick(id, status) {
     const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${id}`,{
       appointment_status : status,
       appointmentDate: `${moment().format('DD/MM/YYYY')}`

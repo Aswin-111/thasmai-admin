@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdSend } from "react-icons/io";
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import NavLink from '../navlink/navlink';
 
 function TestGlobal() {
@@ -78,9 +79,10 @@ function TestGlobal() {
                 setRenderMessageToggle(!renderMessageToggle);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                toast.error("Error while sending message.");
             }
         } else {
-            alert("Message field is empty");
+            toast("Message field is empty!");
         }
 
         

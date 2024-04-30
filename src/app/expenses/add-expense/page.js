@@ -89,6 +89,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavLink from '../navlink/navlink';
+import { toast } from 'react-hot-toast';
 import { MdOutlineFileUpload } from "react-icons/md";
 
 function AddExpense() {
@@ -144,21 +145,27 @@ function AddExpense() {
         form.append('description', formData.description);
         form.append('invoice', formData.invoice);
 
-        try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/expense`, form);
-            console.log(response);
-            alert('Expense created successfully');
-            // Clear form fields after successful submission
-            setFormData({
-                Date: '',
-                expenseType: '',
-                amount: '',
-                description: '',
-                invoice: null,
-            });
-        } catch (error) {
-            console.error('Error creating expense:', error);
-            alert('Failed to create expense');
+        if(formData.invoice && formData.expenseType && formData.amount && formData.description) {
+
+            try {
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/expense`, form);
+                console.log(response);
+                toast.success('Expense created successfully');
+                // Clear form fields after successful submission
+                setFormData({
+                    Date: '',
+                    expenseType: '',
+                    amount: '',
+                    description: '',
+                    invoice: null,
+                });
+            } catch (error) {
+                console.error('Error creating expense:', error);
+                toast.error('Error while updating expense details.');
+            }
+
+        } else {
+            toast("Please enter the required expense details.");
         }
     };
 

@@ -4,7 +4,8 @@
 import React, { useEffect, useRef,useState } from "react";
 import { useAdminAppointmentStore } from "@/app/users/ashram-appointments/appointmentState";
 import axios from "axios";
- 
+import { toast } from 'react-hot-toast'
+
  
  
  
@@ -30,13 +31,15 @@ useEffect(()=>{
       const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/discount/${UId}`,{ coupon:coupon, 
       id:id
       });
-      console.log("successfully updated");
+      // console.log("successfully updated");
+      toast.success("Reward given successfully");
       setCount(current=>current+=1)
-     window.location.reload()
+      window.location.reload()
       return;
  
   } catch (error) {
     console.error('Error fetching data:', error);
+    toast.error(error);
     return;
   }
  

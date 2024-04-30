@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { IoMdSend } from "react-icons/io";
 import NavLink from '../navlink/navlink';
+import { toast } from 'react-hot-toast';
 import moment from 'moment';
 
 function GurujiTab() {
@@ -76,9 +77,10 @@ function GurujiTab() {
                 setRenderMessageToggle(!renderMessageToggle);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                toast.error("Error while sending message.");
             }
         } else {
-            alert("Message field is empty");
+            toast("Message field is empty!");
         }    
     };
 
