@@ -8,12 +8,15 @@ function ConfigurationTable({ dummyData }) {
 
   // const [editState, setEditState] = useState(false);
   const [editableId, setEditableId] = useState(null);
+  const [parameters, setParameters] = useState([])
+
+  
 
   return (
     <div className="w-full overflow-scroll h-[90%]">
       <table className="table rounded-3xl">
         <thead
-          className="w-full h-[50px] bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
+          className="w-full h-[50px] bg-[#66A2FA] text-white sticky top-0 gap-x-20 text-[0.9rem]"
           style={{ borderRadius: "11px" }}
         >
           <tr className="rounded-3xl">

@@ -70,7 +70,7 @@ function TestGlobal() {
                   message: gurujiGlobalMessage,
                   messageTime: formattedDate,
                   isAdminMessage: true,
-                  UId: "1"
+                  UId: 0
                 });
                 // console.log(response);
                 setGurujiGlobalMessage("");
@@ -97,7 +97,7 @@ function TestGlobal() {
             </div>
             <div className='w-full h-[90%] mt-5 p-4 bg-white rounded shadow drop-shadow-md'>
             
-                <div className='w-full h-[70%] p-2 bg-[#e2e8f0] flex flex-col-reverse overflow-y-scroll'>
+                <div className='w-full h-[70%] p-2 flex flex-col-reverse overflow-y-scroll bg-gradient-to-r from-[#a5e1e2] to-[#d5ccc7]'>
                     {
                         messages[0] && 
                         messages.map((i) => {

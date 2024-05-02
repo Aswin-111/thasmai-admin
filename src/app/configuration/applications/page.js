@@ -4,9 +4,7 @@ import React from 'react'
 
 function Applications() {
 
-// window.location.href = "/configuration/applications/registration/"
-
-<div>Under development</div>
+window.location = "configuration/applications/registration"
   
   return (
     <></>

@@ -1,16 +1,95 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
-function SupportContactConfigTable({ dummyData }) {
+function SupportContactConfigTable(props) {
 
   const [editableId, setEditableId] = useState(null);
+  const [developers, setDevelepors] = useState([]);
+
+  const [inputData, setInputData] = useState({
+    Name: "",
+    Role: "",
+    PhoneNo: ""
+  });
+
+
+  console.log(inputData);
+
+  useEffect(() => {
+    
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/support`);
+        console.log(response);
+        setDevelepors(response.data.support);
+        
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+
+    };
+
+    fetchData();
+
+  }, [props.renderTableToggle]);
+
+
+  function handleOnChange(event) {
+    const { name, value } = event.target;
+
+    setInputData((prevValue) => {
+      return {
+        ...prevValue,
+        [name] : value
+      };
+    })
+  }
+
+
+
+
+  async function handleSubmit (id, prevName, prevRole, prevPhoneNo ) {
+
+    if(inputData.Name || inputData.Role || inputData.PhoneNo) {
+
+        try {
+
+            // if(!inputData.Name) {
+
+            // }
+        
+            const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-support/${editableId}`, {
+              Name: inputData.Name ? inputData.Name : prevName,
+              Role: inputData.Role ? inputData.Role : prevRole,
+              PhoneNo: inputData.PhoneNo ? inputData.PhoneNo : prevPhoneNo
+            })
+            setInputData({
+              Name: "",
+              Role: "",
+              PhoneNo: ""
+            });
+            props.setRenderTableToggle(!renderTableToggle);
+
+        } catch (error) {
+            alert("Error");
+        }
+      } else {
+        setEditableId(null);
+        alert("Please enter any field.");
+      }
+    
+    setEditableId(null);
+  }
+
+
 
 
   return (
     <div className="w-full overflow-scroll h-[90%]">
       <table className="table rounded-3xl">
         <thead
-          className="w-full h-[50px] bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
+          className="w-full h-[50px] bg-[#005DB8] text-white sticky top-0 gap-x-20 text-[0.9rem]"
           style={{ borderRadius: "11px" }}
         >
           <tr className="rounded-3xl">
@@ -22,7 +101,7 @@ function SupportContactConfigTable({ dummyData }) {
         </thead>
         <tbody className="my-10">
           {
-            dummyData.map((data, index) => {
+            developers.map((data, index) => {
               return (
                 <tr className="font-semibold text-[0.8rem] text-black my-10 ">
                   <td className="text-center ps-5">
@@ -31,10 +110,13 @@ function SupportContactConfigTable({ dummyData }) {
                         <input 
                           className="w-full h-[35px] border-none bg-[#D9D9D9] rounded" 
                           type="text"
-                          placeholder={data.name} 
+                          placeholder={data.Name}
+                          name="Name"
+                          value={inputData.Name}
+                          onChange={handleOnChange} 
                         />
                       ) : (
-                        data.name
+                        data.Name
                       )
                     }
                
@@ -45,10 +127,13 @@ function SupportContactConfigTable({ dummyData }) {
                         <input 
                           className="w-full h-[35px] border-none bg-[#D9D9D9] rounded" 
                           type="text"
-                          placeholder={data.role} 
+                          placeholder={data.Role}
+                          name="Role"
+                          value={inputData.Role}
+                          onChange={handleOnChange} 
                         />
                       ) : (
-                        data.role
+                        data.Role
                       )
                     }
                
@@ -60,10 +145,13 @@ function SupportContactConfigTable({ dummyData }) {
                         <input 
                           className="w-full h-[35px] border-none bg-[#D9D9D9] rounded" 
                           type="text"
-                          placeholder={data.phone} 
+                          placeholder={data.PhoneNo}
+                          name="PhoneNo"
+                          value={inputData.PhoneNo}
+                          onChange={handleOnChange} 
                         />
                       ) : (
-                        data.phone
+                        data.PhoneNo
                       )
                     }
                
@@ -73,7 +161,9 @@ function SupportContactConfigTable({ dummyData }) {
                       editableId === data.id ? (
                         <button 
                           className="w-[100px] h-[35px] bg-green-500 text-white rounded-xl"
-                          onClick={ () => { setEditableId(null) } }
+                          onClick={ () => { 
+                            handleSubmit(data.id, data.Name, data.Role, data.PhoneNo)
+                          } }
                         >Save</button>
                       ) : (
                         <button 
