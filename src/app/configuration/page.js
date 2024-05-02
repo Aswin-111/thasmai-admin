@@ -5,7 +5,7 @@
 
 export default function Users(){
     
-    window.location = "/configuration/financial"
+    // window.location = "/configuration/financial"
 
     return (
         <></>
