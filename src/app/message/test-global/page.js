@@ -72,11 +72,12 @@ function TestGlobal() {
                   isAdminMessage: true,
                   UId: 0
                 });
-                // console.log(response);
+                console.log(response);
                 setGurujiGlobalMessage("");
-                // alert(response.data.message);
                 setPageNo(1);
                 setRenderMessageToggle(!renderMessageToggle);
+                // alert(response.data.message);
+                toast.success("Message send successfully.");
             } catch (error) {
                 console.error('Error fetching data:', error);
                 toast.error("Error while sending message.");
@@ -84,7 +85,6 @@ function TestGlobal() {
         } else {
             toast("Message field is empty!");
         }
-
         
     };
 
@@ -97,44 +97,44 @@ function TestGlobal() {
             </div>
             <div className='w-full h-[90%] mt-5 p-4 bg-white rounded shadow drop-shadow-md'>
             
-                <div className='w-full h-[70%] p-2 flex flex-col-reverse overflow-y-scroll bg-gradient-to-r from-[#a5e1e2] to-[#d5ccc7]'>
+                <div className='w-full h-[70%] p-2 px-10 flex flex-col-reverse rounded-md overflow-y-scroll bg-gradient-to-r from-[#a5e1e2] to-[#d5ccc7]'>
                     {
                         messages[0] && 
-                        messages.map((i) => {
+                        messages.map((i, index) => {
                             return (
                             
                                 i.isAdminMessage ? (
-                                    <div className="chat chat-end">
-                                        <div className="chat-image avatar">
+                                    <div className="chat chat-end mb-2" key={index}>
+                                        {/* <div className="chat-image avatar">
                                             <div className="w-10 rounded-full">
-                                                <img alt="Tailwind CSS chat bubble component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                                <img alt="Tailwind CSS chat bubble component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                             </div>
-                                        </div>
+                                        </div> */}
                                         {/* <div className="chat-header">
                                             Thasmai Guruji
                                             <time className="text-xs opacity-50">12:46</time>
                                         </div> */}
-                                        <div className="chat-bubble bg-[#DDC2A1] text-[#3E2E16]">{ i.message }</div>
-                                        <div className="chat-footer opacity-50">
-                                            <time className="text-xs opacity-50">{ i.messageTime }</time>
+                                        <div className="chat-bubble bg-[#DDC2A1] text-[#312411]">{ i.message }</div>
+                                        <div className="chat-footer">
+                                            <time className="text-xs opacity-75">{ i.messageTime }</time>
                                         </div>
                                     </div>
                                 ) : (
                                 
-                                    <div className="chat chat-start mb-2">
-                                        <div className="chat-image avatar">
+                                    <div className="chat chat-start mb-2" key={index}>
+                                        {/* <div className="chat-image avatar">
                                             <div className="w-10 rounded-full">
-                                                <img alt="Tailwind CSS chat bubble component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                                <img alt="Tailwind CSS chat bubble component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="chat-header">
                                             {i.userName}
                                             {/* <time className="text-xs opacity-50">{ i.messageTime }</time> */}
                                         </div>
                                         <div className="chat-bubble bg-white text-black">{ i.message }</div>
 
-                                        <div className="chat-footer ">
-                                            <time className="text-xs opacity-50">{ i.messageTime }</time>
+                                        <div className="chat-footer">
+                                            <time className="text-xs opacity-75">{ i.messageDate } at { i.messageTime }</time>
                                         </div>
                                     </div>
                                 )

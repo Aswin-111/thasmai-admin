@@ -35,7 +35,7 @@ function ReferenceConfigTable({ dummyData }) {
                     {
                       editableId === data.id ? (
                         <input 
-                          className="w-full h-[35px] border-none bg-[#D9D9D9] rounded" 
+                          className="w-full h-[35px] px-2 border-none bg-[#D9D9D9] rounded" 
                           type="text"
                           placeholder={ data.value } 
                         />

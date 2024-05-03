@@ -169,7 +169,7 @@ function AppointmentsTable({filterToggle}) {
     
                     <td className="text-center">
                       <button 
-                        className='w-[90px] h-[35px] rounded-3xl border-black border-[0.5px] hover:bg-slate-200'
+                        className='w-[90px] h-[35px] rounded-3xl border-black border-[0.5px] hover:bg-[#e2e8f0]'
                         onClick={ () => {
                           filterState.setAppointmentViewToggle(true, appoint.id);
                         }}

@@ -3,7 +3,7 @@
 
 
 
-export default function Users(){
+export default function Users() {
     
     // window.location = "/configuration/financial"
 
