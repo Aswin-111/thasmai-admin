@@ -75,7 +75,7 @@ function AppointmentView({selectedId}) {
                     isBasicDetails  && data.appointment ? 
                     (
                         <div className='h-[75%] w-[90%] flex m-auto'>
-                            <div className='w-[50%] mt-4 '>
+                            <div className='w-[50%] mt-4 text-black'>
                                 <div className='flex pt-4'><p className='w-[50%]'>Appointment Id </p><p>: {data.appointment.id}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Appointment Date </p><p>: {data.appointment.appointmentDate}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Username </p><p>: {data.appointment.user_name}</p></div>
@@ -86,7 +86,7 @@ function AppointmentView({selectedId}) {
                                 <div className='flex pt-4'><p className='w-[50%]'>No.of.peoples </p><p>: {data.appointment.num_of_people}</p></div>
                             </div>
 
-                            <div className=' w-[50%] mt-4'>
+                            <div className=' w-[50%] mt-4 text-black'>
                                 <div className='flex pt-4'><p className='w-[50%]'>Emergency contact</p><p>: {data.appointment.emergencyNumber}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Rewards</p><p>: {data.appointment.discount}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Check-in date</p><p>: {data.appointment.appointmentDate}</p></div>
@@ -108,7 +108,7 @@ function AppointmentView({selectedId}) {
                                     <th>Age</th>
                                     <th>Relation</th>
                                 </thead>
-                                <tbody className='text-center'>
+                                <tbody className='text-center text-black'>
                                     {
                                         data.appointment && 
                                         data.appointment.groupMembers.map((member, index) => {

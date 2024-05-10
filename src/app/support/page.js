@@ -35,7 +35,7 @@ export default function Users() {
           		<div className=' w-full h-[15%] ps-10 flex items-center bg-blue-400 bg-gradient-to-r from-[#a5e1e282] to-[#d5ccc798]'>
             		<h1 className='font-semibold text-2xl text-white '>Get Support</h1>
           		</div>
-          		<div className='w-full h-[85%] p-10 grid grid-cols-3 gap-4 bg-gradient-to-r from-[#a5e1e282] to-[#d5ccc798]'>
+          		<div className='w-full h-[85%] p-10 flex flex-wrap justify-evenly bg-gradient-to-r from-[#a5e1e282] to-[#d5ccc798] overflow-y-auto'>
 
 					{
 						developers[0] && 

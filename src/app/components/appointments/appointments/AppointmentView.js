@@ -80,7 +80,7 @@ function AppointmentView() {
                     isBasicDetails  && data.appointment ? 
                     (
                         <div className='h-[75%] w-[90%] flex m-auto'>
-                            <div className='w-[50%] mt-4 '>
+                            <div className='w-[50%] mt-4 text-black'>
                                 <div className='flex pt-4'><p className='w-[50%]'>Appointment Id </p><p>: {data.appointment.id}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Appointment Date </p><p>: {data.appointment.appointmentDate}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Username </p><p>: {data.appointment.user_name}</p></div>
@@ -91,7 +91,7 @@ function AppointmentView() {
                                 <div className='flex pt-4'><p className='w-[50%]'>No.of.peoples </p><p>: {data.appointment.num_of_people}</p></div>
                             </div>
 
-                            <div className=' w-[50%] mt-4'>
+                            <div className=' w-[50%] mt-4 text-black'>
                                 <div className='flex pt-4'><p className='w-[50%]'>Emergency contact</p><p>: {data.appointment.emergencyNumber}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Rewards</p><p>: {data.appointment.discount}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Check-in date</p><p>: {data.appointment.appointmentDate}</p></div>
@@ -118,7 +118,7 @@ function AppointmentView() {
                                         data.appointment && 
                                         data.appointment.groupMembers.map((member, index) => {
                                             return (
-                                                <tr className='h-12 border-gray-100 border-b-2'>
+                                                <tr className='h-12 border-gray-100 border-b-2 text-black'>
                                                     <td>{ index + 1}</td>
                                                     <td>{ member.name }</td>
                                                     <td>{ member.age }</td>

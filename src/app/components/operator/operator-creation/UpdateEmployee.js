@@ -1,54 +1,29 @@
-import React ,{useEffect , useState} from 'react'
-import { toast } from 'react-hot-toast'
-import axios from 'axios'
+import React, {useState, useEffect} from 'react';
 
-function AddEmployee(props) {
 
-  const [ employeeData, setEmployeeData ] = useState(
-    { 
-      name:"",
-      role : "",
-      username : "",
-      location : "",
-      dateOfJoining : "",
-      password : "",
-      confirmPassword : ""
-    }
-  );
-    console.log(employeeData);
-   function handleOnChange(event) {
-    const { name, value } = event.target
-    setEmployeeData(prevValue => (
-      {
-        ...prevValue , 
-        [name] : value
-      }
-    ))
-   }
+function UpdateEmployee(props) {
 
-  async function handleCreateEmployee() {
+    const [ employeeData, setEmployeeData ] = useState(
+        { 
+          name:"",
+          role : "",
+          username : "",
+          location : "",
+          dateOfJoining : "",
+          password : "",
+          confirmPassword : ""
+        }
+    );
 
-     if( employeeData.name && employeeData.role && employeeData.username && employeeData.location && employeeData.dateOfJoining && employeeData.password && employeeData.confirmPassword ) {
-      if( employeeData.password === employeeData.confirmPassword ) { 
-        try {
-          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/operatorCreation`,employeeData)
-          console.log(response);
-          toast.success(response.data.message)
-          props.setAddPopup(false)
-          
-      } catch (error) {
-          console.error('Error fetching data:', error);
-      }
-
-      } else {
-        toast("your password and confirm shouldn't match")
-      }
-
-     } else {
-        toast("Please Enter the required Fileds")
-     }
-   
-  }
+    function handleOnChange(event) {
+        const { name, value } = event.target
+        setEmployeeData(prevValue => (
+          {
+            ...prevValue , 
+            [name] : value
+          }
+        ))
+       }
 
 
   return (
@@ -56,13 +31,13 @@ function AddEmployee(props) {
         <button
                 className="w-8 h-8 m-0 p-0 absolute top-6 right-6 hover:scale-110 text-5xl text-white rotate-45"
                 onClick={() => {
-                    props.setAddPopup(false);
+                    props.setUpdateEmployee(false);
                 }}
         >+</button>
 
         <div className="w-[30%] h-[95%] bg-white">
             <div className='w-full h-[10%] bg-[#005DB8]  text-white flex items-center px-10'>
-                <p className='text-xl'>Add Employee</p>
+                <p className='text-xl'>Update Employee</p>
             </div>
             <div className='w-full h-[90%] px-10 py-8 flex flex-col justify-between'>
                 <input 
@@ -81,8 +56,8 @@ function AddEmployee(props) {
 
                  >
                     <option  value="" selected disabled>Role</option>
-                    <option value="supervisor">Supervisor</option>
-                    <option value="operator">Operator</option>
+                    <option>Supervisor</option>
+                    <option>Operator</option>
                 </select>
                 {/* <select className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-2 border-[#74777F] rounded-[8px]' >
                     <option value="" selected disabled>*Supervisor(only if the role is operator)</option>
@@ -140,7 +115,7 @@ function AddEmployee(props) {
                 />
                 <button
                  className='w-full h-12 bg-[#005cb8e6] text-white rounded-xl hover:bg-[#005DB8]'
-                 onClick = {handleCreateEmployee}
+                //  onClick = {handleCreateEmployee}
                 >
                      Add Employee
                 </button>
@@ -153,4 +128,4 @@ function AddEmployee(props) {
   )
 }
 
-export default AddEmployee
+export default UpdateEmployee

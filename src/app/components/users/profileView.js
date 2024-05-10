@@ -46,7 +46,7 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
         return;
     
       }
-
+ 
      
 
       
@@ -168,7 +168,7 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
             <img className='rounded-full h-[180px] w-[180px] border-4 object-cover' src={profilePic? `${profilePic}` : "/profile_dummy.jpeg"} alt='Profile photo' />
                {/* sometimes need to paste " data:image/png;base64, " infront of base64 code */}
           </div>
-          <div className='w-full h-[50%] p-3 pt-5'>
+          <div className='w-full h-[50%] p-3 pt-5 text-black'>
             <p className='mb-4 font-semibold'>{`${profile.first_name}  ${profile.last_name}`}</p>
             <p className='mb-4'>{ profile.email} </p>
             <p className='mb-4'>+91 { profile.phone} </p>
@@ -226,7 +226,7 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
               isProfile && 
                 <>
                 <div className='w-[50%] h-full'>
-                <table className='w-full'>
+                <table className='w-full text-black'>
                   <tbody>
                     <tr className='h-[40px]'>
                       <td className='w-[35%] text-left'>Name</td>
@@ -288,7 +288,7 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
               isMeditation && 
                 <>
                 <div className='w-[50%] h-full'>
-                <table className='w-full'>
+                <table className='w-full text-black'>
                   <tbody>
                     <tr className='h-[40px]'>
                       <td className='w-[50%] text-left'>Current Session</td>
@@ -349,7 +349,7 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
               isBank && 
                 <>
                 <div className='w-[100%] h-full'>
-                <table className='w-full'>
+                <table className='w-full text-black'>
                   <tbody>
                     <tr className='h-[40px]'>
                       <td className='w-[25%] text-left'>Bank Name</td>

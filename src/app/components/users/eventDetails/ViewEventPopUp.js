@@ -77,7 +77,7 @@ function ViewEventPopUp(props) {
                 </div>
             </div>
             <div className='w-[60%] h-full overflow-y-auto'>
-                <p className='w-full ps-10'>{ eventData.event_description }</p>
+                <p className='w-full ps-10 text-black'>{ eventData.event_description }</p>
             </div>
         </div>
       </div>

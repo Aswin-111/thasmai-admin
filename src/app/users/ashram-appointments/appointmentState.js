@@ -3,9 +3,6 @@ import { create } from "zustand";
 
 export const useAdminAppointmentStore = create((set) => ({
 
-   
-
-
     appointments : [],
     setAppointments : (data) => set(state => {
         return ({appointments : data})

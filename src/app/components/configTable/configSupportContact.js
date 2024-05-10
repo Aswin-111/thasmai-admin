@@ -130,7 +130,7 @@ function SupportContactConfigTable(props) {
                   					 	   	editableId === data.id ? (
                   					 	     	<input 
                   					 	     	  	className="w-full h-[35px] px-2 border-none bg-[#D9D9D9] rounded placeholder:text-gray-700" 
-                  					 	     	  	type="text"
+                  					 	     	  	type="number"
                   					 	     	  	placeholder={data.PhoneNo}
                   					 	     	  	name="PhoneNo"
                   					 	     	  	value={inputData.PhoneNo}

@@ -94,7 +94,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 
 function AddExpense() {
     const [formData, setFormData] = useState({
-        Date: '',
+        Expense_Date: '',
         expenseType: '',
         amount: '',
         description: '',
@@ -107,12 +107,12 @@ function AddExpense() {
         const day = String(today.getDate()).padStart(2, '0');
         const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
         const year = today.getFullYear();
-        const todayDate = `${day}/${month}/${year}`;
+        const todayDate = `${year}-${month}-${day}`;
         
         // Set today's date in your form data
         setFormData({
             ...formData,
-            Date: todayDate,
+            Expense_Date: todayDate,
         });
         
     }, []); // Run only once on component mount
@@ -139,7 +139,7 @@ function AddExpense() {
         console.log('Submitting form data:', formData); // Log the form data before submission
 
         const form = new FormData();
-        form.append('Date', formData.Date);
+        form.append('Expense_Date', formData.Expense_Date);
         form.append('expenseType', formData.expenseType);
         form.append('amount', formData.amount);
         form.append('description', formData.description);
@@ -153,7 +153,7 @@ function AddExpense() {
                 toast.success('Expense created successfully');
                 // Clear form fields after successful submission
                 setFormData({
-                    Date: '',
+                    Expense_Date: '',
                     expenseType: '',
                     amount: '',
                     description: '',
@@ -177,14 +177,28 @@ function AddExpense() {
             <div className='w-full h-[93%] mt-2 p-4 bg-white rounded shadow drop-shadow-md '>
                 <div className='w-full h-[85%] px-16 py-6 flex '>
                     <div className='w-[60%] flex flex-col'>
-                        <input
+                        {/* <input
                             type='text'
                             className='w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px]'
                             name="expenseType"
                             value={formData.expenseType}
                             onChange={handleInputChange}
                             placeholder='Expense Type'
-                        />
+                        /> */}
+                        <select 
+                            className='w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px]'
+                            name="expenseType"
+                            value={formData.expenseType}
+                            onChange={handleInputChange}
+                        >
+                            <option value="" disabled>Select</option>
+                            <option value="Electricity bill">Electricity Bill</option>
+                            <option value="Water bill">Water Bill</option>
+                            <option value="Stationery items">Stationery Items</option>
+                            <option value="Food and beverages">Food and beverages</option>
+                            {/* <option value="Other">Other</option> */}
+
+                        </select>
                         <input
                             type='number'
                             className='w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px]'

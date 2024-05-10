@@ -47,7 +47,7 @@ useEffect(()=>{
  
   }
   return (
-    <div className="  ">
+    
       <table className="table rounded-3xl">
         <thead
           className="bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
@@ -70,7 +70,7 @@ useEffect(()=>{
  
           </tr>
         </thead>
-        <tbody className="my-10">
+        <tbody className="my-10 text-black">
           {appointmentState.appointments &&
            appointmentState.appointments.map((appoint, index) => {
  
@@ -129,7 +129,7 @@ useEffect(()=>{
                         onChange={
                           (e)=>setdisc(e.target.value)
                         }
-                        className="w-[6rem] py-1 bg-white rounded placeholder:text-[.7rem] border-black border-[1px]  text-center"
+                        className="w-[6rem] py-1 bg-white text-black rounded placeholder:text-[.7rem] border-black border-[1px]  text-center"
                         placeholder="C.amount"
                       />
                     ) : (
@@ -170,7 +170,7 @@ useEffect(()=>{
           })}
         </tbody>
       </table>
-    </div>
+  
   );
 }
  

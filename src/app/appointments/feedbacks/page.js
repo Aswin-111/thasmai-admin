@@ -276,7 +276,7 @@ function AshramAppointments() {
                           className={`${ feedbackState.FieldValue === "Appointment Date" ||
                           feedbackState.FieldValue === "Checkin Date" ||
                           feedbackState.FieldValue === "Checkout Date" ||
-                          feedbackState.FieldValue === "Status" ? "placeholder:text-slate-200 ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100":"placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"}`}
+                          feedbackState.FieldValue === "Status" ? "placeholder:text-slate-200 ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100":"placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"}`}
                           disabled={
                             feedbackState.FieldValue === "Appointment Date" ||
                             feedbackState.FieldValue === "Checkin Date" ||
@@ -379,10 +379,10 @@ function AshramAppointments() {
                   date = date.split("-");
                   date = `${date[2]}/${date[1]}/${date[0]}`;
 
-                  feedbackState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : `${date}`, logicaloperator:
+                  feedbackState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value, value : `${date}`, logicaloperator:
                   'and'})
                 } else {
-                  feedbackState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : dataRef.current.value, logicaloperator:
+                  feedbackState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value, value : dataRef.current.value, logicaloperator:
                   'and'})
                   
                 }

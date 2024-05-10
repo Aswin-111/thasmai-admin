@@ -165,7 +165,7 @@ function TestGlobal() {
                     <div className='flex pt-10'>
                         <input 
                             text="text" 
-                            className='w-[90%] h-11 me-2 p-2 bg-[#D6E3FF] rounded-xl shadow drop-shadow-md outline-none placeholder:ps-2'
+                            className='w-[90%] h-11 me-2 p-2 bg-[#D6E3FF] text-black rounded-xl shadow drop-shadow-md outline-none placeholder:ps-2'
                             placeholder='Message...'
                             value={ gurujiGlobalMessage }
                             onChange={(e) => {

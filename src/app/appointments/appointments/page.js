@@ -137,14 +137,15 @@ function AshramAppointments() {
               <option disabled selected>
                 Choose field
               </option>
-              { filterState.FieldValues.map((i,index)=>{
-                return (
-                  <option key = {index} value = {i}> 
-                    {i}
-                  </option>
-
-                )
-              })}
+              { 
+                filterState.FieldValues.map((i,index)=>{
+                  return (
+                    <option key = {index} value = {i}> 
+                      {i}
+                    </option>
+                  )
+                })
+              }
             </select>
 
             <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
@@ -220,7 +221,7 @@ function AshramAppointments() {
                           className={`${ filterState.FieldValue === "Appointment Date" ||
                             filterState.FieldValue === "Checkin Date" ||
                             filterState.FieldValue === "Checkout Date" ||
-                            filterState.FieldValue === "Status" ? "placeholder:text-slate-200 ms-3 w-48 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100":"placeholder:text-black ms-3 w-48 h-8 text-[12px] text-center text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"}`}
+                            filterState.FieldValue === "Status" ? "placeholder:text-slate-200 ms-3 w-48 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100":"placeholder:text-black ms-3 w-48 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"}`}
                           disabled={
                             filterState.FieldValue === "Appointment Date" ||
                             filterState.FieldValue === "Checkin Date" ||
@@ -393,8 +394,8 @@ function AshramAppointments() {
         <div className='w-full h-[80%] mt-2'>
           <AppointmentsTable filterToggle={filterToggle} />
 
-          	<div className="w-full h-[10%] px-2 flex justify-between items-center">
-			  	<p className="text-sm text-gray-500">Page 1 of 1</p>
+          <div className="w-full h-[10%] px-2 flex justify-between items-center">
+			  	  <p className="text-sm text-gray-500">Page 1 of 1</p>
 		  		<div>
 					<button
 						className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
@@ -405,9 +406,9 @@ function AshramAppointments() {
 						// onClick={ handleNextPage }
 					>Next</button>
 				</div>
-          	</div>
+      </div>
 
-        </div>
+    </div>
 
         
 

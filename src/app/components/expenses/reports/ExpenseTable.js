@@ -1,9 +1,8 @@
 import React from 'react'
 
 function ExpenseTable(props) {
-
+        // console.log(props.expenseData);
   return (
-        <div className="w-full h-full m-0 p-0">
             <table className='w-full'>
                 <thead className="sticky top-0">
                     <tr className='h-12 text-left bg-[#005DB8] text-white'>
@@ -21,8 +20,8 @@ function ExpenseTable(props) {
                         props.expenseData[0] ? (
                             props.expenseData.map((i,index) => { 
                                 return (
-                                    <tr className='h-12 border-[#E0E2EC] border-b-2'>
-                                        <td className='ps-2'>{i.Date}</td>
+                                    <tr className='h-12 text-black border-[#E0E2EC] border-b-2' key={index}>
+                                        <td className='ps-2'>{i.Expense_Date}</td>
                                         <td className='ps-2'>{i.expenseType}</td>
                                         <td className='ps-2'>₹ {i.amount}</td>
                                         <td className='ps-2 text-center'>
@@ -36,7 +35,10 @@ function ExpenseTable(props) {
                                             />
                                         </td>
 
+                                      { i.description ?   (
+                                        
                                         <td className='h-12 ps-2 flex justify-center items-center'>
+
                                             {
                                                 i.description.length > 20 ? (
                                                         i.description.substring(0,20)
@@ -53,6 +55,15 @@ function ExpenseTable(props) {
                                             >Read more....</p>
 
                                         </td>
+                                      )  : (
+                                        <td className='h-12 ps-2 flex justify-center items-center'>
+                                            -
+                                        </td>
+                                      )  
+
+
+
+                                            }
 
                                         <td className='ps-2 text-center'>
                                             <button
@@ -84,7 +95,6 @@ function ExpenseTable(props) {
 
                 </tbody>
             </table>
-        </div>
     )
 }
 

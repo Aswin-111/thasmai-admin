@@ -139,11 +139,11 @@ function AppointmentCheckOut() {
             <div className='w-full h-[85%] text-center'>
                 <div className='w-[75%] mt-4 mx-auto'>
                         <div className='flex pt-4'>
-                            <p className='w-[50%]'>Number of days stayed</p>
+                            <p className='w-[50%] text-black'>Number of days stayed</p>
                             <p>: {date}</p>
                         </div>
                         <div className='flex pt-4'>
-                            <p className='w-[50%]'>Appointment payment</p>
+                            <p className='w-[50%] text-black'>Appointment payment</p>
  
                             <input 
                                 className="h-[35px] ps-3 rounded-[6px] outline-black bg-white text-black border-black border-[1px]" 
@@ -162,16 +162,16 @@ function AppointmentCheckOut() {
                             />
                         </div>
                         <div className='flex pt-4'>
-                            <p className='w-[50%]'>Reward/Discount received</p>
+                            <p className='w-[50%] text-black'>Reward/Discount received</p>
                             <p>: ₹ {data.discount ? data.discount : "0"}</p>
                         </div>
                         <div className='flex pt-4'>
-                            <p className='w-[50%] font-semibold'>Total payment</p>
+                            <p className='w-[50%] font-semibold text-black'>Total payment</p>
                             <p>: ₹ { finalPayment}
                             </p>
                         </div>  
                         <div className='flex pt-4'>
-                            <p className='w-[50%]'>Type of Payment</p>
+                            <p className='w-[50%] text-black'>Type of Payment</p>
                             {/* <p>: njhgfd</p> */}
                             <select 
                                 className='w-[150px] h-[35px] p-0 ps-2 rounded-[6px] outline-black bg-white text-black border-black border-[1px]'  
@@ -185,7 +185,7 @@ function AppointmentCheckOut() {
                             </select>
                         </div> 
                         <div className='flex pt-4'>
-                            <p className='w-[50%]'>Upload Bill:</p>
+                            <p className='w-[50%] text-black'>Upload Bill:</p>
  
                             <input 
                                 className="h-[35px] rounded-[6px] outline-black" 

@@ -5,9 +5,12 @@ import { IoMdSearch } from "react-icons/io";
 import OperatorCreationTable from '@/app/components/operator/operator-creation/OperatorCreationTable'
 import AddEmployee from '@/app/components/operator/operator-creation/AddEmployee'
 import NavLink from '../navlink/navlink'
+import UpdateEmployee from '@/app/components/operator/operator-creation/UpdateEmployee';
 
 function OperatorCreation() {
 
+
+	const [updateEmployee, setUpdateEmployee] = useState(false);
 	const [addPopup, setAddPopup] = useState(false);
 
 	
@@ -48,13 +51,17 @@ function OperatorCreation() {
         	</div>
 
 			<div className='w-full h-[80%] mt-3'>
-				<OperatorCreationTable />
+				<OperatorCreationTable setUpdateEmployee={setUpdateEmployee} />
 			</div>
       	</div>
 
 		{
 					
 			addPopup && <AddEmployee setAddPopup={ setAddPopup } />
+		}
+
+		{
+			updateEmployee && <UpdateEmployee setUpdateEmployee={setUpdateEmployee} />
 		}
 
     </div>
