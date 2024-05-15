@@ -1,68 +1,88 @@
 "use client"; 
 
 import React, { useEffect, useState } from 'react';
-import { FaEdit } from "react-icons/fa";
+// import { FaEdit } from "react-icons/fa";
+import { TbEyeEdit } from "react-icons/tb";
 import axios from 'axios';
 
 function OperatorCreationTable(props) {
 
-    const [operatorData, setOperatorData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
+            const page = props.pageNo || 1;
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/operatorList`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/operatorList?page=${page}`);
                 console.log(response);
-                setOperatorData(response.data.list);
+                props.setOperatorData(response.data.list);
+                props.setTotalPages(response.data.totalPages)
             } catch (error) {
                 console.log('Error fetching data:', error);
             }
         };
 
         fetchData();
-    }, [operatorData]);
+    }, [props.pageNo, props.renderTableToggle]); 
 
     return (
-        <div className="w-full h-full m-0 p-0 overflow-y-auto">
-            <table className='w-full'>
-                <thead className="sticky top-0">
-                    <tr className='h-12 text-left bg-[#005DB8] text-white'>
-                        <th className='ps-2'>Name</th>
-                        <th className='ps-2'>DOJ</th>
-                        <th className='ps-2'>Username</th>
-                        {/* <th className='ps-2'>Emp Id</th> */}
-                        <th className='ps-2 text-center'>Location</th>
-                        <th className='ps-2 text-center'>Role</th>
-                        <th className='ps-2 text-center'>Email</th>
-                        {/* <th className='ps-2 text-center'>Supervisor</th> */}
-                        <th className='ps-2 text-center'></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {operatorData.map((operator, index) => (
+        <table className='w-full text-sm'>
+            <thead className="sticky top-0">
+                <tr className='h-12 text-left bg-[#005DB8] text-white'>
+                    <th className='w-[10%] ps-2'>Emp Id</th>
+                    <th className='w-[15%] ps-2'>DOJ</th>
+                    <th className='w-[20%] ps-2'>Name</th>
+                    <th className='w-[25%] ps-2'>Username</th>
+                    <th className='w-[15%] ps-2 text-center'>Location</th>
+                    <th className='w-[10%] ps-2 text-center'>Role</th>
+                    <th className='w-[5%] ps-2 text-center'></th>
+                </tr>
+            </thead>
+            <tbody>
+                {   props.operatorData[0] ? (
+                    props.operatorData.map((operator, index) => (
                         <tr key={index} className='h-12 border-[#E0E2EC] border-b-2'>
-                            <td className='ps-2'>{operator.name}</td>
-                            <td className='ps-2'>{operator.dateOfJoining}</td>
-                            <td className='ps-2'>{operator.username}</td>
-                            {/* <td className='ps-2'>{operator.empId}</td> */}
-                            <td className='ps-2 text-center'>{operator.location}</td>
-                            <td className='ps-2 text-center'>{operator.role}</td>
-                            <td className='ps-2 text-center'>{operator.email}</td>
+                            <td className='w-[10%] ps-2'>{operator.emp_Id}</td>
+                            <td className='w-[15%] ps-2'>{operator.dateOfJoining}</td>
+                            <td className='w-[20%] ps-2'>
+                                <div className='w-full h-full text-nowrap'>{operator.name}</div>
+                            </td>
+                            <td className='w-[25%] ps-2'>
+                                <div className='w-full h-full text-nowrap'>{operator.username}</div>
+                            </td>
+                            <td className='w-[15%]ps-2 text-center'>{operator.location}</td>
+                            <td className='w-[10%] ps-2 text-center'>{operator.role}</td>
+                            {/* <td className='ps-2 text-center'>{operator.email}</td> */}
                             {/* <td className='ps-2 text-center'>{operator.supervisor}</td> */}
-                            <td>
+                            <td className='w-[5%] ps-2 text-center'>
                                 <button 
                                     onClick={() => {
-                                      props.setUpdateEmployee(true);
+                                        props.setUpdateEmployee(true);
+                                        props.setEmployeeId(operator.emp_Id);
                                     }}
                                 >
-                                    <FaEdit className='text-2xl text-red-600 hover:text-red-700 hover:bg-slate-200 hover:scale-110' />
+                                    <TbEyeEdit className='text-2xl text-[#444b91] hover:text-red-700 hover:bg-slate-200 hover:scale-110' />
                                 </button>
                             </td>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+                    ))
+                ) : (
+                    <tr className='h-12 border-[#E0E2EC] border-b-2'>
+                        <td className='w-[10%]'></td>
+                        <td className='w-[10%]'></td>
+                        <td className='w-[10%]'></td>
+                        <td>
+                            No data to display
+                        </td>
+                        <td className='w-[10%]'></td>
+                        <td className='w-[10%]'></td>
+                        <td className='w-[10%]'></td>
+                    </tr>
+                )
+                    
+                }
+            </tbody>
+        </table>
+    
     );
 }
 

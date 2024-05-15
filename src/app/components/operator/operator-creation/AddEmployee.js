@@ -15,7 +15,9 @@ function AddEmployee(props) {
       confirmPassword : ""
     }
   );
+
     console.log(employeeData);
+
    function handleOnChange(event) {
     const { name, value } = event.target
     setEmployeeData(prevValue => (
@@ -26,27 +28,38 @@ function AddEmployee(props) {
     ))
    }
 
-  async function handleCreateEmployee() {
+  async function handleCreateEmployee(event) {
+    event.preventDefault();
 
-     if( employeeData.name && employeeData.role && employeeData.username && employeeData.location && employeeData.dateOfJoining && employeeData.password && employeeData.confirmPassword ) {
+    if( employeeData.name && employeeData.role && employeeData.username && employeeData.location && employeeData.dateOfJoining && employeeData.password && employeeData.confirmPassword ) {
       if( employeeData.password === employeeData.confirmPassword ) { 
         try {
-          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/operatorCreation`,employeeData)
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/operatorCreation`, employeeData)
           console.log(response);
-          toast.success(response.data.message)
-          props.setAddPopup(false)
-          
-      } catch (error) {
-          console.error('Error fetching data:', error);
-      }
+          toast.success(response.data.message);
+          setEmployeeData({
+            name:"",
+            role : "",
+            username : "",
+            location : "",
+            dateOfJoining : "",
+            password : "",
+            confirmPassword : ""
+          });
+          props.setPageNo(1);
+          props.setAddPopup(false);
+        } catch (error) {
+            // console.error('Error fetching data:', error);
+            toast.error(error.message)
+        }
 
       } else {
-        toast("your password and confirm shouldn't match")
+        toast("Your password and confirm password should match.")
       }
 
-     } else {
-        toast("Please Enter the required Fileds")
-     }
+    } else {
+       toast("Please Enter the required Fileds")
+    }
    
   }
 
@@ -81,7 +94,7 @@ function AddEmployee(props) {
 
                  >
                     <option  value="" selected disabled>Role</option>
-                    <option value="supervisor">Supervisor</option>
+                    {/* <option value="supervisor">Supervisor</option> */}
                     <option value="operator">Operator</option>
                 </select>
                 {/* <select className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-2 border-[#74777F] rounded-[8px]' >
