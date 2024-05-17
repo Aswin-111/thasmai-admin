@@ -2,7 +2,7 @@
 
 import React , {useState, useEffect} from 'react'
 import axios from 'axios';
-import { useNotificationStore } from '@/app/notifications/notifications/searchState'
+import { useNotificationStore } from '@/app/admin/notifications/notifications/searchState'
 
 
 function NotificationMessageTable() {

@@ -269,7 +269,7 @@
 
 
 import React, { useRef, useEffect } from "react";
-import { useAppointmentStore } from "@/app/operator/appointments/appointmentState";
+import { useAppointmentStore } from "@/app/admin/operator/appointments/appointmentState";
 import axios from "axios";
 import moment from 'moment'
 

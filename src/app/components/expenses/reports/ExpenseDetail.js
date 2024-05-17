@@ -32,41 +32,6 @@ function ExpenseDetail(props) {
                 }}
             >+</button>
             
-            {/* <div className="w-[80%] h-[90%] bg-white flex">
-                <div className='w-[50%]'>
-                    <div className='w-full h-16 bg-blue-800 text-white flex items-center justify-center text-2xl'> Expense Details</div>
-
-                    <div className='w-full pt-24 ps-16'>
-                        <div className="flex mb-5">
-                            <p className="w-[25%] font-bold text-black">Date:</p>
-                            <p className="w-[75%] ms-2">{ data.Date }</p>
-                        </div>
-                        <div className="flex mb-5">
-                            <p className="w-[25%] font-bold text-black">Expense Type:</p>
-                            <p className="w-[75%] ms-2">{ data.expenseType }</p>
-                        </div>
-                        <div className="flex mb-5">
-                            <p className="w-[25%] font-bold text-black">Amount:</p>
-                            <p className="w-[75%] ms-2">{ data.amount }</p>
-                        </div>
-                        <div className="flex mb-5">
-                            <p className="w-[25%] font-bold text-black">Description:</p>
-                            <p className="w-[75%] ms-2">{ data.description }</p>
-                        </div>
-                   </div>
-
-                </div>
-
-
-                <div className='w-[50%] p-5 flex justify-center items-center border-l-2 border-gray-300'>
-                    <img 
-                        className="max-w-[85%] h-full object-cover"
-                        src={data.invoiceUrl} alt="Invoice Image" 
-                    />
-                </div>
-
-
-            </div> */}
 
             <div className='w-full h-[85%] flex justify-center items-center'>
                 <img 

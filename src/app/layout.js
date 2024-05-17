@@ -1,6 +1,6 @@
 
 import { Inter } from "next/font/google";
-import ProtectedRoutes from "./protectRoute/protectRoute";
+import ProtectedRoutes from "./admin/protectRoute/protectRoute";
 import Navbar from "./components/navbar/navbar";
 import SideBar from "./components/siderbar/sidebar";
 import {Toaster} from 'react-hot-toast';
@@ -20,6 +20,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <title>Thasmai admin</title>
+        <link rel="icon" href="/thasmai-logo.png" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin = "true" />
         <link

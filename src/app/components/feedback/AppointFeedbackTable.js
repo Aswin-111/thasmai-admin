@@ -5,7 +5,7 @@
 
 
 import React, { useRef, useEffect } from "react";
-import { useAppointmentFeedbackStore } from "@/app/feedback/ashramStayFeedback/individualFeedback/appointFeedbackState";
+import { useAppointmentFeedbackStore } from "@/app/admin/feedback/ashramStayFeedback/individualFeedback/appointFeedbackState";
 import axios from "axios";
 import moment from 'moment'
 

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect, use } from 'react'
-import {useAdminAppointmentStore} from '@/app/users/ashram-appointments/appointmentState'
+import {useAdminAppointmentStore} from '@/app/admin/users/ashram-appointments/appointmentState'
 import axios from 'axios'
 
 function ProfileView({ selectedId, UId, setViewProfile }) {

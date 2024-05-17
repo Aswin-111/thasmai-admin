@@ -2,8 +2,8 @@
 "use client"
  
 import React, {useState, useEffect, useRef} from 'react';
-// import { useAppointStore } from '@/app/appointments/appointments/ashramAppointmentState';
-import { useAppointFilterStore } from "@/app/appointments/appointments/filterstate";
+// import { useAppointStore } from '@/app/admin/appointments/appointments/ashramAppointmentState';
+import { useAppointFilterStore } from "@/app/admin/appointments/appointments/filterstate";
 import { toast } from 'react-hot-toast'
 import axios  from 'axios';
  
