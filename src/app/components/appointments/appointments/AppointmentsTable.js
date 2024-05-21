@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef, useEffect } from "react";
-import { useAppointFilterStore } from "@/app/admin/appointments/appointments/filterstate";
+import { useAppointFilterStore } from "@/app/appointments/appointments/filterstate";
 import axios from "axios";
 import moment from 'moment'
 

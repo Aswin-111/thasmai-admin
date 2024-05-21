@@ -1,6 +1,6 @@
 
 import { Inter } from "next/font/google";
-import ProtectedRoutes from "./admin/protectRoute/protectRoute";
+import ProtectedRoutes from "./protectRoute/protectRoute";
 import Navbar from "./components/navbar/navbar";
 import SideBar from "./components/siderbar/sidebar";
 import {Toaster} from 'react-hot-toast';

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useAppointmentStore } from '@/app/admin/operator/appointments/appointmentState';
+import { useAppointmentStore } from '@/app/operator/appointments/appointmentState';
 
 
 function AppointmentView() {

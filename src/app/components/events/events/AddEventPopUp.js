@@ -362,6 +362,7 @@
 
 
 
+"use client"
 
 import React, { useState } from 'react';
 import { BiCloudUpload } from "react-icons/bi";

@@ -1,8 +1,8 @@
 "use client"
 import React from "react";
-import { useNavbarTextStore } from '../../admin/state/navbar-state'
+import { useNavbarTextStore } from '../../state/navbar-state'
 import { useRouter } from "next/navigation";
-import { useLoginStore } from "@/app/admin/loginstate/loginState";
+import { useLoginStore } from "@/app/loginstate/loginState";
 useLoginStore
 
 function Navbar() {
@@ -22,7 +22,7 @@ const router = useRouter()
     onClick={()=>{
     localStorage.removeItem('userdata')
     state.setIsloggedin(false)
-    router.push('/admin/login')
+    router.push('/login');
 
 }}>Logout</button>
 </nav>

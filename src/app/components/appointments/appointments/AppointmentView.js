@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 // import { useAppointStore } from '@/app/admin/appointments/appointments/ashramAppointmentState';.
-import { useAppointFilterStore } from "@/app/admin/appointments/appointments/filterstate";
+import { useAppointFilterStore } from "@/app/appointments/appointments/filterstate";
 
 
 

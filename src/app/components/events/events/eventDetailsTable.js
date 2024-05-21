@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { useEventFilterStore } from "@/app/admin/events/events/filterstate";
+import { useEventFilterStore } from "@/app/events/events/filterstate";
 import axios from 'axios';
 import { toast } from 'react-hot-toast'
 import { TbEdit } from "react-icons/tb";
@@ -44,28 +44,28 @@ function EventDetailsTable(props) {
 
 
 
-  const handleDelete = async (eventId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this event?");
-    if (confirmDelete) {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/superAdmin/delete-events/${eventId}`, {
-          method: "DELETE"
-        });
-        if (response.ok) {
-          // Remove the deleted event from the events array
-          setEvents(prevEvents => prevEvents.filter(event => event.id !== eventId));
-        } else {
-          throw new Error("Failed to delete event");
-        }
-      } catch (error) {
-        setError(error.message);
-      }
-    }
-  };
+  // const handleDelete = async (eventId) => {
+  //   const confirmDelete = window.confirm("Are you sure you want to delete this event?");
+  //   if (confirmDelete) {
+  //     try {
+  //       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/superAdmin/delete-events/${eventId}`, {
+  //         method: "DELETE"
+  //       });
+  //       if (response.ok) {
+  //         // Remove the deleted event from the events array
+  //         setEvents(prevEvents => prevEvents.filter(event => event.id !== eventId));
+  //       } else {
+  //         throw new Error("Failed to delete event");
+  //       }
+  //     } catch (error) {
+  //       setError(error.message);
+  //     }
+  //   }
+  // };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
 
 
 
@@ -115,7 +115,10 @@ function EventDetailsTable(props) {
                 </button>
               </td>
               <td className="text-center" title="Delete event">
-                <button onClick={() => handleDelete(event.id)}>
+                <button onClick={() => {
+                  props.setEventId(event.id);
+                  props.setIsDeleteEvent(true);
+                }}>
                   <RiDeleteBin6Fill className='text-2xl text-red-600 hover:text-red-700 hover:bg-slate-200 hover:scale-110'/>
                 </button>
               </td>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useAdminAppointmentStore } from '@/app/admin/users/ashram-appointments/appointmentState';
+import { useAdminAppointmentStore } from '@/app/users/ashram-appointments/appointmentState';
 
 function AppointmentView({selectedId}) {
 

@@ -2,7 +2,7 @@
  
  
 import React, { useEffect, useRef,useState } from "react";
-import { useAdminAppointmentStore } from "@/app/admin/users/ashram-appointments/appointmentState";
+import { useAdminAppointmentStore } from "@/app/users/ashram-appointments/appointmentState";
 import axios from "axios";
 import { toast } from 'react-hot-toast'
 

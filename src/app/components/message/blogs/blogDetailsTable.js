@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { useBlogFilterStore } from "@/app/admin/message/blogs/filterstate";
+import { useBlogFilterStore } from "@/app/message/blogs/filterstate";
 import axios from 'axios';
 import { toast } from 'react-hot-toast'
 import { TbEdit } from "react-icons/tb";
@@ -41,34 +41,6 @@ function BlogDetailsTable(props) {
 
 
 
-
-
-
-  const handleDelete = async (blogId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this event?");
-    if (confirmDelete) {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/superAdmin/delete-blogs/${blogId}`, {
-          method: "DELETE"
-        });
-        if (response.ok) {
-          // Remove the deleted event from the events array
-          setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== blogId));
-        } else {
-          throw new Error("Failed to delete event");
-        }
-      } catch (error) {
-        setError(error.message);
-      }
-    }
-  };
-
-  if (error) {
-    return 
-	// <div>Error: {error}</div>;
-  }
-
-  
   return (
   
    
@@ -116,7 +88,10 @@ function BlogDetailsTable(props) {
                 </button>
               </td>
               <td className="text-center" title="Delete event">
-                <button onClick={() => handleDelete(blog.id)}>
+                <button onClick={() => {
+                  props.setBlogId(blog.id);
+                  props.setIsDeleteBlog(true);
+                }}>
                   <RiDeleteBin6Fill className='text-2xl text-red-600 hover:text-red-700 hover:bg-slate-200 hover:scale-110'/>
                 </button>
               </td>
