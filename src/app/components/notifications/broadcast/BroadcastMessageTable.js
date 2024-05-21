@@ -24,7 +24,7 @@ function BroadcastMessageTable(props) {
     	};
 
     	fetchData();
-  	}, [pageNo]);
+  	}, [pageNo, props.sendMessageToggle]);
 
 
     function handlePreviousPage() {
