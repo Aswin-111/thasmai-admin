@@ -13,7 +13,7 @@ function AddBlogPopUp(props) {
   const [blogData, setBlogData] = useState({
     blog_name: "",
     blog_description: "",  
-    date: "",
+    // date: "",
     image: null
   });
 
@@ -42,16 +42,23 @@ function AddBlogPopUp(props) {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
-    const { blog_name, blog_description, date, image } = blogData;
+    const { blog_name, blog_description, image } = blogData;
 
-    if (blog_name && blog_description && date && image ) {
+    if (blog_name && blog_description && image ) {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+    
+      const formattedDate = `${year}-${month}-${day}`;
+      // console.log(formattedDate);
 
 
       const formData = new FormData();
 
       formData.append('blog_name', blog_name);
       formData.append('blog_description', blog_description);
-      formData.append('date', date);
+      formData.append('date', formattedDate);
       formData.append('image', image);
 
       try {
@@ -93,56 +100,19 @@ function AddBlogPopUp(props) {
           <form className='w-full h-full'>
             <div className='w-full h-[15%] flex justify-between items-center'>
               <input
-                className='w-[75%] h-[40px] ps-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
+                className='w-full h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
                 type="text"
                 placeholder="Headline"
                 name="blog_name"
                 value={blogData.blog_name}
                 onChange={handleChange}
               />
-              <div className='w-[25%] h-full px-2 flex justify-between items-center'>
-                <input
-                  className='w-full h-[40px] px-1 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
-                  type="date"
-                  placeholder="Date"
-                  min={new Date().toISOString().split("T")[0]}
-                  name="date"
-                  value={blogData.date}
-                  onChange={handleChange}
-                />
-                {/* <input
-                  className='w-[45%] h-[40px] px-1 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
-                  type="time"
-                  name="event_time"
-                  // value={eventData.event_time}
-                  // onChange={handleChange}
-                /> */}
-              </div>
+              
             </div>
-            {/* <div className='w-full h-[15%] flex justify-between items-center'>
-              <input
-                className='w-[45%] h-[40px] ps-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
-                type="text"
-                placeholder="Location"
-                name="place"
-                // value={eventData.place}
-                // onChange={handleChange}
-              />
-              <select
-                className='w-[45%] h-[40px] ps-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
-                name="priority"
-                // value={eventData.priority}
-                // onChange={handleChange}
-              >
-                <option value="" disabled>Select Priority</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-            </div> */}
+            
             <div className='w-full h-[40%]'>
               <textarea
-                className="w-full h-full ps-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]"
+                className="w-full h-full p-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]"
                 name="blog_description"
                 value={blogData.blog_description}
                 onChange={handleChange}

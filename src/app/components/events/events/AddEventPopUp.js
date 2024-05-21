@@ -485,7 +485,7 @@ function AddEventPopUp(props) {
           <form className='w-full h-full'>
             <div className='w-full h-[15%] flex justify-between items-center'>
               <input
-                className='w-[45%] h-[40px] ps-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
+                className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
                 type="text"
                 placeholder="Name"
                 name="event_name"
@@ -513,7 +513,7 @@ function AddEventPopUp(props) {
             </div>
             <div className='w-full h-[15%] flex justify-between items-center'>
               <input
-                className='w-[45%] h-[40px] ps-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
+                className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
                 type="text"
                 placeholder="Location"
                 name="place"
@@ -521,7 +521,7 @@ function AddEventPopUp(props) {
                 onChange={handleChange}
               />
               <select
-                className='w-[45%] h-[40px] ps-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
+                className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
                 name="priority"
                 value={eventData.priority}
                 onChange={handleChange}
@@ -534,7 +534,7 @@ function AddEventPopUp(props) {
             </div>
             <div className='w-full h-[30%]'>
               <textarea
-                className="w-full h-full ps-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]"
+                className="w-full h-full p-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]"
                 name="event_description"
                 value={eventData.event_description}
                 onChange={handleChange}

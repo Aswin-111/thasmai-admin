@@ -122,7 +122,7 @@ const handleSubmit = async (e) => {
              <div className='w-full h-[90%] px-20 rounded-b'>
                  <div className='w-full h-[15%] flex justify-between items-center'>
                      <input 
-                         className='w-[45%] h-[40px] bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
+                         className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
                          type="text"
                          placeholder = "Name"
                          name="event_name" 
@@ -132,7 +132,7 @@ const handleSubmit = async (e) => {
                      />
                      <div className='w-[45%] h-full flex justify-between items-center'>
                          <input 
-                             className='w-[45%] h-[40px] bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
+                             className='w-[45%] h-[40px] px-1 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
                              type="date"
                              placeholder="Date"
                              min= {new Date()} 
@@ -142,7 +142,7 @@ const handleSubmit = async (e) => {
                             onChange={handleChange} 
                          />
                          <input 
-                             className='w-[45%] h-[40px] bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
+                             className='w-[45%] h-[40px] px-1 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
                              type="time"
                              // placeholder="Time"
                              name="event_time"
@@ -157,7 +157,7 @@ const handleSubmit = async (e) => {
                  </div>
                  <div className='w-full h-[15%] flex justify-between items-center'>
                      <input 
-                         className='w-[45%] h-[40px] bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
+                         className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
                          type="text"
                          placeholder="Location" 
                          name="place" 
@@ -168,7 +168,7 @@ const handleSubmit = async (e) => {
                      />
                      
                      <select
-                         className='w-[45%] h-[40px] bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
+                         className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 
                          name="priority"
                          value= {edittedData.priority}
                          id=""
@@ -182,7 +182,7 @@ const handleSubmit = async (e) => {
                  </div>
                  <div className='w-full h-[30%]'>
                      <textarea
-                         className="w-full h-full bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]" 
+                         className="w-full h-full p-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]" 
                          name="event_description" 
                          value= {edittedData.event_description}
                          id="" 
