@@ -24,9 +24,9 @@ function Navbar() {
 		<div className="w-full h-16 flex">
 
 			{/* this div is displayed only for operator mobile view */}
-			<div className="w-[10%] md:w-0 h-full flex justify-center items-center">
+			<div className="w-[10%] md:w-0 h-full flex justify-center items-center bg-white">
 
-				<div className="drawer">
+				<div className="drawer bg-white">
 				  	<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 				  	<div className="drawer-content bg-white">
 				    	{/* Page content here */}
