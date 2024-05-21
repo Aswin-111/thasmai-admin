@@ -28,9 +28,9 @@ function Navbar() {
 
 				<div className="drawer">
 				  	<input id="my-drawer" type="checkbox" className="drawer-toggle" />
-				  	<div className="drawer-content">
+				  	<div className="drawer-content bg-white">
 				    	{/* Page content here */}
-				    	<label htmlFor="my-drawer" className="drawer-button flex justify-center items-center">
+				    	<label htmlFor="my-drawer" className="drawer-button bg-white flex justify-center items-center">
 							<IoMdMenu className="text-4xl text-[#005DB8]" />
 						</label>
 				  	</div> 
