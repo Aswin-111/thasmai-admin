@@ -17,7 +17,7 @@ function ProtectedRoutes({children}) {
         console.log(username);
         if (!username){
             // state.setIsloggedin(false)
-            return router.push('/login')
+            return router.push('/login');
         }
 
 
