@@ -57,6 +57,11 @@ function Broadcast() {
 					});
 					// console.log(response);
 					toast.success(response.data.message);
+					setMessage({
+						receiver: "",
+						title: "",
+						body: ""
+					});
 					setSendMessageToggle(!sendMessageToggle);	
 				} catch (error) {
 					// alert('Failed to send broadcast message');
