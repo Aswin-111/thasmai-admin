@@ -101,7 +101,7 @@ function GurujiAvalability() {
             <NavLink />
         </div>
 
-      <div className='w-full mt-5 p-5 bg-white rounded shadow drop-shadow-md flex'>
+      <div className='w-full mt-2 p-5 bg-white rounded shadow drop-shadow-md flex'>
 
         <div className="w-[60%] h-full">
 

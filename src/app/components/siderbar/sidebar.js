@@ -113,8 +113,8 @@ function SideBar() {
 
   return (
     <div>
-      <div className="bg-white h-screen flex flex-col items-center py-8  ">
-        <div className="logo px-5 sticky top-1 bg-white">
+      <div className="bg-white h-screen flex flex-col items-center md:py-8 p-0">
+        <div className="logo md:px-5 p-0  sticky top-1 bg-white">
           <img src="/admin/logo.png" className="h-16" />
         </div>
         <div className="navitems w-full overflow-y-auto">

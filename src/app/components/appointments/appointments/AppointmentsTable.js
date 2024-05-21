@@ -48,7 +48,7 @@ function AppointmentsTable({filterToggle}) {
       appointmentDate: `${moment().format('DD/MM/YYYY')}`
       
     })
-    fetchData()
+    fetchData();
   }
 
 

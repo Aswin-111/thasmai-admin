@@ -32,7 +32,7 @@ function ProtectedRoutes({children}) {
     },[])
   return (
     // <div>{state.isloggedin ? children : <Login loginToggle = {state.setIsloggedin}/> }</div>
-    <div> { children }</div>
+    <div className='w-full h-full m-0'> { children }</div>
     
 
   )

@@ -89,12 +89,11 @@ function AddEmployee(props) {
                   onChange={handleOnChange}
                 />
                 <select
-                 className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-2 border-[#74777F] rounded-[8px]'
-                 name="role"
-                 value={employeeData.role}
-                 onChange={handleOnChange}
-
-                 >
+                  className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-2 border-[#74777F] rounded-[8px]'
+                  name="role"
+                  value={employeeData.role}
+                  onChange={handleOnChange}
+                >
                     <option  value="" selected disabled>Role</option>
                     {/* <option value="supervisor">Supervisor</option> */}
                     <option value="operator">Operator</option>

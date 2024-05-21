@@ -115,7 +115,7 @@ function AshramAppointments() {
       <div className="w-full sticky top-0">
         <NavLink />
       </div>
-      <div className='w-full h-[90%] mt-5 p-4  bg-white rounded shadow drop-shadow-md '>
+      <div className='w-full h-[90%] mt-2 p-4  bg-white rounded shadow drop-shadow-md '>
 
         <div className="w-full h-8 flex justify-between">
 
@@ -414,8 +414,6 @@ function AshramAppointments() {
       </div>
 
       
-          
-
 
       {
         filterState.appointmentViewToggle && <AppointmentView />   
@@ -424,7 +422,7 @@ function AshramAppointments() {
       {
         filterState.paymentToggle && <AppointmentCheckOut />
       }
-      
+    
     
     </div>
   )

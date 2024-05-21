@@ -169,7 +169,7 @@ function Blogs() {
         		    setAddBlogStatus(true);
         		  }}
         		> 
-          			<MdAddCircleOutline  className="me-2  text-[28px]"/>
+          			<MdAddCircleOutline  className="me-2 text-[28px]"/>
           			Add Blog
 				</button>
       		</div>

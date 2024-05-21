@@ -110,7 +110,7 @@ function AshramAppointments() {
         <NavLink />
       </div>
 
-      <div className='w-full h-[90%] mt-5 p-4  bg-white rounded shadow drop-shadow-md '>
+      <div className='w-full h-[90%] mt-2 p-4  bg-white rounded shadow drop-shadow-md '>
 
         <div className="w-full h-8 flex justify-between">
 

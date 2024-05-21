@@ -31,18 +31,20 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
-      <div className="m-0 p-0 flex w-[100vw] h-[100vh] overflow-hidden">
+        <div className="m-0 p-0 flex w-[100vw] h-[100vh] overflow-hidden">
           <Toaster />
-          <div className="m-0 w-[18%] h-full">
+          <div className="m-0 w-0 md:w-[18%] h-full">
             <SideBar/>  
           </div>
-          <div className="w-[82%] h-full">
+          <div className="w-full md:w-[82%] h-full">
             <Navbar/>
-            <div className="border-solid border-t-4 border-l-4 w-full h-full py-5 px-2 bg-[#F3F3F3]">{ 
-              <ProtectedRoutes> {children}</ProtectedRoutes>
-           
-             }</div>
+            <div className="w-full h-full py-5 px-2 bg-[#F3F3F3] border-solid border-t-4 border-l-4 ">
+              { 
+                <ProtectedRoutes> {children}</ProtectedRoutes>
+              }
+             </div>
           </div>
+
         </div>
       </body>
     </html>

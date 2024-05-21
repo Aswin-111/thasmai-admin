@@ -95,7 +95,7 @@ function GurujiTab() {
             <div className="w-full sticky top-0">
                 <NavLink />
             </div>
-            <div className='w-full h-[90%] mt-5 p-4 bg-white rounded shadow drop-shadow-md'>
+            <div className='w-full h-[90%] mt-2 p-4 bg-white rounded shadow drop-shadow-md'>
             
                 <div className='w-full h-[70%] p-2 px-10 flex flex-col-reverse rounded-md overflow-y-scroll bg-gradient-to-r from-[#d5ccc7] to-[#a5e1e2]'>
                     {

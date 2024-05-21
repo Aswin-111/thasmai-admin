@@ -16,6 +16,7 @@ function AppointmentsTables({ setSelectedId, setUId, setViewProfile }) {
   });
   
   // const appointments = appointmentState.appointments;
+  console.log(appointmentState.appointments);
 
 const statusRef = useRef(null);
 const [disc, setdisc] = useState('')
@@ -25,16 +26,17 @@ useEffect(()=>{
  
 },[count])
  
-  async function handleSubmitClick(UId,coupon,id){
+  async function handleSubmitClick(UId, coupon ,id){
     try {
  
       const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/discount/${UId}`,{ coupon:coupon, 
       id:id
       });
+      console.log(response);
       // console.log("successfully updated");
       toast.success("Reward given successfully");
-      setCount(current=>current+=1)
-      window.location.reload()
+      setCount(current => current += 1);
+      window.location.reload();
       return;
  
   } catch (error) {
@@ -71,8 +73,9 @@ useEffect(()=>{
           </tr>
         </thead>
         <tbody className="my-10 text-black">
-          {appointmentState.appointments &&
-           appointmentState.appointments.map((appoint, index) => {
+          { 
+            appointmentState.appointments[0] &&
+            appointmentState.appointments.map((appoint, index) => {
  
             return (
               <tr
@@ -156,7 +159,6 @@ useEffect(()=>{
                       <button className=" px-5 py-1 text-[#a7f3d0] rounded bg-[#6ee7b7]" 
                       disabled
                       >Submit</button>
-                      // ""
                     )
                   }
                   
@@ -167,7 +169,9 @@ useEffect(()=>{
  
               </tr>
             );
-          })}
+          })
+          
+        }
         </tbody>
       </table>
   

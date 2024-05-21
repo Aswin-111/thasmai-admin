@@ -8,10 +8,10 @@ function NavLink() {
     const pathname = usePathname()
 
   return (
-    <nav className='w-full h-full flex justify-between items-center'>
+    <nav className='w-full h-full flex items-center'>
 
-      <Link href = '/notifications/notifications' className={`${pathname === '/notifications/notifications' ? 'link px-6 py-1 bg-[#005DB8] text-white font-semibold rounded-lg' : 'link rounded-md px-6 py-1 bg-[#e0e2ec] text-black font-semibold'}`}>Notification</Link>
-      <Link href = '/notifications/broadcast' className={`${pathname === '/notifications/broadcast' ? 'link px-6 py-1 bg-[#005DB8] text-white font-semibold rounded-lg' : 'link rounded-md px-6 py-1 bg-[#e0e2ec] text-black font-semibold'}`}>Broadcast</Link>
+      <Link href = '/notifications/notifications' className={`${pathname === '/notifications/notifications' ? 'link px-5 py-1 bg-[#005DB8] text-white font-semibold rounded-lg' : 'link rounded-md px-5 py-1 bg-[#e0e2ec] text-black font-semibold hover:scale-105'}`}>Notification</Link>
+      <Link href = '/notifications/broadcast' className={`${pathname === '/notifications/broadcast' ? 'link ms-3 px-5 py-1  bg-[#005DB8] text-white font-semibold rounded-lg' : 'link rounded-md ms-3 px-5 py-1 bg-[#e0e2ec] text-black font-semibold hover:scale-105'}`}>Broadcast</Link>
      
     
     </nav>

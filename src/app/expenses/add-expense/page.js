@@ -174,13 +174,14 @@ function AddExpense() {
     };
 
     return (
-        <div className="w-full h-[85vh] px-7 overflow-y-auto">
+        <div className="w-full h-[85vh] px-1 md:px-7">
             <div className="w-full sticky top-0">
                 <NavLink />
             </div>
-            <div className='w-full h-[93%] mt-2 p-4 bg-white rounded shadow drop-shadow-md '>
-                <div className='w-full h-[85%] px-16 py-6 flex '>
-                    <div className='w-[60%] flex flex-col'>
+            <div className='w-full h-[95%] mt-2 p-4 bg-white rounded shadow drop-shadow-md overflow-y-auto'>
+                <div className='w-full md:h-[85%] px-2 md:px-16 py-6 md:flex '>
+
+                    <div className='w-full md:w-[60%] flex flex-col'>
                         {/* <input
                             type='text'
                             className='w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px]'
@@ -190,7 +191,7 @@ function AddExpense() {
                             placeholder='Expense Type'
                         /> */}
                         <select 
-                            className='w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px]'
+                            className='w-full md:w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px]'
                             name="expenseType"
                             value={formData.expenseType}
                             onChange={handleInputChange}
@@ -205,13 +206,13 @@ function AddExpense() {
                         </select>
                         <input
                             type='number'
-                            className='w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px]'
+                            className='w-full md:w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px]'
                             name="amount"
                             value={formData.amount}
                             onChange={handleInputChange}
                             placeholder='Amount'
                         />
-                        <div className='w-[45%] h-12 px-2 mb-5 bg-[#565F71] text-white rounded-2xl'>
+                        <div className='w-full md:w-[45%] h-12 px-2 mb-5 bg-[#565F71] text-white rounded-2xl hover:bg-green-600'>
                             <label
                                 htmlFor="bill"
                                 className='w-full h-full flex items-center'
@@ -222,7 +223,7 @@ function AddExpense() {
                             <input id="bill" className="w-full h-full" type="file" hidden onChange={handleImageChange} />
                         </div>
                         <textarea
-                            className='w-[95%] p-3 bg-white text-black border-[1px] border-black rounded-[6px]'
+                            className='w-full md:w-[95%] p-3 bg-white text-black border-[1px] border-black rounded-[6px]'
                             name="description"
                             value={formData.description}
                             onChange={handleInputChange}
@@ -230,17 +231,20 @@ function AddExpense() {
                             rows={8}
                         />
                     </div>
-                    <div className='w-[40%] bg-slate-200 flex justify-center items-center rounded-[8px] border-[1px] border-black'>
-                        {formData.invoice ? (
-                            <img className="w-full h-full" src={URL.createObjectURL(formData.invoice)} alt="invoice" />
-                        ) : (
-                            <div className="text-gray-500 text-center">No invoice uploaded</div>
-                        )}
+                    <div className='w-full h-[350px] md:w-[40%] md:h-full mt-5 md:m-0 bg-slate-200 flex justify-center items-center rounded-[8px] border-[1px] border-black'>
+                        {
+                            formData.invoice ? (
+                                <img className="w-full h-full" src={URL.createObjectURL(formData.invoice)} alt="invoice" />
+                            ) : (
+                                <div className="text-gray-500 text-center">No invoice uploaded</div>
+                            )
+                        }
                     </div>
                 </div>
-                <div className='w-full h-[15%] ps-16'>
-                    <div className='w-[60%] h-full'>
-                        <button className='w-[90%] h-12 bg-[#005DB8] text-white rounded-2xl' onClick={handleSubmit}>Create Expense</button>
+
+                <div className='w-full md:h-[15%] md:ps-16'>
+                    <div className='w-full md:w-[60%] h-full'>
+                        <button className='w-full md:w-[90%] h-12 bg-[#005DB8] text-white rounded-2xl' onClick={handleSubmit}>Create Expense</button>
                     </div>
                 </div>
             </div>

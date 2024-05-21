@@ -35,9 +35,11 @@ function UpdateEmployee(props) {
 	
 
 	useEffect(() => {
+
+		const employeeId = props.employeeId;
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/operator/${props.employeeId}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/operator/${employeeId}`);
                 // console.log(response);
                 setData(response.data.operator);
             } catch (error) {

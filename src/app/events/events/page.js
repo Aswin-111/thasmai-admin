@@ -164,12 +164,12 @@ function EventDetails() {
       		<div className='flex items-center justify-between'>
         		<NavLink />
         		<button 
-        		  className="w-[150px] h-[35px] bg-[#5799fd] hover:bg-[#5799fdd3] text-white rounded-[6px] text-[18px] font-semibold flex items-center justify-center hover:scale-105"
+        		  className="w-[180px] h-[35px] px-2 bg-[#5799fd] hover:bg-[#5799fdd3] text-white rounded-[6px] text-[18px] font-semibold flex items-center justify-center hover:scale-105"
         		  onClick={() => {
         		    setAddEventStatus(true);
         		  }}
         		> 
-          			<MdAddCircleOutline  className="me-2  text-[28px]"/>
+          			<MdAddCircleOutline  className="me-2 text-[28px]"/>
           			Add Event
 				</button>
       		</div>

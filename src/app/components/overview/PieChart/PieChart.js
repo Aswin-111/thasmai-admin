@@ -19,7 +19,7 @@ import Link from "next/link";
     type: "pie",
     width: "100%",
     height: "100%",
-    series: [19, 37, 26, 18, 0],
+    series: [19, 37, 26, 18, 12],
     options: {
       chart: {
         toolbar: {
@@ -31,9 +31,9 @@ import Link from "next/link";
       },
       dataLabels: {
         enabled: false,
-        label : ["Distribution", "Donation", "Fees", "Expense", '']
+        label : ["Distribution", "Donation", "Fees", "Ashram Appointments", "Expense"]
       },
-      colors: ["#58C2D9", "#597EDD", "#26CC7C", "#d81b60", "#1e88e5"],
+      colors: ["#58C2D9", "#597EDD", "#26CC7C", "#d81b60", "#f59e0b"],
       legend: {
         show: false,
       },
@@ -86,7 +86,11 @@ import Link from "next/link";
             </div>
             <div className="m-5 flex items-center ">
                 <div className="h-3 w-3 m-2 bg-[#d81b60]"></div>
-                <Link href="">Distribution</Link>
+                <Link href="">Ashram Appointments</Link>
+            </div>
+            <div className="m-5 flex items-center ">
+                <div className="h-3 w-3 m-2 bg-[#f59e0b]"></div>
+                <Link href="">Expense</Link>
             </div>
 
           </div>

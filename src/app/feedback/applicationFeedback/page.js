@@ -10,11 +10,11 @@ function ApplicationFeedback() {
 	setNavbarText("Feedback views");
 
   return (
-    <div className="px-7 h-full ">
+    <div className="px-7 h-full">
     <div className="w-[60%] flex items-center justify-between ">
       <NavLink />
     </div>
-    <div className='w-full mt-10 h-[500px]  bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll'>
+    <div className='w-full mt-2 h-[500px]  bg-white rounded-[8px] shadow drop-shadow-md overflow-scroll'>
       Website under development📍📌
        jshgfsdbnakldnjb
     </div>

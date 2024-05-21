@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-// import { useAppointStore } from '@/app/admin/appointments/appointments/ashramAppointmentState';.
+// import { useAppointStore } from '@/app/appointments/appointments/ashramAppointmentState';.
 import { useAppointFilterStore } from "@/app/appointments/appointments/filterstate";
 
 
@@ -19,7 +19,7 @@ function AppointmentView() {
     // });
     const filterState = useAppointFilterStore((state) => {
         return state;
-      });
+    });
     
     
     

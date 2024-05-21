@@ -143,7 +143,7 @@ function AppointmentCheckOut() {
                             <p>: {date}</p>
                         </div>
                         <div className='flex pt-4'>
-                            <p className='w-[50%] text-black'>Appointment payment</p>
+                            <p className='w-[50%] text-black'>Ashram stay payment</p>
  
                             <input 
                                 className="h-[35px] ps-3 rounded-[6px] outline-black bg-white text-black border-black border-[1px]" 
