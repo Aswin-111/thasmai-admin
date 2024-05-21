@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useAppointmentFeedbackStore } from '@/app/admin/feedback/ashramStayFeedback/individualFeedback/appointFeedbackState';
+import { useAppointmentFeedbackStore } from '@/app/feedback/ashramStayFeedback/individualFeedback/appointFeedbackState';
 
 
 function AppointmentView() {

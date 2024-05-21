@@ -25,7 +25,7 @@
 
 "use client"
 
-import react from 'react'
+import React from 'react'
 import NavLink from '../../navlink/navlink'
 import NavLinkFeedback from '../NavLinkFeedback/NavLinkFeedback'
 import AppointFeedbackTable from '@/app/components/feedback/AppointFeedbackTable'
