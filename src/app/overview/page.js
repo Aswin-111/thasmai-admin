@@ -35,7 +35,7 @@ export default function Overview(){
 
 
                 <div className="w-full h-[250px] md:w-[54%] md:h-full ps-4 pe-1 py-2 mb-4 md:m-0 bg-white rounded-xl shadow-md  overflow-y-auto md:overflow-hidden">
-                    <h3 className="h-[15%] font-bold">Meditation Notes</h3>
+                    <h3 className="h-[15%] font-bold text-black">Meditation Notes</h3>
                     <div className="comments w-[100%] h-[85%] rounded overflow-y-auto pe-1 text-white">
 
                         <div className="w-full min-h-[80px] bg-red-400 mb-2 rounded flex">
@@ -82,7 +82,7 @@ export default function Overview(){
 
                 <div className="w-full h-[250px] md:w-[40%] md:h-full bg-white rounded-xl shadow-md py-2 ps-4 pe-3">
                     <Link href="/users/eventdetails" className="w-full">
-                        <h3 className="h-[15%] font-bold">Recent Messages</h3>
+                        <h3 className="h-[15%] font-bold text-black">Recent Messages</h3>
                     </Link>
                     <CarouselDefault/>
                     

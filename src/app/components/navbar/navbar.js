@@ -39,25 +39,25 @@ function Navbar() {
 				    	<ul className="menu p-4 w-80 min-h-full bg-white text-base-content">
 				      		{/* Sidebar content here */}
 				      		<Link href="/overview">
-                  				<li className={`${pathname.startsWith('/overview') ? ' bg-[#005DB8] text-white py-3 px-5 ' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Overview</li>
+                  				<li className={`${pathname.startsWith('/overview') ? 'bg-[#005DB8] text-white py-3 px-5 ' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Overview</li>
                 			</Link>
               				<Link href="/appointments/appointments">
-              				    <li className={`${pathname.startsWith('/appointments') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Appointments</li>
+              				    <li className={`${pathname.startsWith('/appointments') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Appointments</li>
               				</Link>
               				<Link href="/feedback/appointmentFeedback">
-              				  <li className={`${pathname.startsWith('/feedback') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Feedback Views</li>
+              				  <li className={`${pathname.startsWith('/feedback') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Feedback Views</li>
               				</Link>
               				<Link href="/notifications/notifications">
-              				    <li className={`${pathname.startsWith('/notifications') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Notifications / Broadcast</li>
+              				    <li className={`${pathname.startsWith('/notifications') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Notifications / Broadcast</li>
               				  </Link>
               				<Link href="/events/events">
-              				    <li className={`${pathname.startsWith('/events') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Events</li>
+              				    <li className={`${pathname.startsWith('/events') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Events</li>
               				</Link>
               				<Link href="/expenses/add-expense">
-              				    <li className={`${pathname.startsWith('/expenses') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Financial/Expense</li>
+              				    <li className={`${pathname.startsWith('/expenses') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Financial/Expense</li>
               				</Link>
               				<Link href="/support">
-              				    <li className={`${pathname.startsWith('/support') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Support & Contact</li>
+              				    <li className={`${pathname.startsWith('/support') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Support & Contact</li>
               				</Link>
 				    	</ul>
 				  	</div>

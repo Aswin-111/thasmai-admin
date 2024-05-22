@@ -103,20 +103,20 @@ function Broadcast() {
 				<div className='w-[50%] h-full'>
 					<div className='h-[10%] w-full'>
 					    <select
-           			    	className='w-[50%] h-12 ps-2 border-[1.5px] border-black rounded'
+           			    	className='w-[50%] h-12 ps-2 bg-white text-black border-[1.5px] border-black rounded placeholder:text-gray-500'
 							name="receiver"
 							value={message.receiver}
 							onChange={handleOnChange}
 						>
              		     	<option value="" disabled selected>Select Receivers</option>
-             		     	<option value='operators' >Operators</option>
+             		     	{/* <option value='operators' >Operators</option> */}
              		     	<option value='meditators'>Meditators</option>
 						</select>
 					</div>
 					<div className='w-full h-[70%] mt-5 flex flex-col border-[1.5px] bg-white text-black border-black rounded'>
 						<input 
 						   type='text'
-						   className='w-full h-[20%] ps-2 rounded-t outline-none focus:outline-none text-xl'
+						   className='w-full h-[20%] ps-2 text-xl bg-white text-black rounded-t outline-none focus:outline-none placeholder:text-gray-500'
 						   placeholder='Message Title'
 						   name="title"
 						   value={message.title}
@@ -124,7 +124,7 @@ function Broadcast() {
 						/>   
 						<textarea
 							placeholder='Write a message...'
-							className='w-full h-[80%] mt-2 ps-2 pt-2 bg-white text-black rounded-b outline-none focus:outline-none'
+							className='w-full h-[80%] mt-2 ps-2 pt-2 bg-white text-black rounded-b outline-none focus:outline-none placeholder:text-gray-500'
 							name="body"
 						    value={message.body}
 						    onChange={handleOnChange}
