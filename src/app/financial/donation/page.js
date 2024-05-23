@@ -6,6 +6,7 @@ import { useNavbarTextStore } from "../../state/navbar-state";
 import NavLink from '../navlink/navlink';
 import FilterChip from "./filterChips";
 import DonationTable from "@/app/components/financial/donation/DonationTable";
+import ProfileView from '@/app/components/users/profileView';
 import axios from "axios";
 import Image from "next/image";
 import data from "./data.json"
@@ -19,6 +20,8 @@ function Donation() {
 	const [filteredPageNo, setFilteredPageNo] = useState(1);
 	const [isFilteredData, setIsFilteredData] = useState(false);
 	const [filterToggle, setFilterToggle] = useState(false);
+	const [userId, setUserId] = useState(null);
+	const [isViewProfile, setIsViewProfile] = useState(false);
 
 	// console.log(pageNo, totalPages, filteredPageNo);
 
@@ -97,8 +100,8 @@ function Donation() {
 				"User Id" : "UId",
 				"Available coupon" : "coupons",
 				// "Distributed coupon" : "total_distributed_coupons",
-				"Phone" : "phone",
-				"Email" : "email",
+				// "Phone" : "phone",
+				// "Email" : "email",
 				"Donation Paid So Far" : "total_donation",
 				"Latest Donation" : "latest_donation",
 				"Level" : "Level",
@@ -117,7 +120,7 @@ function Donation() {
 		   
 				const field = i.field;
 				const operator = i.operator.toLowerCase();
-				const value = (i.field.toLowerCase() ==="name" || i.field.toLowerCase() ==="location") ? `${i.value}%` : i.value;
+				const value = (i.field.toLowerCase() ==="first name" || i.field.toLowerCase() ==="second name") ? `${i.value}%` : i.value;
 				console.log(field, value, operator);
 			
 				if(field.includes("Date") && operator === "between") {
@@ -301,7 +304,7 @@ function Donation() {
 
             			}
 
-						{
+						{/* {
                             filterState.fieldValue === "Email" && 
                         
                             <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
@@ -347,7 +350,7 @@ function Donation() {
                                       })
                                 }
                             </select>
-                        }
+                        } */}
 
 						{
                             filterState.fieldValue === "Donation Paid So Far" && 
@@ -578,7 +581,7 @@ function Donation() {
                     	        </>
                     	}
 
-						{
+						{/* {
                     	    ( filterState.fieldValue === "Email" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
@@ -614,7 +617,7 @@ function Donation() {
                     	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
-                    	}
+                    	} */}
 
 						{
                     	    ( filterState.fieldValue === "Donation Paid So Far" && filterState.operatorValue === "") && 
@@ -872,7 +875,9 @@ function Donation() {
 
             <div className='w-full h-[80%] mt-2'>
                 <div className="w-full h-[85%] m-0 p-0 overflow-scroll">
-                    <DonationTable 
+                    <DonationTable
+						setUserId={ setUserId }
+						setIsViewProfile={ setIsViewProfile } 
                         setIsFilteredData={setIsFilteredData}
                         setFilteredPageNo={setFilteredPageNo}
                         pageNo={pageNo}
@@ -882,7 +887,7 @@ function Donation() {
                	</div>
 
 
-              	<div className="w-full h-[10%] px-2 flex justify-between items-center">
+              	<div className="w-full h-[10%] px-2 py-1 flex justify-between items-center border-t-[1px] border-[#005DB8]">
                    <div>
                       {
                         !isFilteredData ? (
@@ -897,22 +902,22 @@ function Donation() {
                           !isFilteredData ? (
                             <div>
                                    <button
-                                     className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+                                     className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
                                      onClick={ handlePreviousPage }
                                    >Previous</button>
                                    <button
-                                     className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+                                     className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
                                      onClick={ handleNextPage }
                                    >Next</button>
                             </div>
                           ) : (
                             <div>
                                    <button
-                                     className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+                                     className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
                                      onClick={ handleFilteredPreviousPage }
                                    >Previous</button>
                                    <button
-                                     className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+                                     className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
                                      onClick={ handleFilteredNextPage }
                                    >Next</button>
                             </div>
@@ -923,6 +928,10 @@ function Donation() {
 
 
         </div>
+
+		{
+			isViewProfile && <ProfileView UId={ userId } setIsViewProfile={ setIsViewProfile } />
+		}
    
 
   	</div>

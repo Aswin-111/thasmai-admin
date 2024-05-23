@@ -22,6 +22,7 @@ function FeesTable({ data }) {
           </tr>
         </thead>
         <tbody className="my-10">
+          
           {data.map((i, index) => {
             return (
               <tr

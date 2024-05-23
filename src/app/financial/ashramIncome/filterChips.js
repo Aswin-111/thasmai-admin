@@ -1,11 +1,12 @@
 "use client"
+
 import React from 'react'
-import { useOperationsFilterStore } from "./filterState";
+import { useAshramIncomeFilterStore } from "./filterState";
 
 
 function FilterChip({ filter, index, filterToggle, setFilterToggle, handleSearch }) {
   
-    const filterState = useOperationsFilterStore((state) => {
+    const filterState = useAshramIncomeFilterStore((state) => {
         return state;
     });
     

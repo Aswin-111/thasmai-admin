@@ -1,20 +1,17 @@
 "use client"
 
 import React, { useState, useEffect, use } from 'react'
-import {useAdminAppointmentStore} from '@/app/users/ashram-appointments/appointmentState'
+import { useAdminAppointmentStore } from '@/app/users/ashram-appointments/appointmentState'
 import axios from 'axios'
 
-function ProfileView({ selectedId, UId, setViewProfile }) {
+function ProfileView({ selectedId, UId, setIsViewProfile }) {
 
     const [profile, setProfile] = useState({});
     const [meditationDetails, setMeditationDetails] = useState({})
     const [bankDetails, setBankDetails] = useState({})
     
     
-    
-    
-    
-
+  
     const [profilePic,setProfilePic] = useState("")
 
     const [isProfile, setIsProfile] = useState(true);
@@ -51,12 +48,15 @@ function ProfileView({ selectedId, UId, setViewProfile }) {
 
       
   return (
-    <div className='fixed top-0 left-0 w-full h-full bg-[#00000022] backdrop-blur-[1px] z-10 shadow drop-shadow-lg flex justify-center items-center overflow-hidden'>
-      <div className='w-[1000px] h-[500px] p-5 bg-white rounded flex relative'>
+    
+    // <div className='fixed top-0 left-0 w-full h-full bg-[#00000022] backdrop-blur-[1px] z-10 shadow drop-shadow-lg flex justify-center items-center overflow-hidden'>
+    <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
+     
+     <div className='w-[1200px] h-[650px] p-5 bg-white rounded flex relative'>
 
         <button 
               className='h-8 w-8 bg-blue-200 text-2xl absolute right-[5px] top-[5px] hover:bg-blue-700 hover:text-white' 
-              onClick=  {() => {setViewProfile(false)}}
+              onClick=  {() => { setIsViewProfile(false) }}
         >x</button>
 
 

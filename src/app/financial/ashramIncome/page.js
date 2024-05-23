@@ -1,19 +1,21 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from "react";
-import { useAppointmentsFilterStore } from './filterState'
+import { useAshramIncomeFilterStore } from './filterState'
 import { useNavbarTextStore } from "../../state/navbar-state";
 import NavLink from '../navlink/navlink';
 import FilterChip from "./filterChips";
-import AppointmentsTable from "@/app/components/financial/appointments/AppointmentsTable";
+import AshramIncomeTable from "@/app/components/financial/ashramIncome/AshramIncomeTable";
+import ProfileView from '@/app/components/users/profileView';
+import axios from "axios";
 import Image from "next/image";
 import data from "./data.json"
 
 
-function Appointments() {
 
- 
-    const [pageNo, setPageNo] = useState(1);
+function AshramIncome() {
+
+  	const [pageNo, setPageNo] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
 	const [filteredPageNo, setFilteredPageNo] = useState(1);
 	const [isFilteredData, setIsFilteredData] = useState(false);
@@ -29,16 +31,17 @@ function Appointments() {
   	const startDateRef = useRef()
   	const endDateRef = useRef()
 
-    const filterState = useAppointmentsFilterStore((state) => {
-        return state;
-    });
+  	const filterState = useAshramIncomeFilterStore((state) => {
+  	  	return state;
+  	});
   
 
-    // useEffect(()=>{console.log('hi',filterState.fieldValue);filterState.setFieldText(filterState.fieldValue)},[])
-    // useEffect(()=>{filterState.setFieldText(filterState.fieldValue)},[filterState.fieldValue])  
+  // useEffect(()=>{console.log('hi',filterState.fieldValue);filterState.setFieldText(filterState.fieldValue)},[])
+  // useEffect(()=>{filterState.setFieldText(filterState.fieldValue)},[filterState.fieldValue])  
 
-    const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
+  	const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Financial");
+
 
     function handleFieldChange(e) {
         const value = e.target.value;
@@ -156,11 +159,10 @@ function Appointments() {
 	// 	} 
 	// };
 
-  
 
 
-    return (
-        
+  	return (
+
         <div className="w-full h-[85vh] px-7 overflow-y-auto">
             <div className='flex items-center justify-between'>
                 <NavLink />
@@ -873,7 +875,7 @@ function Appointments() {
 
             <div className='w-full h-[80%] mt-2'>
                 <div className="w-full h-[85%] m-0 p-0 overflow-scroll">
-                    <AppointmentsTable
+                    <AshramIncomeTable
 						setUserId={ setUserId }
 						setIsViewProfile={ setIsViewProfile } 
                         setIsFilteredData={setIsFilteredData}
@@ -933,7 +935,7 @@ function Appointments() {
    
 
   	</div>
-    )
+  )
 }
 
-export default Appointments
+export default AshramIncome

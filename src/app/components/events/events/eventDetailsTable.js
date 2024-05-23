@@ -40,37 +40,6 @@ function EventDetailsTable(props) {
 }, [props.pageNo, props.filterToggle]);
 
 
-
-
-
-
-  // const handleDelete = async (eventId) => {
-  //   const confirmDelete = window.confirm("Are you sure you want to delete this event?");
-  //   if (confirmDelete) {
-  //     try {
-  //       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/superAdmin/delete-events/${eventId}`, {
-  //         method: "DELETE"
-  //       });
-  //       if (response.ok) {
-  //         // Remove the deleted event from the events array
-  //         setEvents(prevEvents => prevEvents.filter(event => event.id !== eventId));
-  //       } else {
-  //         throw new Error("Failed to delete event");
-  //       }
-  //     } catch (error) {
-  //       setError(error.message);
-  //     }
-  //   }
-  // };
-
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
-
-
-
-  
-
   
   return (
   

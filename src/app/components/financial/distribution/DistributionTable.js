@@ -40,11 +40,12 @@ function DistributionTable(props) {
               style={{ borderRadius: "11px" }}
             >
                 <tr className="">
+					<th className="text-center">Sl. No</th>
                   	<th className="text-center">DOJ</th>
                   	<th className="text-center">Name</th>
-                  	<th className="text-center">Id</th>
-                  	<th className="text-center">Phone</th>
-                  	<th className="text-center">Email</th>
+                  	<th className="text-center">User Id</th>
+                  	{/* <th className="text-center">Phone</th>
+                  	<th className="text-center">Email</th> */}
                   	<th className="text-center">Dist. Coupons</th>
                   	<th className="text-center">Avail. Coupons</th>
                   	<th className="text-center">Branch</th>
@@ -59,27 +60,36 @@ function DistributionTable(props) {
                   		filterState.usersData.map((i, index) => {
 
                     		return (
-                    		  <tr
-                    		    key={index}
-                    		    className="font-medium text-xs text-black my-10 "
-                    		  >
-                    		    <td className="text-center">{ i.DOJ }</td>
-                    		    <td className="text-center text-indigo-600">{ i.firstName } { i.secondName }</td>
-                    		    <td className="text-center">{ i.UId }</td>
-                    		    <td className="text-center">{i.phone} </td>
-                    		    <td className="text-center">{i.email} </td>
-                    		    <td className="text-center">{i.total_distributed_coupons}</td>
-                    		    <td className="text-center">{i.coupons}</td>
-                    		    <td className="text-center flex justify-evenly">
-                    		      <div className="bg-[#d9d9d9] w-10 h-7 p-1 me-1 rounded">L - { i.Level }</div>      
-                    		      <div className="bg-[#d9d9d9] w-10 h-7 p-1 rounded">N - { i.node_number }</div> 
-                    		    </td>
-                    		    {/* <td className="text-center">
-                    		      <div className="bg-[#d9d9d9] w-full h-7 p-1 rounded">{ i.description ? i.description : "" } </div>
-                    		    </td> */}
+                    		  	<tr
+                    		  	  key={index}
+                    		  	  className="font-medium text-xs text-black"
+                    		  	>
+									<td className="text-center">{ (index + 1) + ((props.pageNo - 1) * 10 ) }</td>
+                    		    	<td className="text-center">{ i.DOJ }</td>
+                    		    	<td 
+										className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
+										onClick={() => {
+											props.setUserId(i.UId);
+											props.setIsViewProfile(true);
+										}}
+									>	
+										{ i.firstName } { i.secondName }
+									</td>
+                    		    	<td className="text-center">{ i.UId }</td>
+                    		    	{/* <td className="text-center">{i.phone} </td>
+                    		    	<td className="text-center">{i.email} </td> */}
+                    		    	<td className="text-center">{i.total_distributed_coupons}</td>
+                    		    	<td className="text-center">{i.coupons}</td>
+                    		    	<td className="text-center flex justify-evenly">
+                    		    	  <div className="bg-[#d9d9d9] w-10 h-7 p-1 me-1 rounded">L - { i.Level }</div>      
+                    		    	  <div className="bg-[#d9d9d9] w-10 h-7 p-1 rounded">N - { i.node_number }</div> 
+                    		    	</td>
+                    		    	{/* <td className="text-center">
+                    		    	  <div className="bg-[#d9d9d9] w-full h-7 p-1 rounded">{ i.description ? i.description : "" } </div>
+                    		    	</td> */}
 
 							
-                    		  </tr>
+                    		  	</tr>
                     		);
                     	})
 

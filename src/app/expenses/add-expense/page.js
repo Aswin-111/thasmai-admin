@@ -89,6 +89,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavLink from '../navlink/navlink';
+import { useLoginStore } from '@/app/loginstate/loginState';
 import { useNavbarTextStore } from '../../state/navbar-state';
 import { toast } from 'react-hot-toast';
 import { MdOutlineFileUpload } from "react-icons/md";
@@ -101,6 +102,11 @@ function AddExpense() {
         description: '',
         invoice: null,
     });
+
+
+    const loginState = useLoginStore(function(state) {
+  	    return state
+  	})
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Financial / Expense");
@@ -140,6 +146,9 @@ function AddExpense() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const emp_Id = loginState.emp_Id;
+        console.log(emp_Id);
+
         console.log('Submitting form data:', formData); // Log the form data before submission
 
         const form = new FormData();
@@ -148,9 +157,10 @@ function AddExpense() {
         form.append('amount', formData.amount);
         form.append('description', formData.description);
         form.append('invoice', formData.invoice);
+        form.append('emp_id', emp_Id);
 
         if(formData.invoice && formData.expenseType && formData.amount && formData.description) {
-
+                console.log(form);
             try {
                 const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/expense`, form);
                 console.log(response);
@@ -172,6 +182,7 @@ function AddExpense() {
             toast("Please enter the required expense details.");
         }
     };
+
 
     return (
         <div className="w-full h-[85vh] px-1 md:px-7">

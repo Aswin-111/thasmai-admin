@@ -29,7 +29,7 @@ function Appointments() {
 
   	const [selectedId, setSelectedId] = useState(0);
   	const [UId, setUId] = useState(0);
-  	const [viewProfile, setViewProfile] = useState(false);
+  	const [isviewProfile, setIsViewProfile] = useState(false);
 
   	const [filterToggle, setFilterToggle] = useState(false);
 
@@ -666,7 +666,7 @@ function Appointments() {
 							setSelectedId={setSelectedId} 
 							handleCheckIn= {handleCheckIn} 
 							setUId={setUId} 
-							setViewProfile={setViewProfile}
+							setIsViewProfile={setIsViewProfile}
 							
 						/>		
           			</div>
@@ -720,7 +720,7 @@ function Appointments() {
       		}
 		
       		{
-      		  	viewProfile && <ProfileView selectedId={selectedId} UId={UId} setViewProfile={setViewProfile}/>
+      		  	isviewProfile && <ProfileView selectedId={selectedId} UId={UId} setIsViewProfile={setIsViewProfile}/>
       		}
       
     	</div>

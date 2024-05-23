@@ -1,5 +1,6 @@
 "use client"
-// import { useLoginStore } from '@/app/loginstate/loginState'
+
+import { useLoginStore } from '@/app/loginstate/loginState'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { useRef,useState } from 'react'
@@ -12,12 +13,15 @@ function Login() {
   	const passRef = useRef("")
   	const [data,setData] = useState({})
 	const [passtogg,setPassTogg] = useState(false)
-  	// const state = useLoginStore(function(state){
-  	//   return state
-  	// })
+
+  	const loginState = useLoginStore(function(state){
+  	  return state
+  	})
+
+
   	const router = useRouter()
 
-  	async function handleLogin(username,password){
+  	async function handleLogin(username,password) {
     	try	{
     		const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/login`,{
       			userName:username,
@@ -26,10 +30,10 @@ function Login() {
   
   			let userData = response.data.user
 			
-			//  state.setRole(userData.role)
+			loginState.setEmployeeId(userData.emp_Id);  // set emplyee id for using at expense creation
 			console.log(userData,"dfghjkl;lkjhg")
  
-  			localStorage.setItem('userdata',JSON.stringify(userData))
+  			localStorage.setItem('userdata', JSON.stringify(userData))
 
   			if (userData.role === 'operator'){
 			
@@ -38,7 +42,7 @@ function Login() {
 			
   			}
 		
-  			 else if (userData.role === 'admin'){
+  			 else if (userData.role === 'admin') {
 			
   			  return window.location.href ='/admin/overview'
 			

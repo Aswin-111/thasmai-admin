@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function AppointmentsTable({ data }) {
   return (
     <div className="overflow-scroll max-h-[32vh] px-3">

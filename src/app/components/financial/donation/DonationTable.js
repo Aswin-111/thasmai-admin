@@ -40,12 +40,13 @@ function DonationTable(props) {
               className="bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
               style={{ borderRadius: "11px" }}
             >
-                <tr className="rounded-3xl">
+                <tr className="">
+					<th className="text-center">Sl. No</th>
                     <th className="text-center">DOJ</th>
                     <th className="text-center">Name</th>
-                    <th className="text-center">Id</th>
-                    <th className="text-center">Email</th>
-                    <th className="text-center">Phone</th>
+                    <th className="text-center">User Id</th>
+                    {/* <th className="text-center">Email</th>
+                    <th className="text-center">Phone</th> */}
                     <th className="text-center">DPSF</th>
                     <th className="text-center">Latest Donation</th>
                     {/* <th className="text-center">Remarks</th> */}
@@ -63,13 +64,22 @@ function DonationTable(props) {
                     		return (
                                 <tr
                                     key={index}
-                                    className="font-semibold text-[0.8rem] text-black my-10 "
+                                    className="font-medium text-xs text-black my-10 "
                                 >
+								    <td className="text-center">{ (index + 1) + ((props.pageNo - 1) * 10 ) }</td>
                                     <td className="text-center">{ i.DOJ }</td>
-                                    <td className="text-center text-indigo-600">{ i.firstName } { i.secondName }</td>
+                                    <td 
+                                        className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
+                                        onClick={() => {
+                                            props.setUserId(i.UId);
+                                            props.setIsViewProfile(true);
+                                        }}
+                                    >
+                                        { i.firstName } { i.secondName }
+                                    </td>
                                     <td className="text-center">{ i.UId }</td>
-                                    <td className="text-center">{ i.email } </td>
-                                    <td className="text-center">{ i.phone } </td>
+                                    {/* <td className="text-center">{ i.email } </td>
+                                    <td className="text-center">{ i.phone } </td> */}
                                     <td className="text-center">{ i.total_donation }</td>
                                     <td className="text-center">{ i.latest_donation }</td>
                                     {/* <td className="text-center">

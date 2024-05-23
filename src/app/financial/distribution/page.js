@@ -6,6 +6,7 @@ import NavLink from '../navlink/navlink';
 import { useNavbarTextStore } from "../../state/navbar-state";
 import FilterChip from "./filterChips";
 import DistributionTable from "@/app/components/financial/distribution/DistributionTable";
+import ProfileView from '@/app/components/users/profileView';
 import axios from "axios";
 // import data from "./data.json"
 // import Image from "next/image";
@@ -21,6 +22,8 @@ function Distribution() {
 	const [filteredPageNo, setFilteredPageNo] = useState(1);
 	const [isFilteredData, setIsFilteredData] = useState(false);
 	const [filterToggle, setFilterToggle] = useState(false);
+	const [userId, setUserId] = useState(null);
+	const [isViewProfile, setIsViewProfile] = useState(false);
 
 	// console.log(pageNo, totalPages, filteredPageNo);
 
@@ -100,8 +103,8 @@ function Distribution() {
 				"User Id" : "UId",
 				"Available coupon" : "coupons",
 				"Distributed coupon" : "total_distributed_coupons",
-				"Phone" : "phone",
-				"Email" : "email",
+				// "Phone" : "phone",
+				// "Email" : "email",
 				"Level" : "Level",
 				"Node" : "node_number",
 
@@ -118,7 +121,7 @@ function Distribution() {
 		   
 				const field = i.field;
 				const operator = i.operator.toLowerCase();
-				const value = (i.field.toLowerCase() ==="name" || i.field.toLowerCase() ==="location") ? `${i.value}%` : i.value;
+				const value = (i.field.toLowerCase() ==="first name" || i.field.toLowerCase() ==="second name" ) ? `${i.value}%` : i.value;
 				console.log(field, value, operator);
 			
 				if(field.includes("Date") && operator === "between") {
@@ -301,55 +304,7 @@ function Distribution() {
 
             			}
 
-						{
-                            filterState.fieldValue === "Available coupon" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                            filterState.fieldValue === "Distributed coupon" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
+						{/* {
                             filterState.fieldValue === "Phone" && 
                         
                             <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
@@ -395,25 +350,55 @@ function Distribution() {
                                       })
                                 }
                             </select>
+                        } */}
+
+						{
+                            filterState.fieldValue === "Distributed coupon" && 
+                        
+                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                                ref = {operatorRef}
+                                onChange={e => {
+                                    filterState.setOperatorValue(e.target.value)
+                                }}
+                            >
+                                <option disabled selected>
+                                      Choose operator
+                                </option>
+                                {
+                                      filterState.integerOperator.map((i, index) => {
+                                        return (
+                                              <option key={index} value={i}>
+                                                {i}
+                                              </option>
+                                        );
+                                      })
+                                }
+                            </select>
                         }
 
-                    	{
-                    	      filterState.fieldValue === "Status" && 
-						
-                    	      <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                    	        ref = {operatorRef}
-                    	        onChange={e => {
-                    	              filterState.setOperatorValue(e.target.value)
-                    	        }}
-                    	      >
-                    	        <option disabled selected>
-                    	              Choose operator
-                    	        </option>
-                    	        <option value="equal to">
-                    	              equal to
-                    	        </option>
-                    	      </select>
-                    	}
+						{
+                            filterState.fieldValue === "Available coupon" && 
+                        
+                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                                ref = {operatorRef}
+                                onChange={e => {
+                                    filterState.setOperatorValue(e.target.value)
+                                }}
+                            >
+                                <option disabled selected>
+                                      Choose operator
+                                </option>
+                                {
+                                      filterState.integerOperator.map((i, index) => {
+                                        return (
+                                              <option key={index} value={i}>
+                                                {i}
+                                              </option>
+                                        );
+                                      })
+                                }
+                            </select>
+                        }
 
 						{
                             filterState.fieldValue === "Level" && 
@@ -462,6 +447,24 @@ function Distribution() {
                                 }
                             </select>
                         }
+
+						{
+                    	      filterState.fieldValue === "Status" && 
+						
+                    	      <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                    	        ref = {operatorRef}
+                    	        onChange={e => {
+                    	              filterState.setOperatorValue(e.target.value)
+                    	        }}
+                    	      >
+                    	        <option disabled selected>
+                    	              Choose operator
+                    	        </option>
+                    	        <option value="equal to">
+                    	              equal to
+                    	        </option>
+                    	      </select>
+                    	}
 
                                     {/* ----------------value input/select---------------- */}
 
@@ -554,45 +557,7 @@ function Distribution() {
                     	        </>
                     	}
 
-						{
-                    	    ( filterState.fieldValue === "Available coupon" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Available coupon" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Distributed coupon" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Distributed coupon" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
+						{/* {
                     	    ( filterState.fieldValue === "Phone" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
@@ -628,35 +593,44 @@ function Distribution() {
                     	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
-                    	}
-					
+                    	} */}
 
-                    	{
-                    	    ( filterState.fieldValue === "Status" && filterState.operatorValue === "") && 
+						{
+                    	    ( filterState.fieldValue === "Distributed coupon" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
                     	}
-
-                    	{
-                    	    (filterState.fieldValue  === "Status" && filterState.operatorValue !== "") && (
+                    	{ 
+                    	    ( filterState.fieldValue  === "Distributed coupon" && filterState.operatorValue !== "") && 
                     	        <>
-                    	              <select className='ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
-                    	                <option value="" disabled selected>
-                    	                      Choose value
-                    	                </option>
-                    	                {
-                    	                      filterState.statusOperator.map((i, index) => {
-                    	                        return <option value={i}>
-                    	                              {i}
-                    	                        </option>
-                    	                      }) 
-                    	                }
-                    	              </select>
+                    	              <input
+                    	                type="text"
+                    	                placeholder="Value" ref = {dataRef}
+                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                    	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
-                    	    )
+                    	}
+
+						{
+                    	    ( filterState.fieldValue === "Available coupon" && filterState.operatorValue === "") && 
+                    	        <>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+                    	{ 
+                    	    ( filterState.fieldValue  === "Available coupon" && filterState.operatorValue !== "") && 
+                    	        <>
+                    	              <input
+                    	                type="text"
+                    	                placeholder="Value" ref = {dataRef}
+                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                    	              />
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
                     	}
 
 						{
@@ -695,6 +669,34 @@ function Distribution() {
                     	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
+                    	}
+
+{
+                    	    ( filterState.fieldValue === "Status" && filterState.operatorValue === "") && 
+                    	        <>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+
+                    	{
+                    	    (filterState.fieldValue  === "Status" && filterState.operatorValue !== "") && (
+                    	        <>
+                    	              <select className='ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
+                    	                <option value="" disabled selected>
+                    	                      Choose value
+                    	                </option>
+                    	                {
+                    	                      filterState.statusOperator.map((i, index) => {
+                    	                        return <option value={i}>
+                    	                              {i}
+                    	                        </option>
+                    	                      }) 
+                    	                }
+                    	              </select>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	    )
                     	}
 
               		</div>
@@ -832,6 +834,8 @@ function Distribution() {
             <div className='w-full h-[80%] mt-2'>
                 <div className="w-full h-[85%] m-0 p-0 overflow-scroll">
                     <DistributionTable 
+						setUserId={ setUserId }
+						setIsViewProfile={ setIsViewProfile }
                         setIsFilteredData={setIsFilteredData}
                         setFilteredPageNo={setFilteredPageNo}
                         pageNo={pageNo}
@@ -841,7 +845,7 @@ function Distribution() {
                	</div>
 
 
-              	<div className="w-full h-[10%] px-2 flex justify-between items-center">
+              	<div className="w-full h-[10%] px-2 flex justify-between items-center border-t-[1px] border-[#005DB8]">
                    <div>
                       {
                         !isFilteredData ? (
@@ -856,22 +860,22 @@ function Distribution() {
                           !isFilteredData ? (
                             <div>
                                    <button
-                                     className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+                                     className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
                                      onClick={ handlePreviousPage }
                                    >Previous</button>
                                    <button
-                                     className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+                                     className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
                                      onClick={ handleNextPage }
                                    >Next</button>
                             </div>
                           ) : (
                             <div>
                                    <button
-                                     className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+                                     className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
                                      onClick={ handleFilteredPreviousPage }
                                    >Previous</button>
                                    <button
-                                     className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+                                     className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
                                      onClick={ handleFilteredNextPage }
                                    >Next</button>
                             </div>
@@ -882,6 +886,10 @@ function Distribution() {
 
 
         </div>
+
+		{
+			isViewProfile && <ProfileView UId={ userId } setIsViewProfile={ setIsViewProfile } />
+		}
    
 
   	</div>

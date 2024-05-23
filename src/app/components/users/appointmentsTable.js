@@ -9,7 +9,7 @@ import { toast } from 'react-hot-toast'
  
  
  
-function AppointmentsTables({ setSelectedId, setUId, setViewProfile }) {
+function AppointmentsTables({ setSelectedId, setUId, setIsViewProfile }) {
  
   const appointmentState = useAdminAppointmentStore((state) => {
     return state;
@@ -88,7 +88,7 @@ useEffect(()=>{
                 <td 
                   className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
                   onClick = {() => {
-                    setViewProfile(true);
+                    setIsViewProfile(true);
                     setSelectedId(appoint.id);
                     setUId(appoint.UId);
                   }}

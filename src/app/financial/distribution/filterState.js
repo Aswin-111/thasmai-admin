@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 export const useDistributionFilterStore = create((set) => ({
 
-    fieldValues : ["DOJ", "First Name", "Second Name", "User Id", "Available coupon", "Distributed coupon", "Phone", "Email", "Status", "Level", "Node"],
+    fieldValues : ["DOJ", "First Name", "Second Name", "User Id", "Distributed coupon", "Available coupon", "Level", "Node", "Status"],
 
     dojOperator: ["equal to", "between"],
 

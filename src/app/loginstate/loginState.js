@@ -18,7 +18,18 @@ export const useLoginStore = create((set) => ({
   
       role : role 
 
-    }) )
+    }) ),
+
+    // set emploee Id for use in expense creation ...
+
+    emp_Id : "",
+    setEmployeeId : (id) => set((state) => ( { 
+  
+        emp_Id : id 
+  
+    }) ),
+
+
 
   }) ) //end
   
