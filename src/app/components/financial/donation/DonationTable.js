@@ -1,0 +1,101 @@
+"use client"
+
+import React, { useState, useEffect} from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useDonationFilterStore } from "@/app/financial/donation/filterState";
+
+function DonationTable(props) {
+
+    const filterState = useDonationFilterStore((state) => {
+        return state;
+    });
+
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+        
+            try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-donation?page=${props.pageNo}`);
+                    
+                filterState.setUsersData(response.data.users);
+                props.setTotalPages(response.data.totalPages);
+                props.setIsFilteredData(false);
+                props.setFilteredPageNo(1);
+                console.log(response);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                toast.error("Error fetching data.");
+            }
+        };
+    
+        fetchData();
+    }, [props.pageNo, props.filterToggle]);
+  
+    return (
+    
+        <table className="table">
+            <thead
+              className="bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
+              style={{ borderRadius: "11px" }}
+            >
+                <tr className="rounded-3xl">
+                    <th className="text-center">DOJ</th>
+                    <th className="text-center">Name</th>
+                    <th className="text-center">Id</th>
+                    <th className="text-center">Email</th>
+                    <th className="text-center">Phone</th>
+                    <th className="text-center">DPSF</th>
+                    <th className="text-center">Latest Donation</th>
+                    {/* <th className="text-center">Remarks</th> */}
+                    <th className="text-center">Avail. Coupons</th>
+                    <th className="text-center">Branch</th>
+                </tr>
+            </thead>
+            <tbody className="my-10">
+
+                {    
+					filterState.usersData[0] ? (
+
+                  		filterState.usersData.map((i, index) => {
+
+                    		return (
+                                <tr
+                                    key={index}
+                                    className="font-semibold text-[0.8rem] text-black my-10 "
+                                >
+                                    <td className="text-center">{ i.DOJ }</td>
+                                    <td className="text-center text-indigo-600">{ i.firstName } { i.secondName }</td>
+                                    <td className="text-center">{ i.UId }</td>
+                                    <td className="text-center">{ i.email } </td>
+                                    <td className="text-center">{ i.phone } </td>
+                                    <td className="text-center">{ i.total_donation }</td>
+                                    <td className="text-center">{ i.latest_donation }</td>
+                                    {/* <td className="text-center">
+                                      <div className="bg-[#d9d9d9] w-full h-7 p-1 rounded">{i.remarks}</div>
+                                    </td> */}
+                                    <td className="text-center">{i.coupons} </td>
+                                    <td className="text-center flex justify-evenly">
+                                      <div className="bg-[#d9d9d9] w-10 h-7 p-1 me-1 rounded">L - {i.Level}</div>      
+                                      <div className="bg-[#d9d9d9] w-10 h-7 p-1 rounded">N - {i.node_number}</div> 
+                                    </td>               
+                                </tr>
+                    		);
+                    	})
+
+                	) : (
+                  		<tr>
+                			<td>No data to display</td>
+              			</tr>
+                	)
+                    
+                }
+
+            </tbody>
+        </table>
+    
+    );
+}
+
+export default DonationTable;

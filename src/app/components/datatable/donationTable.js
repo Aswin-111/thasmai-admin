@@ -22,7 +22,8 @@ function DonationTable({ data }) {
           </tr>
         </thead>
         <tbody className="my-10">
-          {data.map((i, index) => {
+
+          {/* {data.map((i, index) => {
             return (
               <tr
                 key={index}
@@ -46,7 +47,30 @@ function DonationTable({ data }) {
                 
               </tr>
             );
-          })}
+          })} */}
+
+              <tr
+                className="font-semibold text-[0.8rem] text-black my-10 "
+              >
+                <td className="text-center">2024-08-24</td>
+                <td className="text-center text-indigo-600">John Doe</td>
+                <td className="text-center">2</td>
+                <td className="text-center">johndoe@gmail.com</td>
+                <td className="text-center">9876543210</td>
+                <td className="text-center">12500</td>
+                <td className="text-center">2500</td>
+                <td className="text-center">
+                  <div className="bg-[#d9d9d9] w-full h-7 p-1 rounded">For education</div>
+                </td>
+                <td className="text-center">5</td>
+                <td className="text-center flex justify-evenly">
+                  <div className="bg-[#d9d9d9] w-10 h-7 p-1 me-1 rounded">10</div>      
+                  <div className="bg-[#d9d9d9] w-10 h-7 p-1 rounded">3</div> 
+                </td>               
+                
+              </tr>
+
+
         </tbody>
       </table>
     </div>

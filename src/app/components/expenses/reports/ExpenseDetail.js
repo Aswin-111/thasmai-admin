@@ -12,7 +12,7 @@ function ExpenseDetail(props) {
           
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/get-expensebyid/${ props.selectedId }`)
-                // console.log(response.data.user);
+                // console.log(response);
                 setData(response.data.user);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -42,7 +42,7 @@ function ExpenseDetail(props) {
 
             <div className="w-full h-[15%] p-5 flex justify-center items-center text-white overflow-scroll">
                 <p className="w-full h-full text-center font-bold">
-                    { data.Date }, { data.expenseType }, ₹ { data.amount }, <span className="font-light">{ data.description }</span>
+                    { data.Expense_Date }, { data.expenseType }, ₹ { data.amount }, <span className="font-light">{ data.description }</span>
                 </p>
             </div>
             

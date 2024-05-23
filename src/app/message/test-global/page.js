@@ -14,7 +14,7 @@ function TestGlobal() {
     const [gurujiGlobalMessage, setGurujiGlobalMessage] = useState("");
     const [renderMessageToggle, setRenderMessageToggle] = useState(false);
 
-    // console.log(pageNo);
+    // console.log(gurujiGlobalMessage);
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Messages");

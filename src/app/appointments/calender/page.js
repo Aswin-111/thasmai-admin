@@ -39,7 +39,7 @@ function GurujiAvalability() {
 
   const selectedDates = value.map((i, index) => {
     return i.year + "," + i.month.number + "," + i.day ;   
-  })
+  });
 
   // console.log(selectedDate);
 
@@ -50,7 +50,7 @@ function GurujiAvalability() {
         // console.log(selectedDates);
         const oldDates = unavailableDates;
         const newDates =  [...oldDates, ...selectedDates]
-       
+       console.log(newDates);
 
 
         const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-gurujidate`, {
@@ -77,6 +77,8 @@ function GurujiAvalability() {
         
         const newDates =  [...unavailableDates];
         newDates.splice(index,1);
+
+        console.log(newDates)
         
         const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-gurujidate`, {
           values : newDates

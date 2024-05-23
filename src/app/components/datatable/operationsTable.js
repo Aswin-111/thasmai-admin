@@ -21,7 +21,8 @@ function OperationsTable({ data }) {
           </tr>
         </thead>
         <tbody className="my-10">
-          {data.map((i, index) => {
+
+          {/* {data.map((i, index) => {
             return (
               <tr
                 key={index}
@@ -41,7 +42,25 @@ function OperationsTable({ data }) {
                 
               </tr>
             );
-          })}
+          })} */}
+
+              <tr
+                className="font-semibold text-[0.8rem] text-black my-10"
+              >
+                <td className="text-center">2024-03-05</td>
+                <td className="text-center text-indigo-600">John Doe</td>
+                <td className="text-center">Electricity Bill</td>
+                <td className="text-center">2000</td>
+                <td className="text-center">Bill Link</td>
+                <td className="text-center">Advance payment</td>
+                <td className="text-center">400</td>
+                <td className="text-center">5000</td>
+                <td className="text-center">
+                  <div className="bg-[#55ee9b] w-full h-7 p-1 text-white rounded">Pay</div>
+                </td>
+                
+              </tr>
+
         </tbody>
       </table>
     </div>

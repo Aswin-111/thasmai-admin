@@ -62,7 +62,7 @@ function Login() {
 
         	<div className='w-full h-[85%] flex justify-center items-center '>
          		<div className='w-[90%] h-[80%] md:w-[35rem] md:h-[28rem] shadow-xl flex flex-col rounded-2xl  items-center bg-white box-shadow-custom'>
-          			<h1 className='my-10 font-semibold text-2xl'>Login</h1>
+          			<h1 className='my-10 font-semibold text-2xl text-black'>Login</h1>
           			<input 
 						ref = {userRef} 
 						className='w-[90%] md:w-[60%] h-[50px] px-10 py-2 mt-10 rounded bg-white text-black outline-black border-black border-2 placeholder:text-gray-500'

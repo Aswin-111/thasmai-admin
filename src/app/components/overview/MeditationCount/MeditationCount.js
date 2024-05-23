@@ -18,7 +18,7 @@ function MeditationCount() {
             try {
                 const response1 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/this-month`);
                 // console.log(response1);
-                setNewJoineesCount(response.data.events);
+                setNewJoineesCount(response1.data.count);   
     
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -27,7 +27,7 @@ function MeditationCount() {
 
             try {
                 const response2 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/beneficiaries`);
-                // console.log(response2.data.count);
+                // console.log(response2);
                 setBeneficiariesCount(response2.data.count);
     
             } catch (error) {
@@ -36,7 +36,7 @@ function MeditationCount() {
 
             try {
                 const response3 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/meditation`);
-                // console.log(response3.data.list);
+                // console.log(response3);
                 setTotalMeditatorsCount(response3.data.list);
     
             } catch (error) {
@@ -65,7 +65,7 @@ function MeditationCount() {
                 <img className="w-full rounded-full" src="/admin/new-joinees.png" alt="" />       
             </div>
             <div className="w-[75%] ps-2">
-                <h3 className="text-[32px] md:text-[28px] text-black font-medium">75</h3>
+                <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ newJoineesCount }</h3>
                 <p className="text-[20px] md:text-[16px] text-gray-400 font-medium">New Joinees</p>
             </div>
         </div>

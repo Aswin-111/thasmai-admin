@@ -54,7 +54,7 @@ function Navbar() {
               				    <li className={`${pathname.startsWith('/events') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Events</li>
               				</Link>
               				<Link href="/expenses/add-expense">
-              				    <li className={`${pathname.startsWith('/expenses') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Financial/Expense</li>
+              				    <li className={`${pathname.startsWith('/expenses') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Financial / Expense</li>
               				</Link>
               				<Link href="/support">
               				    <li className={`${pathname.startsWith('/support') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Support & Contact</li>
