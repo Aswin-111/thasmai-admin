@@ -8,6 +8,7 @@ import NavLink from '../navlink/navlink';
 import FilterChip from "./filterChips";
 import OperationsTable from "@/app/components/financial/operations/OperationsTable";
 import ProfileView from "@/app/components/users/profileView";
+import ExpenseDetail from "@/app/components/expenses/reports/ExpenseDetail";
 import Image from "next/image";
 import data from './data.json'
 
@@ -20,6 +21,9 @@ function Operations() {
 	const [filterToggle, setFilterToggle] = useState(false);
 	const [userId, setUserId] = useState(null);
 	const [isViewProfile, setIsViewProfile] = useState(false);
+	const [expenseId, setExpenseId] = useState(null);
+	const [isViewBill, setIsViewBill] = useState(false);
+	
 
 	// console.log(pageNo, totalPages, filteredPageNo);
 
@@ -92,18 +96,11 @@ function Operations() {
 	// async function handleSearch (newPageNo) {
 	// 	try {
 	// 	  	const config = {
-	// 			"DOJ" : "DOJ",
-	// 			"First Name" : "firstName",
-	// 			"Second Name" : "secondName",
-	// 			"User Id" : "UId",
-	// 			"Available coupon" : "coupons",
-	// 			// "Distributed coupon" : "total_distributed_coupons",
-	// 			// "Phone" : "phone",
-	// 			// "Email" : "email",
-	// 			"Donation Paid So Far" : "total_donation",
-	// 			"Latest Donation" : "latest_donation",
-	// 			"Level" : "Level",
-	// 			"Node" : "node_number",
+	// 			"Expense Date" : "Expense_Date",
+	// 			"Expense Type" : "expenseType",
+	// 			"Employee Id" : "emp_id",
+	// 			"Amount" : "amount",
+	// 			"Total Expense" : "totalAmount",
 
 	// 			"starts with":"like",
 	// 			"equal to": "=",
@@ -213,7 +210,7 @@ function Operations() {
 						}
 
                         {
-                            filterState.fieldValue === "DOJ" && 
+                            filterState.fieldValue === "Expense Date" && 
                   
                             <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
                                 ref = {operatorRef}
@@ -236,241 +233,8 @@ function Operations() {
                             </select>
                         }
 
-                        {
-                            filterState.fieldValue === "First Name" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.stringOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
 						{
-                            filterState.fieldValue === "Second Name" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.stringOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-            			  	filterState.fieldValue === "User Id" && 
-	
-            			  	<select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-            			  	  ref = {operatorRef}
-            			  	  onChange={e => {
-								filterState.setOperatorValue(e.target.value)
-            			  	  }}
-            			  	>
-            			  	  <option disabled selected>
-            			  	    Choose operator
-            			  	  </option>
-            			  	  <option value="equal to">Equal to</option>  
-            			  	</select>
-
-            			}
-
-						{/* {
-                            filterState.fieldValue === "Email" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.stringOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                            filterState.fieldValue === "Phone" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.stringOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        } */}
-
-						{
-                            filterState.fieldValue === "Donation Paid So Far" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                            filterState.fieldValue === "Latest Donation" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                            filterState.fieldValue === "Available coupon" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                            filterState.fieldValue === "Level" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                            filterState.fieldValue === "Node" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                    	    filterState.fieldValue === "Status" && 
+                    	    filterState.fieldValue === "Expense Type" && 
 					
                     	    <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
                     	      ref = {operatorRef}
@@ -487,6 +251,73 @@ function Operations() {
                     	    </select>
                     	}
 
+						{
+            			  	filterState.fieldValue === "Employee Id" && 
+	
+            			  	<select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+            			  	  ref = {operatorRef}
+            			  	  onChange={e => {
+								filterState.setOperatorValue(e.target.value)
+            			  	  }}
+            			  	>
+            			  	  <option disabled selected>
+            			  	    Choose operator
+            			  	  </option>
+            			  	  <option value="equal to">Equal to</option>  
+            			  	</select>
+
+            			}
+
+						{
+                            filterState.fieldValue === "Amount" && 
+                        
+                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                                ref = {operatorRef}
+                                onChange={e => {
+                                    filterState.setOperatorValue(e.target.value)
+                                }}
+                            >
+                                <option disabled selected>
+                                      Choose operator
+                                </option>
+                                {
+                                      filterState.integerOperator.map((i, index) => {
+                                        return (
+                                              <option key={index} value={i}>
+                                                {i}
+                                              </option>
+                                        );
+                                      })
+                                }
+                            </select>
+                        }
+
+						{
+                            filterState.fieldValue === "Total Expense" && 
+                        
+                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                                ref = {operatorRef}
+                                onChange={e => {
+                                    filterState.setOperatorValue(e.target.value)
+                                }}
+                            >
+                                <option disabled selected>
+                                      Choose operator
+                                </option>
+                                {
+                                      filterState.integerOperator.map((i, index) => {
+                                        return (
+                                              <option key={index} value={i}>
+                                                {i}
+                                              </option>
+                                        );
+                                      })
+                                }
+                            </select>
+                        }
+
+
+
                                     {/* ----------------value input/select---------------- */}
 
                     	{
@@ -499,234 +330,43 @@ function Operations() {
                     	}
 
                     	{
-                    	    (filterState.fieldValue === "DOJ" && filterState.operatorValue === "") && 
+                    	    (filterState.fieldValue === "Expense Date" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
                     	}
                     	{
-                    	  	( filterState.fieldValue === "DOJ" && filterState.operatorValue === "equal to") &&
+                    	  	( filterState.fieldValue === "Expense Date" && filterState.operatorValue === "equal to") &&
                     	    <>
                     	      <input type="date" ref = {dataRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
                     	      <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	    </>
                     	}
-                    	{   ( filterState.fieldValue === "DOJ" && filterState.operatorValue === "between") && 
+                    	{   ( filterState.fieldValue === "Expense Date" && filterState.operatorValue === "between") && 
                     	    <>
                     	      <input type="date" ref={startDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
                     	      <input type="date" ref={endDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
                     	    </>
                     	}
-    
-
-                    	{
-                    	    ( filterState.fieldValue === "First Name" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "First Name" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Second Name" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Second Name" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
 
 
 						{
-                    	    ( filterState.fieldValue === "User Id" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "User Id" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{/* {
-                    	    ( filterState.fieldValue === "Email" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Email" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Phone" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Phone" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	} */}
-
-						{
-                    	    ( filterState.fieldValue === "Donation Paid So Far" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Donation Paid So Far" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Latest Donation" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Latest Donation" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Available coupon" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Available coupon" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Level" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Level" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Node" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Node" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Status" && filterState.operatorValue === "") && 
+                    	    ( filterState.fieldValue === "Expense Type" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
                     	}
                     	{
-                    	    (filterState.fieldValue  === "Status" && filterState.operatorValue !== "") && (
+                    	    (filterState.fieldValue  === "Expense Type" && filterState.operatorValue !== "") && (
                     	        <>
                     	              <select className='ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
                     	                <option value="" disabled selected>
                     	                      Choose value
                     	                </option>
                     	                {
-                    	                      filterState.statusOperator.map((i, index) => {
+                    	                      filterState.expenseTypeValues.map((i, index) => {
                     	                        return <option value={i}>
                     	                              {i}
                     	                        </option>
@@ -737,6 +377,65 @@ function Operations() {
                     	        </>
                     	    )
                     	}
+
+
+						{
+                    	    ( filterState.fieldValue === "Employee Id" && filterState.operatorValue === "") && 
+                    	        <>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+                    	{ 
+                    	    ( filterState.fieldValue  === "Employee Id" && filterState.operatorValue !== "") && 
+                    	        <>
+                    	              <input
+                    	                type="text"
+                    	                placeholder="Value" ref = {dataRef}
+                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                    	              />
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+
+						{
+                    	    ( filterState.fieldValue === "Amount" && filterState.operatorValue === "") && 
+                    	        <>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+                    	{ 
+                    	    ( filterState.fieldValue  === "Amount" && filterState.operatorValue !== "") && 
+                    	        <>
+                    	              <input
+                    	                type="text"
+                    	                placeholder="Value" ref = {dataRef}
+                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                    	              />
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+
+						{
+                    	    ( filterState.fieldValue === "Total Expense" && filterState.operatorValue === "") && 
+                    	        <>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+                    	{ 
+                    	    ( filterState.fieldValue  === "Total Expense" && filterState.operatorValue !== "") && 
+                    	        <>
+                    	              <input
+                    	                type="text"
+                    	                placeholder="Value" ref = {dataRef}
+                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                    	              />
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+
 
               		</div>
 
@@ -875,6 +574,8 @@ function Operations() {
                 	    <OperationsTable
 							setUserId={ setUserId }
 							setIsViewProfile={ setIsViewProfile } 
+							setExpenseId={ setExpenseId }
+							setIsViewBill = { setIsViewBill }
                 	        setIsFilteredData={setIsFilteredData}
                 	        setFilteredPageNo={setFilteredPageNo}
                 	        pageNo={pageNo}
@@ -929,6 +630,10 @@ function Operations() {
 			{
 				isViewProfile && <ProfileView UId={ userId } setIsViewProfile={ setIsViewProfile } />
 			}
+
+			{
+        	  	isViewBill && <ExpenseDetail selectedId={expenseId} setIsViewDetail={ setIsViewBill } />
+        	} 
    
 
   		</div>

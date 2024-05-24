@@ -12,26 +12,26 @@ function AshramIncomeTable(props) {
     });
 
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     const fetchData = async () => {
+        const fetchData = async () => {
         
-    //         try {
-    //             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-donation?page=${props.pageNo}`);
+            try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-fees?page=${props.pageNo}`);
                     
-    //             filterState.setUsersData(response.data.users);
-    //             props.setTotalPages(response.data.totalPages);
-    //             props.setIsFilteredData(false);
-    //             props.setFilteredPageNo(1);
-    //             console.log(response);
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
-    //             toast.error("Error fetching data.");
-    //         }
-    //     };
+                filterState.setUsersData(response.data.users);
+                props.setTotalPages(response.data.totalPages);
+                props.setIsFilteredData(false);
+                props.setFilteredPageNo(1);
+                console.log(response);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                toast.error("Error fetching data.");
+            }
+        };
     
-    //     fetchData();
-    // }, [props.pageNo, props.filterToggle]);
+        fetchData();
+    }, [props.pageNo, props.filterToggle]);
   
     return (
     
@@ -50,58 +50,58 @@ function AshramIncomeTable(props) {
                     <th className="text-center">Email</th> */}
                     <th className="text-center">FPSF</th>
                     <th className="text-center">Latest Fee</th>
-                    <th className="text-center">Dist. Coupons</th>
+                    {/* <th className="text-center">Dist. Coupons</th> */}
                     <th className="text-center">Avail. Coupons</th>
                 </tr>
             </thead>
             <tbody className="my-10">
 
                 {    
-					// filterState.usersData[0] ? (
+					filterState.usersData[0] ? (
 
-                  	// 	filterState.usersData.map((i, index) => {
+                  		filterState.usersData.map((i, index) => {
 
-                    // 		return (
+                    		return (
 
-                    //             <tr
-                    //                 key={index}
-                    //                 className="font-medium text-xs text-black my-10 "
-                    //             >
-					// 			    <td className="text-center">{ (index + 1) + ((props.pageNo - 1) * 10 ) }</td>
-                    //                 <td className="text-center">{ i.DOJ }</td>
-                    //                 <td 
-                    //                     className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
-                    //                     onClick={() => {
-                    //                         props.setUserId(i.UId);
-                    //                         props.setIsViewProfile(true);
-                    //                     }}
-                    //                 >
-                    //                     { i.firstName } { i.secondName }
-                    //                 </td>
-                    //                 <td className="text-center">{ i.UId }</td>
-                    //                 <td className="text-center flex justify-evenly">
-                    //                   <div className="bg-[#d9d9d9] w-10 h-7 p-1 me-1 rounded">L - { i.Level }</div>      
-                    //                   <div className="bg-[#d9d9d9] w-10 h-7 p-1 rounded">N - { i.node_number }</div> 
-                    //                 </td>     
-                    //                 {/* <td className="text-center">{i.phone} </td>
-                    //                 <td className="text-center">{i.email}</td> */}
-                    //                 <td className="text-center">{ i.FPSF }</td>
-                    //                 <td className="text-center">{ i.latestFee } </td>
-                    //                 <td className="text-center">{ i.total_distributed_coupons } </td>
-                    //                 <td className="text-center">{ i.coupons } </td>              
-                    //             </tr>
-                    // 		);
-                    // 	})
+                                <tr
+                                    key={index}
+                                    className="font-medium text-xs text-black my-10 "
+                                >
+								    <td className="text-center">{ (index + 1) + ((props.pageNo - 1) * 10 ) }</td>
+                                    <td className="text-center">{ i.DOJ }</td>
+                                    <td 
+                                        className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
+                                        onClick={() => {
+                                            props.setUserId(i.UId);
+                                            props.setIsViewProfile(true);
+                                        }}
+                                    >
+                                        { i.firstName } { i.secondName }
+                                    </td>
+                                    <td className="text-center">{ i.UId }</td>
+                                    <td className="text-center flex justify-evenly">
+                                      <div className="bg-[#d9d9d9] w-10 h-7 p-1 me-1 rounded">L - { i.Level }</div>      
+                                      <div className="bg-[#d9d9d9] w-10 h-7 p-1 rounded">N - { i.node_number }</div> 
+                                    </td>     
+                                    {/* <td className="text-center">{i.phone} </td>
+                                    <td className="text-center">{i.email}</td> */}
+                                    <td className="text-center">{ i.total_fees }</td>
+                                    <td className="text-center">{ i.latest_donation } </td>
+                                    {/* <td className="text-center">{ i.total_distributed_coupons } </td> */}
+                                    <td className="text-center">{ i.coupons } </td>              
+                                </tr>
+                    		);
+                    	})
 
-                	// ) : (
-                  	// 	<tr>
-                	// 		<td>No data to display</td>
-              		// 	</tr>
-                	// )
+                	) : (
+                  		<tr>
+                			<td>No data to display</td>
+              			</tr>
+                	)
                     
                 }
 
-                <tr className="font-medium text-xs text-black my-10">
+                {/* <tr className="font-medium text-xs text-black my-10">
                     <td className="text-center">1</td>
                     <td className="text-center">2024-06-16</td>
                     <td 
@@ -117,7 +117,7 @@ function AshramIncomeTable(props) {
                     <td className="text-center">3</td>
                     <td className="text-center">5</td>
 
-                </tr>
+                </tr> */}
 
             </tbody>
         </table>

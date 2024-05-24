@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 export const useAshramIncomeFilterStore = create((set) => ({
 
-  	fieldValues : ["DOJ", "First Name", "Second Name", "User Id", "Distributed coupon", "Available coupon", "Level", "Node", "Status"],
+  	fieldValues : ["DOJ", "First Name", "Second Name", "User Id", "Level", "Node", "Available coupon"],
 
   	dojOperator: ["equal to", "between"],
 

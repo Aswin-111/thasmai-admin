@@ -1,9 +1,9 @@
 "use client"
 
+import React, { useRef,useState } from 'react'
 import { useLoginStore } from '@/app/loginstate/loginState'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import React, { useRef,useState } from 'react'
 
 import { IoEye ,IoEyeOff} from "react-icons/io5";
 
@@ -16,7 +16,7 @@ function Login() {
 
   	const loginState = useLoginStore(function(state){
   	  return state
-  	})
+  	});
 
 
   	const router = useRouter()

@@ -95,8 +95,11 @@ import { toast } from 'react-hot-toast';
 import { MdOutlineFileUpload } from "react-icons/md";
 
 function AddExpense() {
+
+    const [employeeId, setEmployeeId] = useState(null); // to attach employye id with expense created.
     const [formData, setFormData] = useState({
         Expense_Date: '',
+        emp_id : '',
         expenseType: '',
         amount: '',
         description: '',
@@ -106,7 +109,7 @@ function AddExpense() {
 
     const loginState = useLoginStore(function(state) {
   	    return state
-  	})
+  	});
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Financial / Expense");
@@ -118,14 +121,23 @@ function AddExpense() {
         const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
         const year = today.getFullYear();
         const todayDate = `${year}-${month}-${day}`;
+
+
+        //set employee Id in form data
+       const userData = localStorage.getItem('userdata')
+       const empId = JSON.parse(userData).emp_Id;
         
-        // Set today's date in your form data
+        // Set today's date and employee id in your form data
         setFormData({
             ...formData,
             Expense_Date: todayDate,
+            emp_id : empId,
         });
         
     }, []); // Run only once on component mount
+
+
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -146,9 +158,7 @@ function AddExpense() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const emp_Id = loginState.emp_Id;
-        console.log(emp_Id);
-
+        
         console.log('Submitting form data:', formData); // Log the form data before submission
 
         const form = new FormData();
@@ -157,7 +167,7 @@ function AddExpense() {
         form.append('amount', formData.amount);
         form.append('description', formData.description);
         form.append('invoice', formData.invoice);
-        form.append('emp_id', emp_Id);
+        form.append('emp_id', formData.emp_id);
 
         if(formData.invoice && formData.expenseType && formData.amount && formData.description) {
                 console.log(form);
@@ -168,6 +178,7 @@ function AddExpense() {
                 // Clear form fields after successful submission
                 setFormData({
                     Expense_Date: '',
+                    emp_id : '',
                     expenseType: '',
                     amount: '',
                     description: '',

@@ -129,14 +129,7 @@ function FinancialConfigTable({ dummyData }) {
         
               
 
-
               
-
-
-              
-              
-            
-        
         </tbody>
       </table>
     </div>

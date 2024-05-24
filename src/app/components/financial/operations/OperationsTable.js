@@ -1,35 +1,37 @@
 "use client"
 
-import React from "react";
+import React, { useEffect } from "react";
+import axios from 'axios';
+import { toast } from "react-hot-toast";
 import { useOperationsFilterStore } from "@/app/financial/operations/filterState";
 
-function OperationsTable({ data }) {
+function OperationsTable(props) {
 
 
-    const filterState =  useOperationsFilterStore((state) => {
+    const filterState = useOperationsFilterStore((state) => {
   	  return state;
   	});
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     const fetchData = async () => {
+        const fetchData = async () => {
         
-    //         try {
-    //             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-donation?page=${props.pageNo}`);
+            try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-operation?page=${props.pageNo}`);
                     
-    //             filterState.setExpenseData(response.data.users);
-    //             props.setTotalPages(response.data.totalPages);
-    //             props.setIsFilteredData(false);
-    //             props.setFilteredPageNo(1);
-    //             console.log(response);
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
-    //             toast.error("Error fetching data.");
-    //         }
-    //     };
+                filterState.setExpenseData(response.data.expense);
+                props.setTotalPages(response.data.totalPages);
+                props.setIsFilteredData(false);
+                props.setFilteredPageNo(1);
+                console.log(response);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                toast.error("Error fetching data.");
+            }
+        };
     
-    //     fetchData();
-    // }, [props.pageNo, props.filterToggle]);
+        fetchData();
+    }, [props.pageNo, props.filterToggle]);
 
     return (
     
@@ -40,8 +42,9 @@ function OperationsTable({ data }) {
             >
                 <tr className="rounded-3xl">
 		        	<th className="text-center">Sl. No</th>
-                    <th className="text-center">Date</th>
+                    <th className="text-center">Expense Date</th>
                     <th className="text-center">Emp. Name</th>
+                    <th className="text-center">Emp. Id</th>
                     <th className="text-center">Expense Type</th>
                     <th className="text-center">Amount</th>
                     <th className="text-center">Bills</th>
@@ -55,38 +58,48 @@ function OperationsTable({ data }) {
                 <tbody className="">
 
                     {
-                        // filterState.expenseData[0] ? (
-                        //     filterState.expenseData.map((i, index) => {
-                        //         return (
-                        //             <tr
-                        //               key={index}
-                        //               className="font-medium text-xs text-black"
-                        //             >
-                        //                 <td className="text-center">{ (index + 1) + ((props.pageNo - 1) * 10 ) }</td>
-                        //                 <td className="text-center">{i.joinDate}</td>
-                        //                 <td className="text-center text-indigo-600">{i.employeeName} </td>
-                        //                 <td className="text-center">{i.expenseType} </td>
-                        //                 <td className="text-center">{i.amount} </td>
-                        //                 <td className="text-center">{i.bills} </td>
-                        //                 <td className="text-center">{i.remarks}</td>
-                        //                 <td className="text-center">{i.totalExpense}</td>
-                        //                 <td className="text-center">{i.saturationLimit} </td>
-                        //                 <td className="text-center">
-                        //                   <div className="bg-[#55ee9b] w-full h-7 p-1 text-white rounded">{i.status}</div>
-                        //                 </td>
+                        filterState.expenseData[0] ? (
+                            filterState.expenseData.map((i, index) => {
+								const expenseId = i.id;
+                                return (
+                                    <tr
+                                      key={index}
+                                      className="font-medium text-xs text-black"
+                                    >
+                                        <td className="text-center">{ (index + 1) + ((props.pageNo - 1) * 10 ) }</td>
+                                        <td className="text-center">{i.Expense_Date}</td>
+                                        <td className="text-center text-indigo-600">{i.emp_name} </td>
+                                        <td className="text-center text-indigo-600">{i.emp_id} </td>
+                                        <td className="text-center">{i.expenseType} </td>
+                                        <td className="text-center">{i.amount} </td>
+                                        <td className="text-center  hover:scale-105">
+											<span 
+												className="text-purple-500 underline cursor-pointer"
+												onClick={() => {
+													props.setExpenseId(expenseId);
+													props.setIsViewBill(true);
+												}}
+											>Bill link</span>
+										</td>
+                                        <td className="text-center">{i.totalAmount}</td>
+										{/* saturation limit is a configurable parameter  */}
+                                        <td className="text-center">{i.saturationLimit}5000</td>  
+                                        <td className="text-center">
+                                          <div className="bg-[#55ee9b] w-full h-7 p-1 text-white rounded">Pay</div>
+                                        </td>
                                     
-                        //             </tr>
-                        //         );
-                        //     })
-                        // ) : (
-                        //     <tr>
-                		// 	    <td>No data to display</td>
-              			//     </tr>
-                        // )
+                                    </tr>
+                                );
+                            })
+                        ) : (
+                            <tr>
+                			    <td>No data to display</td>
+              			    </tr>
+                        )
             
                     }
 
-                <tr
+                {/* <tr
                   className="font-medium text-xs text-black"
                 >
                     <td className="text-center">1</td>
@@ -95,14 +108,14 @@ function OperationsTable({ data }) {
                     <td className="text-center">Electricity Bill</td>
                     <td className="text-center">2000</td>
                     <td className="text-center">Bill Link</td>
-                    {/* <td className="text-center">Advance payment</td> */}
+                    <td className="text-center">Advance payment</td>
                     <td className="text-center">400</td>
                     <td className="text-center">5000</td>
                     <td className="text-center">
                       <div className="bg-[#55ee9b] w-full h-7 p-1 text-white rounded">Pay</div>
                     </td>
                 
-                </tr>
+                </tr> */}
 
         </tbody>
       </table>

@@ -91,73 +91,73 @@ function AshramIncome() {
         }
     };
 
-	// async function handleSearch (newPageNo) {
-	// 	try {
-	// 	  	const config = {
-	// 			"DOJ" : "DOJ",
-	// 			"First Name" : "firstName",
-	// 			"Second Name" : "secondName",
-	// 			"User Id" : "UId",
-	// 			"Available coupon" : "coupons",
-	// 			// "Distributed coupon" : "total_distributed_coupons",
-	// 			// "Phone" : "phone",
-	// 			// "Email" : "email",
-	// 			"Donation Paid So Far" : "total_donation",
-	// 			"Latest Donation" : "latest_donation",
-	// 			"Level" : "Level",
-	// 			"Node" : "node_number",
+	async function handleSearch (newPageNo) {
+		try {
+		  	const config = {
+				"DOJ" : "DOJ",
+				"First Name" : "firstName",
+				"Second Name" : "secondName",
+				"User Id" : "UId",
+				"Available coupon" : "coupons",
+				// "Distributed coupon" : "total_distributed_coupons",
+				// "Phone" : "phone",
+				// "Email" : "email",
+				// "Donation Paid So Far" : "total_donation",
+				// "Latest Donation" : "latest_donation",
+				"Level" : "Level",
+				"Node" : "node_number",
 
-	// 			"starts with":"like",
-	// 			"equal to": "=",
-	// 			"greater than" : ">",
-	// 			"less than" : "<",
-	// 			"not equal to" : "<>",
-	// 	  	}
-	// 	  	console.log(config["starts with"]);
+				"starts with":"like",
+				"equal to": "=",
+				"greater than" : ">",
+				"less than" : "<",
+				"not equal to" : "<>",
+		  	}
+		  	console.log(config["starts with"]);
 		   
 	  
-	// 	  	const filteredData = filterState.filters.map((i,ind) => {
+		  	const filteredData = filterState.filters.map((i,ind) => {
 		   
-	// 			const field = i.field;
-	// 			const operator = i.operator.toLowerCase();
-	// 			const value = (i.field.toLowerCase() ==="first name" || i.field.toLowerCase() ==="second name") ? `${i.value}%` : i.value;
-	// 			console.log(field, value, operator);
+				const field = i.field;
+				const operator = i.operator.toLowerCase();
+				const value = (i.field.toLowerCase() ==="first name" || i.field.toLowerCase() ==="second name") ? `${i.value}%` : i.value;
+				console.log(field, value, operator);
 			
-	// 			if(field.includes("Date") && operator === "between") {
-	// 			  	return({
-	// 					field : config[`${field}`], 
-	// 					operator: "between", 
-	// 					value: value, 
-	// 					logicaloperator: i.logicaloperator
-	// 			  	})
-	// 			} 
+				if(field.includes("Date") && operator === "between") {
+				  	return({
+						field : config[`${field}`], 
+						operator: "between", 
+						value: value, 
+						logicaloperator: i.logicaloperator
+				  	})
+				} 
 			
-	// 			return({
-	// 			  	field : config[`${field}`], 
-	// 				operator: config[`${operator}`], 
-	// 				value: value, 
-	// 				logicaloperator: i.logicaloperator
-	// 			})
-	// 		})
+				return({
+				  	field : config[`${field}`], 
+					operator: config[`${operator}`], 
+					value: value, 
+					logicaloperator: i.logicaloperator
+				})
+			})
 
-	// 	  	filteredData[filteredData.length-1].logicaloperator = "null";
-	// 	  	console.log(filteredData);   
+		  	filteredData[filteredData.length-1].logicaloperator = "null";
+		  	console.log(filteredData);   
 		  
-	// 	  	const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/donation-query`, {
-	// 			queryConditions: filteredData, 
-	// 			page : newPageNo , 
-	// 	  	})
-	// 	  	//undo
-	// 	  	console.log(response,"sdfghnbg");
+		  	const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/fees-query`, {
+				queryConditions: filteredData, 
+				page : newPageNo , 
+		  	})
+		  	//undo
+		  	console.log(response,"sdfghnbg");
 	
-	// 	  	filterState.setUsersData(response.data.results);
-	// 		setIsFilteredData(true);
-	// 		setTotalPages(response.data.totalPages);
-	// 	}
-	// 	catch (error) {  
-	// 	  	console.error('Error occurred:', error);
-	// 	} 
-	// };
+		  	filterState.setUsersData(response.data.results);
+			setIsFilteredData(true);
+			setTotalPages(response.data.totalPages);
+		}
+		catch (error) {  
+		  	console.error('Error occurred:', error);
+		} 
+	};
 
 
 
@@ -304,102 +304,6 @@ function AshramIncome() {
 
             			}
 
-						{/* {
-                            filterState.fieldValue === "Email" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.stringOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                            filterState.fieldValue === "Phone" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.stringOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        } */}
-
-						{
-                            filterState.fieldValue === "Donation Paid So Far" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
-						{
-                            filterState.fieldValue === "Latest Donation" && 
-                        
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                                ref = {operatorRef}
-                                onChange={e => {
-                                    filterState.setOperatorValue(e.target.value)
-                                }}
-                            >
-                                <option disabled selected>
-                                      Choose operator
-                                </option>
-                                {
-                                      filterState.integerOperator.map((i, index) => {
-                                        return (
-                                              <option key={index} value={i}>
-                                                {i}
-                                              </option>
-                                        );
-                                      })
-                                }
-                            </select>
-                        }
-
 						{
                             filterState.fieldValue === "Available coupon" && 
                         
@@ -472,23 +376,6 @@ function AshramIncome() {
                             </select>
                         }
 
-						{
-                    	    filterState.fieldValue === "Status" && 
-					
-                    	    <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-                    	      ref = {operatorRef}
-                    	      onChange={e => {
-                    	            filterState.setOperatorValue(e.target.value)
-                    	      }}
-                    	    >
-                    	      <option disabled selected>
-                    	            Choose operator
-                    	      </option>
-                    	      <option value="equal to">
-                    	            equal to
-                    	      </option>
-                    	    </select>
-                    	}
 
                                     {/* ----------------value input/select---------------- */}
 
@@ -581,82 +468,6 @@ function AshramIncome() {
                     	        </>
                     	}
 
-						{/* {
-                    	    ( filterState.fieldValue === "Email" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Email" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Phone" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Phone" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	} */}
-
-						{
-                    	    ( filterState.fieldValue === "Donation Paid So Far" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Donation Paid So Far" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Latest Donation" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{ 
-                    	    ( filterState.fieldValue  === "Latest Donation" && filterState.operatorValue !== "") && 
-                    	        <>
-                    	              <input
-                    	                type="text"
-                    	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
-                    	              />
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-
 						{
                     	    ( filterState.fieldValue === "Available coupon" && filterState.operatorValue === "") && 
                     	        <>
@@ -712,33 +523,6 @@ function AshramIncome() {
                     	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
-                    	}
-
-						{
-                    	    ( filterState.fieldValue === "Status" && filterState.operatorValue === "") && 
-                    	        <>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	}
-                    	{
-                    	    (filterState.fieldValue  === "Status" && filterState.operatorValue !== "") && (
-                    	        <>
-                    	              <select className='ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
-                    	                <option value="" disabled selected>
-                    	                      Choose value
-                    	                </option>
-                    	                {
-                    	                      filterState.statusOperator.map((i, index) => {
-                    	                        return <option value={i}>
-                    	                              {i}
-                    	                        </option>
-                    	                      }) 
-                    	                }
-                    	              </select>
-                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                    	        </>
-                    	    )
                     	}
 
               		</div>

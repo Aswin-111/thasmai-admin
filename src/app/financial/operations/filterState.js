@@ -4,15 +4,14 @@ import { create } from "zustand";
 
 export const useOperationsFilterStore = create((set) => ({
 
-  	fieldValues : ["DOJ", "First Name", "Second Name", "User Id", "Donation Paid So Far", "Latest Donation", "Available coupon", "Level", "Node", "Status"],
+  	fieldValues : ["Expense Date", "Expense Type", "Employee Id", "Amount", "Total Expense"],
 
   	dojOperator : ["equal to", "between"],
-
   	stringOperator : ["starts with", "equal to"],
-
   	integerOperator : ["greater than", "less than", "equal to", "not equal to"],
 
-  	statusOperator : ["Active", "Inactive", "Blocked"],
+	expenseTypeValues : ["Electricity bill", "Water bill", "Stationery items", "Food and beverages"],
+
 
 
 

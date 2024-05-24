@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 export const useAppointmentsFilterStore = create((set) => ({
 	
-	fieldValues : ["DOJ", "First Name", "Second Name", "User Id", "Donation Paid So Far", "Latest Donation", "Available coupon", "Level", "Node", "Status"],
+	fieldValues : ["Appointment Date", "User Name", "User Id", "Fees Paid", "Available Coupons", "Coupons Redeemed"],
 
     dojOperator : ["equal to", "between"],
 
