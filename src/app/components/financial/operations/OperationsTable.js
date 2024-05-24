@@ -66,7 +66,19 @@ function OperationsTable(props) {
                                       key={index}
                                       className="font-medium text-xs text-black"
                                     >
-                                        <td className="text-center">{ (index + 1) + ((props.pageNo - 1) * 10 ) }</td>
+                                        <td className="text-center">
+                                            { 	
+										    	!props.isFilteredData ? (
+                                                
+										    		(index + 1) + ((props.pageNo - 1) * 10 )
+                                                
+										    	) : (
+                                                
+										    		(index + 1) + ((props.filteredPageNo - 1) * 10 )
+                                                
+										    	)
+										    }
+                                        </td>
                                         <td className="text-center">{i.Expense_Date}</td>
                                         <td className="text-center text-indigo-600">{i.emp_name} </td>
                                         <td className="text-center text-indigo-600">{i.emp_id} </td>

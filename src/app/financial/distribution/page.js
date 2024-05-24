@@ -801,6 +801,7 @@ function Distribution() {
               	        className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" 
               	        onClick={() => { 
               	            console.log('clicked');
+							setPageNo(1);
               	            handleSearch(1);
               	        }}
               	    >
@@ -836,9 +837,11 @@ function Distribution() {
                     <DistributionTable 
 						setUserId={ setUserId }
 						setIsViewProfile={ setIsViewProfile }
+						isFilteredData={ isFilteredData }
                         setIsFilteredData={setIsFilteredData}
                         setFilteredPageNo={setFilteredPageNo}
                         pageNo={pageNo}
+						filteredPageNo={ filteredPageNo }
                         setTotalPages={setTotalPages}
                         filterToggle={filterToggle}
                     />

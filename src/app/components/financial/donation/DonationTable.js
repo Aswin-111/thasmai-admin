@@ -66,7 +66,19 @@ function DonationTable(props) {
                                     key={index}
                                     className="font-medium text-xs text-black my-10 "
                                 >
-								    <td className="text-center">{ (index + 1) + ((props.pageNo - 1) * 10 ) }</td>
+								    <td className="text-center">
+                                        { 	
+											!props.isFilteredData ? (
+
+												(index + 1) + ((props.pageNo - 1) * 10 )
+
+											) : (
+
+												(index + 1) + ((props.filteredPageNo - 1) * 10 )
+
+											)
+										}
+                                    </td>
                                     <td className="text-center">{ i.DOJ }</td>
                                     <td 
                                         className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"

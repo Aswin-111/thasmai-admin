@@ -9,6 +9,7 @@ import FilterChip from "./filterChips";
 import OperationsTable from "@/app/components/financial/operations/OperationsTable";
 import ProfileView from "@/app/components/users/profileView";
 import ExpenseDetail from "@/app/components/expenses/reports/ExpenseDetail";
+import axios from "axios";
 import Image from "next/image";
 import data from './data.json'
 
@@ -93,66 +94,66 @@ function Operations() {
 	    }
 	};
 
-	// async function handleSearch (newPageNo) {
-	// 	try {
-	// 	  	const config = {
-	// 			"Expense Date" : "Expense_Date",
-	// 			"Expense Type" : "expenseType",
-	// 			"Employee Id" : "emp_id",
-	// 			"Amount" : "amount",
-	// 			"Total Expense" : "totalAmount",
+	async function handleSearch (newPageNo) {
+		try {
+		  	const config = {
+				"Expense Date" : "Expense_Date",
+				"Expense Type" : "expenseType",
+				"Employee Id" : "emp_id",
+				"Amount" : "amount",
+				"Total Expense" : "totalAmount",
 
-	// 			"starts with":"like",
-	// 			"equal to": "=",
-	// 			"greater than" : ">",
-	// 			"less than" : "<",
-	// 			"not equal to" : "<>",
-	// 	  	}
-	// 	  	console.log(config["starts with"]);
+				"starts with":"like",
+				"equal to": "=",
+				"greater than" : ">",
+				"less than" : "<",
+				"not equal to" : "<>",
+		  	}
+		  	console.log(config["starts with"]);
 		   
 	  
-	// 	  	const filteredData = filterState.filters.map((i,ind) => {
+		  	const filteredData = filterState.filters.map((i,ind) => {
 		   
-	// 			const field = i.field;
-	// 			const operator = i.operator.toLowerCase();
-	// 			const value = (i.field.toLowerCase() ==="first name" || i.field.toLowerCase() ==="second name") ? `${i.value}%` : i.value;
-	// 			console.log(field, value, operator);
+				const field = i.field;
+				const operator = i.operator.toLowerCase();
+				const value = (i.field.toLowerCase() ==="first name" || i.field.toLowerCase() ==="second name") ? `${i.value}%` : i.value;
+				console.log(field, value, operator);
 			
-	// 			if(field.includes("Date") && operator === "between") {
-	// 			  	return({
-	// 					field : config[`${field}`], 
-	// 					operator: "between", 
-	// 					value: value, 
-	// 					logicaloperator: i.logicaloperator
-	// 			  	})
-	// 			} 
+				if(field.includes("Date") && operator === "between") {
+				  	return({
+						field : config[`${field}`], 
+						operator: "between", 
+						value: value, 
+						logicaloperator: i.logicaloperator
+				  	})
+				} 
 			
-	// 			return({
-	// 			  	field : config[`${field}`], 
-	// 				operator: config[`${operator}`], 
-	// 				value: value, 
-	// 				logicaloperator: i.logicaloperator
-	// 			})
-	// 		})
+				return({
+				  	field : config[`${field}`], 
+					operator: config[`${operator}`], 
+					value: value, 
+					logicaloperator: i.logicaloperator
+				})
+			})
 
-	// 	  	filteredData[filteredData.length-1].logicaloperator = "null";
-	// 	  	console.log(filteredData);   
+		  	filteredData[filteredData.length-1].logicaloperator = "null";
+		  	console.log(filteredData);   
 		  
-	// 	  	const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/donation-query`, {
-	// 			queryConditions: filteredData, 
-	// 			page : newPageNo , 
-	// 	  	})
-	// 	  	//undo
-	// 	  	console.log(response,"sdfghnbg");
+		  	const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/operation-query`, {
+				queryConditions: filteredData, 
+				page : newPageNo , 
+		  	})
+		  	//undo
+		  	console.log(response,"sdfghnbg");
 	
-	// 	  	filterState.setExpenseData(response.data.results);
-	// 		setIsFilteredData(true);
-	// 		setTotalPages(response.data.totalPages);
-	// 	}
-	// 	catch (error) {  
-	// 	  	console.error('Error occurred:', error);
-	// 	} 
-	// };
+		  	filterState.setExpenseData(response.data.queryResults);
+			setIsFilteredData(true);
+			setTotalPages(response.data.totalPages);
+		}
+		catch (error) {  
+		  	console.error('Error occurred:', error);
+		} 
+	};
 
 
 	return (
@@ -576,9 +577,11 @@ function Operations() {
 							setIsViewProfile={ setIsViewProfile } 
 							setExpenseId={ setExpenseId }
 							setIsViewBill = { setIsViewBill }
+							isFilteredData={ isFilteredData }
                 	        setIsFilteredData={setIsFilteredData}
                 	        setFilteredPageNo={setFilteredPageNo}
                 	        pageNo={pageNo}
+							filteredPageNo={ filteredPageNo }
                 	        setTotalPages={setTotalPages}
                 	        filterToggle={filterToggle}
                 	    />

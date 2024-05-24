@@ -662,9 +662,11 @@ function AshramIncome() {
                     <AshramIncomeTable
 						setUserId={ setUserId }
 						setIsViewProfile={ setIsViewProfile } 
+						isFilteredData={ isFilteredData }
                         setIsFilteredData={setIsFilteredData}
                         setFilteredPageNo={setFilteredPageNo}
                         pageNo={pageNo}
+						filteredPageNo={ filteredPageNo }
                         setTotalPages={setTotalPages}
                         filterToggle={filterToggle}
                     />

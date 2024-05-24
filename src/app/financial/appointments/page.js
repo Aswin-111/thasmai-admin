@@ -6,6 +6,7 @@ import { useNavbarTextStore } from "../../state/navbar-state";
 import NavLink from '../navlink/navlink';
 import FilterChip from "./filterChips";
 import AppointmentsTable from "@/app/components/financial/appointments/AppointmentsTable";
+import ProfileView from "@/app/components/users/profileView";
 import axios from 'axios';
 import Image from "next/image";
 import data from "./data.json"
@@ -613,9 +614,11 @@ function Appointments() {
                     <AppointmentsTable
 						setUserId={ setUserId }
 						setIsViewProfile={ setIsViewProfile } 
+						isFilteredData={ isFilteredData }
                         setIsFilteredData={setIsFilteredData}
                         setFilteredPageNo={setFilteredPageNo}
                         pageNo={pageNo}
+						filteredPageNo={ filteredPageNo }
                         setTotalPages={setTotalPages}
                         filterToggle={filterToggle}
                     />

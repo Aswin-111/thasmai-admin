@@ -877,10 +877,12 @@ function Donation() {
                 <div className="w-full h-[85%] m-0 p-0 overflow-scroll">
                     <DonationTable
 						setUserId={ setUserId }
-						setIsViewProfile={ setIsViewProfile } 
+						setIsViewProfile={ setIsViewProfile }
+						isFilteredData={ isFilteredData } 
                         setIsFilteredData={setIsFilteredData}
                         setFilteredPageNo={setFilteredPageNo}
                         pageNo={pageNo}
+						filteredPageNo={ filteredPageNo }
                         setTotalPages={setTotalPages}
                         filterToggle={filterToggle}
                     />
