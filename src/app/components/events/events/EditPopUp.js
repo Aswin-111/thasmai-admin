@@ -91,7 +91,7 @@ const handleSubmit = async (e) => {
         console.log(response);
         // alert(response.data.message);
         toast.success(response.data.message);
-        window.location = "/users/eventdetails";
+        window.location = "/admin/events/events";
         
       } catch (error) {
         console.error('Error uploading event:', error);

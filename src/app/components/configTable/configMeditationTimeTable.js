@@ -1,7 +1,8 @@
 "use client"
 
 import React, { useState } from 'react'
-import { RiEditLine } from "react-icons/ri";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { MdOutlineEdit } from "react-icons/md";
 
 
 function MeditationTimeConfigTable({ dummyData }) {
@@ -9,80 +10,64 @@ function MeditationTimeConfigTable({ dummyData }) {
   const [editableId, setEditableId] = useState(null);
 
   return (
-    <div className="w-full overflow-scroll h-[90%]">
-      <table className="table rounded-3xl">
+    <div className="w-full mt-10 overflow-scroll h-[90%]">
+      <p className='text-black font-medium mt-4'>Meditation Time & Video Details By Country</p>
+      <table className="table rounded-3xl mt-4">
         <thead
-          className="w-full h-[50px] bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]"
+          className="w-full h-[50px] bg-[#005DB8] text-white sticky top-0 gap-x-20 text-[0.9rem]"
           style={{ borderRadius: "11px" }}
         >
           <tr className="rounded-3xl">
-            <th className="text-center w-[10%]">Id</th>
-            <th className="text-center w-[30%]">User Name</th>
-            <th className="text-center w-[25%]">Morning Time</th>
-            <th className="text-center w-[25%]">Evening Time</th>
-            <th className="text-center w-[10%]">Edit</th>
+            <th className="text-left w-[10%]">Sl.No.</th>
+            <th className="text-left w-[30%]">Country</th>
+            <th className="text-left w-[25%]">General Video</th>
+            <th className="text-left w-[25%]">Morning Meditation</th>
+            <th className="text-left w-[10%]">Morning Video</th>
+            <th className="text-left w-[25%]">Evening Meditation</th>
+            <th className="text-left w-[10%]">Evening Video</th>
+            <th className="text-left w-[25%]">Edit</th>
+            <th className="text-left w-[25%]">Delete</th>
+
+
 
           </tr>
         </thead>
-        <tbody className="my-10">
+        <tbody className="my-10 font-medium text-xs  border-b-2 border-[#C1C6D4]">
           
-          {
-            dummyData.map((data, index) => {
-              return (
-                <tr className="font-semibold text-[0.8rem] text-black my-10 ">
-                  <td className="text-center ps-5">{data.id}</td>
-                  <td className="text-center text-indigo-600">
-                    {data.name}
-                  </td>
-                  <td className="text-center">
-                    {
-                      editableId === data.id ? (
-                        <input 
-                          className="w-full h-[35px] border-none bg-[#D9D9D9] rounded" 
-                          type="text"
-                          placeholder={data.morningTime} 
-                        />
-                      ) : (
-                        data.morningTime
-                      )
-                    }
-                  </td>
-                  <td className="text-center">
-                    {
-                      editableId === data.id ? (
-                        <input 
-                          className="w-full h-[35px] border-none bg-[#D9D9D9] rounded" 
-                          type="text"
-                          placeholder={data.eveningTime} 
-                        />
-                      ) : (
-                        data.eveningTime
-                      )
-                    }
-                  </td>
-                  <td className="text-center">
-                    {
-                      editableId === data.id ? (
-                        <button 
-                          className="w-[60px] h-[35px] bg-green-500 text-white rounded-xl flex justify-center items-center"
-                          onClick={() => setEditableId(null)}
-                        >Save</button>
-                      ) : (
-                        <button 
-                          className="w-[60px] h-[35px] bg-[#66A2FA] text-xl text-white rounded-xl flex justify-center items-center"
-                          onClick={() => setEditableId(data.id)}
-                        >
-                          <RiEditLine />
-                        </button>
-                      )
-                    }
-                    
-                  </td>            
-                </tr>
-              )
-            })
-          }
+         <tr className='font-medium text-xs  border-b-2 border-[#C1C6D4]'>
+          <td>1</td>
+          <td>India</td>
+          <td>https://www.y...</td>
+          <td>06:00 AM to 07:00 AM </td>
+          <td>https://www.y...</td>
+          <td>06:00 AM to 07:00 AM </td>
+          <td>https://www.y...</td> 
+          <td><RiDeleteBin6Line className='text-2xl cursor-pointer hover:text-red-500'/></td>
+          <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/></td>
+        </tr>
         
+        <tr className='font-medium text-xs  border-b-2 border-[#C1C6D4]'>
+          <td>1</td>
+          <td>India</td>
+          <td>https://www.y...</td>
+          <td>06:00 AM to 07:00 AM </td>
+          <td>https://www.y...</td>
+          <td>06:00 AM to 07:00 AM </td>
+          <td>https://www.y...</td> 
+          <td><RiDeleteBin6Line className='text-2xl cursor-pointer hover:text-red-500'/></td>
+          <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/></td>
+        </tr>
+        <tr className='font-medium text-xs  border-b-2 border-[#C1C6D4]'>
+          <td>1</td>
+          <td>India</td>
+          <td>https://www.y...</td>
+          <td>06:00 AM to 07:00 AM </td>
+          <td>https://www.y...</td>
+          <td>06:00 AM to 07:00 AM </td>
+          <td>https://www.y...</td> 
+          <td><RiDeleteBin6Line className='text-2xl cursor-pointer hover:text-red-500'/></td>
+          <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/></td>
+        </tr>
               
 
 

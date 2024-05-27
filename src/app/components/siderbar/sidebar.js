@@ -158,9 +158,9 @@ function SideBar() {
                 <Link href="/configuration/financial">
                   <li className={`${pathname.startsWith('/configuration') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Configuration Parameters</li>
                 </Link>
-                <Link href="/logging">
+                {/* <Link href="/logging">
                   <li className={`${pathname.startsWith('/logging') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Logging / Error Handling</li>
-                </Link>
+                </Link> */}
                 <Link href="/support">
                   <li className={`${pathname.startsWith('/support') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Support & Contact</li>
                 </Link>

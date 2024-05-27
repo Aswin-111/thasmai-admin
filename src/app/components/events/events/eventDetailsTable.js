@@ -85,7 +85,7 @@ function EventDetailsTable(props) {
               </td>
               <td className="text-center" title="Delete event">
                 <button onClick={() => {
-                  props.setEventId(event.id);
+                  props.setEventId(event.id); 
                   props.setIsDeleteEvent(true);
                 }}>
                   <RiDeleteBin6Fill className='text-2xl text-red-600 hover:text-red-700 hover:bg-slate-200 hover:scale-110'/>

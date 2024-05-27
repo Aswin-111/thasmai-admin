@@ -467,7 +467,7 @@ function AddEventPopUp(props) {
     }
   };
 
-
+ 
   return (
     <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
       <div className='w-[1000px] h-[550px] bg-[#D9D9D9] rounded'>

@@ -240,7 +240,7 @@ function ExpenseReports() {
 			console.log(response);
 			
 			if (response.status === 200) {
-				alert("Data exported successfully");
+				toast.success("Data exported successfully");
 				const url = window.URL.createObjectURL(new Blob([response.data]));
 				const a = document.createElement('a');
 				a.href = url;
@@ -252,9 +252,9 @@ function ExpenseReports() {
 		} catch (error) {
 			console.error('Error fetching data:', error);
 			if (error.response && error.response.status === 404) {
-				alert("No member found for the specified criteria");
+				toast("No member found for the specified criteria");
 			} else {
-				alert("An error occurred while exporting data");
+				toast.error("An error occurred while exporting data");
 			}
 		}
 	}

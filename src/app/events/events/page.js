@@ -13,7 +13,7 @@ import DeleteEventPopUp from '@/app/components/events/events/DeleteEventPopUp'
 import { useEventFilterStore } from "./filterstate";
 import {toast} from 'react-hot-toast';
 import FilterChip from "./filterchips";
-import axios from 'axios';
+import axios from 'axios'; 
 
 
 
