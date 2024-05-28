@@ -5,7 +5,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineEdit } from "react-icons/md";
 
 
-function MeditationTimeConfigTable({ dummyData }) {
+function MeditationTimeConfigTable(props) {
 
   const [editableId, setEditableId] = useState(null);
 
@@ -26,7 +26,6 @@ function MeditationTimeConfigTable({ dummyData }) {
             <th className="text-left w-[25%]">Evening Meditation</th>
             <th className="text-left w-[10%]">Evening Video</th>
             <th className="text-left w-[25%]">Edit</th>
-            <th className="text-left w-[25%]">Delete</th>
 
 
 
@@ -42,8 +41,11 @@ function MeditationTimeConfigTable({ dummyData }) {
           <td>https://www.y...</td>
           <td>06:00 AM to 07:00 AM </td>
           <td>https://www.y...</td> 
-          <td><RiDeleteBin6Line className='text-2xl cursor-pointer hover:text-red-500'/></td>
-          <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/></td>
+          <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'
+                onClick={() => {
+                  props.setEditMeditationTimePopUp(true)
+                  }}
+          /></td>
         </tr>
         
         <tr className='font-medium text-xs  border-b-2 border-[#C1C6D4]'>
@@ -54,7 +56,6 @@ function MeditationTimeConfigTable({ dummyData }) {
           <td>https://www.y...</td>
           <td>06:00 AM to 07:00 AM </td>
           <td>https://www.y...</td> 
-          <td><RiDeleteBin6Line className='text-2xl cursor-pointer hover:text-red-500'/></td>
           <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/></td>
         </tr>
         <tr className='font-medium text-xs  border-b-2 border-[#C1C6D4]'>
@@ -65,7 +66,6 @@ function MeditationTimeConfigTable({ dummyData }) {
           <td>https://www.y...</td>
           <td>06:00 AM to 07:00 AM </td>
           <td>https://www.y...</td> 
-          <td><RiDeleteBin6Line className='text-2xl cursor-pointer hover:text-red-500'/></td>
           <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/></td>
         </tr>
               

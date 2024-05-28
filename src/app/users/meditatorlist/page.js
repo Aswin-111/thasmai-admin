@@ -19,6 +19,7 @@ import data from "./data.json";
  
 function MeditatorList() {
  
+    const [pageRows, setPageRows] = useState(10);
     const [pageNo, setPageNo] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
 	const [filteredPageNo, setFilteredPageNo] = useState(1);
@@ -27,6 +28,7 @@ function MeditatorList() {
 	const [isSearchedData, setIsSearchedData] = useState(false);
 	const [filterToggle, setFilterToggle] = useState(false);
     const [fetchToggle, setFetchToggle] = useState(false);
+    const [tableRowToggle, setTableRowToggle] = useState(false);
  
 	const [userId, setUserId] = useState(null);
 	const [isViewProfile, setIsViewProfile] = useState(false);
@@ -107,7 +109,7 @@ function MeditatorList() {
         } else {
             setFilteredPageNo(prevPageNo => {
                 const newPageNo = prevPageNo - 1;
-                handleSearch(newPageNo);
+                handleSearch(newPageNo, pageRows);
                 return newPageNo;
             });
         }
@@ -119,16 +121,32 @@ function MeditatorList() {
         } else {
             setFilteredPageNo(prevPageNo => {
                 const newPageNo = prevPageNo + 1;
-                handleSearch(newPageNo);
+                handleSearch(newPageNo, pageRows);
                 return newPageNo;
             });
+        }
+    };
+ 
+    function handleChangeRow(event) {
+ 
+        const newRow = event.target.value;
+        if(!isFilteredData && !isSearchedData) {
+            setPageRows(newRow);
+            setTableRowToggle(!tableRowToggle);
+            return;
+        } else if(!isSearchedData && isFilteredData) {
+            setPageRows(newRow);
+            handleClickFind(1, newRow);
+        } else if(!isFilteredData && isSearchedData) {
+            setPageRows(newRow);
+            handleSearch(1, newRow);
         }
     };
  
  
  
     //handleClick to filter list
-    async function handleClickFind (newPageNo) {
+    async function handleClickFind (newPageNo, newRow) {
         try {
             const config = {
                 "DOJ" : "DOJ",
@@ -157,8 +175,8 @@ function MeditatorList() {
                 const operator = i.operator.toLowerCase();
                 const value = ( i.field.toLowerCase() ==="first name" || 
                                 i.field.toLowerCase() ==="second name" ||
-                                i.field.toLowerCase() ==="second name" ||
-                                i.field.toLowerCase() ==="second name") ? `${i.value}%` : i.value;
+                                i.field.toLowerCase() ==="phone" ||
+                                i.field.toLowerCase() ==="email") ? `${i.value}%` : i.value;
                 console.log(field,value,operator);
  
                 if(field.includes("DOJ") && operator === "between") {
@@ -184,7 +202,7 @@ function MeditatorList() {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/execute-query`, {
                 queryConditions : filteredData,
                 page : newPageNo,
-                // pageSize : 10
+                pageSize : newRow ? newRow : pageRows,
             });
             //undo
             console.log(response,"sdfghnbg");
@@ -201,17 +219,19 @@ function MeditatorList() {
  
     //handleSearch to quickly search meditators
  
-    async function handleSearch() {
+    async function handleSearch(page, newRow) {
+        const rows = newRow ? newRow : pageRows;
+        const searchPage = page ? page : 1
         try {
             console.log(searchRef.current.value)
             console.log(textRef.current.value)
  
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/searchfield?field=${searchRef.current.value}&value=${textRef.current.value}`);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/searchfield?field=${searchRef.current.value}&value=${textRef.current.value}&page=${searchPage}&limit=${rows}`);
             console.log(response);
             filterState.setMeditatorsData(response.data.data); 
             setIsSearchedData(true);
             setIsFilteredData(false);
-			// setTotalPages(response.data.totalPages);
+			setTotalPages(response.data.pagination.totalPages);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -912,7 +932,7 @@ function MeditatorList() {
               	        className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" 
               	        onClick={() => { 
               	            console.log('clicked');
-              	            handleClickFind(1);
+              	            handleClickFind(1, pageRows);
               	        }}
               	    >
               	        Find
@@ -979,13 +999,19 @@ function MeditatorList() {
                                 src="/admin/search.png" 
                                 alt="search icon" 
                                 className="w-8 h-8 ms-3 cursor-pointer hover:scale-105"
-                                onClick={handleSearch}
+                                onClick={() => {
+                                    handleSearch(1, pageRows);
+                                }}
                             />
                         </div>
                     </div>
                     <div className="w-[20%]">
-                        <select name="" id=""
+                        <select name="newRow" id=""
                             className="px-2 w-20 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
+                            onChange={(event) => {
+                                // console.log(e.target.value);
+                                handleChangeRow(event);
+                            }}
                         >
                             <option value="" selected disabled>Rows</option>
                             <option value="10">10</option>
@@ -1042,8 +1068,10 @@ function MeditatorList() {
                         pageNo={ pageNo }
 						filteredPageNo={ filteredPageNo }
                         setTotalPages={setTotalPages}
+                        pageRows={pageRows}
                         filterToggle={filterToggle}
                         fetchToggle={fetchToggle}
+                        tableRowToggle={tableRowToggle}
                     />
                	</div>
  

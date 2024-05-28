@@ -19,7 +19,7 @@ function RegPageConfiguration() {
       <div className="w-[60%] flex items-center justify-between ">
         <NavLink />
       </div>
-      <div className='w-[50%]'>
+      <div className='w-[80%]'>
         <NavLinkApp />
       </div>
       <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md'>

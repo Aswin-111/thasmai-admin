@@ -15,11 +15,12 @@ function MeditatorListTable(props) {
     useEffect(() => {
  
         const pageNo = props.pageNo;
+        const pageRows = props.pageRows;
  
         const fetchData = async () => {
  
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-meditators?page=${pageNo}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-meditators?page=${pageNo}&limit=${pageRows}`);
  
                 filterState.setMeditatorsData(response.data.users);
                 filterState.setCouponCount(response.data.totalCoupons)
@@ -33,10 +34,14 @@ function MeditatorListTable(props) {
                 console.error('Error fetching data:', error);
                 toast.error("Error fetching data.");
             }
+ 
+            return () => {
+                return;
+            }
         };
  
         fetchData();
-    }, [props.pageNo, props.filterToggle, props.fetchToggle]);
+    }, [props.pageNo, props.filterToggle, props.fetchToggle, props.tableRowToggle]);
  
  
     return (

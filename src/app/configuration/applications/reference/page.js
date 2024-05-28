@@ -18,7 +18,7 @@ function RefQuestionConfiguration() {
       <div className="w-[60%] flex items-center justify-between ">
         <NavLink />
       </div>
-      <div className='w-[50%]'>
+      <div className='w-[80%]'>
         <NavLinkApp />
       </div>
 
