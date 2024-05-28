@@ -43,20 +43,24 @@ function AppointmentsTable({filterToggle}) {
 
 
   async function handleCheckInClick(id, status) {
+    const dateTime = `${moment().format('DD/MM/YYYY')}`;
+    const formattedCheckinDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
+    console.log(formattedCheckinDate);
     const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${id}`,{
       appointment_status : status,
-      appointmentDate: `${moment().format('DD/MM/YYYY')}`
-      
+      appointmentDate: formattedCheckinDate
     })
     fetchData();
   }
 
 
   async function handleCheckOutClick(id, status){
-
+    const dateTime = `${moment().format('DD/MM/YYYY')}`;
+    const formattedCheckoutDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
+    console.log(formattedCheckoutDate);
      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${id}`,{
       appointment_status : status,
-      check_out: `${moment().format('DD/MM/YYYY')}`
+      check_out: formattedCheckoutDate
     })
     fetchData()
   }

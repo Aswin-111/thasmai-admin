@@ -297,20 +297,20 @@ function AshramAppointments() {
               if(filterState.operatorValue === "between") {
                 let startDate = startDateRef.current.value;
                 startDate = startDate.split("-");
-                startDate = `${startDate[2]}/${startDate[1]}/${startDate[0]}`;
+                startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
 
                 let endDate = endDateRef.current.value;
                 endDate = endDate.split("-");
-                endDate = `${endDate[2]}/${endDate[1]}/${endDate[0]}`;
+                endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
 
                 console.log(startDate, endDate);
                 
-                filterState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}-${endDate}`, logicaloperator:
+                filterState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}/${endDate}`, logicaloperator:
               'and'})
               } else if(filterState.FieldValue.includes("Date") && filterState.operatorValue === "equal to") {
                 let date = dataRef.current.value;
                 date = date.split("-");
-                date = `${date[2]}/${date[1]}/${date[0]}`;
+                date = `${date[0]}-${date[1]}-${date[2]}`;
                 
                 filterState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : `${date}`, logicaloperator:
                 'and'})
@@ -328,19 +328,19 @@ function AshramAppointments() {
               if(filterState.operatorValue === "between") {
                 let startDate = startDateRef.current.value;
                 startDate = startDate.split("-");
-                startDate = `${startDate[2]}/${startDate[1]}/${startDate[0]}`;
+                startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
               
                 let endDate = endDateRef.current.value;
                 endDate = endDate.split("-");
-                endDate = `${endDate[2]}/${endDate[1]}/${endDate[0]}`;
+                endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
               
                 console.log(startDate, endDate);
 
-                filterState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}-${endDate}`, logicaloperator:'or'})
+                filterState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}/${endDate}`, logicaloperator:'or'})
               } else if(filterState.FieldValue.includes("Date") && filterState.operatorValue === "equal to") {
                 let date = dataRef.current.value;
                 date = date.split("-");
-                date = `${date[2]}/${date[1]}/${date[0]}`;
+                date = `${date[0]}-${date[1]}-${date[2]}`;
 
                 filterState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : `${date}`, logicaloperator:'or'})
               } else {

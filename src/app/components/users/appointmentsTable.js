@@ -26,28 +26,39 @@ useEffect(()=>{
  
 },[count])
  
-  async function handleSubmitClick(UId, coupon ,id){
-    try {
- 
-      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/discount/${UId}`,{ coupon:coupon, 
-      id:id
-      });
-      console.log(response);
-      // console.log("successfully updated");
-      toast.success("Reward given successfully");
-      setCount(current => current += 1);
-      window.location.reload();
+  async function handleSubmitClick(UId, coupon ,id, userCoupons) {
+  
+    if (userCoupons === "" || userCoupons === null || userCoupons === 0) {
+
+      toast("No coupons available to give discount.");
       return;
+
+    } else {
+
+      try {
  
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    toast.error(error);
-    return;
+        const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/discount/${UId}`,{ 
+          coupon: coupon, 
+          id: id
+        });
+        console.log(response);
+        // console.log("successfully updated");
+        toast.success("Reward given successfully");
+        setCount(current => current += 1);
+        window.location.reload();
+        return;
+   
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          toast.error("Error while giving discount");
+          return;
+        }
+
+    }
+
   }
- 
- 
- 
-  }
+
+
   return (
     
       <table className="table rounded-3xl">
@@ -130,7 +141,10 @@ useEffect(()=>{
                       <input 
                         type="number"
                         onChange={
-                          (e)=>setdisc(e.target.value)
+                          (e)=> {
+                            e.preventDefault();
+                            setdisc(e.target.value);
+                          }
                         }
                         className="w-[6rem] py-1 bg-white text-black rounded placeholder:text-[.7rem] border-black border-[1px]  text-center"
                         placeholder="C.amount"
@@ -151,21 +165,21 @@ useEffect(()=>{
                   {
                     appoint.appointment_status === "Checked Out" ? (
                       <button className=" px-5 py-1 text-white rounded bg-[#10b981] hover:scale-105" 
-                        onClick={() => {
-                          handleSubmitClick(appoint.UId, disc, appoint.id)
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleSubmitClick(appoint.UId, disc, appoint.id, appoint.userCoupons)
                         }}
                       >Submit</button>
                     ) : (
-                      <button className=" px-5 py-1 text-[#a7f3d0] rounded bg-[#6ee7b7]" 
-                      disabled
+                      <button 
+                        className=" px-5 py-1 text-[#a7f3d0] rounded bg-[#6ee7b7]" 
+                        disabled
                       >Submit</button>
                     )
                   }
                   
                 </td>
- 
- 
- 
+
  
               </tr>
             );

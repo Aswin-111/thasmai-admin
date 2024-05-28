@@ -359,24 +359,24 @@ function AshramAppointments() {
 
           <div className='w-[15%]  flex'>
 
-            <button className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" onClick={(e)=>{
+          <button className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" onClick={(e)=>{
               if(feedbackState.operatorValue === "between") {
                   let startDate = startDateRef.current.value;
                   startDate = startDate.split("-");
-                  startDate = `${startDate[2]}/${startDate[1]}/${startDate[0]}`;
+                  startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
 
                   let endDate = endDateRef.current.value;
                   endDate = endDate.split("-");
-                  endDate = `${endDate[2]}/${endDate[1]}/${endDate[0]}`;
+                  endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
 
                   console.log(startDate, endDate);
 
-                  feedbackState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}-${endDate}`, logicaloperator:
+                  feedbackState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}/${endDate}`, logicaloperator:
                   'and'})
                 } else if(feedbackState.FieldValue.includes("Date") && feedbackState.operatorValue === "equal to") {
                   let date = dataRef.current.value;
                   date = date.split("-");
-                  date = `${date[2]}/${date[1]}/${date[0]}`;
+                  date = `${date[0]}-${date[1]}-${date[2]}`;
 
                   feedbackState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value, value : `${date}`, logicaloperator:
                   'and'})
@@ -394,19 +394,19 @@ function AshramAppointments() {
                 if(feedbackState.operatorValue === "between") {
                   let startDate = startDateRef.current.value;
                   startDate = startDate.split("-");
-                  startDate = `${startDate[2]}/${startDate[1]}/${startDate[0]}`;
+                  startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
 
                   let endDate = endDateRef.current.value;
                   endDate = endDate.split("-");
-                  endDate = `${endDate[2]}/${endDate[1]}/${endDate[0]}`;
+                  endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
 
                   console.log(startDate, endDate);
 
-                  feedbackState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}-${endDate}`, logicaloperator:'or'})
+                  feedbackState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}/${endDate}`, logicaloperator:'or'})
                 } else if(feedbackState.FieldValue.includes("Date") && feedbackState.operatorValue === "equal to") {
                   let date = dataRef.current.value;
                   date = date.split("-");
-                  date = `${date[2]}/${date[1]}/${date[0]}`;
+                  date = `${date[0]}-${date[1]}-${date[2]}`;
 
                   feedbackState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : `${date}`, logicaloperator:'or'})
                 } else {
