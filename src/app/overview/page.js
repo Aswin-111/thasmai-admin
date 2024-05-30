@@ -81,7 +81,7 @@ export default function Overview(){
 
 
                 <div className="w-full h-[250px] md:w-[40%] md:h-full bg-white rounded-xl shadow-md py-2 ps-4 pe-3">
-                    <Link href="/users/eventdetails" className="w-full">
+                    <Link href="/events/events" className="w-full">
                         <h3 className="h-[15%] font-bold text-black">Recent Messages</h3>
                     </Link>
                     <CarouselDefault/>

@@ -10,7 +10,7 @@ function Playlist(props) {
     
     
     <div>
-           <div className='w-full h-15 bg-[#495F85] flex'>
+           <div className='w-full h-15 mt-8 bg-[#495F85] flex'>
                <div className='w-[60%] h-full p-2 flex text-white'>
                  <img src="/admin/thasmai-logo.png" className="h-11" />
                     <div className='ps-2 flex justify-center items-center'>

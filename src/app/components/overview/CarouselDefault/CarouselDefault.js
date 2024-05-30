@@ -42,7 +42,7 @@ export default function CarouselDefault() {
             events[0] && 
 			events.map((i, index) => {
 				return (
-          <Link href="/users/eventdetails" className="w-full h-full">
+          <Link href="/events/events" className="w-full h-full">
 
 					<div className="h-full flex justify-center items-center bg-blue-gray-100">
             			<div className="w-[35%] h-full flex justify-end items-center pe-5">
