@@ -32,7 +32,7 @@ function ViewBroadcastMessage(props) {
 
                             {/* Message Details */}
 
-        <div className='w-[750px] h-[600px] bg-white'>
+        <div className='w-full md:w-[750px] min-h-[90vh] md:min-h-0 md:h-[600px] bg-white'>
             <div className='w-full h-[10%] px-8 bg-[#005DB8] text-white flex items-center'>
                 <p className='font-medium text-xl'>Broadcast sent : {messageData.title}</p>
             </div>

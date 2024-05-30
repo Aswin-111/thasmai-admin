@@ -95,15 +95,15 @@ function Broadcast() {
 	}
 
  	return (
-    	<div className="w-full h-[85vh] px-7">
-    		<div className="w-[25%] h-[6%] mb-2">
+    	<div className="w-full h-[85vh] md:px-7 overflow-y-auto">
+    		<div className="w-full h-[6%] mb-2">
     			<NavLink />
     		</div>
-    		<div className='w-full h-[90%] drop-shadow-xl bg-white flex p-4 py-10'>
-				<div className='w-[50%] h-full'>
+    		<div className='w-full min-h-[90vh] md:min-h-0 md:h-[90%] p-4 py-10 drop-shadow-xl bg-white flex flex-col md:flex-row overflow-y-scroll'>
+				<div className='w-full md:w-[50%] h-96 md:h-full mb-10 md:mb-0'>
 					<div className='h-[10%] w-full'>
 					    <select
-           			    	className='w-[50%] h-12 ps-2 bg-white text-black border-[1.5px] border-black rounded placeholder:text-gray-500'
+           			    	className='w-full md:w-[50%] h-12 ps-2 text-sm md:text-md bg-white text-black border-[1.5px] border-black rounded placeholder:text-gray-500'
 							name="receiver"
 							value={message.receiver}
 							onChange={handleOnChange}
@@ -116,7 +116,7 @@ function Broadcast() {
 					<div className='w-full h-[70%] mt-5 flex flex-col border-[1.5px] bg-white text-black border-black rounded'>
 						<input 
 						   type='text'
-						   className='w-full h-[20%] ps-2 text-xl bg-white text-black rounded-t outline-none focus:outline-none placeholder:text-gray-500'
+						   className='w-full h-[20%] ps-2 text-lg md:text-xl bg-white text-black rounded-t outline-none focus:outline-none placeholder:text-gray-500'
 						   placeholder='Message Title'
 						   name="title"
 						   value={message.title}
@@ -124,7 +124,7 @@ function Broadcast() {
 						/>   
 						<textarea
 							placeholder='Write a message...'
-							className='w-full h-[80%] mt-2 ps-2 pt-2 bg-white text-black rounded-b outline-none focus:outline-none placeholder:text-gray-500'
+							className='w-full h-[80%] mt-2 ps-2 pt-2 text-md bg-white text-black rounded-b outline-none focus:outline-none placeholder:text-gray-500'
 							name="body"
 						    value={message.body}
 						    onChange={handleOnChange}
@@ -132,13 +132,13 @@ function Broadcast() {
 					</div>
 					<div className="w-full h-[20%] pt-5">
 						<button 
-							className= 'w-full h-12 bg-[#005db8] text-white rounded-xl hover:bg-[#005cb8e2] drop-shadow-xl'
+							className= 'w-full h-10 md:h-12 bg-[#005db8] text-white rounded-xl hover:bg-[#005cb8e2] drop-shadow-xl'
 							onClick={handleSendMessage}
 						>Send</button>
 					</div>
 				</div>
 
-				<div className='w-[50%] h-full p-2 ps-4'>
+				<div className='w-full md:w-[50%] md:h-full md:p-2 md:ps-4'>
 					<div className='w-full h-12 p-3 bg-[#005DB8] text-white text-xl font-medium'>Sent items</div>
 					<BroadcastMessageTable 
 						setselectedMessageId={setselectedMessageId}

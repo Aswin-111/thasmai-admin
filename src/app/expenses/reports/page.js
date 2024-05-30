@@ -263,19 +263,19 @@ function ExpenseReports() {
 
   	return (
 
-    	<div className="w-full h-[85vh] px-7 overflow-y-auto">
+    	<div className="w-full h-[85vh] md:px-7 overflow-y-auto">
       		<div className="w-full sticky top-0">
         		<NavLink />
       		</div>
 
-      		<div className='w-full h-[93%] mt-2 p-4 bg-white rounded shadow drop-shadow-md '>
+      		<div className='w-full min-h-[90vh] md:min-h-0 md:h-[93%] mt-2 p-4 bg-white rounded shadow drop-shadow-md '>
         
-				<div className="w-full h-8 flex justify-between">
+				<div className="w-full md:h-8 flex flex-col md:flex-row justify-between">
 
-					<div className='w-[65%] flex'>
+					<div className='w-full md:w-[65%] flex flex-wrap md:flex-nowrap justify-evenly md:justify-normal'>
 
   						<select ref = {fieldRef}
-							className="px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]"
+							className="px-2 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]"
 							onChange={(e) => {
 							  handleFieldChange(e);
 							}}
@@ -302,7 +302,7 @@ function ExpenseReports() {
 						{
               				filterState.FieldValue === "" && 
 
-              				<select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+              				<select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
               				  disabled  
               				>
               				  <option disabled selected>
@@ -314,7 +314,7 @@ function ExpenseReports() {
             			{
             			  filterState.FieldValue === "Expense Type" && 
 						
-            			  <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+            			  <select className="m-0 md:ms-3 px-2 w-36 md:40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
             			    ref = {operatorRef}
             			    onChange={e => {
 								filterState.setOperatorValue(e.target.value)
@@ -339,7 +339,7 @@ function ExpenseReports() {
             			{
             			  filterState.FieldValue === "Amount" && 
 						
-            			  <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+            			  <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
             			    ref = {operatorRef}
             			    onChange={e => {
 								filterState.setOperatorValue(e.target.value)
@@ -363,7 +363,7 @@ function ExpenseReports() {
 						{
             			  filterState.FieldValue === "Expense Date" && 
 						
-            			  <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+            			  <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
             			    ref = {operatorRef}
             			    onChange={e => {
 								filterState.setOperatorValue(e.target.value)
@@ -389,8 +389,8 @@ function ExpenseReports() {
   						{
 							(filterState.FieldValue.length === 0 || filterState.operatorValue === "")  && 
 							<>
-								<div className='ms-3 w-40 h-8 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
-								<div className='ms-3 w-40 h-8 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
 							</>
   						}
 
@@ -400,16 +400,16 @@ function ExpenseReports() {
 								<input
 									type="text"
 									placeholder="Value" ref = {dataRef}
-									className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+									className="placeholder:text-black m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
 								/>
-								<div className='ms-3 w-40 h-8 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
 							</>
   						}
 
 						{
 							( filterState.FieldValue  === "Expense Type" && filterState.operatorValue === "equal to" ) &&
 							<>
-								<select className='ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
+								<select className='m-0 md:ms-3 px-2 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px]focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
 									<option disabled selected value="" > Choose field </option>
 								  	{
 										filterState.expenseTypeValues.map((i, index) => {
@@ -417,7 +417,7 @@ function ExpenseReports() {
 										}) 
 								    }
 								</select>
-								<div className='ms-3 w-40 h-8 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
 							</>
   						}
 
@@ -427,23 +427,23 @@ function ExpenseReports() {
 								<input
 									type="text"
 									placeholder="Value" ref = {dataRef}
-									className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+									className="placeholder:text-black m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
 								/>
-								<input type="text" disabled className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100' />
+								<input type="text" disabled className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100' />
 								</>
   						}
 
   						{
 							( filterState.FieldValue === "Expense Date" && filterState.operatorValue === "equal to") && 
 							<>
-							  <input type="date" ref = {dataRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-							  <input type="date" disabled className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100' />
+							  <input type="date" ref = {dataRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+							  <input type="date" disabled className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100' />
 							</>  
   						}
   						{   ( filterState.FieldValue === "Expense Date" && filterState.operatorValue === "between") && 
 							  <>
-							  	<input type="date" ref={startDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-							  	<input type="date" ref={endDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+							  	<input type="date" ref={startDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+							  	<input type="date" ref={endDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
 							  </>
   						}
 
@@ -452,7 +452,7 @@ function ExpenseReports() {
 
   						{/* ---------------------------AND / OR button------------------------ */}
 
-					<div className='w-[15%]  flex'>
+					<div className='w-full md:w-[15%]  flex'>
 					  	<button 
 							className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" 
 							onClick={(e)=>{
@@ -549,9 +549,9 @@ function ExpenseReports() {
 				  
 							  {/* --------------Find button---------------- */}
 				  
-					<div className='w-[20%] h-full text-right flex items-center justify-between'>   
+					<div className='w-full md:w-[20%] h-full text-right flex items-center justify-end md:justify-between'>   
 					  	<button 
-							className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" 
+							className="px-6 h-8 me-2 md:me-0 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" 
 							onClick={() => {
 								console.log('clicked');
 								handleSearch()
@@ -575,7 +575,7 @@ function ExpenseReports() {
 
 				                            {/* -------- Filterchip div ----------- */}
 
-        		<div className="w-full h-[10%] my-2 py-2 px-2 bg-[#005DB8] overflow-y-auto shadow flex flex-wrap items-center snap-mandatory snap-y">
+        		<div className="w-full min-h-20 md:min-h-0 md:h-[10%] my-2 py-2 px-2 bg-[#005DB8] overflow-y-auto shadow flex flex-wrap items-center snap-mandatory snap-y">
 
         		  { 
         		    filterState.filters[0] ? (
@@ -591,7 +591,7 @@ function ExpenseReports() {
         		        )
         		      })
         		    ) : (
-        		      <p className="ms-3 text-[#94a3b8] font-light">No filters applied</p>
+        		      <p className="ms-3 text-[#94a3b8] font-light text-sm md:text-md">No filters applied</p>
         		    )
 				
         		  }
@@ -605,7 +605,7 @@ function ExpenseReports() {
         		<div className='w-full h-[80%] mt-2'>
 
 					<div className="w-full h-[5%] m-0 mb-1 p-2 flex flex-row-reverse">
-						<div className='w-[40%] flex justify-between items-center font-medium'>
+						<div className='w-full md:w-[40%] flex justify-between items-center text-[12px] md:text-base font-medium'>
           				  	<p>Expense Amount: 3000</p>
           				  	<p>Received Amount: 5000</p>
           				</div>
@@ -617,13 +617,13 @@ function ExpenseReports() {
 					</div>
 
 
-					<div className="w-full h-[10%] px-2 flex justify-between items-center">
+					<div className="w-full md:h-[10%] px-2 flex justify-between items-center">
 						<div>
 							{
 								!isFilteredData ? (
-									<p className="text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
+									<p className="text-[12px] md:text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
 								) : (
-									<p className="text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
+									<p className="text-[12px] md:text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
 								)
 							}
 						</div>
@@ -631,22 +631,22 @@ function ExpenseReports() {
 							!isFilteredData ? (
 								<div>
 									<button
-										className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+										className="w-20 md:w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
 										onClick={ handlePreviousPage }
 									>Previous</button>
 									<button
-										className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+										className="w-20 md:w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
 										onClick={ handleNextPage }
 									>Next</button>
 								</div>
 							) : (
 								<div>
 									<button
-										className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+										className="w-20 md:w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
 										onClick={ handleFilteredPreviousPage }
 									>Previous</button>
 									<button
-										className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+										className="w-20 md:w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
 										onClick={ handleFilteredNextPage }
 									>Next</button>
 								</div>

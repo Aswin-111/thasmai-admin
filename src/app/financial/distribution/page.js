@@ -14,16 +14,18 @@ import axios from "axios";
 
 function Distribution() {
 
-    
-
-
+	const [pageRows, setPageRows] = useState(10);
   	const [pageNo, setPageNo] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
 	const [filteredPageNo, setFilteredPageNo] = useState(1);
 	const [isFilteredData, setIsFilteredData] = useState(false);
+	const [searchedPageNo, setSearchedPageNo] = useState(1);
+	const [isSearchedData, setIsSearchedData] = useState(false);
 	const [filterToggle, setFilterToggle] = useState(false);
 	const [userId, setUserId] = useState(null);
 	const [isViewProfile, setIsViewProfile] = useState(false);
+	const [tableRowToggle, setTableRowToggle] = useState(false);
+
 
 	// console.log(pageNo, totalPages, filteredPageNo);
 
@@ -32,6 +34,9 @@ function Distribution() {
   	const dataRef = useRef("")
   	const startDateRef = useRef()
   	const endDateRef = useRef()
+
+	const searchRef = useRef()
+	const textRef = useRef()
   
 
     const filterState = useDistributionFilterStore((state) => {
@@ -94,7 +99,49 @@ function Distribution() {
         }
     };
 
-    async function handleSearch (newPageNo) {
+	function handleSearchedPreviousPage() {
+        if(filteredPageNo <= 1) {
+            return;
+        } else {
+            setFilteredPageNo(prevPageNo => {
+                const newPageNo = prevPageNo - 1;
+                handleSearch(newPageNo, pageRows);
+                return newPageNo;
+            });
+        }
+    };
+ 
+    function handleSearchedNextPage() {
+        if(filteredPageNo >= totalPages ) {
+            return;
+        } else {
+            setFilteredPageNo(prevPageNo => {
+                const newPageNo = prevPageNo + 1;
+                handleSearch(newPageNo, pageRows);
+                return newPageNo;
+            });
+        }
+    };
+
+	function handleChangeRow(event) {
+ 
+        const newRow = event.target.value;
+        if(!isFilteredData && !isSearchedData) {
+            setPageRows(newRow);
+            setTableRowToggle(!tableRowToggle);
+            return;
+        } else if(!isSearchedData && isFilteredData) {
+            setPageRows(newRow);
+            handleClickFind(1, newRow);
+        } else if(!isFilteredData && isSearchedData) {
+            setPageRows(newRow);
+            handleSearch(1, newRow);
+        }
+    };
+
+	//filtering users
+
+    async function handleClickFind (newPageNo, newRow) {
 		try {
 		  	const config = {
 				"DOJ" : "DOJ",
@@ -146,18 +193,41 @@ function Distribution() {
 		  
 		  	const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/financial-query`, {
 				queryConditions: filteredData, 
-				page : newPageNo , 
+				page : newPageNo,
+				pageSize: newRow,
 		  	})
 		  	//undo
 		  	console.log(response,"sdfghnbg");
 	
 		  	filterState.setUsersData(response.data.results);
+			setIsSearchedData(false);
 			setIsFilteredData(true);
 			setTotalPages(response.data.totalPages);
 		}
 		catch (error) {  
 		  	console.error('Error occurred:', error);
 		} 
+	};
+
+
+	//handleSearch to quickly search meditators
+
+	async function handleSearch(page, newRow) {
+		const rows = newRow ? newRow : pageRows;
+		const searchPage = page ? page : 1
+		try {
+			console.log(searchRef.current.value);
+			console.log(textRef.current.value);
+	
+			const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/search?field=${searchRef.current.value}&value=${textRef.current.value}&page=${searchPage}&limit=${rows}`);
+			console.log(response);
+			filterState.setUsersData(response.data.data); 
+			setIsSearchedData(true);
+			setIsFilteredData(false);
+			setTotalPages(response.data.pagination.totalPages);
+		} catch (error) {
+			console.error('Error fetching data:', error);
+		}
 	};
   
 	
@@ -802,7 +872,7 @@ function Distribution() {
               	        onClick={() => { 
               	            console.log('clicked');
 							setPageNo(1);
-              	            handleSearch(1);
+							handleClickFind(1, pageRows);
               	        }}
               	    >
               	        Find
@@ -815,7 +885,7 @@ function Distribution() {
 
                                     {/* ------------------Fiterchips div ------------------- */}
 
-          	<div className="w-full h-[10%] bg-[#005DB8] overflow-y-auto shadow my-5 flex flex-wrap items-center snap-mandatory snap-y py-2 px-2">
+          	<div className="w-full h-[10%] my-3 p-2 bg-[#005DB8] overflow-y-auto shadow  flex flex-wrap items-center snap-mandatory snap-y">
 
                 { 
                   	filterState.filters[0] ? (
@@ -830,10 +900,75 @@ function Distribution() {
                   	)
                 }
 
-            </div>
+            </div> 
 
             <div className='w-full h-[80%] mt-2'>
-                <div className="w-full h-[85%] m-0 p-0 overflow-scroll">
+
+
+                {/* -----search bar------- */}
+                <div className="w-full h-[10%] flex items-center">
+ 
+                    <div className="w-[40%] h-full flex items-center">
+                        <select 
+                            ref = {searchRef}
+                            className="px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
+                        >
+                            <option disabled selected>
+                              Choose option
+                            </option>
+                            <option value="DOJ">Date Of Joining</option>
+                            <option value="firstName">First Name</option>
+                            <option value="secondName">Second Name</option>
+                            <option value="UId">User Id</option>
+							<option value="total_distributed_coupons">Distributed coupon</option>
+                            <option value="coupons">Available Coupons</option>
+                            <option value="Level">Level</option>
+                            <option value="node_number">Node</option>
+							<option value="Status">Status</option>
+ 
+                        </select>
+ 
+                        <input
+                    	    type="text"
+                    	    placeholder="Value" ref = {textRef}
+                    	    className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-[#EEEAEA] text-black px-4  focus:outline-none rounded"
+                    	/>
+ 
+                        <div className="h-full flex items-center">
+                            <img 
+                                src="/admin/search.png" 
+                                alt="search icon" 
+                                className="w-8 h-8 ms-3 cursor-pointer hover:scale-105"
+                                onClick={() => {
+									setPageNo(1);
+                                    handleSearch(1, pageRows);
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className="w-[20%]">
+                        <select name="newRow" id=""
+                            className="px-2 w-20 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
+                            onChange={(event) => {
+                                // console.log(e.target.value);
+                                handleChangeRow(event);
+                            }}
+                        >
+                            <option value="" selected disabled>Rows</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                    <div className="w-[40%] flex items-center justify-between">
+                        
+ 
+                    
+                    </div>
+                </div>
+
+
+                <div className="w-full h-[80%] m-0 p-0 overflow-scroll">
                     <DistributionTable 
 						setUserId={ setUserId }
 						setIsViewProfile={ setIsViewProfile }
@@ -844,45 +979,71 @@ function Distribution() {
 						filteredPageNo={ filteredPageNo }
                         setTotalPages={setTotalPages}
                         filterToggle={filterToggle}
+						isSearchedData={isSearchedData}
+                        setIsSearchedData={setIsSearchedData}
+                        setSearchedPageNo={setSearchedPageNo}
+						pageRows={pageRows}
+                        tableRowToggle={tableRowToggle}
                     />
                	</div>
 
 
               	<div className="w-full h-[10%] px-2 flex justify-between items-center border-t-[1px] border-[#005DB8]">
                    <div>
-                      {
-                        !isFilteredData ? (
-                          <p className="text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
-                        ) : (
-                          <p className="text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
-                        )
-                      }
+                      	{
+                      	  ( !isFilteredData && !isSearchedData ) &&
+                      	    <p className="text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
+                      	}
+						{
+                        	(!isSearchedData && isFilteredData) &&
+							<p className="text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
+						}
+						{
+                        	(!isFilteredData && isSearchedData) &&
+							<p className="text-sm text-gray-500">Page { searchedPageNo } of { totalPages }</p>
+						}
                     </div>
 
                     {
-                          !isFilteredData ? (
+                        ( !isFilteredData && !isSearchedData ) &&
                             <div>
-                                   <button
-                                     className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
-                                     onClick={ handlePreviousPage }
-                                   >Previous</button>
-                                   <button
-                                     className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
-                                     onClick={ handleNextPage }
-                                   >Next</button>
+                                <button
+                                    className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
+                                    onClick={ handlePreviousPage }
+                                >Previous</button>
+                                <button
+                                    className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+                                    onClick={ handleNextPage }
+                                >Next</button>
                             </div>
-                          ) : (
+                    } 
+ 
+                    {
+                        (!isSearchedData && isFilteredData) &&
                             <div>
-                                   <button
-                                     className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
-                                     onClick={ handleFilteredPreviousPage }
-                                   >Previous</button>
-                                   <button
-                                     className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
-                                     onClick={ handleFilteredNextPage }
-                                   >Next</button>
+                                <button
+                                    className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
+                                    onClick={ handleFilteredPreviousPage }
+                                >Previous</button>
+                                <button
+                                    className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+                                    onClick={ handleFilteredNextPage }
+                                >Next</button>
                             </div>
-                          )
+                    }
+ 
+                    {
+                        (!isFilteredData && isSearchedData) &&
+                            <div>
+                                <button
+                                    className="w-24 h-8 text-sm bg-[#005DB8] text-white rounded-xl"
+                                    onClick={ handleSearchedPreviousPage }
+                                >Previous</button>
+                                <button
+                                    className="w-24 h-8 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+                                    onClick={ handleSearchedNextPage }
+                                >Next</button>
+                            </div>
                     }
               	</div>
           	</div>

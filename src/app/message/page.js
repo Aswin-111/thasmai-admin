@@ -1,21 +1,23 @@
 "use client"
+
 import { React, useEffect } from "react"
 import { useRouter } from 'next/navigation'
 
 
 
-export default function Users() {
-    
+function Message() {
     const router = useRouter()
     useEffect(() => {
-      router.push('/configuration/financial')
+      router.push('/message/test-global')
     
       return () => {
         return;
       }
     }, [])
 
-    return (
-        <></>
-    )
+  return (
+    <div></div>
+  )
 }
+
+export default Message

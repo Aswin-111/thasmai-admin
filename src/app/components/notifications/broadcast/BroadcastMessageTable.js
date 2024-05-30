@@ -50,7 +50,7 @@ function BroadcastMessageTable(props) {
             <div className='w-full h-[90%] overflow-scroll'>
                 <table className='w-full'>
                     <thead className='w-full sticky top-0'>
-                        <tr className='h-12 text-left bg-[#005DB8] text-white'>
+                        <tr className='h-12 text-left text-[14px] md:text-sm bg-[#005DB8] text-white'>
                             <th className='ps-2'>Date</th>
                             <th className='ps-2'>Message</th>
                             <th className='ps-2 text-center'>View</th>
@@ -60,7 +60,7 @@ function BroadcastMessageTable(props) {
                         {
                             broadcastMessages.map((i, index) => {
                                 return (
-                                    <tr className='h-12 border-[#E0E2EC] border-b-2' key={index}>
+                                    <tr className='h-12 text-[12px] md:text-xs border-[#E0E2EC] border-b-2' key={index}>
                                         <td className='ps-2'>{i.Date}</td>
                                         <td className='ps-2'>{i.title}</td>
                                         <td className='ps-2 text-center'>
@@ -90,11 +90,11 @@ function BroadcastMessageTable(props) {
             			
             	<div>
             	  <button
-            	    className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+            	    className="w-20 md:w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
             	    onClick={ handlePreviousPage }
             	  >Previous</button>
             	  <button
-            	    className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+            	    className="w-20 md:w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
             	    onClick={ handleNextPage }
             	  >Next</button>
             	</div>

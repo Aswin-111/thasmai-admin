@@ -133,8 +133,8 @@ function SideBar() {
                 <Link href="/appointments/appointments">
                   <li className={`${pathname.startsWith('/appointments') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Appointments</li>
                 </Link>
-                <Link href="/feedback/meditationFeedback">
-                  <li className={`${pathname.starts/('feedback') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Feedback Views</li>
+                <Link href="/feedback/feedbacks">
+                  <li className={`${pathname.startsWith('/feedback') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Feedback Views</li>
                 </Link>
                 <Link href="/message/test-global">
                   <li className={`${pathname.startsWith('/message') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Message</li>
@@ -168,7 +168,8 @@ function SideBar() {
               </>
             ) }
 
-                {role === 'operator' && (
+                {
+                (role === 'operator' || role === "Operator") && (
             
               <>
               <Link href="/overview">
@@ -177,7 +178,7 @@ function SideBar() {
               <Link href="/appointments/appointments">
                   <li className={`${pathname.startsWith('/appointments') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Appointments</li>
               </Link>
-              <Link href="/feedback/appointmentFeedback">
+              <Link href="/feedback/feedbacks">
                 <li className={`${pathname.startsWith('/feedback') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Feedback Views</li>
               </Link>
               <Link href="/notifications/notifications">

@@ -200,7 +200,7 @@ function AddExpense() {
             <div className="w-full sticky top-0">
                 <NavLink />
             </div>
-            <div className='w-full h-[95%] mt-2 p-4 bg-white rounded shadow drop-shadow-md overflow-y-auto'>
+            <div className='w-full h-[95%] mt-2 p-1 pb-6 md:p-4 bg-white rounded shadow drop-shadow-md overflow-y-auto'>
                 <div className='w-full md:h-[85%] px-2 md:px-16 py-6 md:flex '>
 
                     <div className='w-full md:w-[60%] flex flex-col'>
@@ -264,7 +264,7 @@ function AddExpense() {
                     </div>
                 </div>
 
-                <div className='w-full md:h-[15%] md:ps-16'>
+                <div className='w-full md:h-[15%] px-2 md:ps-16'>
                     <div className='w-full md:w-[60%] h-full'>
                         <button className='w-full md:w-[90%] h-12 bg-[#005DB8] text-white rounded-2xl' onClick={handleSubmit}>Create Expense</button>
                     </div>

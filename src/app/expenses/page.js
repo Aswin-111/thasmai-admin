@@ -1,10 +1,19 @@
 "use client"
-import React from 'react'
+import { React, useEffect } from "react"
+import { useRouter } from 'next/navigation'
 
 function Expenses() {
-  	return (
-    	<div className="w-full h-[85vh] px-7 overflow-y-auto">
-			Expense
+	const router = useRouter()
+	useEffect(() => {
+	  router.push('/expenses/add-expense')
+	
+	  return () => {
+		return;
+	  }
+	}, [])
+	return (
+    	<div >
+			
 		</div>
   	)
 }

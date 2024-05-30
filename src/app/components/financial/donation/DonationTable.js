@@ -15,14 +15,18 @@ function DonationTable(props) {
     useEffect(() => {
 
         const fetchData = async () => {
+            const pageNo = props.pageNo;
+        	const pageRows = props.pageRows;
         
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-donation?page=${props.pageNo}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-donation?page=${pageNo}&pageSize=${pageRows}`);
                     
                 filterState.setUsersData(response.data.users);
                 props.setTotalPages(response.data.totalPages);
                 props.setIsFilteredData(false);
+                props.setIsSearchedData(false);
                 props.setFilteredPageNo(1);
+                props.setSearchedPageNo(1);
                 console.log(response);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -31,7 +35,7 @@ function DonationTable(props) {
         };
     
         fetchData();
-    }, [props.pageNo, props.filterToggle]);
+    }, [props.pageNo, props.filterToggle, props.tableRowToggle]);
   
     return (
     

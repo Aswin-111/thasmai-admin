@@ -72,7 +72,6 @@
 // }
 
 // export default page
-
 "use client"
 import { useEffect, useState } from 'react';
 import React from 'react';
@@ -102,13 +101,28 @@ function Page() {
     }));
   };
 
+  const convertTo12HourFormat = (time24) => {
+    const [hours, minutes] = time24.split(':');
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const hours12 = hours % 12 || 12;
+    return `${hours12}:${minutes} ${period}`;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if any required field is empty
+    if (!formData.zoomdate || !formData.zoomStartTime || !formData.zoomStopTime || !formData.zoomLink) {
+      toast.error('Please fill all the required fields.');
+      return;
+    }
 
     // Format the date to YYYY-MM-DD
     const formattedData = {
       ...formData,
-      zoomdate: new Date(formData.zoomdate).toISOString().split('T')[0]
+      zoomdate: new Date(formData.zoomdate).toISOString().split('T')[0],
+      zoomStartTime: convertTo12HourFormat(formData.zoomStartTime),
+      zoomStopTime: convertTo12HourFormat(formData.zoomStopTime)
     };
 
     try {
@@ -118,7 +132,6 @@ function Page() {
         }
       });
 
-      
       setFormData({
         zoomdate: '',
         zoomStartTime: '',
@@ -126,11 +139,9 @@ function Page() {
         zoomLink: ''
       });
 
-      
       toast.success(response.data.message);
       console.log(response.data);
     } catch (error) {
-      
       toast.error('Failed to add meeting. Please try again.');
       console.error('Error:', error);
     }

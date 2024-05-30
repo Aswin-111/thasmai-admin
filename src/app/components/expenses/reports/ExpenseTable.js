@@ -5,9 +5,9 @@ import React from 'react'
 function ExpenseTable(props) {
         // console.log(props.expenseData);
   return (
-            <table className='w-full'>
+            <table className='min-w-full md:w-full'>
                 <thead className="sticky top-0">
-                    <tr className='h-12 text-left bg-[#005DB8] text-white'>
+                    <tr className='min-w-full h-12 text-[10px] md:text-sm text-left bg-[#005DB8] text-white'>
                         <th className='ps-2'>Date</th>
                         <th className='ps-2'>Expense Type</th>
                         <th className='ps-2'>Amount</th>
@@ -22,7 +22,7 @@ function ExpenseTable(props) {
                         props.expenseData[0] ? (
                             props.expenseData.map((i,index) => { 
                                 return (
-                                    <tr className='h-12 text-black border-[#E0E2EC] border-b-2' key={index}>
+                                    <tr className='h-12 text-[10px] md:text-xs text-black border-[#E0E2EC] border-b-2' key={index}>
                                         <td className='ps-2'>{i.Expense_Date}</td>
                                         <td className='ps-2'>{i.expenseType}</td>
                                         <td className='ps-2'>₹ {i.amount}</td>
@@ -49,7 +49,7 @@ function ExpenseTable(props) {
                                                     ) 
                                             }
                                             <p 
-                                                className="ms-1 text-blue-500 text-sm hover:scale-110 cursor-pointer"
+                                                className="ms-1 text-blue-500 text-[10px] md:text-sm hover:scale-110 cursor-pointer"
                                                 onClick={() => {
                                                     props.setSelectedId(i.id);
                                                     props.setIsViewDetail(true);
@@ -84,8 +84,8 @@ function ExpenseTable(props) {
 
                         ) : (
 
-                            <tr className='h-12 border-[#E0E2EC] border-b-2'>
-                                <td className='ps-2'>No Data to Display</td>
+                            <tr className='h-12 text-[10px] md:text-base border-[#E0E2EC] border-b-2'>
+                                <td className='w-48 ps-2'>No Data to Display</td>
                                 <td className='ps-2'></td>
                                 <td className='ps-2'></td>
                                 <td className='ps-2 text-center'></td>

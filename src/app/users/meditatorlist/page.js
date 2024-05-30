@@ -968,7 +968,7 @@ function MeditatorList() {
             <div className='w-full h-[80%] mt-2'>
  
                 {/* -----search bar------- */}
-                <div className="w-full h-[10%] flex items-center">
+                <div className="w-full h-[10%] flex items-center"> 
  
                     <div className="w-[40%] h-full flex items-center">
                         <select 
@@ -1072,7 +1072,7 @@ function MeditatorList() {
                         filterToggle={filterToggle}
                         fetchToggle={fetchToggle}
                         tableRowToggle={tableRowToggle}
-                    />
+                    /> 
                	</div>
  
  

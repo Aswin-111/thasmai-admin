@@ -142,12 +142,12 @@ function Notifications() {
 	
   
   	return (
-    	<div className="w-full h-[85vh] px-7">
-    		<div className="w-[25%] h-[6%] mb-2">
+    	<div className="w-full h-[85vh] md:px-7 overflow-y-auto">
+    		<div className="w-full h-[6%] mb-2">
     			<NavLink />
     		</div>
-    		<div className='w-full h-[90%] drop-shadow-xl bg-white flex p-4'>
-				<div className='w-[50%] h-full'>
+    		<div className='w-full min-h-[90vh] md:min-h-0 md:h-[90%] p-4 pb-10 md:pb-10 drop-shadow-xl bg-white flex flex-col md:flex-row overflow-y-auto'>
+				<div className='w-full md:w-[50%] h-96 md:h-full order-last md:order-first'>
 					{/* <div className='h-[25%] w-full bg-[#005cb81f] rounded'> */}
 					<div className="h-[25%] w-full mb-2 py-2 px-2 bg-[#005cb81f] rounded overflow-y-auto shadow  flex flex-wrap snap-mandatory snap-y ">
 
@@ -194,10 +194,10 @@ function Notifications() {
 					</div>
 				</div>
 
-				<div className='w-[50%] h-full px-2 ps-4'>
+				<div className='w-full md:w-[50%] h-full md:px-2 md:ps-4'>
 						{/* ---------------Search Tab --------------*/}
 
-					<div className='w-full h-[10%] flex'>
+					<div className='w-full h-10 md:h-[10%] flex'>
             			<input 
             			 	type='search'
             			 	className='w-[80%] h-full px-2 text-black bg-[#716f6f1f] rounded-l outline-none'
