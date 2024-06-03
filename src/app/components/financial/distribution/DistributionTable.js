@@ -21,7 +21,7 @@ function DistributionTable(props) {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-users?page=${pageNo}&pageSize=${pageRows}`);
                     
                 filterState.setUsersData(response.data.users);
-                props.setTotalPages(response.data.totalPages);
+                props.setTotalPages(response.data.totalPages); 
                 props.setIsFilteredData(false);
                 props.setIsSearchedData(false);
                 props.setFilteredPageNo(1);

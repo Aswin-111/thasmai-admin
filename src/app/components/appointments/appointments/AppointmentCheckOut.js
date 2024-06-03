@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast'
 import axios  from 'axios';
  
  
-function AppointmentCheckOut() {
+function AppointmentCheckOut(props) {
  
  
     // const appointmentState = useAppointStore((state) => {
@@ -76,8 +76,22 @@ function AppointmentCheckOut() {
  
             try {
                 const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${filterState.id}`, formData);
+                
+                // window.location.reload();
+                if(!props.isFilteredData){
+                    // return;
+                // window.location.reload();
+                props.setFilterToggle(!props.filterToggle)
+                filterState.setPaymentToggle(false, undefined);
+
+
+                } else {
+                    props.handleSearch(props.filteredPageNo)
+                    filterState.setPaymentToggle(false, undefined);
+                    
+                }
                 toast.success("Payment updated successfully!")
-                window.location.reload();
+
             } catch (error) {
                 // console.error('Error uploading payment:', error);
                 toast.error("Error while uploading payment details.");
@@ -149,7 +163,7 @@ function AppointmentCheckOut() {
                                 className="h-[35px] ps-3 rounded-[6px] outline-black bg-white text-black border-black border-[1px]" 
                                 type="number" 
                                 name="payment"
-                                placeholder='₹ 0000'
+                                placeholder='Enter amount'
                                 ref={paymentAmountRef}
  
 
@@ -163,11 +177,11 @@ function AppointmentCheckOut() {
                         </div>
                         <div className='flex pt-4'>
                             <p className='w-[50%] text-black'>Reward/Discount received</p>
-                            <p>: ₹ {data.discount ? data.discount : "0"}</p>
+                            <p>: Rs. {data.discount ? data.discount : "0"}</p>
                         </div>
                         <div className='flex pt-4'>
                             <p className='w-[50%] font-semibold text-black'>Total payment</p>
-                            <p>: ₹ { finalPayment}
+                            <p>: Rs. { finalPayment}
                             </p>
                         </div>  
                         <div className='flex pt-4'>
@@ -210,7 +224,7 @@ function AppointmentCheckOut() {
                         paymentClickHandler(String((Number(paymentAmountRef.current.value) - discount)), paymentMethodRef.current.value, "Completed", date)
                     }}
                 >
-                    Payment of ₹ { String((Number(paymentAmountRef.current.value) - discount)).startsWith('-') ? "" : String((Number(paymentAmountRef.current.value) - discount)) }
+                    Payment of Rs. { String((Number(paymentAmountRef.current.value) - discount)).startsWith('-') ? "" : String((Number(paymentAmountRef.current.value) - discount)) }
                 </button>
  
             </div>

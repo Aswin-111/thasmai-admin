@@ -38,14 +38,14 @@ function Login() {
   			if (userData.role === 'operator'){
 			
   			 
-			  return router.push('/overview');
+				return location.href ='/admin/overview'
 
 			
   			}
 		
   			 else if (userData.role === 'admin') {
 			
-			  return router.push('/overview');
+				return location.href ='/admin/overview'
 
 			
   			}

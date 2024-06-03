@@ -547,7 +547,7 @@ function Distribution() {
                     	    )
                     	}
 
-                    	{
+                    	{ 
                     	    (filterState.fieldValue === "DOJ" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>

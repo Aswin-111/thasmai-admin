@@ -12,7 +12,7 @@ import moment from 'moment'
 
 
 
-function AppointFeedbackTable( {filterToggle}) {
+function AppointFeedbackTable( props) {
 
   const feedbackState = useAppointFeedbackStore((state) => {
     return state;
@@ -27,14 +27,19 @@ function AppointFeedbackTable( {filterToggle}) {
       return;
     }
     
-  }, [filterToggle])
+  }, [props.filterToggle,props.pageNo,])
 
   async function fetchData() {
    try {
-    
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);
+    console.log(props.pageNo);
 
-    console.log(response.data.appointments);
+    
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment?page=${props.pageNo}`);
+
+    console.log(response);
+    props.setTotalPages(response.data.totalPages)
+    props.setIsFilteredData(false)
+    props.setFilteredPageNo(1)
 
     const data = response.data.appointments;
     const filteredData = data.filter((i) => {

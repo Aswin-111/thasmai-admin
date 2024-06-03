@@ -9,14 +9,14 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
     const [profile, setProfile] = useState({});
     const [meditationDetails, setMeditationDetails] = useState({})
     const [bankDetails, setBankDetails] = useState({})
-    
-    
-  
     const [profilePic,setProfilePic] = useState("")
+    const [paymentDetails,setPaymentDetails] = useState([])
 
     const [isProfile, setIsProfile] = useState(true);
     const [isMeditation, setIsMeditation] = useState(false);
     const [isBank, setIsBank] = useState(false);
+    const [isPayment, setIsPayment] = useState(false);
+    
 
 
 
@@ -38,6 +38,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
         setProfilePic(response.data.profilePic)
         setMeditationDetails(response.data.meditationData)
         setBankDetails(response.data.bankDetails)
+        setPaymentDetails(response.data.transactions)
         console.log(response.data);
         // console.log(`${process.env.NEXT_PUBLIC_API_URL}`)
         return;
@@ -61,107 +62,6 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
 
 
 
-
-        {/* <div className='bg-white w-[30%] border-blue-900 border-b-2'>
-          <div className='w-full h-[60%] bg-[#4b90f8] flex items-center justify-center'>
-          <img className='rounded-full h-[180px] w-[180px] border-4 object-cover' src={profile.profilePicUrl? `${profile.profilePicUrl}` : "/profile_dummy.jpeg"} alt='Profile photo' />
-               sometimes need to paste " data:image/png;base64, " infront of base64 code
-          </div>
-          <div className='w-full h-[40%] text-blue-950 text-center pt-5'>
-            <h1 className='text-xl font-bold'>{`${profile.first_name}  ${profile.last_name}`}</h1>
-            <p className='text-xl'>ID: {profile.UId}</p>
-            <br/>
-            <p className='text-md'>+91 {profile.phone}</p>
-           
-            <p className='text-md'>
-              <a href="mailto: `{profile.email}`">
-              {profile.email}
-              </a>
-            </p>
-
-
-          </div>
-        </div>
-
-        <div className='bg-white w-[70%] h-full p-5 border-blue-900 border-b-2'>
-          <div className='w-full flex'>
-            <p className='text-xl font-semibold text-blue-900'>Meditator Profile</p>
-            <button 
-              className='h-8 w-8 bg-blue-200 text-2xl relative left-[385px] bottom-[5px] hover:bg-blue-700 hover:text-white' 
-              onClick=  {() => {setViewProfile(false)}}
-            >x</button>
-          </div>
-
-          <div className='w-full h-[93%] mx-auto pt-2 border-blue-900 border-t-4 overflow-y-auto'>
-            <div className='mb-3'>
-                <div className='font-bold  text-blue-900'>User Id</div>
-                    <div>{profile.UId}</div>
-            </div>
-            <div className='mb-3'>
-               <div className='font-bold  text-blue-900'>Date of Joining</div>
-               <div>{profile.DOJ}</div>
-            </div>
-            <div className='mb-3'>
-              <div className='font-bold text-blue-900'>Date of Birth</div>
-              <div>{profile.DOB}</div>
-            </div>
-            <div className='mb-3'>
-              <div className='font-bold text-blue-900'>Email</div>
-              <div>{profile.email}</div>
-            </div>
-            
-                  <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Phone number</div>
-                       <div>{profile.phone}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Address</div>
-                       <div>{profile.address}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Pin Code</div>
-                       <div>{profile.pincode}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>District</div>
-                       <div>{profile.district}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>State</div>
-                       <div>{profile.state}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Country</div>
-                       <div>{profile.country}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Reference</div>
-                       <div>{profile.reference}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Languages</div>
-                       <div>{profile.languages}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Classes Attended</div>
-                       <div>{profile.classAttended}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Meditation Cycle</div>
-                       <div>{profile.cycle}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Meditation Days</div>
-                       <div>{profile.day}</div>
-                   </div>
-                   <div className='mb-3'>
-                       <div className='font-bold  text-blue-900'>Session NO</div>
-                       <div>{profile.session_num}</div>
-                   </div>
-                   
-                   
-          </div>
-        </div> */}
 
         <div className='w-[30%] h-full p-2 shadow-lg'>
           <div className='w-full h-[50%] flex justify-center items-center bg-[#E0E2EC]'>
@@ -189,6 +89,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                       setIsMeditation(false);
                       setIsBank(false);
                       setIsProfile(true);
+                      setIsPayment(false);
                     }}
                 >Profile</button>
                 <button 
@@ -201,10 +102,24 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                       setIsProfile(false);
                       setIsBank(false);
                       setIsMeditation(true);
+                      setIsPayment(false);
                     }}
                 >Meditation</button>
                 <button 
                     className={isBank ? 
+                        ('w-36 h-8 me-2 bg-[#005db8] text-white rounded-[8px] hover:scale-105')
+                         : 
+                        ('w-36 h-8 me-2 bg-[#e0e2ec]  hover:scale-105 rounded-[8px]') 
+                    }
+                    onClick={() => {
+                      setIsProfile(false);
+                      setIsMeditation(false);
+                      setIsBank(true);
+                      setIsPayment(false);
+                    }}
+                >Bank</button>
+                <button 
+                    className={isPayment ? 
                         ('w-36 h-8 bg-[#005db8] text-white rounded-[8px] hover:scale-105')
                          : 
                         ('w-36 h-8 bg-[#e0e2ec]  hover:scale-105 rounded-[8px]') 
@@ -212,9 +127,10 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                     onClick={() => {
                       setIsProfile(false);
                       setIsMeditation(false);
-                      setIsBank(true);
+                      setIsBank(false);
+                      setIsPayment(true);
                     }}
-                >Bank</button>
+                >Payment</button>
           </div>
 
           
@@ -379,6 +295,95 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
               </>
             
             }
+
+            {/* {
+              isPayment && 
+                <>
+                <div className='w-[50%] h-full'>
+                <table className='w-full text-black'>
+                  <tbody>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>UId</td>
+                      <td className='w-[65%] text-left'>: {paymentDetails.UId}</td>
+                    </tr>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>Phone No.</td>
+                      <td className='w-[65%] text-left'>: {profile.phone}</td>
+                    </tr>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>Email</td>
+                      <td className='w-[65%] text-left'>: {profile.email}</td>
+                    </tr>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>DOB</td>
+                      <td className='w-[65%] text-left'>: {profile.DOB}</td>
+                    </tr>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>Gender</td>
+                      <td className='w-[65%] text-left'>: {profile.gender}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <div className='w-[50%] h-full'>
+              <table className='w-full'>
+                  <tbody>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>Card No.</td>
+                      <td className='w-[65%] text-left'>: {profile.UId}</td>
+                    </tr>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>Address</td>
+                      <td className='w-[65%] text-left'>: {profile.address}</td>
+                    </tr>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>District</td>
+                      <td className='w-[65%] text-left'>: {profile.district}</td>
+                    </tr>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>State</td>
+                      <td className='w-[65%] text-left'>: {profile.state}</td>
+                    </tr>
+                    <tr className='h-[40px]'>
+                      <td className='w-[35%] text-left'>PIN</td>
+                      <td className='w-[65%] text-left'>: {profile.pincode}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              </>
+            
+            } */}
+
+
+{
+  isPayment && 
+  <div className='w-[100%] h-full overflow-y-auto'>
+    <table className='w-full text-black'>
+      <thead>
+        <tr className='h-[40px]'>
+          <th className='w-[20%] text-left'>UID</th>
+          <th className='w-[20%] text-left'>Amount</th>
+          <th className='w-[30%] text-left'>Payment Date</th>
+          <th className='w-[20%] text-left'>Payment Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {paymentDetails.map((payment, index) => (
+          <tr key={index} className='h-[40px]'>
+            <td className='text-left'>{payment.UId}</td>
+            <td className='text-left'>{payment.amount}</td>
+            <td className='text-left'>{payment.payment_date}</td>
+            <td className='text-left'>{payment.payment_time}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+}
+
 
 
             

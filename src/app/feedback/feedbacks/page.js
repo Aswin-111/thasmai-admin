@@ -15,6 +15,12 @@ function AshramAppointments() {
 
   const [filterToggle,setFilterToggle] = useState(false);
 
+  
+  const [pageNo, setPageNo] = useState(1);
+	const [totalPages, setTotalPages] = useState();
+	const [filteredPageNo, setFilteredPageNo] = useState(1);
+	const [isFilteredData, setIsFilteredData] = useState(false);
+
   const fieldRef = useRef("")
   const operatorRef = useRef("")
   const dataRef = useRef("")
@@ -25,9 +31,9 @@ function AshramAppointments() {
         return state;
     });
 
-    useEffect(()=>{console.log('hi',feedbackState.FieldValue);feedbackState.setFieldText(feedbackState.FieldValue)},[])
-  useEffect(()=>{feedbackState.setFieldText(feedbackState.FieldValue)},[feedbackState.FieldValue])  
-
+  //   useEffect(()=>{console.log('hi',feedbackState.FieldValue);feedbackState.setFieldText(feedbackState.FieldValue)},[])
+  // useEffect(()=>{feedbackState.setFieldText(feedbackState.FieldValue)},[feedbackState.FieldValue])  
+    // console.log(pageNo);
   const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Feedback views");
   
@@ -38,8 +44,49 @@ function AshramAppointments() {
     feedbackState.setOperatorValue("");
   }
 
+    
+	function handlePreviousPage() {
+    if(pageNo <= 1) {
+        return;
+    } else {
+        setPageNo(prevValue => prevValue - 1);
+    }
+};
 
-  async function handleSearch () {
+function handleNextPage() {
+    if(pageNo >= totalPages ) {
+        return;
+    } else {
+        setPageNo(prevValue => prevValue + 1);
+    }
+};
+
+function handleFilteredPreviousPage() {
+    if(filteredPageNo <= 1) {
+        return;
+    } else {
+        setFilteredPageNo(prevPageNo => {
+    const newPageNo = prevPageNo - 1;
+    handleSearch(newPageNo);
+    return newPageNo;
+  });
+    }
+};
+
+function handleFilteredNextPage() {
+    if(filteredPageNo >= totalPages ) {
+        return;
+    } else {
+        setFilteredPageNo(prevPageNo => {
+    const newPageNo = prevPageNo + 1;
+    handleSearch(newPageNo);
+    return newPageNo;
+  });
+    }
+};
+
+
+  async function handleSearch (page) {
     try {
       const config = {
         "Appointment Id": "id",
@@ -86,10 +133,12 @@ function AshramAppointments() {
       console.log(filteredData);   
       
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/appointment-query`, {
-        queryConditions: filteredData, page :1, pageSize: 10
+        queryConditions: filteredData, page :page, pageSize: 10
       })
       //undo
       console.log(response,"sdfghnbg");
+      setIsFilteredData(true)
+      setTotalPages(response.data.totalPages)
 
       const data = response.data.results;
       const dataFiltered = data.filter((i) => {
@@ -455,21 +504,53 @@ function AshramAppointments() {
 
 
         <div className='w-full h-[80%] mt-2'>
-          	<AppointFeedbackTable  filterToggle={filterToggle}/>
+          	<AppointFeedbackTable  
+              filterToggle={filterToggle}
+              pageNo={pageNo} 
+              setTotalPages={setTotalPages} 
+              setIsFilteredData={setIsFilteredData}
+              isFilteredData={isFilteredData}
+              filteredPageNo={filteredPageNo}
+              setFilteredPageNo={setFilteredPageNo}
+            />
 
-		  	<div className="w-full h-[10%] px-2 flex justify-between items-center">
-			  	<p className="text-sm text-gray-500">Page 1 of 1</p>
-		  		<div>
-					<button
-						className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
-						// onClick={ handlePreviousPage }
-					>Previous</button>
-					<button
-						className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
-						// onClick={ handleNextPage }
-					>Next</button>
-				</div>
-          	</div>
+            <div className="w-full md:h-[10%] px-2 flex justify-between items-center">
+						<div>
+							{
+								!isFilteredData ? (
+									<p className="text-[12px] md:text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
+								) : (
+									<p className="text-[12px] md:text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
+								)
+							}
+						</div>
+						{
+							!isFilteredData ? (
+								<div>
+									<button
+										className="w-20 md:w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+										onClick={ handlePreviousPage }
+									>Previous</button>
+									<button
+										className="w-20 md:w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+										onClick={ handleNextPage }
+									>Next</button>
+								</div>
+							) : (
+								<div>
+									<button
+										className="w-20 md:w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+										onClick={ handleFilteredPreviousPage }
+									>Previous</button>
+									<button
+										className="w-20 md:w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+										onClick={ handleFilteredNextPage }
+									>Next</button>
+								</div>
+							)
+						}
+					
+					</div>
         </div>
       
 

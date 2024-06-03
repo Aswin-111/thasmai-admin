@@ -17,12 +17,19 @@ function AshramAppointments() {
 
   const [filterToggle, setFilterToggle] = useState(false);
 
+  const [pageNo, setPageNo] = useState(1);
+	const [totalPages, setTotalPages] = useState();
+	const [filteredPageNo, setFilteredPageNo] = useState(1);
+	const [isFilteredData, setIsFilteredData] = useState(false);
+
   const fieldRef = useRef("")
   const operatorRef = useRef("")
   const dataRef = useRef("")
   const startDateRef = useRef()
   const endDateRef = useRef()
- 
+
+  
+//  console.log(pageNo);
 
 
   // const appointmentState = useAppointStore((state) => {
@@ -48,8 +55,49 @@ function AshramAppointments() {
   }
 
 
+  
+	function handlePreviousPage() {
+    if(pageNo <= 1) {
+        return;
+    } else {
+        setPageNo(prevValue => prevValue - 1);
+    }
+};
 
-  async function handleSearch () {
+function handleNextPage() {
+    if(pageNo >= totalPages ) {
+        return;
+    } else {
+        setPageNo(prevValue => prevValue + 1);
+    }
+};
+
+function handleFilteredPreviousPage() {
+    if(filteredPageNo <= 1) {
+        return;
+    } else {
+        setFilteredPageNo(prevPageNo => {
+    const newPageNo = prevPageNo - 1;
+    handleSearch(newPageNo);
+    return newPageNo;
+  });
+    }
+};
+
+function handleFilteredNextPage() {
+    if(filteredPageNo >= totalPages ) {
+        return;
+    } else {
+        setFilteredPageNo(prevPageNo => {
+    const newPageNo = prevPageNo + 1;
+    handleSearch(newPageNo);
+    return newPageNo;
+  });
+    }
+};
+
+
+  async function handleSearch (page) {
     try {
       const config = {
         "Appointment Id": "id",
@@ -96,11 +144,14 @@ function AshramAppointments() {
       console.log(filteredData);   
       
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/appointment-query`, {
-        queryConditions: filteredData, page :1, pageSize: 10
+        queryConditions: filteredData, page :page, pageSize: 10
       })
       //undo
      console.log(response,"sdfghnbg");
     filterState.setAppointments([...response.data.results])
+    setIsFilteredData(true)
+    setTotalPages(response.data.totalPages)
+    
   
     }
     catch (error) {
@@ -357,7 +408,11 @@ function AshramAppointments() {
                     {/* --------------Find button---------------- */}
 
           <div className='w-[20%] h-full text-right'>   
-            <button className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" onClick={()=>{console.log('clicked');handleSearch()}}>
+            <button className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg"
+                 onClick={()=>{
+                    console.log('clicked');
+                    handleSearch(1)
+                    }}>
               Find
             </button> 
           </div>
@@ -390,25 +445,59 @@ function AshramAppointments() {
         </div>
 
 
-        <div className='w-full h-[80%] mt-2'>
-          <AppointmentsTable filterToggle={filterToggle} />
+      <div className='w-full h-[80%] mt-2'>
+          <AppointmentsTable 
+           filterToggle={filterToggle}
+           pageNo={pageNo} 
+           setTotalPages={setTotalPages} 
+           setIsFilteredData={setIsFilteredData}
+           isFilteredData={isFilteredData}
+           filteredPageNo={filteredPageNo}
+           setFilteredPageNo={setFilteredPageNo}
+           handleSearch={handleSearch}
+          />
+      
 
-          <div className="w-full h-[10%] px-2 flex justify-between items-center">
-			  	  <p className="text-sm text-gray-500">Page 1 of 1</p>
-		  		<div>
-					<button
-						className="w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
-						// onClick={ handlePreviousPage }
-					>Previous</button>
-					<button
-						className="w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
-						// onClick={ handleNextPage }
-					>Next</button>
-				</div>
-      </div>
 
-    </div>
 
+      <div className="w-full md:h-[10%] px-2 flex justify-between items-center">
+						<div>
+							{
+								!isFilteredData ? (
+									<p className="text-[12px] md:text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
+								) : (
+									<p className="text-[12px] md:text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
+								)
+							}
+						</div>
+						{
+							!isFilteredData ? (
+								<div>
+									<button
+										className="w-20 md:w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+										onClick={ handlePreviousPage }
+									>Previous</button>
+									<button
+										className="w-20 md:w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+										onClick={ handleNextPage }
+									>Next</button>
+								</div>
+							) : (
+								<div>
+									<button
+										className="w-20 md:w-28 h-9 text-sm bg-[#005DB8] text-white rounded-xl"
+										onClick={ handleFilteredPreviousPage }
+									>Previous</button>
+									<button
+										className="w-20 md:w-28 h-9 ms-5 text-sm bg-[#005DB8] text-white rounded-xl"
+										onClick={ handleFilteredNextPage }
+									>Next</button>
+								</div>
+							)
+						}
+					
+					</div>
+          </div>
         
 
       </div>
@@ -416,11 +505,18 @@ function AshramAppointments() {
       
 
       {
-        filterState.appointmentViewToggle && <AppointmentView />   
+        filterState.appointmentViewToggle && <AppointmentView  />   
       }
 
       {
-        filterState.paymentToggle && <AppointmentCheckOut />
+        filterState.paymentToggle && 
+        <AppointmentCheckOut 
+          isFilteredData={isFilteredData} 
+          handleSearch={handleSearch}  
+          filteredPageNo={filteredPageNo} 
+          filterToggle={filterToggle} 
+          setFilterToggle={setFilterToggle}
+       />
       }
     
     

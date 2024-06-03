@@ -1,19 +1,15 @@
 "use client"
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useAppointFilterStore } from "@/app/appointments/appointments/filterstate";
 import axios from "axios";
 import moment from 'moment'
+import toast from 'react-hot-toast'
 
 
 
 
-function AppointmentsTable({filterToggle}) {
-
-  // const appointmentState = useAppointStore((state) => {
-  //   return state;
-  // });
-   
-  // console.log(appointmentState.appointments);
+function AppointmentsTable(props) {
+  const [isCheckinRender,setIsCheckinRender] = useState(false)
   const filterState = useAppointFilterStore((state) => {
     return state;
   });
@@ -24,13 +20,20 @@ function AppointmentsTable({filterToggle}) {
       return;
     }
     
-  }, [filterToggle])
+  }, [props.filterToggle, props.pageNo ,isCheckinRender])
 
   async function fetchData() {
+    const pageNo = props.pageNo
+    console.log(pageNo);
+
    try {
     
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment?page=${pageNo}`);
     filterState.setAppointments(response.data.appointments);
+    // console.log(response);
+    props.setTotalPages(response.data.totalPages)
+    props.setIsFilteredData(false)
+    props.setIsFilteredPageNo(1)
     
     
    } catch (error) {
@@ -43,6 +46,7 @@ function AppointmentsTable({filterToggle}) {
 
 
   async function handleCheckInClick(id, status) {
+    try {
     const dateTime = `${moment().format('DD/MM/YYYY')}`;
     const formattedCheckinDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
     console.log(formattedCheckinDate);
@@ -50,11 +54,28 @@ function AppointmentsTable({filterToggle}) {
       appointment_status : status,
       appointmentDate: formattedCheckinDate
     })
-    fetchData();
+    toast.success("User Checkedin Successfully")
+    
+    if (!props.isFilteredData) {
+      // setIsCheckinRender(!isCheckinRender)
+      fetchData()
+      
+    } else{
+      props.handleSearch(props.filteredPageNo)
+    }
+    
+    
+
+      
+    } catch (error) {
+      toast.error("Error while checkin a user")
+    }
+    
   }
 
 
   async function handleCheckOutClick(id, status){
+    try {
     const dateTime = `${moment().format('DD/MM/YYYY')}`;
     const formattedCheckoutDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
     console.log(formattedCheckoutDate);
@@ -62,7 +83,23 @@ function AppointmentsTable({filterToggle}) {
       appointment_status : status,
       check_out: formattedCheckoutDate
     })
-    fetchData()
+    toast.success("User Checked out Successfully")
+    
+    if (!props.isFilteredData) {
+      // props.setFilterToggle(!props.filterToggle)
+      fetchData();
+     
+      
+    } else{
+      props.handleSearch(props.filteredPageNo)
+    }
+      
+    } catch (error) {
+      toast.error("Error while checkin a user")
+
+      
+    }
+    
   }
 
 
