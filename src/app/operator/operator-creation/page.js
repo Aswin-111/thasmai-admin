@@ -140,6 +140,7 @@ function OperatorCreation() {
 							setUpdateEmployee={setUpdateEmployee} 
 							setEmployeeId={setEmployeeId} 
 							renderTableToggle={renderTableToggle}
+							searchData={searchData}
 						/>
 					</div>
 					<div className="w-full h-[15%] px-2 flex justify-between items-center">

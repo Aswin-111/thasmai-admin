@@ -64,7 +64,7 @@ function SupportContact() {
   return (
     <div className="w-full h-[85vh] px-7 overflow-y-auto">
 
-      <div className="w-[60%] flex items-center justify-between ">
+      <div className="w-full flex items-center justify-between ">
         <NavLink />
       </div>
       <div className='w-full h-[90%] mt-2 p-4 bg-white rounded-[8px] shadow drop-shadow-md'>

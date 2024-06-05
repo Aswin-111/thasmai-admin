@@ -15,7 +15,7 @@ function MeditationVideo() {
     const [addVideoPopUp , setAddVideoPopUp] = useState(false);
     const [playlistData, setPlaylistData] = useState({
         playlistHeading: "",
-        playlistImage:""
+        playlistImage: ""
     });
 
     console.log(playlistData);
@@ -42,26 +42,30 @@ function MeditationVideo() {
 
     const handleAddPlaylist = async (e) => {
         e.preventDefault();
+                
+        const { playlistHeading, playlistImage } = playlistData
 
         
-        console.log('Submitting playlist data:', playlistData); // Log the form data before submission
-
-        const form = new FormData();
-        form.append('playList_heading', playlistData.playlistHeading);
-        form.append('playList_image', playlistData.playlistImage);
-        form.append('category', playlistData.playlistHeading);
         
+        // console.log('Submitting playlist form:',form);
 
-        if(playlistData.playlistHeading && playlistData.playlistImage ) {
-                console.log(form);
+        if(playlistHeading && playlistImage ) {
+
+                const formData = new FormData();
+                formData.append('playList_heading', playlistHeading);
+                formData.append('playList_image', playlistImage);
+                // form.append('category', playlistHeading);
+                console.log(formData);
+
             try {
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/add-video`, form);
+
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/add-video`, formData);
                 console.log(response);
                 toast.success('Playlist created successfully');
                 // Clear form fields after successful submission
                 setPlaylistData({
                     playlistHeading: '',
-                    playlistImage: null,
+                    playlistImage: '',
                 });
 
             } catch (error) {
@@ -79,10 +83,10 @@ function MeditationVideo() {
 
   return (
     <div className="w-full h-[85vh] px-7 overflow-y-auto ">
-      <div className="w-[60%] flex items-center justify-between ">
+      <div className="w-full flex items-center justify-between ">
         <NavLink />
       </div>
-      <div className='w-[80%]'>
+      <div className='w-full'>
         <NavLinkApp />
       </div>
       <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md'>

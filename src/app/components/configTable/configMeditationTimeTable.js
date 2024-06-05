@@ -1,13 +1,16 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineEdit } from "react-icons/md";
+import axios from 'axios'
 
 
 function MeditationTimeConfigTable(props) {
 
-  const [editableId, setEditableId] = useState(null);
+ 
+
+  // const [editableId, setEditableId] = useState(null);
 
   return (
     <div className="w-full mt-10 overflow-scroll h-[90%]">
@@ -19,12 +22,14 @@ function MeditationTimeConfigTable(props) {
         >
           <tr className="rounded-3xl">
             <th className="text-left w-[10%]">Sl.No.</th>
-            <th className="text-left w-[30%]">Country</th>
+            <th className="text-left w-[20%]">Country</th>
             <th className="text-left w-[25%]">General Video</th>
-            <th className="text-left w-[25%]">Morning Meditation</th>
-            <th className="text-left w-[10%]">Morning Video</th>
-            <th className="text-left w-[25%]">Evening Meditation</th>
-            <th className="text-left w-[10%]">Evening Video</th>
+            <th className="text-left w-[10%]">Morning Meditation Video</th>
+            <th className="text-left w-[25%]">From</th>
+            <th className="text-left w-[25%]">To</th>
+            <th className="text-left w-[10%]">Evening Meditation Video</th>
+            <th className="text-left w-[25%]">From</th>
+            <th className="text-left w-[25%]">To</th>
             <th className="text-left w-[25%]">Edit</th>
 
 
@@ -32,42 +37,54 @@ function MeditationTimeConfigTable(props) {
           </tr>
         </thead>
         <tbody className="my-10 font-medium text-xs  border-b-2 border-[#C1C6D4]">
+
+         
           
-         <tr className='font-medium text-xs  border-b-2 border-[#C1C6D4]'>
-          <td>1</td>
-          <td>India</td>
-          <td>https://www.y...</td>
-          <td>06:00 AM to 07:00 AM </td>
-          <td>https://www.y...</td>
-          <td>06:00 AM to 07:00 AM </td>
-          <td>https://www.y...</td> 
-          <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'
-                onClick={() => {
-                  props.setEditMeditationTimePopUp(true)
-                  }}
-          /></td>
-        </tr>
-        
-        <tr className='font-medium text-xs  border-b-2 border-[#C1C6D4]'>
-          <td>1</td>
-          <td>India</td>
-          <td>https://www.y...</td>
-          <td>06:00 AM to 07:00 AM </td>
-          <td>https://www.y...</td>
-          <td>06:00 AM to 07:00 AM </td>
-          <td>https://www.y...</td> 
-          <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/></td>
-        </tr>
-        <tr className='font-medium text-xs  border-b-2 border-[#C1C6D4]'>
-          <td>1</td>
-          <td>India</td>
-          <td>https://www.y...</td>
-          <td>06:00 AM to 07:00 AM </td>
-          <td>https://www.y...</td>
-          <td>06:00 AM to 07:00 AM </td>
-          <td>https://www.y...</td> 
-          <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/></td>
-        </tr>
+          {
+                        props.meditationTime[0] ? (
+                          props.meditationTime.map((meditationTime, index) => {
+                                return (
+                                    <tr 
+                                        key={index}
+                                        className='h-12' 
+                                    >
+                                        <td className='ps-2'>{ index + 1 }</td>
+                                        <td>{ meditationTime.country }</td>
+                                        <td className='text-[#7698ef] hover:text-[#005DB8]'>
+                                        <a href={ meditationTime.general_video } target="_blank">{ meditationTime.general_video }</a>
+                                        </td>
+                                        <td className='text-[#7698ef] hover:text-[#005DB8]'>
+                                          <a href={ meditationTime.morning_video } target="_blank">{ meditationTime.morning_video }</a>
+                                        </td>
+                                        <td>{ meditationTime.morning_time_from }</td>
+                                        <td>{ meditationTime.morning_time_to }</td>
+                                        <td className='text-[#7698ef] hover:text-[#005DB8]'>
+                                          <a href={ meditationTime.evening_video } target="_blank">{ meditationTime.evening_video }</a>
+                                        </td>
+                                        <td>{ meditationTime.evening_time_from }</td>
+                                        <td>{ meditationTime.evening_time_to }</td>
+                                        <td><MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'
+                                                  onClick={() => {
+                                                         props.setEditMeditationTimePopUp(true)
+                                                         props.setMeditationTimeId(meditationTime.id)
+                                                      }}
+                                        /></td>
+                                    </tr>
+                                );
+                            })
+
+                        ) : (
+                            <tr className='h-12'>
+                                <td>No data to display</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        )
+                        
+                    }
               
 
 

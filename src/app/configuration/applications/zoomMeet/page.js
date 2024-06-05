@@ -83,6 +83,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 function Page() {
+
   const [formData, setFormData] = useState({
     zoomdate: '',
     zoomStartTime: '',
@@ -92,6 +93,7 @@ function Page() {
 
   const [isFocusedZoomFrom, setIsFocusedZoomFrom] = useState(false);
   const [isFocusedZoomTo, setIsFocusedZoomTo] = useState(false);
+  const [zoomTableRenderToggle, setZoomTableRenderToggle] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -138,6 +140,7 @@ function Page() {
         zoomStopTime: '',
         zoomLink: ''
       });
+      setZoomTableRenderToggle(prevValue => !prevValue);
 
       toast.success(response.data.message);
       console.log(response.data);
@@ -149,10 +152,10 @@ function Page() {
 
   return (
     <div className="w-full h-[85vh] px-7 overflow-y-auto">
-      <div className="w-[60%] flex items-center justify-between ">
+      <div className="w-full flex items-center justify-between ">
         <NavLink />
       </div>
-      <div className='w-[80%]'>
+      <div className='w-full'>
         <NavLinkApp />
       </div>
       <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md overflow-y-auto'>
@@ -206,10 +209,10 @@ function Page() {
             </div>
           </div>
         </div>
-        <ZoomMeet />
+        <ZoomMeet zoomTableRenderToggle={zoomTableRenderToggle} />
       </div>
     </div>
-  );
+  ); 
 }
 
 export default Page;

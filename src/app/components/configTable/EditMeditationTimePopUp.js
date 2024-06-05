@@ -1,121 +1,227 @@
-import React from 'react'
+"use client"
+import React, {useState , useEffect} from 'react'
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
-function EditMeditationTimePopUp() {
+function EditMeditationTimePopUp(props) {
+
+  const [edittedData, setEdittedData] = useState({
+    country: '',
+    general_video: '',
+    morning_time_from: '',
+    morning_time_to: '',
+    evening_time_from: '',
+    evening_time_to: '',
+    morning_video: '',
+    evening_video: ''
+  });
+
+  const [updateToggle, setUpdateToggle] = useState(false);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+
+          const meditationTimeId = props.meditationTimeId;
+
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/meditation-time/${meditationTimeId}`);
+          console.log(response);
+          setEdittedData(response.data);
+
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+  
+    };
+  
+    fetchData();
+
+    return () => {
+        return;
+    }
+
+}, [updateToggle]);
+
+
+const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setEdittedData(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+};
+
+
+
+const handleEditSubmit = async (e) => {
+  e.preventDefault();
+  const meditationTimeId = props.meditationTimeId;
+
+
+  const {
+    country,
+    general_video,
+    morning_time_from,
+    morning_time_to,
+    evening_time_from,
+    evening_time_to,
+    morning_video,
+    evening_video
+  } = edittedData;
+
+  if (
+    country &&
+    general_video &&
+    morning_time_from &&
+    morning_time_to &&
+    evening_time_from &&
+    evening_time_to &&
+    morning_video &&
+    evening_video
+  ) {
+    try {
+      const submissionData = new FormData();
+      submissionData.append('country', country);
+      submissionData.append('general_video', general_video);
+      submissionData.append('morning_time_from', morning_time_from);
+      submissionData.append('morning_time_to', morning_time_to);
+      submissionData.append('evening_time_from', evening_time_from);
+      submissionData.append('evening_time_to', evening_time_to);
+      submissionData.append('morning_video', morning_video);
+      submissionData.append('evening_video', evening_video);
+
+     
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-meditation-time/${meditationTimeId}`, submissionData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      setEdittedData({
+        country: '',
+        general_video: '',
+        morning_time_from: '',
+        morning_time_to: '',
+        evening_time_from: '',
+        evening_time_to: '',
+        morning_video: '',
+        evening_video: ''
+      });
+      
+      console.log(response.data);
+      setUpdateToggle(prevValue => !prevValue);
+      props.setMeditationTimeRenderToggle(prevValue => !prevValue);
+      toast.success(response.data.message);      
+      
+    } catch (error) {
+      console.error(error);
+      toast.error('Error submitting form. Please try again.');
+    }
+  } else {
+    toast.error('Please fill in all fields.');
+  }
+};
+
+
   return (
     <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
-        <div className='bg-white'>
-      <p className='text-black font-medium'>Add Meditation Time by Country</p>
-      <form >
-        <div className='mt-6 flex'>
-          <select
-            name="country"
+                 <button
+                  className="w-8 h-8 m-0 p-0 absolute top-6 right-6 hover:scale-110 text-5xl text-white rotate-45"
+                   onClick={() => {
+                       props.setEditMeditationTimePopUp(false);
+                     }}
+                 >+
+                 </button>
+           
+                     <div className='w-[1000px] h-[550px] p-8 bg-white rounded '>
+                        <p className='text-2xl font-medium'>Country : {edittedData.country}</p>
+                        <div>
+                          <p className='mt-4 font-bold'>General Video</p>
+                          <input 
+                            type='text'
+                            name='general_video'
+                            value={edittedData.general_video}
+                            className='w-[500px] h-[40px] mt-2 p-1 bg-blue-gray-100 rounded '
+                            onChange={handleOnChange}
+                          
+                          />
+                        </div>
+                        <div>
+                          <p className='mt-6 font-bold'>Morning Meditation</p>
+                          
+                          <div className='flex mt-3'>
+                            <p className='me-2 font-medium'>Time :</p>
+                            <input 
+                             type='time'
+                             name='morning_time_from'
+                             value={edittedData.morning_time_from}
+                            className='w-[100px] h-[40px] me-2 p-1 bg-blue-gray-100 rounded'
+                            onChange={handleOnChange}
+                            /> 
+                            
+                            <input 
+                             type='time'
+                             name='morning_time_to'
+                             value={edittedData.morning_time_to}
+                            className='w-[100px] h-[40px] me-2 p-1 bg-blue-gray-100 rounded'
+                            onChange={handleOnChange}
+                            /> 
+                            <p className='me-2 font-medium'> URL :</p>
+                           <input 
+                            type='text'
+                            name='morning_video'
+                            value={edittedData.morning_video}
+                            className='w-[500px] h-[40px] p-1 bg-blue-gray-100 rounded'
+                            onChange={handleOnChange}
+                          />
+                          </div>
 
-            
-            className='w-full md:w-[32%] h-10 p-2 ps-6 ms-11 mb-5 bg-[#FDFBFF] text-black border-[1px] border-black rounded-md'
-          >
-            <option value="" disabled>---Select a country---</option>
-            {/* {countryList.map((country, index) => (
-              <option value={country.name} key={index}>
-                {country.name}
-              </option>
-            ))} */}
-          </select>
-  
-          <p className='h-10 ps-16 text-black flex items-end'>Add General Video Url</p>
-          <input
-            name="general_video"
-            
-            className='w-[20%] h-10 ms-2 border-[1px] bg-[#FDFBFF] border-black rounded-md'
-            type='text'
-          />
-          <label className="h-10 ms-12 flex justify-center items-center p-4 border-2 border-dashed border-gray-800 rounded-lg cursor-pointer hover:bg-gray-50">
-            <input 
-              type="file" 
-              className="hidden" 
-             
-            />
-            
-          </label>
-        </div>
-  
-        <p className='text-black font-medium'>Morning Meditation</p>
-        <div className='mt-4 flex'>
-          <p className='flex justify-center items-center ms-10 text-black'>Time</p>
-          <input
-            name="morning_time_from"
-            
-            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] border-black rounded-md ps-3'
-            placeholder='From'
-           
-          />
-          <input
-            name="morning_time_to"
-            
-            
-            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] border-black rounded-md ps-3'
-            placeholder='To'
-            
-          />
-          <p className='h-10 text-black flex items-center ms-10'>Add URL</p>
-          <input
-            name="morning_video"
-            
-            className='w-[30%] h-10 ms-2 border-[1px] bg-[#FDFBFF] border-black rounded-md'
-            type='text'
-          />
-          <label className="h-10 ms-12 flex justify-center items-center p-4 border-2 border-dashed border-gray-800 rounded-lg cursor-pointer hover:bg-gray-50">
-            <input 
-              type="file" 
-              className="hidden" 
-              accept="image/*" 
+                          <p className='mt-6 font-bold'>Evening Meditation</p>
+                          
+                          <div className='flex mt-3'>
+                            <p className='me-2 font-medium'>Time :</p>
+                            <input 
+                             type='time'
+                             name='evening_time_from'
+                             value={edittedData.evening_time_from}
+                            className='w-[100px] h-[40px] me-2 p-1  bg-blue-gray-100 rounded'
+                            onChange={handleOnChange}
+                            /> 
+                            
+                            <input 
+                             type='time'
+                             name='evening_time_to'
+                             value={edittedData.evening_time_to}
+                            className='w-[100px] h-[40px] me-2 p-1 bg-blue-gray-100 rounded'
+                            onChange={handleOnChange}
+                            /> 
+                            <p className='me-2 font-medium'> URL :</p>
+                           <input 
+                            type='text'
+                            name='evening_video'
+                            value={edittedData.evening_video}
+                            className='w-[500px] h-[40px] p-1 bg-blue-gray-100 rounded'
+                            onChange={handleOnChange}
+                          />
+                          </div>
+
+                          
+                        </div>
+                        <div className=' mt-16 flex justify-center items-center'>
+                            <button 
+                              type="submit" 
+                              className='h-12 w-[450px]  bg-[#005DB8] hover:bg-[#005cb8d1] text-white rounded-2xl'
+                              onClick={handleEditSubmit}
+                            >
+                                 Update Meditation Time
+                            </button>
+              </div>
+                     </div>
+
+
               
-            />
-            
-          </label>
-        </div>
-  
-        <p className='text-black font-medium mt-5'>Evening Meditation</p>
-        <div className='mt-4 flex'>
-          <p className='flex justify-center items-center ms-10 text-black'>Time</p>
-          <input
-            name="evening_time_from"
-            
-            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] border-black rounded-md ps-3'
-            placeholder='From'
-            
-          />
-          <input
-            name="evening_time_to"
-            
-            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] border-black rounded-md ps-3'
-            placeholder='To'
-            
-          />
-          <p className='h-10 text-black flex items-center ms-10'>Add URL</p>
-          <input
-            
-           
-            className='w-[30%] h-10 ms-2 border-[1px] bg-[#FDFBFF] border-black rounded-md'
-            type='text'
-          />
-          <label className="h-10 ms-12 flex justify-center items-center p-4 border-2 border-dashed border-gray-800 rounded-lg cursor-pointer hover:bg-gray-50">
-            <input 
-              type="file" 
-              className="hidden" 
-              accept="image/*" 
-             
-            />
-            {/* <span className={`text-gray-400 ${eveningImage ? 'text-gray-800' : ''}`}>
-              {eveningImage ? eveningImage.name : 'Select an image'}
-            </span> */}
-          </label>
-        </div>
-  
-        <button type="submit" className='h-12 w-[450px] mt-10 bg-[#005DB8] hover:bg-[#005cb8d1] text-white rounded-2xl'>
-          Add Meditation Time
-        </button>
-      </form>
-    </div>
+              
     </div>
   )
 }

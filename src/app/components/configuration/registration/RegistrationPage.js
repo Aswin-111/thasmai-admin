@@ -1,97 +1,95 @@
 "use client"
 
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import { toast } from "react-hot-toast";
+import React, { useState,useEffect } from "react";
+import axios from "axios";
 
-function FinancialConfigTable() {
+function RegistartionPage({ dummyData }) {
 
-    // const [editState, setEditState] = useState(false);
-    const [editableId, setEditableId] = useState(null);
-    const [parameters, setParameters] = useState([]); 
+    console.log(dummyData);
 
-    const [inputFieldValue, setInputFieldValue] = useState({
-        field: "",
-        value: ""
-    });
+  // const [editState, setEditState] = useState(false);
+  const [editableId, setEditableId] = useState(null);
+  const [parameters, setParameters] = useState([]); 
 
-    const [renderTableToggle, setRenderTableToggle] = useState(false);
-
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/financialconfig`);
-                console.log(response);
-                setParameters(response.data.finconfig);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                toast.error("Error fetching data");
-            }
-        };
-
-        fetchData();
-    }, [renderTableToggle]);
+  const [inputFieldValue, setInputFieldValue] = useState({
+      field: "",
+      value: ""
+  });
+  const [renderTableToggle, setRenderTableToggle] = useState(false);
 
 
+  
+  useEffect(() => {
 
-    function handleOnChange(field, value) {
-        console.log(value);
-        setInputFieldValue(() => ({
-            field: field,
-            value: value
-        }));
-    }
-
-
-    async function handleSubmit () {
-
+    const fetchData = async () => {
         try {
-            if(inputFieldValue.value) {
-
-                const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-configuration`, {
-                    id: editableId,
-                    field: inputFieldValue.field,
-                    value: inputFieldValue.value,
-                });
-                if(response) {
-                    setRenderTableToggle(prevValue => !prevValue);
-                }
-
-
-            } else {
-                setEditableId(null);
-                toast("Please enter the value to configure.");
-            }
-      
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/appconfig`);
+            console.log(response);
+            setParameters(response.data.appconfig);
         } catch (error) {
-            console.log("Financial configuration updating", error);
-            toast.error("Error updating parameter.")
+            console.error("Error fetching data:", error);
+            toast.error("Error fetching data");
         }
-        setInputFieldValue("");
-        setEditableId(null);
     };
 
+    fetchData();
+},[renderTableToggle])
+
+function handleOnChange(field, value) {
+  console.log(value);
+  setInputFieldValue(() => ({
+      field: field,
+      value: value
+  }));
+}
 
 
+async function handleSubmit () {
 
-    return (
+  try {
+      if(inputFieldValue.value) {
+
+          const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-appconfig`, {
+              id: editableId,
+              field: inputFieldValue.field,
+              value: inputFieldValue.value,
+          });
+          if(response) {
+              setRenderTableToggle(prevValue => !prevValue);
+          }
+
+
+      } else {
+          setEditableId(null);
+          toast("Please enter the value to configure.");
+      }
+
+  } catch (error) {
+      console.log("Financial configuration updating", error);
+      toast.error("Error updating parameter.")
+  }
+  setInputFieldValue("");
+  setEditableId(null);
+};
+
+
+  return (
+    <div className="w-full overflow-scroll h-[90%]">
+      <table className="table rounded-3xl">
+        <thead
+          className="w-full h-[50px] bg-[#66A2FA] text-white sticky top-0 gap-x-20 text-[0.9rem]"
+          style={{ borderRadius: "11px" }}
+        >
+          <tr className="rounded-3xl">
+            <th className="text-center w-[30%]">Field</th>
+            <th className="text-center w-[55%]">Value</th>
+            <th className="text-center w-[15%]"></th>
+          </tr>
+        </thead>
+        <tbody className="my-10">
         
-        <table className="table rounded-3xl">
-            <thead
-              className="w-full h-[50px] bg-[#005DB8] text-white sticky top-0 gap-x-20 text-[0.9rem]"
-              style={{ borderRadius: "11px" }}
-            >
-                <tr className="rounded-3xl">
-                    <th className="text-center w-[30%]">Field</th>
-                    <th className="text-center w-[55%]">Value</th>
-                    <th className="text-center w-[15%]"></th>
-                </tr>
-            </thead>
-            <tbody className="my-10">
-        
-                {
+
+               {
                     parameters[0] ? (
                         parameters.map((data, index) => { 
                             return (
@@ -145,18 +143,18 @@ function FinancialConfigTable() {
                     
                 }
 
-                {/* <tr>
-                    <td className="text-center">field</td>
-                    <td className="text-center">value</td>
-                    <td className="text-center"><button>Edit</button></td>
 
-                </tr> */}
-        
               
-            </tbody>
-        </table>
-    
-    );
+
+
+              
+              
+            
+        
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
-export default FinancialConfigTable;
+export default RegistartionPage;
