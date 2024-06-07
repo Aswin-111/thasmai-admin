@@ -122,7 +122,7 @@ function AppointFeedbackTable( props) {
                           feedbackState.setFeedbackViewToggle(true, i.id);
                       }}
                     >
-                      { String(i.feedback).substring(0, 80) } <p className="ms-1 text-blue-400 hover:text-blue-600 hover:scale-105"> { "<" + "Read more..." +">" }</p>
+                      { String(i.feedback).substring(0, 50) } <p className="ms-1 text-blue-400 hover:text-blue-600 hover:scale-105"> { "<" + "Read more..." +">" }</p>
                     </td>
                     
     

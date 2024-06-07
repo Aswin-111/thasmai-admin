@@ -140,6 +140,7 @@ useEffect(()=>{
                     appoint.appointment_status === "Checked Out" ? (
                       <input 
                         type="number"
+                        min="0"
                         onChange={
                           (e)=> {
                             e.preventDefault();

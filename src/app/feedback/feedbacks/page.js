@@ -11,7 +11,7 @@ import { useAppointFeedbackStore } from './ashramAppointFeedbackState'
 import FilterChip from "./filterchips";
 
 
-function AshramAppointments() {
+function AshramAppointments() { 
 
   const [filterToggle,setFilterToggle] = useState(false);
 

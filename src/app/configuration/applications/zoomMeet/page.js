@@ -78,12 +78,15 @@ import React from 'react';
 import NavLink from '../../navlink/navlink';
 import NavLinkApp from '../NavlinkApp/navlinkApp';
 import { BsImage } from 'react-icons/bs';
-import ZoomMeet from '@/app/components/configTable/ZoomMeet';
+import ZoomMeet from '@/app/components/configuration/zoomMeet/ZoomMeet';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import DeleteZoomMeetPopUp from '@/app/components/configuration/zoomMeet/DeleteZoomMeetPopUp';
 
 function Page() {
 
+  const [zoomMeetId, setZoomMeetId] = useState("")
+  const [ isZoomMeetPopUp, setIsZoomMeetPopUp ] = useState(false)
   const [formData, setFormData] = useState({
     zoomdate: '',
     zoomStartTime: '',
@@ -160,19 +163,19 @@ function Page() {
       </div>
       <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md overflow-y-auto'>
         <div className='w-full h-[20%] bg-[#E1E2EB] rounded-md'>
-          <p className='text-black font-medium px-2 pt-1'>Create Playlist Heading</p>
+          <p className='text-black font-medium px-2 pt-1'>Create Zoom Meet Link</p>
           <div className='w-full h-full flex'>
             <div className='w-[80%] h-full pt-4 flex'>
               <input
                 name="zoomdate"
-                className='w-40 h-10 ms-8 p-2 rounded border-[1px] border-black'
+                className='w-40 h-10 ms-8 p-2 rounded border-[1px] bg-white text-black border-black'
                 type='date'
                 value={formData.zoomdate}
                 onChange={handleChange}
               />
               <input
                 name="zoomStartTime"
-                className='w-32 h-10 ms-8 p-2 rounded border-[1px] border-black'
+                className='w-32 h-10 ms-8 p-2 rounded border-[1px] bg-white text-black border-black'
                 placeholder='From'
                 type={!isFocusedZoomFrom ? 'text' : 'time'}
                 onFocus={() => setIsFocusedZoomFrom(true)}
@@ -182,7 +185,7 @@ function Page() {
               />
               <input
                 name="zoomStopTime"
-                className='w-32 h-10 ms-8 p-2 rounded border-[1px] border-black'
+                className='w-32 h-10 ms-8 p-2 rounded border-[1px] bg-white text-black border-black'
                 placeholder='To'
                 type={!isFocusedZoomTo ? 'text' : 'time'}
                 onFocus={() => setIsFocusedZoomTo(true)}
@@ -192,7 +195,7 @@ function Page() {
               />
               <input
                 name="zoomLink"
-                className='w-[300px] h-10 ms-8 p-2 rounded border-[1px] border-black'
+                className='w-[300px] h-10 ms-8 p-2 rounded border-[1px] bg-white text-black  border-black'
                 placeholder='Zoom URL'
                 type='text'
                 value={formData.zoomLink}
@@ -209,8 +212,12 @@ function Page() {
             </div>
           </div>
         </div>
-        <ZoomMeet zoomTableRenderToggle={zoomTableRenderToggle} />
+        <ZoomMeet  setZoomMeetId={setZoomMeetId} zoomTableRenderToggle={zoomTableRenderToggle} setIsZoomMeetPopUp={setIsZoomMeetPopUp} />
+
       </div>
+      {
+        isZoomMeetPopUp && <DeleteZoomMeetPopUp zoomMeetId={zoomMeetId}  setIsZoomMeetPopUp={setIsZoomMeetPopUp} />
+      }
     </div>
   ); 
 }

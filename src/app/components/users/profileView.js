@@ -11,6 +11,8 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
     const [bankDetails, setBankDetails] = useState({})
     const [profilePic,setProfilePic] = useState("")
     const [paymentDetails,setPaymentDetails] = useState([])
+    const [zoomDetails,setZoomDetails] = useState([])
+    const [meditationLog, setMeditationLog] = useState([])
 
     const [isProfile, setIsProfile] = useState(true);
     const [isMeditation, setIsMeditation] = useState(false);
@@ -39,6 +41,8 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
         setMeditationDetails(response.data.meditationData)
         setBankDetails(response.data.bankDetails)
         setPaymentDetails(response.data.transactions)
+        setZoomDetails(response.data.zoomrecord)
+        setMeditationLog(response.data.meditationlog)
         console.log(response.data);
         // console.log(`${process.env.NEXT_PUBLIC_API_URL}`)
         return;
@@ -65,7 +69,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
 
         <div className='w-[30%] h-full p-2 shadow-lg'>
           <div className='w-full h-[50%] flex justify-center items-center bg-[#E0E2EC]'>
-            <img className='rounded-full h-[180px] w-[180px] border-4 object-cover' src={profilePic? `${profilePic}` : "/profile_dummy.jpeg"} alt='Profile photo' />
+            <img className='rounded-full h-[180px] w-[180px] border-4 object-cover' src={profilePic? `${profilePic}` : "/admin/profile_dummy.jpeg"} alt='Profile photo' />
                {/* sometimes need to paste " data:image/png;base64, " infront of base64 code */}
           </div>
           <div className='w-full h-[50%] p-3 pt-5 text-black'>
@@ -103,6 +107,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                       setIsBank(false);
                       setIsMeditation(true);
                       setIsPayment(false);
+
                     }}
                 >Meditation</button>
                 <button 
@@ -116,6 +121,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                       setIsMeditation(false);
                       setIsBank(true);
                       setIsPayment(false);
+
                     }}
                 >Bank</button>
                 <button 
@@ -129,18 +135,22 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                       setIsMeditation(false);
                       setIsBank(false);
                       setIsPayment(true);
+
                     }}
                 >Payment</button>
+
+        
           </div>
 
           
 
-          <div className='w-full h-[90%] p-4 bg-[#DAE2F9] flex'>
+          <div className='w-full h-[90%] p-4 bg-[#DAE2F9] '>
             
 
             {
               isProfile && 
                 <>
+                <div className='w-full flex'>
                 <div className='w-[50%] h-full'>
                 <table className='w-full text-black'>
                   <tbody>
@@ -195,68 +205,82 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                   </tbody>
                 </table>
               </div>
+
+              </div>
               </>
             
             }
 
 
             {
-              isMeditation && 
+              isMeditation   && 
                 <>
-                <div className='w-[50%] h-full'>
-                <table className='w-full text-black'>
-                  <tbody>
-                    <tr className='h-[40px]'>
-                      <td className='w-[50%] text-left'>Current Session</td>
-                      <td className='w-[50%] text-left'>: {meditationDetails.session_num}</td>
-                    </tr>
-                    <tr className='h-[40px]'>
-                      <td className='w-[50%] text-left'>Day</td>
-                      <td className='w-50%] text-left'>: {meditationDetails.day}</td>
-                    </tr>
-                    <tr className='h-[40px]'>
-                      <td className='w-[50%] text-left'>Completed Cycle</td>
-                      <td className='w-[50%] text-left'>: {meditationDetails.cycle}</td>
-                    </tr>
-                    {/* <tr className='h-[40px]'>
-                      <td className='w-[50%] text-left'>Break Cycle</td>
-                      <td className='w-[50%] text-left'>: 20</td>
-                    </tr> */}
-                    
-                  </tbody>
-                </table>
-              </div>
-              <div className='w-[50%] h-full'>
-              <table className='w-full'>
-                  <tbody>
-                    <tr className='h-[40px]'>
-                      <td className='w-[35%] text-left'>Last 5 meditated days</td>
-                      {/* <td className='w-[65%] text-left'>: {profile.UId}</td> */}
-                    </tr>
-                    <tr className='h-[40px]'>
-                      <td className='w-[35%] text-left'>05/06/2024</td>
-                      {/* <td className='w-[65%] text-left'>: {profile.address}</td> */}
-                    </tr>
-                    <tr className='h-[40px]'>
-                      <td className='w-[35%] text-left'>05/06/2024</td>
-                      {/* <td className='w-[65%] text-left'>: {profile.district}</td> */}
-                    </tr>
-                    <tr className='h-[40px]'>
-                      <td className='w-[35%] text-left'>05/06/2024</td>
-                      {/* <td className='w-[65%] text-left'>: {profile.state}</td> */}
-                    </tr>
-                    <tr className='h-[40px]'>
-                      <td className='w-[35%] text-left'>05/06/2024</td>
-                      {/* <td className='w-[65%] text-left'>: {profile.pincode}</td> */}
-                    </tr>
-                    <tr className='h-[40px]'>
-                      <td className='w-[35%] text-left'>05/06/2024</td>
-                      {/* <td className='w-[65%] text-left'>: {profile.pincode}</td> */}
-                    </tr>
+                      <div className='w-full flex border-b-2 border-white'>
+                       <div className='w-[50%] '>
+                       <table className='w-full text-black'>
+                         <tbody>
+                           <tr className='h-[40px]'>
+                             <td className='w-[50%] text-left'>Current Session</td>
+                             <td className='w-[50%] text-left'>: {meditationDetails.session_num ? meditationDetails.session_num : "-"}</td>
+                           </tr>
+                           <tr className='h-[40px]'>
+                             <td className='w-[50%] text-left'>Day</td>
+                             <td className='w-50%] text-left'>: {meditationDetails.day ? meditationDetails.day : "-"}</td>
+                           </tr>
+                           <tr className='h-[40px]'>
+                             <td className='w-[50%] text-left'>Completed Cycle</td>
+                             <td className='w-[50%] text-left'>: {meditationDetails.cycle ? meditationDetails.cycle : "-"}</td>
+                           </tr>
+                           {/* <tr className='h-[40px]'>
+                             <td className='w-[50%] text-left'>Break Cycle</td>
+                             <td className='w-[50%] text-left'>: 20</td>
+                           </tr> */}
+                           
+                         </tbody>
+                       </table>
+                     </div>
+                     <div className='w-[50%] '>
+                     <table className="w-full">
+                    <tbody>
+                      <tr>
+                        <td className="w-[35%] text-left ">Last 5 meditated days</td>
+                      </tr>
+                      { (meditationLog[0]) && 
+                        meditationLog.map((medLog, index) => {
+                          return(
+                            <tr key={index} className="h-[40px]">
+                              <td className="w-[35%] text-left">{medLog.updatedAt}</td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                    </table>
+                         
+                     </div>
+                  </div>
 
-                  </tbody>
-                </table>
-              </div>
+                  <div className='w-[100%] mt-4 h-full overflow-y-auto'>
+                    <p className='text-black font-medium'>Latest Zoom class attended</p>
+      <table className='w-full text-black'>
+      <thead>
+        <tr className='h-[40px]'>
+          <th className='w-[20%] text-left'>Date</th>
+          <th className='w-[20%] text-left'>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {zoomDetails.map((zoom, index) => (
+          <tr key={index} className='h-[40px]'>
+            <td className='text-left'>{zoom.zoom_date}</td>
+            <td className='text-left'>{zoom.zoom_time}</td>
+            
+          </tr>
+        ))}
+      </tbody>
+    </table>
+       </div>
+                     
               </>
             
             }
@@ -383,6 +407,9 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
     </table>
   </div>
 }
+
+
+
 
 
 

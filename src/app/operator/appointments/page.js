@@ -6,7 +6,7 @@ import NavLink from '../navlink/navlink'
 import AppointmentsTable from '@/app/components/operator/operatorTable'
 import AppointmentView from '@/app/components/operator/appointmentView'
 import CheckoutPayment from '@/app/components/operator/checkoutPayment'
-import FeedbackView from '@/app/components/feedback/FeedbackView'
+import FeedbackView from '@/app/components/feedback/appointmentFeedback/FeedbackView'
 import axios from 'axios';
 import { useAppointmentStore } from './appointmentState'
 import { useRouter } from 'next/navigation'

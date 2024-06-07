@@ -1,514 +1,300 @@
-// "use client"
-
-// import {
-//     Card,
-//     CardBody,
-//     CardHeader,
-//     Typography,
-//   } from "@material-tailwind/react";
-//   // import Chart from "react-apexcharts";
-//   import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
-   
-//   // If you're using Next.js please use the dynamic import for react-apexcharts and remove the import from the top for the react-apexcharts
-//   import dynamic from "next/dynamic";
-//   const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-   
-//   const chartConfig = {
-//     type: "bar",
-//     height: 200,
-//     series: [
-//       {
-//         name: "New Users",
-//         data: [100, 400, 300, 320, 500, 350, 400, 275, 500],
-//       },
-//     ],
-//     options: {
-//       chart: {
-//         toolbar: {
-//           show: false,
-//         },
-//       },
-//       title: {
-//         show: "",
-//       },
-//       dataLabels: {
-//         enabled: false,
-//       },
-//       colors: ["#5799FD"],
-//       plotOptions: {
-//         bar: {
-//           columnWidth: "40%",
-//           borderRadius: 2,
-//         },
-//       },
-//       xaxis: {
-//         axisTicks: {
-//           show: false,
-//         },
-//         axisBorder: {
-//           show: false,
-//         },
-//         labels: {
-//           style: {
-//             colors: "#616161",
-//             fontSize: "12px",
-//             fontFamily: "inherit",
-//             fontWeight: 400,
-//           },
-//         },
-//         categories: [
-//           "Apr",
-//           "May",
-//           "Jun",
-//           "Jul",
-//           "Aug",
-//           "Sep",
-//           "Oct",
-//           "Nov",
-//           "Dec",
-//         ],
-//       },
-//       yaxis: {
-//         labels: {
-//           style: {
-//             colors: "#616161",
-//             fontSize: "12px",
-//             fontFamily: "inherit",
-//             fontWeight: 400,
-//           },
-//         },
-//       },
-//       grid: {
-//         show: false,
-//         borderColor: "#dddddd",
-//         strokeDashArray: 5,
-//         xaxis: {
-//           lines: {
-//             show: true,
-//           },
-//         },
-//         padding: {
-//           top: 5,
-//           right: 20,
-//         },
-//       },
-//       fill: {
-//         opacity: 0.8,
-//       },
-//       tooltip: {
-//         theme: "dark",
-//       },
-//     },
-//   };
-   
-//   export default function ColumnChart() {
-//     return (
-//       <Card className="h-full">
-//         {/* <CardHeader
-//           floated={false}
-//           shadow={false}
-//           color="transparent"
-//           className="flex flex-col gap-4 rounded-none md:flex-row md:items-center h-[20%]"
-//         >
-//           <div className="w-max rounded-lg bg-gray-900 p-5 text-white">
-//             <Square3Stack3DIcon className="" />
-//           </div>
-//           <div>
-//             <Typography variant="" color="blue-gray">
-//               Thasmai
-//             </Typography>
-//             <Typography
-//               variant="small"
-//               color="gray"
-//               className="max-w-sm font-normal"
-//             >
-//               Visualize your data in a simple way using the
-//               @material-tailwind/react chart plugin.
-//             </Typography>
-//           </div>
-//         </CardHeader> */}
-//         <CardBody className="p-0 pb-0 h-full">
-//           <Chart {...chartConfig} />
-//         </CardBody>
-//       </Card>
-//     );
-//   }
-
-
-
-
-
-// "use client"
-
-// import {
-//     Card,
-//     CardBody,
-//     CardHeader,
-//     Typography,
-//   } from "@material-tailwind/react";
-//   // import Chart from "react-apexcharts";
-//   import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
-   
-//   // If you're using Next.js please use the dynamic import for react-apexcharts and remove the import from the top for the react-apexcharts
-//   import dynamic from "next/dynamic";
-//   const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-   
-//   const chartConfig = {
-//     type: "bar",
-//     height: 200,
-//     series: [
-//       {
-//         name: "New Users",
-//         data: [100, 400, 300, 320, 500, 350, 400, 275, 500],
-//       },
-//     ],
-//     options: {
-//       chart: {
-//         toolbar: {
-//           show: false,
-//         },
-//       },
-//       title: {
-//         show: "",
-//       },
-//       dataLabels: {
-//         enabled: false,
-//       },
-//       colors: ["#5799FD"],
-//       plotOptions: {
-//         bar: {
-//           columnWidth: "40%",
-//           borderRadius: 2,
-//         },
-//       },
-//       xaxis: {
-//         axisTicks: {
-//           show: false,
-//         },
-//         axisBorder: {
-//           show: false,
-//         },
-//         labels: {
-//           style: {
-//             colors: "#616161",
-//             fontSize: "12px",
-//             fontFamily: "inherit",
-//             fontWeight: 400,
-//           },
-//         },
-//         categories: [
-//           "Apr",
-//           "May",
-//           "Jun",
-//           "Jul",
-//           "Aug",
-//           "Sep",
-//           "Oct",
-//           "Nov",
-//           "Dec",
-//         ],
-//       },
-//       yaxis: {
-//         labels: {
-//           style: {
-//             colors: "#616161",
-//             fontSize: "12px",
-//             fontFamily: "inherit",
-//             fontWeight: 400,
-//           },
-//         },
-//       },
-//       grid: {
-//         show: false,
-//         borderColor: "#dddddd",
-//         strokeDashArray: 5,
-//         xaxis: {
-//           lines: {
-//             show: true,
-//           },
-//         },
-//         padding: {
-//           top: 5,
-//           right: 20,
-//         },
-//       },
-//       fill: {
-//         opacity: 0.8,
-//       },
-//       tooltip: {
-//         theme: "dark",
-//       },
-//     },
-//   };
-   
-//   export default function ColumnChart() {
-//     return (
-//       <Card className="h-full">
-//         <CardHeader
-//           floated={false}
-//           shadow={false}
-//           color="transparent"
-//           className="flex flex-col gap-4 rounded-none md:flex-row md:items-center h-[20%]"
-//         >
-          
-         
-//         </CardHeader>
-//         <CardBody className="p-0 pb-0 h-full">
-//           <Chart {...chartConfig} />
-//         </CardBody>
-//       </Card>
-//     );
-//   }
-
-
-import React, { useState, useEffect } from 'react';
+"use client";
+ 
+ 
+import React, { useState, useEffect } from "react";
 import {
   Card,
-  CardBody, 
+  CardBody,
   CardHeader,
+  Typography,
 } from "@material-tailwind/react";
+// import Chart from "react-apexcharts";
+import Link from "next/link";
+import axios from 'axios';
+ 
+// If you're using Next.js please use the dynamic import for react-apexcharts and remove the import from the top for the react-apexcharts
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+ 
 
-export default function ColumnChart() {
+ 
+export default function ColumnChart () {
+ 
+  const [ columnChartData, setColumnChartData ] = useState([]);
+  const [selectedOperator, setSelectedOperator] = useState("");
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonthYear, setSelectedMonthYear] = useState();
+  const [isYearlyData, setIsYearlyData] = useState(true);
+  const [isMonthlyData, setIsMonthlyData] = useState(false);
+
+  console.log(selectedMonthYear);
+
+  let monthArray = [];
+  let monthlyCountArray = [];
+
+
+  if(isYearlyData && !isMonthlyData) {
+    monthArray = columnChartData.map((i, ind) => {
+      return(
+        i.month
+      )
+    });
   
-  const [interval, setInterval] = useState("monthly"); // Default interval
+    monthlyCountArray = columnChartData.map((i, ind) => {
+      return(
+        i.count
+      )
+    });
+  } else if(!isYearlyData && isMonthlyData) {
+    monthArray = columnChartData.map((i, ind) => {
+      return(
+        i.day
+      )
+    });
   
-  const [chartData, setChartData] = useState({
-    type: "bar",
-    height: 200,
-    series: [],
-    options: {
-      // Options here
-
-      
-               chart: {
-                 toolbar: {
-                   show: true,
-                 }, 
-               },
-               title: {
-                 show: "",
-               },
-               dataLabels: {
-                 enabled: false,
-               },
-               colors: ["#5799FD"],
-              //  plotOptions: {
-              //    bar: {
-              //      columnWidth: "40%",
-              //      borderRadius: 2,
-              //    },
-              //  },
-               xaxis: {
-                 axisTicks: {
-                   show: false,
-                 },
-                 axisBorder: {       
-                   show: false,
-                 },
-                 labels: {
-                   style: {
-                     colors: "#616161",
-                     fontSize: "12px",
-                     fontFamily: "inherit",
-                     fontWeight: 400,
-                   },
-                 },
-                 categories: [
-                   "Apr",
-                   "May",
-                   "Jun",
-                   "Jul",
-                   "Aug",
-                   "Sep",
-                   "Oct",
-                   "Nov",
-                   "Dec",
-                 ],
-               },
-               yaxis: {
-                 labels: {
-                   style: {
-                     colors: "#616161",
-                     fontSize: "12px",
-                     fontFamily: "inherit",
-                     fontWeight: 400,
-                   },
-                 },
-               },
-               grid: {
-                 show: false,
-                 borderColor: "#dddddd", 
-                 strokeDashArray: 5,
-                 xaxis: {
-                   lines: {
-                     show: true,
-                   },
-                 },
-                 padding: {
-                   top: 5,
-                   right: 20,
-                 },
-               },
-               fill: {
-                 opacity: 0.8,
-               },
-               tooltip: {
-                 theme: "dark",
-               },
-    },   
-  });
-
+    monthlyCountArray = columnChartData.map((i, ind) => {
+      return(
+        i.count
+      )
+    });
+  }
 
   
-  // Fetch data based on the selected interval
+ 
   useEffect(() => {
-    fetchData(interval);
-  }, [interval]);
 
-  const fetchData = async (interval) => {
-    // Simulated data fetching based on the interval
-    let newData = [];
-    switch (interval) {
-      case "year":
-        newData = [200, 500, 400, 600, 800, 700, 900, 1000, 1200];
-        break;
-      case "month":
-        newData = [100, 400, 300, 320, 500, 350, 400, 275, 500];
-        break;
-      
-      default:
-        newData = [100, 400, 300, 320, 500, 350, 400, 275, 500];
+    const yearOnLoad = new Date().getFullYear();
+    // console.log(yearOnLoad);
+ 
+    const fetchData = async () => {
+ 
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/register-count?year=${yearOnLoad}`);
+            // console.log(response);
+            setColumnChartData(response.data);
+            setIsYearlyData(true);
+            setIsMonthlyData(false);
+ 
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+        return () => {
+          return;
+        }
+ 
+    };
+ 
+    fetchData();
+  }, []);
+
+
+  async function handleSubmitColChart(e) {
+    e.preventDefault();
+  
+    if (!selectedYear && !selectedMonthYear ) {
+      toast("Chose operator to search.");
+      return;
+    } else {
+
+      if(selectedMonthYear) {
+
+        const splitDate = selectedMonthYear.split("-");
+        const splittedYear = splitDate[0];
+        const splittedMonth = splitDate[1];
+        try {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/register-count?year=${splittedYear}&month=${splittedMonth}`);
+          console.log(response);
+          setColumnChartData(response.data);
+          setIsYearlyData(false);
+          setIsMonthlyData(true);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            toast.error("Error while fetching monthly data.");
+            return;
+        }
+        
+      } else if(selectedYear && !selectedMonthYear) {
+
+        try {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/register-count?year=${selectedYear}`);
+          console.log(response);
+          setColumnChartData(response.data);
+          setIsYearlyData(true);
+          setIsMonthlyData(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            toast.error("Error while fetching yearly data.");
+            return;
+        }
+
+      } else {
+        return;
+      }
+
     }
-    // Update chart data
-    setChartData(prevState => ({  
-      ...prevState,
-      series: [{ data: newData }]
-    }));
   };
 
-  const handleIntervalChange = (e) => {
-    setInterval(e.target.value);
-  };
 
+
+  const chartConfig = {
+    type: "bar",
+    height: "100%",
+    width: "100%",
+    series: [
+      {
+        name: "New Joinees",
+        // data: [50, 40, 300, 320, 500, 350, 200, 230, 500, 450, 320, 700],
+        // data: [21,12,33,14,25,16,27,8,16,10,21,12,21,14,35,16,7,18,29,20,21,2,23,12,25,26,17,28,29,40,31],
+        data: monthlyCountArray,
+      },
+    ],
+    options: {
+      chart: {
+        toolbar: {
+          show: false,
+        },
+      },
+      title: {
+        show: "",
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      colors: ["#5799FD"],
+      plotOptions: {
+        bar: {
+          columnWidth: "80%",
+          borderRadius: 2,
+        },
+      },
+      xaxis: {
+        axisTicks: {
+          show: false,
+        },
+        axisBorder: {
+          show: false,
+        },
+        labels: {
+          style: {
+            colors: "#616161",
+            fontSize: "10px",
+            fontFamily: "inherit",
+            fontWeight: 400,
+          },
+        },
+        // categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ],
+        // categories: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+        categories: monthArray,
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: "#616161",
+            fontSize: "10px",
+            fontFamily: "inherit",
+            fontWeight: 400,
+          },
+        },
+      },
+      grid: {
+        show: false,
+        borderColor: "#dddddd",
+        strokeDashArray: 5,
+        xaxis: {
+          lines: {
+            show: true,
+          },
+        },
+        padding: {
+          top: 1,
+          right: 20,
+        },
+      },
+      fill: {
+        opacity: 0.8,
+      },
+      tooltip: {
+        theme: "dark",
+      },
+    },
+  };
+ 
   return (
-    <Card className="h-full">
+    <Card className="w-full h-full">
       <CardHeader
         floated={false}
         shadow={false}
         color="transparent"
-        className="flex flex-col gap-4 rounded-none md:flex-row md:items-center h-[20%]"
+        className="flex flex-col h-[15%] m-0 p-2 rounded-none md:flex-row md:items-center"
       >
-        <div>
-          <select
-            value={interval}
-            onChange={handleIntervalChange}
-            className="px-3 py-2 border rounded-md bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >   
-            <option value="yearly">Year</option>
-            <option value="monthly">Month</option>
-            
-          </select>
+        <div className="w-full h-full flex justify-between items-center">
+          <Typography variant="h6" color="blue-gray">
+            New Joinees
+          </Typography>
+          <div className="flex items-center">
+              <select 
+                className="w-[80px] h-6 text-[12px] text-black bg-white border-2 border-[#5799FD] rounded"
+                name="selectedOperator"
+                onChange={(e) => {
+                  let val= e.target.value;
+                  setSelectedYear(new Date().getFullYear());
+                  setSelectedOperator(val);
+                }}
+              >
+                <option value="" disabled selected>SELECT</option>
+                <option value="year"> By Year</option>
+                <option value="month"> By month & year</option>
+    
+              </select>
+
+              {
+                selectedOperator === "year" &&
+                <div className="flex items-center">
+                  <button
+                    className="w-6 h-6 text-xl"
+                    onClick={() => {
+                      setSelectedMonthYear("");
+                      setSelectedYear(prevValue => prevValue - 1);
+                    }}
+                  >-</button>
+                  <div>{ selectedYear }</div>
+                  <button
+                    className="w-6 h-6 text-xl"
+                    onClick={() => {
+                      setSelectedMonthYear("");
+                      setSelectedYear(prevValue => prevValue + 1);
+                    }}
+                  >+</button>
+                </div>
+              }
+
+              {
+                selectedOperator === "month" &&
+                <input 
+                  type="month" 
+                  name="selectedMonthYear" 
+                  className="w-6 h-6 text-xl"
+                  onChange={(e) => {
+                    var val = e.target.value;
+                    setSelectedMonthYear(val);
+                  }}  
+                />
+              }
+
+              <button
+                className="w-8 h-6"
+                onClick={handleSubmitColChart}
+              >Go</button>
+
+              
+
+          </div>
         </div>
       </CardHeader>
-      <CardBody className="p-0 pb-0 h-full">
-        <Chart {...chartData} />
+      <CardBody className="h-[85%] m-0 p-0 px-2 pb-0">
+        <Chart {...chartConfig} />
       </CardBody>
     </Card>
   );
 }
-           
-
-
-
-// "use client"
-
-
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import {
-//   Card,
-//   CardBody,
-//   CardHeader,
-// } from "@material-tailwind/react";
-// import dynamic from "next/dynamic";
-// const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
-// export default function ColumnChart() {
-  
-//   const [interval, setInterval] = useState("monthly"); // Default interval
-//   const [chartData, setChartData] = useState({
-//     type: "bar",
-//     height: 200,
-//     series: [],
-//     options: {
-//       // Options here
-//     },
-//   });
-
-//   useEffect(() => {
-//     fetchData(interval);
-//   }, [interval]);
-
-//   const fetchData = async (interval) => {
-//     let newData = [];
-//     switch (interval) {
-//       case "yearly":
-//         newData = [200, 500, 400, 600, 800, 700, 900, 1000, 1200];
-//         break;
-//       case "monthly":
-//         const currentDate = new Date();
-//         const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-//         const year = currentDate.getFullYear();
-//         try {
-//           const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superAdmin/register-count?month=${month}&year=${year}`);
-//           const monthlyData = response.data; // Assuming the API response contains the monthly data
-//           newData = monthlyData.map(item => item.value); // Assuming the API response contains an array of objects with a 'value' property
-//         } catch (error) {
-//           console.error("Error fetching monthly data:", error);
-//         }
-//         break;
-//       case "weekly":
-//         newData = [50, 100, 80, 120, 200, 150, 180, 100, 250];
-//         break;
-//       default:
-//         newData = [100, 400, 300, 320, 500, 350, 400, 275, 500];
-//     }
-//     // Update chart data
-//     setChartData(prevState => ({
-//       ...prevState,
-//       series: [{ data: newData }]
-//     }));
-//   };
-
-//   const handleIntervalChange = (e) => {
-//     setInterval(e.target.value);
-//   };
-
-//   return (
-//     <Card className="h-full">
-//       <CardHeader
-//         floated={false}
-//         shadow={false}
-//         color="transparent"
-//         className="flex flex-col gap-4 rounded-none md:flex-row md:items-center h-[20%]"
-//       >
-//         <div>
-//           <select
-//             value={interval}
-//             onChange={handleIntervalChange}
-//             className="px-3 py-2 border rounded-md bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-//           >   
-//             <option value="yearly">Yearly</option>
-//             <option value="monthly">Monthly</option>
-//             <option value="weekly">Weekly</option>
-//           </select>
-//         </div>
-//       </CardHeader>
-//       <CardBody className="p-0 pb-0 h-full">
-//         <Chart {...chartData} />
-//       </CardBody>
-//     </Card>
-//   );
-// }

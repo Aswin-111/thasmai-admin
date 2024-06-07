@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdOutlineEdit } from "react-icons/md";
+// import { MdOutlineEdit } from "react-icons/md";
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
@@ -61,7 +61,12 @@ function ZoomMeet(props) {
                                             <a href={ zoomMeet.zoomLink } target="_blank">{ zoomMeet.zoomLink }</a>
                                         </td>
                                         <td>
-                                            <MdOutlineEdit className='text-2xl cursor-pointer hover:text-blue-500'/>
+                                            <RiDeleteBin6Line className='text-2xl cursor-pointer hover:text-red-500'
+                                                onClick={() => {
+                                                    props.setZoomMeetId(zoomMeet.id);
+                                                    props.setIsZoomMeetPopUp(true)
+                                                }}
+                                            />
                                         </td>
                                     </tr>
                                 );

@@ -2,9 +2,9 @@
 
 import React from 'react'
 import NavLink from '../navlink/navlink'
-import AppointFeedbackTable from '@/app/components/feedback/AppointFeedbackTable'
+import AppointFeedbackTable from '@/app/components/feedback/appointmentFeedback/AppointFeedbackTable'
 import AppointmentView from '@/app/components/feedback/AppointmentView'
-import FeedbackView from '@/app/components/feedback/FeedbackView'
+import FeedbackView from '@/app/components/feedback/appointmentFeedback/FeedbackView'
 import { useAppointmentFeedbackStore } from '../ashramStayFeedback/individualFeedback/appointFeedbackState.js'
 
 function AppointmentFeedback() {

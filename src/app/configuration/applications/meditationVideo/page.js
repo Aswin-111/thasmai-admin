@@ -18,7 +18,13 @@ function MeditationVideo() {
         playlistImage: ""
     });
 
-    console.log(playlistData);
+    //pass plalist head and image from playlist table to add video popup
+    const [selectedData, setSelectedData] = useState({
+      head: '',
+      image: ''
+    });
+
+  
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Configuration parameters");
@@ -31,7 +37,7 @@ function MeditationVideo() {
         }));
       };
 
-      const handlePlaylistImageChange = (e) => {
+    const handlePlaylistImageChange = (e) => {
         const file = e.target.files[0];
         setPlaylistData({
             ...playlistData,
@@ -39,6 +45,10 @@ function MeditationVideo() {
         });
     };
 
+
+
+
+    //handleAddPlaylist
 
     const handleAddPlaylist = async (e) => {
         e.preventDefault();
@@ -91,14 +101,14 @@ function MeditationVideo() {
       </div>
       <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md'>
           
-          <div className='w-full h-[20%] bg-[#E1E2EB] rounded-md '>
+          <div className='w-full h-[20%] bg-[#E1E2EB] rounded-md'>
               
                 <p className='text-black font-medium px-2 pt-1'>Create Playlist Heading</p>
                   
                  <div className='w-full flex'>
                    <div className='w-[80%] h-full pt-4 flex'>
                       <input
-                       className='w-[300px] h-10 ms-8 p-2 rounded border-[1px] border-black'
+                       className='w-[300px] h-10 ms-8 p-2 rounded border-[1px] bg-white border-black'
                        name='playlistHeading'
                        value={playlistData.playlistHeading}
                        placeholder='Playlist Heading'
@@ -139,14 +149,19 @@ function MeditationVideo() {
                          </button>
                       </div>
                  </div>
-             
 
-              <Playlist setAddVideoPopUp ={setAddVideoPopUp}/>
+          </div>
+          <div className='w-full h-[80%] overflow-y-auto'>
+            <Playlist setAddVideoPopUp ={setAddVideoPopUp} setSelectedData={setSelectedData} />
+
           </div>
 
 
       </div>
-      { addVideoPopUp  &&  <AddVideoPopUp setAddVideoPopUp={setAddVideoPopUp} />    }
+      { 
+        addVideoPopUp  &&  
+        <AddVideoPopUp setAddVideoPopUp={setAddVideoPopUp} selectedData={selectedData} setSelectedData={setSelectedData} /> 
+      }
 
     </div>
   )

@@ -134,7 +134,7 @@ const handleEditSubmit = async (e) => {
                  >+
                  </button>
            
-                     <div className='w-[1000px] h-[550px] p-8 bg-white rounded '>
+                     <div className='w-[1000px] h-[550px] p-8 bg-white rounded text-black '>
                         <p className='text-2xl font-medium'>Country : {edittedData.country}</p>
                         <div>
                           <p className='mt-4 font-bold'>General Video</p>
@@ -142,7 +142,7 @@ const handleEditSubmit = async (e) => {
                             type='text'
                             name='general_video'
                             value={edittedData.general_video}
-                            className='w-[500px] h-[40px] mt-2 p-1 bg-blue-gray-100 rounded '
+                            className='w-[500px] h-[40px] mt-2 p-1 text-black  bg-blue-gray-100 rounded '
                             onChange={handleOnChange}
                           
                           />
@@ -156,7 +156,7 @@ const handleEditSubmit = async (e) => {
                              type='time'
                              name='morning_time_from'
                              value={edittedData.morning_time_from}
-                            className='w-[100px] h-[40px] me-2 p-1 bg-blue-gray-100 rounded'
+                            className='w-[130px] h-[40px] me-2 p-1 text-black  bg-blue-gray-100 rounded'
                             onChange={handleOnChange}
                             /> 
                             
@@ -164,7 +164,7 @@ const handleEditSubmit = async (e) => {
                              type='time'
                              name='morning_time_to'
                              value={edittedData.morning_time_to}
-                            className='w-[100px] h-[40px] me-2 p-1 bg-blue-gray-100 rounded'
+                            className='w-[130px] h-[40px] me-2 p-1 text-black  bg-blue-gray-100 rounded'
                             onChange={handleOnChange}
                             /> 
                             <p className='me-2 font-medium'> URL :</p>
@@ -172,7 +172,7 @@ const handleEditSubmit = async (e) => {
                             type='text'
                             name='morning_video'
                             value={edittedData.morning_video}
-                            className='w-[500px] h-[40px] p-1 bg-blue-gray-100 rounded'
+                            className='w-[500px] h-[40px] p-1 text-black  bg-blue-gray-100 rounded'
                             onChange={handleOnChange}
                           />
                           </div>
@@ -185,7 +185,7 @@ const handleEditSubmit = async (e) => {
                              type='time'
                              name='evening_time_from'
                              value={edittedData.evening_time_from}
-                            className='w-[100px] h-[40px] me-2 p-1  bg-blue-gray-100 rounded'
+                            className='w-[130px] h-[40px] me-2 p-1 text-black   bg-blue-gray-100 rounded'
                             onChange={handleOnChange}
                             /> 
                             
@@ -193,7 +193,7 @@ const handleEditSubmit = async (e) => {
                              type='time'
                              name='evening_time_to'
                              value={edittedData.evening_time_to}
-                            className='w-[100px] h-[40px] me-2 p-1 bg-blue-gray-100 rounded'
+                            className='w-[130px] h-[40px] me-2 p-1 text-black  bg-blue-gray-100 rounded'
                             onChange={handleOnChange}
                             /> 
                             <p className='me-2 font-medium'> URL :</p>
@@ -201,7 +201,7 @@ const handleEditSubmit = async (e) => {
                             type='text'
                             name='evening_video'
                             value={edittedData.evening_video}
-                            className='w-[500px] h-[40px] p-1 bg-blue-gray-100 rounded'
+                            className='w-[500px] h-[40px] p-1 text-black  bg-blue-gray-100 rounded'
                             onChange={handleOnChange}
                           />
                           </div>

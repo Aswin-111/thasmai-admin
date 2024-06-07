@@ -20,7 +20,7 @@ export default function Overview() {
         
         <div className="w-full h-[85vh] pb-1 overflow-y-auto">
             <div className="w-full md:h-[40%] mb-6 md:m-0 md:flex justify-around">
-                <div className="w-full md:w-[47%] mb-2 md:m-0 h-full">
+                <div className="w-full md:w-[47%] mb-2 md:m-0 h-[35vh] md:h-full">
                     <ColumnChart />
                 </div>
                 <div className="w-full md:w-[47%] mb-2 md:m-0 h-full">
@@ -37,7 +37,7 @@ export default function Overview() {
 
                 <div className="w-full h-[250px] md:w-[54%] md:h-full ps-4 pe-1 py-2 mb-4 md:m-0 bg-white rounded-xl shadow-md  overflow-y-auto md:overflow-hidden">
                     <h3 className="h-[15%] font-bold text-black">Meditation Notes</h3>
-                    <div className="comments w-[100%] h-[85%] rounded overflow-y-auto pe-1 text-white">
+                    <div className="comments w-[100%] h-[85%] rounded overflow-y-auto p-1 bg-blue-gray-50 text-white">
                         <MeditationNotes />
                     </div>
                 </div>
@@ -45,7 +45,7 @@ export default function Overview() {
 
                 <div className="w-full h-[250px] md:w-[40%] md:h-full bg-white rounded-xl shadow-md py-2 ps-4 pe-3">
                     <Link href="/events/events" className="w-full">
-                        <h3 className="h-[15%] font-bold text-black">Recent Messages</h3>
+                        <h3 className="h-[15%] font-bold text-black">Recent Events</h3>
                     </Link>
                     <CarouselDefault />
                     
