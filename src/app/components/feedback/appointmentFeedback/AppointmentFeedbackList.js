@@ -5,20 +5,20 @@
 
 
 import React, { useRef, useEffect } from "react";
+import { useAppointFeedbackStore } from "@/app/feedback/appointmentFeedback/ashramAppointFeedbackState";
 import axios from "axios";
 import moment from 'moment'
-import { useAppointFeedbackStore } from "@/app/appointments/feedbacks/ashramAppointFeedbackState";
 
 
 
 
-function AppointFeedbackTable( props) {
+function AppointmentFeedbackList( props) {
 
   const feedbackState = useAppointFeedbackStore((state) => {
     return state;
   });
    
-  
+
 
   useEffect(() =>{
     fetchData();
@@ -42,11 +42,11 @@ function AppointFeedbackTable( props) {
     props.setFilteredPageNo(1)
 
     const data = response.data.appointments;
-    // const filteredData = data.filter((i) => {
-    //   return i.appointment_status === "Completed";
-    // })
+    const filteredData = data.filter((i) => {
+      return i.appointment_status === "Completed";
+    })
 
-    feedbackState.setAppointments(data);
+    feedbackState.setAppointments(filteredData);
     
    } catch (error) {
 
@@ -162,4 +162,4 @@ function AppointFeedbackTable( props) {
   );
 }
 
-export default AppointFeedbackTable;
+export default AppointmentFeedbackList;

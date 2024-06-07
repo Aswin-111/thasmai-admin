@@ -1,20 +1,20 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { IoMdSend } from "react-icons/io";
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
+import { IoMdSend } from "react-icons/io";
 import NavLink from '../navlink/navlink';
+import { toast } from 'react-hot-toast';
 import { useNavbarTextStore } from '../../state/navbar-state';
 
-function TestGlobal() {
+function GurujiMessage() {
 
     const [messages, setMessages] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [pageNo, setPageNo] = useState(1);
-    const [gurujiGlobalMessage, setGurujiGlobalMessage] = useState("");
+    const [gurujiMessage, setGurujiMessage] = useState("");
     const [renderMessageToggle, setRenderMessageToggle] = useState(false);
-
-    // console.log(gurujiGlobalMessage);
+    
+    // console.log(pageNo);
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Messages");
@@ -23,13 +23,12 @@ function TestGlobal() {
         const fetchData = async () => {
           
             try {
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/adminglobalMessage`, {
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/gurujimessage`, {
                     page: pageNo
                 });
                 setMessages(response.data.messages);
                 setTotalPages(response.data.totalPages)
-                console.log(response.data);
-  
+                console.log(response.data); 
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -55,7 +54,7 @@ function TestGlobal() {
         }
     };
 
-    async function handleGurujiGlobalMessage() {
+    async function handleGurujiMessage() {
 
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleString('en-US', {
@@ -68,19 +67,18 @@ function TestGlobal() {
         });
 
         // console.log(formattedDate);
-        if(gurujiGlobalMessage) {
+        if(gurujiMessage) {
             try {
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/global-message`, {
-                  message: gurujiGlobalMessage,
-                  messageTime: formattedDate,
-                  isAdminMessage: true,
-                  UId: 0
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/admin-messages`, {
+                    message: gurujiMessage,
+                    messageTime: formattedDate,
+                    isAdminMessage: true
                 });
                 console.log(response);
-                setGurujiGlobalMessage("");
+                setGurujiMessage("");
+                // alert(response.data.message);
                 setPageNo(1);
                 setRenderMessageToggle(!renderMessageToggle);
-                // alert(response.data.message);
                 toast.success("Message send successfully.");
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -88,81 +86,58 @@ function TestGlobal() {
             }
         } else {
             toast("Message field is empty!");
-        }
-        
+        }    
     };
 
 
     return (
-        
         <div className="w-full h-[85vh] px-7 overflow-y-auto">
             <div className="w-full sticky top-0">
                 <NavLink />
             </div>
             <div className='w-full h-[90%] mt-2 p-4 bg-white rounded shadow drop-shadow-md'>
             
-                <div className='w-full h-[70%] p-2 px-10 flex flex-col-reverse rounded-md overflow-y-scroll bg-gradient-to-r from-[#a5e1e2] to-[#d5ccc7]'>
+                <div className='w-full h-[70%] p-2 px-10 flex flex-col-reverse rounded-md overflow-y-scroll bg-gradient-to-r from-[#d5ccc7] to-[#a5e1e2]'>
                     {
                         messages[0] && 
                         messages.map((i, index) => {
                             return (
-                            
-                                i.isAdminMessage ? (
+                                i.isAdminMessage && 
                                     <div className="chat chat-end mb-2" key={index}>
                                         {/* <div className="chat-image avatar">
                                             <div className="w-10 rounded-full">
-                                                <img alt="Tailwind CSS chat bubble component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                                <img alt="Tailwind CSS chat bubble component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                             </div>
                                         </div> */}
                                         {/* <div className="chat-header">
                                             Thasmai Guruji
                                             <time className="text-xs opacity-50">12:46</time>
                                         </div> */}
-                                        <div className="chat-bubble bg-[#DDC2A1] text-[#312411]">{ i.message }</div>
+                                        <div className="chat-bubble bg-white text-black">{ i.message }</div>
                                         <div className="chat-footer">
                                             <time className="text-xs opacity-75">{ i.messageTime }</time>
                                         </div>
-                                    </div>
-                                ) : (
-                                
-                                    <div className="chat chat-start mb-2" key={index}>
-                                        {/* <div className="chat-image avatar">
-                                            <div className="w-10 rounded-full">
-                                                <img alt="Tailwind CSS chat bubble component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                            </div>
-                                        </div> */}
-                                        <div className="chat-header">
-                                            {i.userName}
-                                            {/* <time className="text-xs opacity-50">{ i.messageTime }</time> */}
-                                        </div>
-                                        <div className="chat-bubble bg-white text-black">{ i.message }</div>
-
-                                        <div className="chat-footer">
-                                            <time className="text-xs opacity-75">{ i.messageDate } at { i.messageTime }</time>
-                                        </div>
-                                    </div>
-                                )
-                            
+                                    </div>               
                             );
                         })
                     }
                 </div>
 
-                {/*-------------------- Guruji messsage input field ----------------------*/}
+                    {/*-------------------- Guruji messsage input field ----------------------*/}
 
                 <div className='w-full h-[30%]  py-4 bg-white'>
                     <div className='flex'>
                         <div className='w-[70%]'></div>
-                        <div className='w-[30%] flex justify-between items-center'>
-                            <div>Page {pageNo} of {totalPages}</div>
-
+                            <div className=' w-[30%] flex justify-between items-center'>
+                                <div>Page {pageNo} of {totalPages}
+                            </div>
                             <button 
                                 className='w-[110px] h-12 rounded-xl bg-[#AAC7FF] text-black hover:bg-[#aac6ff92]'
-                             onClick={handlePreviousPage}
+                                onClick={handlePreviousPage}
                             >Previous</button>
                             <button 
-                               className='w-[110px] h-12 rounded-xl bg-[#AAC7FF] text-black hover:bg-[#aac6ff92]'
-                               onClick={handleNextPage}
+                                className='w-[110px] h-12 rounded-xl bg-[#AAC7FF] text-black hover:bg-[#aac6ff92]'
+                                onClick={handleNextPage}
                             >Next</button>
                         </div>
                     </div>
@@ -171,18 +146,20 @@ function TestGlobal() {
                             text="text" 
                             className='w-[90%] h-11 me-2 p-2 bg-[#D6E3FF] text-black rounded-xl shadow drop-shadow-md outline-none placeholder:ps-2'
                             placeholder='Message...'
-                            value={ gurujiGlobalMessage }
+                            value={ gurujiMessage }
                             onChange={(e) => {
                                 const val = e.target.value;
-                                setGurujiGlobalMessage(val);
+                                setGurujiMessage(val);
                             }}
                         />
                         <button 
                             className='w-[100px] h-11 bg-[#005DB8] text-sm rounded-2xl text-white flex items-center justify-center hover:bg-[#005cb8e4]'
-                            onClick={handleGurujiGlobalMessage}
+                            onClick={handleGurujiMessage}
                         >
                             <IoMdSend className='text-2xl me-2'/>
-                        Send</button>
+                            Send
+                        </button>
+ 
                     </div>
                 
                 </div>
@@ -192,4 +169,4 @@ function TestGlobal() {
     );
 }
 
-export default TestGlobal
+export default GurujiMessage

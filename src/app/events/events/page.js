@@ -118,7 +118,7 @@ function EventDetails() {
 		   
 				const field = i.field;
 				const operator = i.operator.toLowerCase();
-				const value = (i.field.toLowerCase() ==="name" || i.field.toLowerCase() ==="location") ? `${i.value}%` : i.value;
+				const value = ((i.field.toLowerCase() ==="name" && i.operator === "starts with") || (i.field.toLowerCase() ==="location" && i.operator === "starts with")) ? `${i.value}%` : i.value;
 				console.log(field,value,operator);
 			
 				if(field.includes("Date") && operator === "between") {

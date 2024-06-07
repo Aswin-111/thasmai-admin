@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useAppointFeedbackStore } from '@/app/appointments/feedbacks/ashramAppointFeedbackState';
+import { useAppointFeedbackStore } from '@/app/feedback/appointmentFeedback/ashramAppointFeedbackState'
 
-function AppointFeedbackView() {
+
+function AppointmentFeedbackView() {
 
     const feedbackState = useAppointFeedbackStore((state) => {
         return state;
@@ -75,4 +76,4 @@ function AppointFeedbackView() {
   )
 }
 
-export default AppointFeedbackView
+export default AppointmentFeedbackView

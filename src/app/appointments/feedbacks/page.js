@@ -92,10 +92,10 @@ function AshramAppointments() {
       console.log(response,"sdfghnbg");
 
       const data = response.data.results;
-      const dataFiltered = data.filter((i) => {
-        return i.appointment_status === "Completed";
-      });
-      feedbackState.setAppointments([...dataFiltered]);
+      // const dataFiltered = data.filter((i) => {
+      //   return i.appointment_status === "Completed";
+      // });
+      feedbackState.setAppointments([...data]);
   
     }
     catch (error) {  

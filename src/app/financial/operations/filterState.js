@@ -10,7 +10,7 @@ export const useOperationsFilterStore = create((set) => ({
   	stringOperator : ["starts with", "equal to"],
   	integerOperator : ["greater than", "less than", "equal to", "not equal to"],
 
-	expenseTypeValues : ["Electricity bill", "Water bill", "Stationery items", "Food and beverages"],
+	expenseTypeValues : ["Electricity Bill", "Water Bill", "Stationery Items", "Food and beverages"],
 
 
 

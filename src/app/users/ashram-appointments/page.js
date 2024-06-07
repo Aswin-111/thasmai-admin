@@ -6,7 +6,6 @@ import NavLink from '../navlink/navlink'
 import AppointmentsTables from '@/app/components/users/appointmentsTable'
 import AppointmentView from '@/app/components/users/ashramAppointmentsView'
 import ProfileView from '@/app/components/users/profileView'
-import CheckoutPayment from '@/app/components/operator/checkoutPayment'
 import axios from 'axios';
 import { useAdminAppointmentStore } from './appointmentState'
 import { useAppointmentFilterStore } from "./filterstate";
@@ -161,7 +160,7 @@ function Appointments() {
        
         		const field = i.field;
         		const operator = i.operator.toLowerCase();
-        		const value = i.field.toLowerCase() ==="name" ? `${i.value}%` : i.value;
+        		const value = ((i.field.toLowerCase() ==="name")  && (i.operator === "starts with"))  ? `${i.value}%` : i.value;
          		console.log(field,value,operator);
         
          		if(field.includes("Date") && operator === "between") {
