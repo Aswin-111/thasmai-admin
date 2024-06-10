@@ -216,7 +216,13 @@ function Page() {
 
       </div>
       {
-        isZoomMeetPopUp && <DeleteZoomMeetPopUp zoomMeetId={zoomMeetId}  setIsZoomMeetPopUp={setIsZoomMeetPopUp} />
+        isZoomMeetPopUp && 
+          <DeleteZoomMeetPopUp 
+            zoomMeetId={zoomMeetId}  
+            setIsZoomMeetPopUp={setIsZoomMeetPopUp}
+            zoomTableRenderToggle={zoomTableRenderToggle} 
+            setZoomTableRenderToggle={setZoomTableRenderToggle} 
+          />
       }
     </div>
   ); 

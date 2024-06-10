@@ -6,11 +6,14 @@ import { toast } from 'react-hot-toast';
 
 function AddVideoPopUp(props) {
 
-
+    
     const [videoData, setVideoData] = useState({
-        videoHeading: '',
-        videoLink: ''
+        videoHeading: "",
+        videoLink: ""
     });
+    const playlistId = props.selectedPlaylistId;
+    console.log(playlistId);
+
 
     const handleVideoDataChange = (e) => {
         const { name, value } = e.target;
@@ -25,37 +28,50 @@ function AddVideoPopUp(props) {
     const handleAddVideo = async (e) => {
         e.preventDefault();
                 
-        const { head, image } = props.selectedData;
         const { videoHeading, videoLink } = videoData;
+        const {head, category, videoArray} = props.selectedPlaylistData
 
-        
+        console.log(videoArray);
+        const videoHeadArray = videoArray.map((i,index) => {
+            return i.video_heading
+        })
+        const videoLinkArray = videoArray.map((i,index) => {
+            return i.video_link
+        })
         
         // console.log('Submitting playlist form:',form);
+        
 
         if(videoHeading && videoLink) {
 
+                videoHeadArray.push(videoHeading)
+                videoLinkArray.push(videoLink)
+
+                console.log(head,category,videoLinkArray,videoHeadArray);
                 const formData = new FormData();
+                formData.append('Video_heading', JSON.stringify(videoHeadArray));
+                formData.append('videoLink', JSON.stringify(videoLinkArray));
                 formData.append('playList_heading', head);
-                formData.append('playList_image', image);
-                formData.append('Video_heading', videoHeading)
-                formData.append('videoLink', videoLink);
-
-                // form.append('category', playlistHeading);
+                formData.append('category', category);
                 console.log(formData);
-
             try {
 
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/add-video`, formData);
+                const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-video/${playlistId}`,formData )
                 console.log(response);
                 // Clear form fields after successful submission
-                props.setSelectedData({
-                    playlistHeading: '',
-                    playlistImage: '',
-                });
+                props.setSelectedPlaylistId("");
+                props.setSelectedPlaylistData({
+                    head : "",
+                    category : "",
+                    videoArray : [],
+
+                })
                 setVideoData({
                     videoHeading: '',
                     videoLink: '',
                 });
+                props.setRenderPlaylistToggle(prevValue => !prevValue);
+                props.setAddVideoPopUp(false);
                 toast.success('Video added successfully');
 
             } catch (error) {

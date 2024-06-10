@@ -11,10 +11,10 @@ function Playlist(props) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/superadmin/videos`
+          `${process.env.NEXT_PUBLIC_API_URL}/superadmin/get-video`
         );
         console.log(response, "playlists");
-        setPlaylists(response.data);
+        setPlaylists(response.data.videos);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -25,7 +25,7 @@ function Playlist(props) {
     return () => {
       return;
     };
-  }, []);
+  }, [props.renderPlaylistToggle]);
 
   return (
 
@@ -45,15 +45,24 @@ function Playlist(props) {
                   </div>
                       
                   <div className="w-[40%] h-full p-1 text-white flex  items-center justify-evenly ">
-                    <RiDeleteBin6Line className="text-2xl cursor-pointer hover:text-red-500" />
-                    <MdOutlineEdit className="text-2xl cursor-pointer hover:text-blue-500" />
+                    <RiDeleteBin6Line className="text-2xl cursor-pointer hover:text-red-500"
+                        onClick={() => {
+                         props.setSelectedPlaylistId(item.id);
+                         props.setIsDeletePlaylistPopup(true)
+
+   
+                       }}
+                    />
+                    {/* <MdOutlineEdit className="text-2xl cursor-pointer hover:text-blue-500" /> */}
                     <button
                       className="w-[150px] h-10 ms-8 mt-2 bg-[#6EA5FF] text-white rounded-2xl hover:scale-105 hover:bg-[#629bf7]"
                       onClick={() => {
-                        props.setSelectedData({
-                          head: item.playList_heading,
-                          image: item.playList_image
-                        });
+                        props.setSelectedPlaylistId(item.id);
+                        props.setSelectedPlaylistData({
+                          head : item.playList_heading,
+                          category : item.category,
+                          videoArray : item.video
+                        })
                         props.setAddVideoPopUp(true);
                       }}
                     >
@@ -75,18 +84,36 @@ function Playlist(props) {
                     </thead>
                     <tbody className="w-full h-14 bg-[#F9F9FF] border-b-2 border-[#C1C6D4] text-black">
                       {
-                        item.videos[0] && 
-                        item.videos.map((vid, ind) => {
+                        item.video[0] && 
+                        item.video.map((vid, ind) => {
                           return(
                             <tr>
                               <td className="ps-2">{ ind + 1}</td>
-                              <td>{ vid.Video_heading }</td>
-                              <td>{ vid.videoLink }</td>
+                              <td>{ vid.video_heading }</td>
+                              <td>{ vid.video_link }</td>
                               <td>
-                                <RiDeleteBin6Line className="text-2xl cursor-pointer hover:text-red-500" />
+                                <RiDeleteBin6Line className="text-2xl cursor-pointer hover:text-red-500"
+                                  onClick={() => {
+                                    props.setSelectedPlaylistId(item.id);
+                                    props.setSelectedPlaylistData({
+                                      head : item.playList_heading,
+                                      category : item.category,
+                                      videoArray : item.video,
+                                      index : ind
+                                    })
+                                    props.setIsDeleteVideoPopup(true)
+
+
+                                  }}
+                                />
                               </td>
                               <td>
-                                <MdOutlineEdit className="text-2xl cursor-pointer hover:text-blue-500" />
+                                <MdOutlineEdit className="text-2xl cursor-pointer hover:text-blue-500"
+                                  onClick={() => {
+                                    props.setSelectedPlaylistId(item.id);
+
+                                  }}
+                                />
                               </td>
                             </tr>
                           );

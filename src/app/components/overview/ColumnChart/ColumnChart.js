@@ -11,6 +11,8 @@ import {
 // import Chart from "react-apexcharts";
 import Link from "next/link";
 import axios from 'axios';
+import { HiMinusCircle , HiPlusCircle} from "react-icons/hi";
+import { BsArrowRightCircleFill } from "react-icons/bs";
  
 // If you're using Next.js please use the dynamic import for react-apexcharts and remove the import from the top for the react-apexcharts
 import dynamic from "next/dynamic";
@@ -234,7 +236,7 @@ export default function ColumnChart () {
           </Typography>
           <div className="flex items-center">
               <select 
-                className="w-[80px] h-6 text-[12px] text-black bg-white border-2 border-[#5799FD] rounded"
+                className="w-[80px] h-6  text-[12px] text-black bg-white border-2 border-[#5799FD] rounded"
                 name="selectedOperator"
                 onChange={(e) => {
                   let val= e.target.value;
@@ -248,25 +250,33 @@ export default function ColumnChart () {
     
               </select>
 
-              {
-                selectedOperator === "year" &&
-                <div className="flex items-center">
+              {   
+                
+                selectedOperator === "year" ? (
+                <div className=" h-6 flex items-center border-2 ms-2  border-[#5799FD] rounded">
                   <button
-                    className="w-6 h-6 text-xl"
+                    className="w-6 h-6 text-md flex justify-center items-center hover:text-[#5799FD]"
                     onClick={() => {
                       setSelectedMonthYear("");
                       setSelectedYear(prevValue => prevValue - 1);
                     }}
-                  >-</button>
-                  <div>{ selectedYear }</div>
+                  >
+                    <HiMinusCircle/>
+                  </button>
+                  <div className="text-[11px] flex justify-center items-center font-medium" >{ selectedYear }</div>
                   <button
-                    className="w-6 h-6 text-xl"
+                    className="w-6 h-6 text-md flex justify-center items-center hover:text-[#5799FD]"
                     onClick={() => {
                       setSelectedMonthYear("");
                       setSelectedYear(prevValue => prevValue + 1);
                     }}
-                  >+</button>
-                </div>
+                  >
+                    <HiPlusCircle/>
+                  </button>
+                </div> 
+                ) : (
+                  <div className="w-[85px] h-5 "></div> 
+                )
               }
 
               {
@@ -283,9 +293,11 @@ export default function ColumnChart () {
               }
 
               <button
-                className="w-8 h-6"
+                className="w-8 h-6 text-xl text-teal-600 flex justify-center items-center hover:text-teal-400"
                 onClick={handleSubmitColChart}
-              >Go</button>
+              >
+                < BsArrowRightCircleFill/>
+              </button>
 
               
 

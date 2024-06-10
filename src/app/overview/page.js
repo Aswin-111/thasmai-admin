@@ -1,16 +1,20 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from "next/link";
 import ColumnChart from "@/app/components/overview/ColumnChart/ColumnChart"
-import PieChart from "@/app/components/overview/PieChart/PieChart"
 import CarouselDefault from "@/app/components/overview/CarouselDefault/CarouselDefault"
 import MeditationCount from "@/app/components/overview/MeditationCount/MeditationCount"
 import { useNavbarTextStore } from '../state/navbar-state';
 import MeditationNotes from '../components/overview/MeditationNotes/MeditationNotes';
+import IncomePieChart from '../components/overview/PieChart/IncomePieChart';
+import ExpensePieChart from '../components/overview/PieChart/ExpensePieChart';
+import { BsToggle2Off,BsToggle2On } from "react-icons/bs";
 
 
 export default function Overview() {
+
+    const [pieChartToggle , setPieChartToggle] =useState(false)
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Overview");
@@ -23,8 +27,19 @@ export default function Overview() {
                 <div className="w-full md:w-[47%] mb-2 md:m-0 h-[35vh] md:h-full">
                     <ColumnChart />
                 </div>
-                <div className="w-full md:w-[47%] mb-2 md:m-0 h-full">
-                    <PieChart />
+                <div className="w-full md:w-[47%]  mb-2 md:m-0 h-full relative">
+                    <button className='w-10 h-6 text-3xl text-blue-gray-900 hover:text-blue-600 absolute top-3 right-5 z-50'
+                        onClick={() => {
+                            setPieChartToggle(prevValue => !prevValue);
+                        }}
+                    >
+                        {
+                            !pieChartToggle ? <BsToggle2Off/> : <BsToggle2On/>
+                        }
+                    </button>
+                    {
+                        !pieChartToggle ?  <IncomePieChart/> :  <ExpensePieChart/>
+                    }
                 </div>
             </div>
 

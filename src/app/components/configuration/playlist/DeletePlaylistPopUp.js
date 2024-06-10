@@ -1,30 +1,22 @@
 "use client"
-
-
-import React from 'react';
+import React from 'react'
 import axios from 'axios';
 import { toast } from "react-hot-toast";
-
-function DeleteZoomMeetPopUp(props) {
-
-
+function DeletePlaylistPopUp(props) {
     
     const handleDelete = async () => {
         
-        const zoomMeetId = props.zoomMeetId
+        const playlistId = props.selectedPlaylistId
         try {
-            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/delete-video/${zoomMeetId}`);
-            //   filterState.setBlogsData(response.data.blogs);
-            //   props.setTotalPages(response.data.totalPages);
-            //   props.setIsFilteredData(false);
-            //   props.setFilteredPageNo(1);
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/delete-video/${playlistId}`);
+           
             console.log(response);
-            props.setZoomTableRenderToggle(!props.zoomTableRenderToggle)
-            toast.success("Successfully deleted the Zoom Meet link.");
-            props.setIsZoomMeetPopUp(false);
+            props.setRenderPlaylistToggle(prevValue => !prevValue);
+            toast.success("Successfully deleted the Playlist.");
+            props.setIsDeletePlaylistPopup(false);
         } catch (error) {
                  // console.error('Error fetching data:', error);
-                toast.error("Error while deleting Zoom Meet link.");
+                toast.error("Error while deleting Playlist.");
         }
         
     };
@@ -35,7 +27,7 @@ function DeleteZoomMeetPopUp(props) {
         <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
             <div className='w-[700px] h-[300px] bg-white rounded hover:bg-[#cfcdcc]'>
                 <div className='w-full h-[50%] flex justify-center items-center'>
-                    <p className='text-lg font-medium text-black'>Are you sure you want to delete this Zoom Meet link?</p>
+                    <p className='text-lg font-medium text-black'>Are you sure you want to delete the entire playlist?</p>
                 </div>
                 <div className='w-full h-[50%] flex justify-evenly items-center'>
                     <button 
@@ -47,7 +39,7 @@ function DeleteZoomMeetPopUp(props) {
                     <button 
                         className='w-[120px] h-[40px] bg-blue-500 hover:bg-blue-600 text-white rounded'
                         onClick={() => {
-                            props.setIsZoomMeetPopUp(false);
+                            props.setIsDeletePlaylistPopup(false);
                         }}
                     >No</button>
                 </div>
@@ -57,4 +49,4 @@ function DeleteZoomMeetPopUp(props) {
     
 }
 
-export default DeleteZoomMeetPopUp
+export default DeletePlaylistPopUp

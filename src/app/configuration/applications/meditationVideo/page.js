@@ -9,6 +9,9 @@ import Playlist from '@/app/components/configuration/playlist/Playlist'
 import AddVideoPopUp from '@/app/components/configuration/playlist/AddVideoPopUp'
 import axios from 'axios';
 import { toast } from "react-hot-toast";
+import DeletePlaylistPopUp from '@/app/components/configuration/playlist/DeletePlaylistPopUp'
+import DeleteVideoPopUp from '@/app/components/configuration/playlist/DeleteVideoPopUp'
+
 
 function MeditationVideo() {
    
@@ -18,13 +21,17 @@ function MeditationVideo() {
         playlistImage: ""
     });
 
-    //pass plalist head and image from playlist table to add video popup
-    const [selectedData, setSelectedData] = useState({
-      head: '',
-      image: ''
-    });
+    const [selectedPlaylistId, setSelectedPlaylistId] = useState("");
+    const [selectedPlaylistData, setSelectedPlaylistData] = useState({
+      head : "",
+      category : "",
+      videoArray : [],
+      index : ""
+    })
 
-  
+    const [isDeletePlaylistPopup, setIsDeletePlaylistPopup] = useState(false)
+    const [isDeleteVideoPopup, setIsDeleteVideoPopup] = useState(false)
+    const [renderPlaylistToggle, setRenderPlaylistToggle] =useState(false)
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Configuration parameters");
@@ -71,11 +78,12 @@ function MeditationVideo() {
 
                 const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/add-video`, formData);
                 console.log(response);
+                setRenderPlaylistToggle(prevValue => !prevValue);
                 toast.success('Playlist created successfully');
                 // Clear form fields after successful submission
                 setPlaylistData({
-                    playlistHeading: '',
-                    playlistImage: '',
+                    playlistHeading: "",
+                    playlistImage: "",
                 });
 
             } catch (error) {
@@ -152,7 +160,14 @@ function MeditationVideo() {
 
           </div>
           <div className='w-full h-[80%] overflow-y-auto'>
-            <Playlist setAddVideoPopUp ={setAddVideoPopUp} setSelectedData={setSelectedData} />
+            <Playlist 
+              setAddVideoPopUp ={setAddVideoPopUp} 
+              setSelectedPlaylistId={setSelectedPlaylistId} 
+              setSelectedPlaylistData={setSelectedPlaylistData} 
+              renderPlaylistToggle={renderPlaylistToggle}
+              setIsDeletePlaylistPopup={setIsDeletePlaylistPopup}
+              setIsDeleteVideoPopup={setIsDeleteVideoPopup} 
+            />
 
           </div>
 
@@ -160,7 +175,34 @@ function MeditationVideo() {
       </div>
       { 
         addVideoPopUp  &&  
-        <AddVideoPopUp setAddVideoPopUp={setAddVideoPopUp} selectedData={selectedData} setSelectedData={setSelectedData} /> 
+        <AddVideoPopUp
+           setAddVideoPopUp={setAddVideoPopUp} 
+           selectedPlaylistId={selectedPlaylistId} 
+           setSelectedPlaylistId={setSelectedPlaylistId} 
+           setSelectedPlaylistData={setSelectedPlaylistData} 
+           selectedPlaylistData={selectedPlaylistData} 
+           setRenderPlaylistToggle={setRenderPlaylistToggle}
+        /> 
+      }
+
+      {
+        isDeletePlaylistPopup &&
+        <DeletePlaylistPopUp 
+         selectedPlaylistId={selectedPlaylistId}  
+         setIsDeletePlaylistPopup={setIsDeletePlaylistPopup} 
+         setRenderPlaylistToggle={setRenderPlaylistToggle}
+        />
+      }
+
+      {
+        isDeleteVideoPopup &&
+        <DeleteVideoPopUp 
+         selectedPlaylistId={selectedPlaylistId}  
+         setIsDeleteVideoPopup={setIsDeleteVideoPopup}
+         selectedPlaylistData={selectedPlaylistData}  
+         setRenderPlaylistToggle={setRenderPlaylistToggle}
+
+        />
       }
 
     </div>

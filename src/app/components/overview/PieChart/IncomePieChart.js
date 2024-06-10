@@ -10,6 +10,7 @@ import {
 // import Chart from "react-apexcharts";
 import Link from "next/link";
 import axios from 'axios';
+import {toast} from 'react-hot-toast';
  
  
 // If you're using Next.js please use the dynamic import for react-apexcharts and remove the import from the top for the react-apexcharts
@@ -18,7 +19,7 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
  
  
  
-export default function PieChart() {
+export default function IncomePieChart() {
  
  
  
@@ -38,12 +39,17 @@ export default function PieChart() {
     const fetchData = async () => {
  
         try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/piechart`);
-            // console.log(response);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/incomePiechart`);
+            console.log(response);
             setPieChartData(response.data.summary);
  
         } catch (error) {
             console.error('Error fetching data:', error);
+            toast.error("Error loading piechart data")
+
+        }
+        return() => {
+          return
         }
  
     };
@@ -69,7 +75,7 @@ export default function PieChart() {
       dataLabels: {
         enabled: false,
       },
-      colors: ["#597EDD", "#f59e0b", "#d81b60", "#26CC7C", "#58C2D9"],
+      colors: ["#597EDD", "#26CC7C", "#f59e0b", "#d81b60"],
       legend: {
         show: false,
       },
@@ -108,10 +114,7 @@ export default function PieChart() {
         }
  
         <div className="w-full md:w-[50%] h-full">
-          <div className="m-2 flex items-center ">
-              <div className="h-3 w-3 m-2 bg-[#58C2D9]"></div>
-              <Link href="" className="text-sm text-black">Distribution</Link>
-          </div>
+          
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#597EDD]"></div>
               <Link href="" className="text-sm text-black">Donation</Link>                 
@@ -122,13 +125,14 @@ export default function PieChart() {
  
           </div>
           <div className="m-2 flex items-center ">
+              <div className="h-3 w-3 m-2 bg-[#f59e0b]"></div>
+              <Link href="" className="text-sm text-black">Dakshina</Link>
+          </div>
+          <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#d81b60]"></div>
               <Link href="" className="text-sm text-black">Ashram Appointments</Link>
           </div>
-          <div className="m-2 flex items-center ">
-              <div className="h-3 w-3 m-2 bg-[#f59e0b]"></div>
-              <Link href="" className="text-sm text-black">Expense</Link>
-          </div>
+          
         </div>
       </CardBody>
     </Card>
