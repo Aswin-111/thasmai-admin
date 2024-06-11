@@ -74,7 +74,7 @@ function Playlist(props) {
                 <div className="w-full h-full">
                   <table className="w-full h-full">
                     <thead className="w-full h-12 bg-[#C5D8FF] text-black ">
-                      <tr>
+                      <tr >
                         <th className="w-[10%] text-start ps-2">Sl No.</th>
                         <th className="w-[20%] text-start">Video Heading</th>
                         <th className="w-[50%] text-start">Video Url</th>
@@ -87,10 +87,14 @@ function Playlist(props) {
                         item.video[0] && 
                         item.video.map((vid, ind) => {
                           return(
-                            <tr>
+                            <tr className="text-xs">
                               <td className="ps-2">{ ind + 1}</td>
                               <td>{ vid.video_heading }</td>
-                              <td>{ vid.video_link }</td>
+
+                              <td className='text-[#7698ef] hover:text-[#005DB8]'>
+                                            <a href={ vid.video_link } target="_blank">{ vid.video_link }</a>
+                              </td>
+
                               <td>
                                 <RiDeleteBin6Line className="text-2xl cursor-pointer hover:text-red-500"
                                   onClick={() => {

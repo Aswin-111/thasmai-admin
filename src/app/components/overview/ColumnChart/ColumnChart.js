@@ -290,7 +290,7 @@ export default function ColumnChart () {
                 <input 
                   type="month" 
                   name="selectedMonthYear" 
-                  className="w-[85px] ms-2 h-6 text-[11px] outline-none border-2  border-[#5799FD] rounded"
+                  className="w-[85px] ms-2 h-6 text-[11px] text-black bg-white outline-none border-2  border-[#5799FD] rounded"
                   onChange={(e) => {
                     var val = e.target.value;
                     setSelectedMonthYear(val);
@@ -299,7 +299,7 @@ export default function ColumnChart () {
               }
 
               <button
-                className="w-8 h-6 text-xl text-teal-600 flex justify-center items-center hover:text-teal-400"
+                className="w-8 h-8 text-xl text-teal-600 flex justify-center items-center hover:text-teal-400 hover:scale-105"
                 onClick={handleSubmitColChart}
               >
                 < BsArrowRightCircleFill/>
