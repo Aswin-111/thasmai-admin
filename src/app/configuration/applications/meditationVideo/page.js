@@ -11,6 +11,7 @@ import axios from 'axios';
 import { toast } from "react-hot-toast";
 import DeletePlaylistPopUp from '@/app/components/configuration/playlist/DeletePlaylistPopUp'
 import DeleteVideoPopUp from '@/app/components/configuration/playlist/DeleteVideoPopUp'
+import EditVideoPopUp from '@/app/components/configuration/playlist/EditVideoPopUp'
 
 
 function MeditationVideo() {
@@ -31,7 +32,9 @@ function MeditationVideo() {
 
     const [isDeletePlaylistPopup, setIsDeletePlaylistPopup] = useState(false)
     const [isDeleteVideoPopup, setIsDeleteVideoPopup] = useState(false)
+    const [isEditVideoPopup, setIsEditVideoPopup] = useState(false)
     const [renderPlaylistToggle, setRenderPlaylistToggle] =useState(false)
+    
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Configuration parameters");
@@ -167,6 +170,8 @@ function MeditationVideo() {
               renderPlaylistToggle={renderPlaylistToggle}
               setIsDeletePlaylistPopup={setIsDeletePlaylistPopup}
               setIsDeleteVideoPopup={setIsDeleteVideoPopup} 
+              setIsEditVideoPopup={setIsEditVideoPopup}
+
             />
 
           </div>
@@ -204,6 +209,19 @@ function MeditationVideo() {
 
         />
       }
+
+      {
+        isEditVideoPopup &&
+        < EditVideoPopUp
+         selectedPlaylistId={selectedPlaylistId}  
+         setIsEditVideoPopup={setIsEditVideoPopup}
+         selectedPlaylistData={selectedPlaylistData}  
+         setRenderPlaylistToggle={setRenderPlaylistToggle}
+
+        />
+      }
+
+
 
     </div>
   )

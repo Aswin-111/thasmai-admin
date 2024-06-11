@@ -111,5 +111,15 @@ export const useAppointFilterStore = create((set) => ({
           feedback_id = state.id
         } 
         return ({  feedbackViewToggle : toggle, id : feedback_id})}),
+
+        profileViewToggle: false,
+        setprofileViewToggle : (toggle, id) => set((state) => { 
+          let feedback_id = "";
+          if(id) {
+            feedback_id = id
+          } else {
+            feedback_id = state.id
+          } 
+          return ({  profileViewToggle : toggle, id : feedback_id})}),
   
 }))

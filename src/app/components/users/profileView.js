@@ -216,7 +216,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
               isMeditation   && 
                 <>
                       <div className='w-full flex border-b-2 border-white'>
-                       <div className='w-[50%] '>
+                       <div className='w-[50%] h-[50%] '>
                        <table className='w-full text-black'>
                          <tbody>
                            <tr className='h-[40px]'>
@@ -239,7 +239,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                          </tbody>
                        </table>
                      </div>
-                     <div className='w-[50%] '>
+                     <div className='w-[50%] h-[50%] '>
                      <table className="w-full">
                     <tbody>
                       <tr>
@@ -260,7 +260,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                      </div>
                   </div>
 
-                  <div className='w-[100%] mt-4 h-full overflow-y-auto'>
+                  <div className='w-[100%] mt-4  overflow-y-auto'>
                     <p className='text-black font-medium'>Latest Zoom class attended</p>
       <table className='w-full text-black'>
       <thead>
@@ -388,7 +388,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
     <table className='w-full text-black'>
       <thead>
         <tr className='h-[40px]'>
-          <th className='w-[20%] text-left'>UID</th>
+          {/* <th className='w-[20%] text-left'>UID</th> */}
           <th className='w-[20%] text-left'>Amount</th>
           <th className='w-[30%] text-left'>Payment Date</th>
           <th className='w-[20%] text-left'>Payment Time</th>
@@ -397,7 +397,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
       <tbody>
         {paymentDetails.map((payment, index) => (
           <tr key={index} className='h-[40px]'>
-            <td className='text-left'>{payment.UId}</td>
+            {/* <td className='text-left'>{payment.UId}</td> */}
             <td className='text-left'>{payment.amount}</td>
             <td className='text-left'>{payment.payment_date}</td>
             <td className='text-left'>{payment.payment_time}</td>

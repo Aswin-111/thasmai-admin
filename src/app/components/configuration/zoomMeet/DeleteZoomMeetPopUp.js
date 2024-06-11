@@ -12,12 +12,10 @@ function DeleteZoomMeetPopUp(props) {
     const handleDelete = async () => {
         
         const zoomMeetId = props.zoomMeetId
+        console.log(zoomMeetId);
         try {
-            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/delete-video/${zoomMeetId}`);
-            //   filterState.setBlogsData(response.data.blogs);
-            //   props.setTotalPages(response.data.totalPages);
-            //   props.setIsFilteredData(false);
-            //   props.setFilteredPageNo(1);
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/delete-zoom/${zoomMeetId}`);
+            
             console.log(response);
             props.setZoomTableRenderToggle(!props.zoomTableRenderToggle)
             toast.success("Successfully deleted the Zoom Meet link.");

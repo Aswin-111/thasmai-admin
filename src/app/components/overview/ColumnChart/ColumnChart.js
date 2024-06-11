@@ -34,13 +34,16 @@ export default function ColumnChart () {
   let monthArray = [];
   let monthlyCountArray = [];
 
+  
 
   if(isYearlyData && !isMonthlyData) {
-    monthArray = columnChartData.map((i, ind) => {
-      return(
-        i.month
-      )
-    });
+    // monthArray = columnChartData.map((i, ind) => {
+    //   return(
+    //     i.month
+    //   )
+    // });
+    monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ]
+
   
     monthlyCountArray = columnChartData.map((i, ind) => {
       return(
@@ -94,8 +97,8 @@ export default function ColumnChart () {
   async function handleSubmitColChart(e) {
     e.preventDefault();
   
-    if (!selectedYear && !selectedMonthYear ) {
-      toast("Chose operator to search.");
+    if (selectedYear === "" && selectedMonthYear === "" ) {
+      toast("Choose operator to search.");
       return;
     } else {
 
@@ -131,7 +134,7 @@ export default function ColumnChart () {
         }
 
       } else {
-        return;
+        toast("please select month and year")
       }
 
     }
@@ -230,13 +233,13 @@ export default function ColumnChart () {
         color="transparent"
         className="flex flex-col h-[15%] m-0 p-2 rounded-none md:flex-row md:items-center"
       >
-        <div className="w-full h-full flex justify-between items-center">
+        <div className="w-full h-full ps-2 flex justify-between items-center">
           <Typography variant="h6" color="blue-gray">
             New Joinees
           </Typography>
           <div className="flex items-center">
               <select 
-                className="w-[80px] h-6  text-[12px] text-black bg-white border-2 border-[#5799FD] rounded"
+                className="w-[80px] h-6  text-[11px] text-black bg-white border-2 outline-none border-[#5799FD] rounded"
                 name="selectedOperator"
                 onChange={(e) => {
                   let val= e.target.value;
@@ -245,15 +248,18 @@ export default function ColumnChart () {
                 }}
               >
                 <option value="" disabled selected>SELECT</option>
-                <option value="year"> By Year</option>
+                <option value="year" > By Year</option>
                 <option value="month"> By month & year</option>
     
               </select>
+              {
+                    selectedOperator === "" && <div className="h-6 w-[85px] ms-2  bg-[#ebebec] rounded"></div>
+              }
 
               {   
                 
-                selectedOperator === "year" ? (
-                <div className=" h-6 flex items-center border-2 ms-2  border-[#5799FD] rounded">
+                selectedOperator === "year" && 
+                <div className=" h-6 w-[85px] flex items-center border-2 ms-2  border-[#5799FD] rounded">
                   <button
                     className="w-6 h-6 text-md flex justify-center items-center hover:text-[#5799FD]"
                     onClick={() => {
@@ -274,9 +280,9 @@ export default function ColumnChart () {
                     <HiPlusCircle/>
                   </button>
                 </div> 
-                ) : (
-                  <div className="w-[85px] h-5 "></div> 
-                )
+                  
+                   
+                
               }
 
               {
@@ -284,7 +290,7 @@ export default function ColumnChart () {
                 <input 
                   type="month" 
                   name="selectedMonthYear" 
-                  className="w-6 h-6 text-xl"
+                  className="w-[85px] ms-2 h-6 text-[11px] outline-none border-2  border-[#5799FD] rounded"
                   onChange={(e) => {
                     var val = e.target.value;
                     setSelectedMonthYear(val);

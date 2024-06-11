@@ -92,9 +92,9 @@ export default function IncomePieChart() {
         color="transparent"
         className="h-[15%] m-0 p-2 flex flex-col gap-4 rounded-none md:flex-row md:items-center"
       >
-        <div>
+        <div className="ps-2">
           <Typography variant="h6" color="blue-gray">
-            Financial
+            Ashram Income
           </Typography>
  
         </div>

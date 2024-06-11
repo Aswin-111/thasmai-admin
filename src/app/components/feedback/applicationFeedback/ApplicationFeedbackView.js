@@ -18,7 +18,7 @@ function ApplicationFeedbackView() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-              const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-appointment/${feedbackState.id}`);
+              const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/app-feedback-by-id/${feedbackState.id}`);
               setData(response.data.appointment);
   
           } catch (error) {

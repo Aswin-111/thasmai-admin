@@ -102,8 +102,6 @@ function Playlist(props) {
                                       index : ind
                                     })
                                     props.setIsDeleteVideoPopup(true)
-
-
                                   }}
                                 />
                               </td>
@@ -111,7 +109,14 @@ function Playlist(props) {
                                 <MdOutlineEdit className="text-2xl cursor-pointer hover:text-blue-500"
                                   onClick={() => {
                                     props.setSelectedPlaylistId(item.id);
-
+                                    props.setSelectedPlaylistData({
+                                      head : item.playList_heading,
+                                      category : item.category,
+                                      videoArray : item.video,
+                                      index : ind
+                                    })
+                                    props.setIsEditVideoPopup(true)
+                                    
                                   }}
                                 />
                               </td>

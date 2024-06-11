@@ -10,6 +10,7 @@ import AppointmentCheckOut from '@/app/components/appointments/appointments/Appo
 import axios from 'axios';
 import { useAppointFilterStore } from "./filterstate";
 import FilterChip from "./filterchips";
+import ProfileView from '@/app/components/users/profileView'
 
 
 
@@ -37,7 +38,7 @@ function AshramAppointments() {
   // });
 
   const filterState = useAppointFilterStore((state) => {
-    return state;
+    return state; 
   });
 
 
@@ -517,6 +518,14 @@ function handleFilteredNextPage() {
           filterToggle={filterToggle} 
           setFilterToggle={setFilterToggle}
        />
+      }
+      {
+        filterState.profileViewToggle && 
+        <ProfileView
+         UId={filterState.id}
+         setIsViewProfile={filterState.setprofileViewToggle}
+         
+        />
       }
     
     

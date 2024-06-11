@@ -139,7 +139,11 @@ function AppointmentsTable(props) {
                     
                     <td className="text-center">{appoint.UId} </td>
                     <td className="text-center">{appoint.register_date} </td>
-                    <td className="text-center text-indigo-600">{appoint.user_name} </td>
+                    <td className="text-center text-indigo-600 cursor-pointer hover:scale-110"
+                      onClick={()=>{
+                        filterState.setprofileViewToggle(true,appoint.UId);
+                      }}
+                    >{appoint.user_name} </td>
                     <td className="text-center">{appoint.appointmentDate}</td>
                     <td className="text-center">{appoint.check_out} </td>
                     <td className="text-center flex justify-center">

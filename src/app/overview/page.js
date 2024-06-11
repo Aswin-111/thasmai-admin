@@ -28,7 +28,7 @@ export default function Overview() {
                     <ColumnChart />
                 </div>
                 <div className="w-full md:w-[47%]  mb-2 md:m-0 h-full relative">
-                    <button className='w-10 h-6 text-3xl text-blue-gray-900 hover:text-blue-600 absolute top-3 right-5 z-50'
+                    <button className='w-10 h-6 text-3xl text-blue-gray-900 hover:text-blue-600 absolute top-[7px] right-5 z-50'
                         onClick={() => {
                             setPieChartToggle(prevValue => !prevValue);
                         }}
