@@ -90,9 +90,11 @@ function Navbar() {
 						<p className="text-[#afafaf]">Thasmai</p>
 						<button 
 							className="w-6 h-6 text-[#afafaf] text-xl flex justify-center items-center rounded-sm hover:text-white  hover:bg-[#dadadae4] "
-							onClick={()=>{
+							onMouseEnter={()=>{
 								setIsDropDown(prevValue => !prevValue)
 							}}
+							
+
 						>
 							 {
 								isDropDown ? <FaAngleRight/> : <FaAngleDown/>
@@ -105,7 +107,11 @@ function Navbar() {
 			</div>
 			{
 				isDropDown && 
-				<div className=" w-44 z-10  p-2 bg-white border-[1px] border-[#afafaf] rounded absolute top-[44px] right-[20px] md:right-[40px]">
+				<div className=" w-44 z-10  p-2 bg-white border-[1px] border-[#afafaf] rounded absolute top-[44px] right-[20px] md:right-[40px]"
+					onMouseLeave={()=>{
+						setIsDropDown(prevValue => !prevValue)
+					}}
+				>
 					<button
 				
 			 			className='w-full  h-[34px]  bg-[#d34b4b] hover:bg-[#d34b4bd2] text-white flex items-center justify-center rounded'
