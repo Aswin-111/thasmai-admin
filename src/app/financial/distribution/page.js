@@ -7,6 +7,7 @@ import { useNavbarTextStore } from "../../state/navbar-state";
 import FilterChip from "./filterChips";
 import DistributionTable from "@/app/components/financial/distribution/DistributionTable";
 import ProfileView from '@/app/components/users/profileView';
+import {toast} from 'react-hot-toast'
 import axios from "axios";
 // import data from "./data.json"
 // import Image from "next/image";
@@ -168,10 +169,10 @@ function Distribution() {
 		   
 				const field = i.field;
 				const operator = i.operator.toLowerCase();
-				const value = (i.field.toLowerCase() ==="first name" || i.field.toLowerCase() ==="second name" ) ? `${i.value}%` : i.value;
+				const value = (i.field.toLowerCase() ==="first name" || i.field.toLowerCase() ==="second name" ) && i.operator === "starts with" ? `${i.value}%` : i.value;
 				console.log(field, value, operator);
 			
-				if(field.includes("Date") && operator === "between") {
+				if(field === "DOJ" && operator === "between") {
 				  	return({
 						field : config[`${field}`], 
 						operator: "between", 
@@ -422,7 +423,7 @@ function Distribution() {
                             </select>
                         } */}
 
-						{
+						{/* {
                             filterState.fieldValue === "Distributed coupon" && 
                         
                             <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
@@ -444,7 +445,7 @@ function Distribution() {
                                       })
                                 }
                             </select>
-                        }
+                        } */}
 
 						{
                             filterState.fieldValue === "Available coupon" && 
@@ -665,7 +666,7 @@ function Distribution() {
                     	        </>
                     	} */}
 
-						{
+						{/* {
                     	    ( filterState.fieldValue === "Distributed coupon" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
@@ -682,7 +683,7 @@ function Distribution() {
                     	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
-                    	}
+                    	} */}
 
 						{
                     	    ( filterState.fieldValue === "Available coupon" && filterState.operatorValue === "") && 
@@ -777,88 +778,132 @@ function Distribution() {
 
                    	<button 
                    	   className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" 
-                   	   onClick={(e)=>{
-                   	          if(filterState.operatorValue === "between") {
-                   	              let startDate = startDateRef.current.value;
-                   	              startDate = startDate.split("-");
-                   	              startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
-
-                   	              let endDate = endDateRef.current.value;
-                   	              endDate = endDate.split("-");
-                   	              endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
-
-                   	              console.log(startDate, endDate);
-
-                   	              filterState.setFilter({
-                   	               field : fieldRef.current.value, 
-                   	               operator : "between", 
-                   	               value : `${startDate}/${endDate}`, 
-                   	               logicaloperator: 'and'
-                   	           })
-                   	        } else if(filterState.fieldValue.includes("Date") && filterState.operatorValue === "equal to") {
-                   	              let date = dataRef.current.value;
-                   	              date = date.split("-");
-                   	              date = `${date[0]}-${date[1]}-${date[2]}`;
+                   	   onClick={(e) => {
+						if(filterState.fieldValue === "" || filterState.operatorValue === "") {
+							toast("Please choose a field and an operator to filter")
+						} else {
+							if(filterState.operatorValue === "between") {
+								let startDate = startDateRef.current.value;
+								startDate = startDate.split("-");
+								startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
 							
-                   	              filterState.setFilter({
-                   	               field : fieldRef.current.value, 
-                   	               operator : operatorRef.current.value,
-                   	               value : `${date}`, 
-                   	               logicaloperator: 'and'
-                   	           })
-                   	        } else {
-                   	            filterState.setFilter({
-                   	               field : fieldRef.current.value, 
-                   	               operator : operatorRef.current.value, 
-                   	               value : dataRef.current.value, 
-                   	               logicaloperator: 'and'
-                   	           })
-                   	        }
-                   	      }}
+								let endDate = endDateRef.current.value;
+								endDate = endDate.split("-");
+								endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
+
+								if(startDate && endDate){
+									console.log(startDate, endDate);
+							
+									filterState.setFilter({
+										field : fieldRef.current.value, 
+										operator : "between", 
+										value : `${startDate}/${endDate}`, 
+										logicaloperator: 'and'
+									 })
+								} else {
+									toast("Please select start date and end date to filter")
+								}
+							
+								
+							} else if(filterState.fieldValue === "DOJ" && filterState.operatorValue === "equal to") {
+								let date = dataRef.current.value;
+								date = date.split("-");
+								date = `${date[0]}-${date[1]}-${date[2]}`;
+
+								if(dataRef.current.value) {
+									filterState.setFilter({
+										field : fieldRef.current.value, 
+										operator : operatorRef.current.value, 
+										value : `${date}`, 
+										logicaloperator: 'and'
+									})
+								} else {
+									toast("Please select a date to filter")
+								}
+							
+
+							} else {
+								const val = dataRef.current.value
+								if(val){
+									filterState.setFilter({
+										field : fieldRef.current.value, 
+										operator : operatorRef.current.value, 
+										value : dataRef.current.value, 
+										logicaloperator: 'and'
+									})
+								} else{
+									toast("Please input a value to filter")
+								}
+								
+							}
+						}
+					}}
                    	>
                          AND
                   	</button>
 
                   	<button 
                   	    className="ms-3 w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" 
-                  	    onClick={(e)=>{
-                  	        if(filterState.operatorValue === "between") {
-                  	               let startDate = startDateRef.current.value;
-                  	               startDate = startDate.split("-");
-                  	               startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
-							
-                  	               let endDate = endDateRef.current.value;
-                  	               endDate = endDate.split("-");
-                  	               endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
-							
-                  	               console.log(startDate, endDate);
-							
-                  	               filterState.setFilter({
-                  	                field : fieldRef.current.value, 
-                  	                operator : "between", 
-                  	                value : `${startDate}/${endDate}`, 
-                  	                logicaloperator:'or'
-                  	            })
-                  	        } else if(filterState.fieldValue.includes("Date") && filterState.operatorValue === "equal to") {
-                  	               let date = dataRef.current.value;
-                  	               date = date.split("-");
-                  	               date = `${date[0]}-${date[1]}-${date[2]}`;
-							
-                  	               filterState.setFilter({
-                  	                field : fieldRef.current.value, 
-                  	                operator : operatorRef.current.value, 
-                  	                value : `${date}`, 
-                  	                logicaloperator:'or'
-                  	            })
-                  	        } else {
-                  	               filterState.setFilter({
-                  	                field : fieldRef.current.value, 
-                  	                operator : operatorRef.current.value, 
-                  	                value : dataRef.current.value, 
-                  	                logicaloperator:'or'
-                  	            })
-                  	        }
-                  	    }}
+                  	    onClick={(e) => {
+							if(filterState.fieldValue === "" || filterState.operatorValue === "") {
+								toast("Please choose a field and an operator to filter")
+							} else{
+								if(filterState.operatorValue === "between") {
+									let startDate = startDateRef.current.value;
+									startDate = startDate.split("-");
+									startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
+								
+									let endDate = endDateRef.current.value;
+									endDate = endDate.split("-");
+									endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
+
+									if(startDate && endDate) {
+										console.log(startDate, endDate);
+								
+										filterState.setFilter({
+											field : fieldRef.current.value, 
+											operator : "between", 
+											value : `${startDate}/${endDate}`, 
+											logicaloperator: 'or'
+										 })
+									} else{
+										toast("Please select start date and end date to filter")
+									}
+								
+									
+								} else if(filterState.fieldValue === "DOJ" && filterState.operatorValue === "equal to") {
+									let date = dataRef.current.value;
+									date = date.split("-");
+									date = `${date[0]}-${date[1]}-${date[2]}`;
+
+									if(dataRef.current.value) {
+										filterState.setFilter({
+											field : fieldRef.current.value, 
+											operator : operatorRef.current.value, 
+											value : `${date}`, 
+											logicaloperator: 'or'
+										})
+									} else{
+										toast("Please select a date to filter")
+									}
+								
+
+								} else {
+									const val = dataRef.current.value
+									if(val){
+										filterState.setFilter({
+											field : fieldRef.current.value, 
+											operator : operatorRef.current.value, 
+											value : dataRef.current.value, 
+											logicaloperator: 'or'
+										})
+									} else{
+										toast("Please input a value to filter")
+									}
+									
+								}
+							}
+						}}
                   	>
                         OR
                   	</button>
@@ -913,18 +958,18 @@ function Distribution() {
                             ref = {searchRef}
                             className="px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
                         >
-                            <option disabled selected>
+                            <option value = "" disabled selected>
                               Choose option
                             </option>
                             <option value="DOJ">Date Of Joining</option>
                             <option value="firstName">First Name</option>
                             <option value="secondName">Second Name</option>
                             <option value="UId">User Id</option>
-							<option value="total_distributed_coupons">Distributed coupon</option>
+							{/* <option value="total_distributed_coupons">Distributed coupon</option> */}
                             <option value="coupons">Available Coupons</option>
                             <option value="Level">Level</option>
                             <option value="node_number">Node</option>
-							<option value="Status">Status</option>
+							{/* <option value="Status">Status</option> */}
  
                         </select>
  
@@ -945,6 +990,14 @@ function Distribution() {
                                 }}
                             />
                         </div>
+						<p 
+							className="ms-2 text-xs text-red-400 underline cursor-pointer"
+							onClick={() => {
+								setFilterToggle(!filterToggle);
+								searchRef.current.value = "";
+								textRef.current.value = "";
+							}}
+						>clear</p>
                     </div>
                     <div className="w-[20%]">
                         <select name="newRow" id=""

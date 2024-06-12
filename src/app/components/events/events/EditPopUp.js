@@ -4,6 +4,8 @@
  import { BiCloudUpload } from "react-icons/bi";
  import axios from 'axios'
  import { toast } from 'react-hot-toast'
+ import moment from 'moment';
+
 
 
 
@@ -16,6 +18,8 @@
   const [previewImage, setPreviewImage] = useState();
 
   console.log(edittedData);
+
+
 
 
   useEffect(() => {
@@ -73,6 +77,10 @@ const handleSubmit = async (e) => {
     // console.log((eventId));
 
     const { event_name, event_description, priority, place, date, image, event_time } = edittedData;
+         
+    // formatting time to 15:00 Am format and append to form
+    var time = moment(event_time, "HH:mm");
+    const formattedTime = time.format('h:mm a');
 
     
       const formData = new FormData();
@@ -82,7 +90,7 @@ const handleSubmit = async (e) => {
       formData.append('place', place);
       formData.append('date', date);
       formData.append('image', image);
-      formData.append('event_time', event_time);
+      formData.append('event_time', formattedTime);
 
     //   console.log(formData);
 

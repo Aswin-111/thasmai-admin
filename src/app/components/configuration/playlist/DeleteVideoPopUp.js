@@ -52,7 +52,7 @@ function DeleteVideoPopUp(props) {
     <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
             <div className='w-[700px] h-[300px] bg-white rounded hover:bg-[#cfcdcc]'>
                 <div className='w-full h-[50%] flex justify-center items-center'>
-                    <p className='text-lg font-medium text-black'>Are you sure you want to delete the entire playlist?</p>
+                    <p className='text-lg font-medium text-black'>Are you sure you want to delete this video?</p>
                 </div>
                 <div className='w-full h-[50%] flex justify-evenly items-center'>
                     <button 

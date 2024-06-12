@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useAppointFilterStore } from "./filterstate";
 import FilterChip from "./filterchips";
 import ProfileView from '@/app/components/users/profileView'
+import {toast} from 'react-hot-toast'
 
 
 
@@ -345,38 +346,76 @@ function handleFilteredNextPage() {
             {/* ---------------------------AND / OR button------------------------ */}
 
           <div className='w-[15%]  flex'>
-            <button className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" onClick={(e)=>{
-              if(filterState.operatorValue === "between") {
-                let startDate = startDateRef.current.value;
-                startDate = startDate.split("-");
-                startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
-
-                let endDate = endDateRef.current.value;
-                endDate = endDate.split("-");
-                endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
-
-                console.log(startDate, endDate);
+            <button className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl"
+              onClick={(e) => {
+                if(filterState.FieldValue === "" || filterState.operatorValue === "") {
+                toast("Please choose a field and an operator to filter")
+              } else{
+                if(filterState.operatorValue === "between") {
+                  let startDate = startDateRef.current.value;
+                  startDate = startDate.split("-");
+                  startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
                 
-                filterState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}/${endDate}`, logicaloperator:
-              'and'})
-              } else if(filterState.FieldValue.includes("Date") && filterState.operatorValue === "equal to") {
-                let date = dataRef.current.value;
-                date = date.split("-");
-                date = `${date[0]}-${date[1]}-${date[2]}`;
+                  let endDate = endDateRef.current.value;
+                  endDate = endDate.split("-");
+                  endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
+
+                  if(startDate && endDate){
+                    console.log(startDate, endDate);
                 
-                filterState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : `${date}`, logicaloperator:
-                'and'})
-              } else {
-              filterState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : dataRef.current.value, logicaloperator:
-              'and'})
-              dataRef.current.value = ''
+                      filterState.setFilter({
+                        field : fieldRef.current.value, 
+                        operator : "between", 
+                        value : `${startDate}/${endDate}`, 
+                        logicaloperator: 'and'
+                     })
+                  } else{
+                    toast("Please select start date and end date to filter")
+                  }
+                
+                  
+                } else if(filterState.FieldValue.includes("Date") && filterState.operatorValue === "equal to") {
+                  let date = dataRef.current.value;
+                  date = date.split("-");
+                  date = `${date[0]}-${date[1]}-${date[2]}`;
+
+                  if(dataRef.current.value) {
+                    filterState.setFilter({
+                      field : fieldRef.current.value, 
+                      operator : operatorRef.current.value, 
+                      value : `${date}`, 
+                      logicaloperator: 'and'
+                    })
+                  } else{
+                    toast("Please select a date to filter")
+                  }
+                
+
+                } else {
+                  const val = dataRef.current.value
+                  if(val){
+                    filterState.setFilter({
+                      field : fieldRef.current.value, 
+                      operator : operatorRef.current.value, 
+                      value : dataRef.current.value, 
+                      logicaloperator: 'and'
+                    })
+                  } else{
+                    toast("Please input a value to filter")
+                  }
+                  
+                }
               }
-            }}>
+              }}
+            >
               AND
             </button>
 
-            <button className="ms-3 w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" onClick={(e)=>{
-
+            <button className="ms-3 w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl"
+             onClick={(e) => {
+              if(filterState.FieldValue === "" || filterState.operatorValue === "") {
+              toast("Please choose a field and an operator to filter")
+            } else{
               if(filterState.operatorValue === "between") {
                 let startDate = startDateRef.current.value;
                 startDate = startDate.split("-");
@@ -385,22 +424,55 @@ function handleFilteredNextPage() {
                 let endDate = endDateRef.current.value;
                 endDate = endDate.split("-");
                 endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
-              
-                console.log(startDate, endDate);
 
-                filterState.setFilter({field : fieldRef.current.value, operator : "between", value : `${startDate}/${endDate}`, logicaloperator:'or'})
+                if(startDate && endDate){
+                  console.log(startDate, endDate);
+              
+                    filterState.setFilter({
+                      field : fieldRef.current.value, 
+                      operator : "between", 
+                      value : `${startDate}/${endDate}`, 
+                      logicaloperator: 'or'
+                   })
+                } else{
+                  toast("Please select start date and end date to filter")
+                }
+              
+                
               } else if(filterState.FieldValue.includes("Date") && filterState.operatorValue === "equal to") {
                 let date = dataRef.current.value;
                 date = date.split("-");
                 date = `${date[0]}-${date[1]}-${date[2]}`;
 
-                filterState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : `${date}`, logicaloperator:'or'})
-              } else {
-              filterState.setFilter({field : fieldRef.current.value, operator : operatorRef.current.value,value : dataRef.current.value, logicaloperator:'or'})
-              dataRef.current.value = ''
-              }
+                if(dataRef.current.value) {
+                  filterState.setFilter({
+                    field : fieldRef.current.value, 
+                    operator : operatorRef.current.value, 
+                    value : `${date}`, 
+                    logicaloperator: 'or'
+                  })
+                } else{
+                  toast("Please select a date to filter")
+                }
               
-            }}>
+
+              } else {
+                const val = dataRef.current.value
+                if(val){
+                  filterState.setFilter({
+                    field : fieldRef.current.value, 
+                    operator : operatorRef.current.value, 
+                    value : dataRef.current.value, 
+                    logicaloperator: 'or'
+                  })
+                } else{
+                  toast("Please input a value to filter")
+                }
+                
+              }
+            }
+            }}
+             >
               OR
             </button>
 

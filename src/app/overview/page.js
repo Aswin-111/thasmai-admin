@@ -28,7 +28,7 @@ export default function Overview() {
                     <ColumnChart />
                 </div>
                 <div className="w-full md:w-[47%]  mb-2 md:m-0 h-full relative">
-                    <button className='w-10 h-6 text-3xl text-blue-gray-900 hover:text-blue-600 absolute top-[7px] right-5 z-50'
+                    <button className='w-10 h-6 text-3xl text-blue-gray-900 hover:text-blue-600 absolute top-[7px] right-5 z-10'
                         onClick={() => {
                             setPieChartToggle(prevValue => !prevValue);
                         }}
@@ -51,7 +51,9 @@ export default function Overview() {
 
 
                 <div className="w-full h-[250px] md:w-[54%] md:h-full ps-4 pe-1 py-2 mb-4 md:m-0 bg-white rounded-xl shadow-md  overflow-y-auto md:overflow-hidden">
+                    <Link href="/message/globalMessage" className="w-full">
                     <h3 className="h-[15%] font-bold text-black">Meditation Notes</h3>
+                    </Link>
                     <div className="comments w-[100%] h-[85%] rounded overflow-y-auto p-1 bg-blue-gray-50 text-white">
                         <MeditationNotes />
                     </div>

@@ -11,15 +11,18 @@ function ApplicationFeedbackView() {
         return state;
     });
     
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
     console.log(data);
-    
+    console.log(feedbackState.id);
     
     useEffect(() => {
+        
         const fetchData = async () => {
           try {
               const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/app-feedback-by-id/${feedbackState.id}`);
-              setData(response.data.appointment);
+              setData(response.data.feedbackWithUsernames);
+            // console.log(response);
+            
   
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -49,22 +52,22 @@ function ApplicationFeedbackView() {
 
             <div className="w-full h-[15%] ps-10 text-white bg-[#005DB8] text-lg font-thin flex items-center">
                 Feedback from:
-                <h1 className="text-xl font-bold ms-5"> { data.user_name }</h1>
+                <h1 className="text-xl font-bold ms-5"> { data[0] && data[0].username }</h1>
             </div>
 
             <div className="w-full h-[85%] p-10 bg-white shadow-md overflow-y-auto">
-                <div className='w-[220px] h-[10%] flex'>
+                {/* <div className='w-[220px] h-[10%] flex'>
                     <p className='w-[50%] text-[#44474E]'>Date</p>
                     <p className='w-[50%] font-medium'>: { data.check_out }</p>
-                </div>
+                </div> */}
                 <div className='w-[220px] h-[10%] flex'>
                     <p className='w-[50%] text-[#44474E]'>Rating</p>
-                    <p className='w-[50%] font-medium'>: { data.rating }</p>
+                    <p className='w-[50%] font-medium'>: {data[0] && data[0].rating }</p>
                 </div>
                 <div className='h-[80%]'>
                     <p className='w-[50%] h-[10%] text-[#44474E]'>Message :</p>
                     <div className='h-[90%] p-4 bg-[#E0E2EC] rounded-[10px] overflow-y-auto'>
-                        <p className="">{ data.feedback }</p>
+                        <p className="">{data[0] && data[0].feedback }</p>
                     </div>
                 </div>
             </div>

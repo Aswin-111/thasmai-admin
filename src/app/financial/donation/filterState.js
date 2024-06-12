@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 export const useDonationFilterStore = create((set) => ({
 
-    fieldValues : ["DOJ", "First Name", "Second Name", "User Id", "Donation Paid So Far", "Latest Donation", "Available coupon", "Level", "Node", "Status"],
+    fieldValues : ["DOJ", "First Name", "Second Name", "User Id", "Available coupon", "Level", "Node"],
 
     dojOperator : ["equal to", "between"],
 

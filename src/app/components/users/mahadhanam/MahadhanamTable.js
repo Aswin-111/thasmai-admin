@@ -48,71 +48,77 @@ function MahadhanamTable({ data, filterState }) {
  
             <tbody className="">
                 {
-                    filterState.meditatorsData.map((i, index) => {
-                        return (
-                            <tr
-                                key={index}
-                                className="font-medium text-xs bg-white text-black"
-                            >
- 
-                                <td className="text-center">{ i.DOJ }</td>
-                                <td 
-                                    className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
-                                    onClick={() => {
-                                        filterState.setRefPopData(i.UId, true);
-                                    }}
+                    filterState.meditatorsData[0] ? (
+                        filterState.meditatorsData.map((i, index) => {
+                            return (
+                                <tr
+                                    key={index}
+                                    className="font-medium text-xs bg-white text-black"
                                 >
-                                    { i.firstName } { i.secondName }
-                                </td>
-                                <td className="text-center">{ i.UId } </td>
-                                <td className="text-center">{ i.coupons } </td>
-                                <td className="text-center">{ i.phone } </td>
-                                <td className="text-center">{ i.email }</td>
-                                <td className="text-center">{ i.user_Status }</td>
-                                <td className="text-center">
-                                    <button 
-                                        className="w-5 h-5" 
+     
+                                    <td className="text-center">{ i.DOJ }</td>
+                                    <td 
+                                        className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
                                         onClick={() => {
-                                            (async function() {
-                                                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/closeuser`,{
-                                                    id:i.UId
-                                                });
- 
-                                                filterState.setBanToggle(!filterState.banToggle)
-                                            })()
-                                        }} 
-                                        disabled={ i.ban === true }
+                                            filterState.setRefPopData(i.UId, true);
+                                        }}
                                     >
-                                        <img src="/admin/ban.png" className={`${i.ban === true ? "mahadhanam-ban" : ""}`}/>
-                                    </button>
-                                </td>
- 
-                                <td className="text-center">
-                                    <button className="w-20 h-7 px-3 py-1 bg-[#40A2D8] text-white rounded">
-                                        Submit
-                                    </button>
-                                </td>
- 
-                                <td className="text-center">
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            className={filterState.selectAll ? `w-4 h-4 checkbox checkbox-md text-2xl outline-none  focus:outline-none text-[#34d399] border-none shadow-none focus:ring-0 bg-gray-800 opacity-20` : `w-4 h-4 checkbox checkbox-md text-2xl outline-none  focus:outline-none text-[#34d399] border-none shadow-none px-[0.7rem] py-[0.7rem] focus:ring-0 bg-gray-500`}
-                                            disabled={filterState.selectAll}
-                                            onClick = {(e) => {
-                                                if(e.target.checked) {
-                                                    filterState.setDistributedList(i.UId)
-                                                    // console.log(filterState.distributedList);
-                                                } else {
-                                                    filterState.setRemoveIdFromDistList(i.UId)
-                                                }
-                                            }}
-                                        />
-                                    </label>
-                                </td>
-                            </tr>
-                        );
-                    })
+                                        { i.firstName } { i.secondName }
+                                    </td>
+                                    <td className="text-center">{ i.UId } </td>
+                                    <td className="text-center">{ i.coupons } </td>
+                                    <td className="text-center">{ i.phone } </td>
+                                    <td className="text-center">{ i.email }</td>
+                                    <td className="text-center">{ i.user_Status }</td>
+                                    <td className="text-center">
+                                        <button 
+                                            className="w-5 h-5" 
+                                            onClick={() => {
+                                                (async function() {
+                                                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/closeuser`,{
+                                                        id:i.UId
+                                                    });
+     
+                                                    filterState.setBanToggle(!filterState.banToggle)
+                                                })()
+                                            }} 
+                                            disabled={ i.ban === true }
+                                        >
+                                            <img src="/admin/ban.png" className={`${i.ban === true ? "mahadhanam-ban" : ""}`}/>
+                                        </button>
+                                    </td>
+     
+                                    <td className="text-center">
+                                        <button className="w-20 h-7 px-3 py-1 bg-[#40A2D8] text-white rounded">
+                                            Submit
+                                        </button>
+                                    </td>
+     
+                                    <td className="text-center">
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                className={filterState.selectAll ? `w-4 h-4 checkbox checkbox-md text-2xl outline-none  focus:outline-none text-[#34d399] border-none shadow-none focus:ring-0 bg-gray-800 opacity-20` : `w-4 h-4 checkbox checkbox-md text-2xl outline-none  focus:outline-none text-[#34d399] border-none shadow-none px-[0.7rem] py-[0.7rem] focus:ring-0 bg-gray-500`}
+                                                disabled={filterState.selectAll}
+                                                onClick = {(e) => {
+                                                    if(e.target.checked) {
+                                                        filterState.setDistributedList(i.UId)
+                                                        // console.log(filterState.distributedList);
+                                                    } else {
+                                                        filterState.setRemoveIdFromDistList(i.UId)
+                                                    }
+                                                }}
+                                            />
+                                        </label>
+                                    </td>
+                                </tr>
+                            );
+                        })
+                    ) : (
+                        <tr>
+                            <td>No results found</td>
+                        </tr>
+                    )
                 }
             </tbody>
  

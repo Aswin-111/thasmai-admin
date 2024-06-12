@@ -17,6 +17,7 @@ function AddEmployee(props) {
       confirmPassword : ""
     }
   );
+  const [isFocused, setIsFocused] = useState(false)
 
     console.log(employeeData);
 
@@ -51,8 +52,8 @@ function AddEmployee(props) {
           props.setPageNo(1);
           props.setAddPopup(false);
         } catch (error) {
-            // console.error('Error fetching data:', error);
-            toast.error(error.message)
+            console.error('Error fetching data:', error);
+            toast.error(error.response.data.message)
         }
 
       } else {
@@ -129,8 +130,14 @@ function AddEmployee(props) {
                   onChange={handleOnChange}
                 />
                  <input 
-                  type='date'
-                  placeholder='Date of Joining'
+                  type={isFocused ? 'date' : 'text'}
+                  onFocus={()=> {
+                    setIsFocused(true)
+                  }}
+                  onBlur={()=> {
+                    setIsFocused(false)
+                  }}
+                  placeholder={employeeData.dateOfJoining ? employeeData.dateOfJoining : "Date of joining"}
                   className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-2 border-[#74777F] rounded-[8px]'
                   name="dateOfJoining"
                   value={employeeData.dateOfJoining}

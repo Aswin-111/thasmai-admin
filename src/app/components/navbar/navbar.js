@@ -1,14 +1,19 @@
 "use client"
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { useNavbarTextStore } from '../../state/navbar-state'
 import { useLoginStore } from "@/app/loginstate/loginState";
 import { IoMdMenu } from "react-icons/io";
+import { FaAngleDown , FaAngleRight } from "react-icons/fa";
+import LogoutPopUp from "./LogoutPopUp";
 
 
 function Navbar() {
+
+	const [isDropDown, setIsDropDown] = useState(false)
+	const [isLogoutPopUp, setIsLogoutPopUp] = useState(false)
   	const state = useLoginStore(function(state) { {
     	return state
   		}	
@@ -70,22 +75,57 @@ function Navbar() {
 			<div className="w-[90%] md:w-full  h-full">
 				<nav className="navbar w-full h-10 px-4 md:px-10 bg-white flex justify-between ">
       
-	  				<h1 className="text-black">{nav_text}</h1>
-		 			<button
+	  				<h1 className="text-black text-md md:text-lg font-medium">{nav_text}</h1>
+		 			{/* <button
 			 			className='w-[80px] h-[30px]  bg-[#d34b4b] text-white flex items-center justify-center rounded'
 		  				onClick={()=>{
 			  				localStorage.removeItem('userdata')
 			  				state.setIsloggedin(false)
 			  				router.push('/login');
 		  				}}
-	  				>Logout</button>
+	  				>Logout</button> */}
+					
+					<div className="w-28 md:w-44 flex justify-between">
+						<img src="/admin/starlife-logo.png" className="h-10 w-0 md:w-10 rounded-full" />
+						<p className="text-[#afafaf]">Thasmai</p>
+						<button 
+							className="w-6 h-6 text-[#afafaf] text-xl flex justify-center items-center rounded-sm hover:text-white  hover:bg-[#dadadae4] "
+							onClick={()=>{
+								setIsDropDown(prevValue => !prevValue)
+							}}
+						>
+							 {
+								isDropDown ? <FaAngleRight/> : <FaAngleDown/>
+							 }
+						</button>
+						
+					</div>
+
   				</nav>
 			</div>
-			
+			{
+				isDropDown && 
+				<div className=" w-44 z-10  p-2 bg-white border-[1px] border-[#afafaf] rounded absolute top-[44px] right-[20px] md:right-[40px]">
+					<button
+				
+			 			className='w-full  h-[34px]  bg-[#d34b4b] hover:bg-[#d34b4bd2] text-white flex items-center justify-center rounded'
+		  				onClick={()=>{
+							setIsLogoutPopUp(true)
+						}}
+	  				>Logout</button>
+				</div>
+			}
 
+
+			{
+				isLogoutPopUp && 
+				<LogoutPopUp setIsLogoutPopUp={setIsLogoutPopUp}/>
+			}
+				
 		</div>
     	
   	);
 }
 
 export default Navbar;
+

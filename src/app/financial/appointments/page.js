@@ -8,11 +8,14 @@ import FilterChip from "./filterChips";
 import AppointmentsTable from "@/app/components/financial/appointments/AppointmentsTable";
 import ProfileView from "@/app/components/users/profileView";
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import Image from "next/image";
 import data from "./data.json"
 
 
 function Appointments() {
+
+	const [totalFeesToAshram, setTotalFeesToAshram] = useState();
 
 	const [pageRows, setPageRows] = useState(10);
     const [pageNo, setPageNo] = useState(1);
@@ -41,6 +44,25 @@ function Appointments() {
     const filterState = useAppointmentsFilterStore((state) => {
         return state;
     });
+
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+			  	const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/get-fees-sum`);
+				console.log(response);
+			  	setTotalFeesToAshram(response.data.totalAmount);
+			} catch (error) {
+			  	console.error("Error fetching data:", error);
+			}
+		};
+		fetchData();
+	
+		return () => {
+			return;
+		}
+	
+	}, []);
   
 
     // useEffect(()=>{console.log('hi',filterState.fieldValue);filterState.setFieldText(filterState.fieldValue)},[])
@@ -138,7 +160,7 @@ function Appointments() {
 
 	//filtering users
 
-	async function handleSearch (newPageNo) {
+	async function handleClickFind (newPageNo, newRow) {
 		try {
 		  	const config = {
 				"Appointment Date" : "appointmentDate",
@@ -372,7 +394,7 @@ function Appointments() {
                             </select>
                         }
 
-						{
+						{/* {
                             filterState.fieldValue === "Available Coupons" && 
                         
                             <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
@@ -394,7 +416,7 @@ function Appointments() {
                                       })
                                 }
                             </select>
-                        }
+                        } */}
 
 						{
                             filterState.fieldValue === "Coupons Redeemed" && 
@@ -511,7 +533,7 @@ function Appointments() {
                     	        </>
                     	}
 
-						{
+						{/* {
                     	    ( filterState.fieldValue === "Available Coupons" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
@@ -528,7 +550,7 @@ function Appointments() {
                     	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
-                    	}
+                    	} */}
 
 						{
                     	    ( filterState.fieldValue === "Coupons Redeemed" && filterState.operatorValue === "") && 
@@ -558,88 +580,132 @@ function Appointments() {
 
                    	<button 
                    	   className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" 
-                   	   onClick={(e)=>{
-                   	          if(filterState.operatorValue === "between") {
-                   	              let startDate = startDateRef.current.value;
-                   	              startDate = startDate.split("-");
-                   	              startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
-
-                   	              let endDate = endDateRef.current.value;
-                   	              endDate = endDate.split("-");
-                   	              endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
-
-                   	              console.log(startDate, endDate);
-
-                   	              filterState.setFilter({
-                   	               field : fieldRef.current.value, 
-                   	               operator : "between", 
-                   	               value : `${startDate}/${endDate}`, 
-                   	               logicaloperator: 'and'
-                   	           })
-                   	        } else if(filterState.fieldValue.includes("Date") && filterState.operatorValue === "equal to") {
-                   	              let date = dataRef.current.value;
-                   	              date = date.split("-");
-                   	              date = `${date[0]}-${date[1]}-${date[2]}`;
+                   	   onClick={(e) => {
+						if(filterState.fieldValue === "" || filterState.operatorValue === "") {
+							toast("Please choose a field and an operator to filter")
+						} else {
+							if(filterState.operatorValue === "between") {
+								let startDate = startDateRef.current.value;
+								startDate = startDate.split("-");
+								startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
 							
-                   	              filterState.setFilter({
-                   	               field : fieldRef.current.value, 
-                   	               operator : operatorRef.current.value,
-                   	               value : `${date}`, 
-                   	               logicaloperator: 'and'
-                   	           })
-                   	        } else {
-                   	            filterState.setFilter({
-                   	               field : fieldRef.current.value, 
-                   	               operator : operatorRef.current.value, 
-                   	               value : dataRef.current.value, 
-                   	               logicaloperator: 'and'
-                   	           })
-                   	        }
-                   	      }}
+								let endDate = endDateRef.current.value;
+								endDate = endDate.split("-");
+								endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
+
+								if(startDate && endDate){
+									console.log(startDate, endDate);
+							
+									filterState.setFilter({
+										field : fieldRef.current.value, 
+										operator : "between", 
+										value : `${startDate}/${endDate}`, 
+										logicaloperator: 'and'
+									 })
+								} else {
+									toast("Please select start date and end date to filter")
+								}
+							
+								
+							} else if(filterState.fieldValue.includes("Date") && filterState.operatorValue === "equal to") {
+								let date = dataRef.current.value;
+								date = date.split("-");
+								date = `${date[0]}-${date[1]}-${date[2]}`;
+
+								if(dataRef.current.value) {
+									filterState.setFilter({
+										field : fieldRef.current.value, 
+										operator : operatorRef.current.value, 
+										value : `${date}`, 
+										logicaloperator: 'and'
+									})
+								} else {
+									toast("Please select a date to filter")
+								}
+							
+
+							} else {
+								const val = dataRef.current.value
+								if(val){
+									filterState.setFilter({
+										field : fieldRef.current.value, 
+										operator : operatorRef.current.value, 
+										value : dataRef.current.value, 
+										logicaloperator: 'and'
+									})
+								} else{
+									toast("Please input a value to filter")
+								}
+								
+							}
+						}
+					}}
                    	>
                          AND
                   	</button>
 
                   	<button 
                   	    className="ms-3 w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" 
-                  	    onClick={(e)=>{
-                  	        if(filterState.operatorValue === "between") {
-                  	               let startDate = startDateRef.current.value;
-                  	               startDate = startDate.split("-");
-                  	               startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
-							
-                  	               let endDate = endDateRef.current.value;
-                  	               endDate = endDate.split("-");
-                  	               endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
-							
-                  	               console.log(startDate, endDate);
-							
-                  	               filterState.setFilter({
-                  	                field : fieldRef.current.value, 
-                  	                operator : "between", 
-                  	                value : `${startDate}/${endDate}`, 
-                  	                logicaloperator:'or'
-                  	            })
-                  	        } else if(filterState.fieldValue.includes("Date") && filterState.operatorValue === "equal to") {
-                  	               let date = dataRef.current.value;
-                  	               date = date.split("-");
-                  	               date = `${date[0]}-${date[1]}-${date[2]}`;
-							
-                  	               filterState.setFilter({
-                  	                field : fieldRef.current.value, 
-                  	                operator : operatorRef.current.value, 
-                  	                value : `${date}`, 
-                  	                logicaloperator:'or'
-                  	            })
-                  	        } else {
-                  	               filterState.setFilter({
-                  	                field : fieldRef.current.value, 
-                  	                operator : operatorRef.current.value, 
-                  	                value : dataRef.current.value, 
-                  	                logicaloperator:'or'
-                  	            })
-                  	        }
-                  	    }}
+                  	    onClick={(e) => {
+							if(filterState.fieldValue === "" || filterState.operatorValue === "") {
+								toast("Please choose a field and an operator to filter")
+							} else {
+								if(filterState.operatorValue === "between") {
+									let startDate = startDateRef.current.value;
+									startDate = startDate.split("-");
+									startDate = `${startDate[0]}-${startDate[1]}-${startDate[2]}`;
+								
+									let endDate = endDateRef.current.value;
+									endDate = endDate.split("-");
+									endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
+	
+									if(startDate && endDate){
+										console.log(startDate, endDate);
+								
+										filterState.setFilter({
+											field : fieldRef.current.value, 
+											operator : "between", 
+											value : `${startDate}/${endDate}`, 
+											logicaloperator: 'or'
+										 })
+									} else {
+										toast("Please select start date and end date to filter")
+									}
+								
+									
+								} else if(filterState.fieldValue.includes("Date") && filterState.operatorValue === "equal to") {
+									let date = dataRef.current.value;
+									date = date.split("-");
+									date = `${date[0]}-${date[1]}-${date[2]}`;
+	
+									if(dataRef.current.value) {
+										filterState.setFilter({
+											field : fieldRef.current.value, 
+											operator : operatorRef.current.value, 
+											value : `${date}`, 
+											logicaloperator: 'or'
+										})
+									} else {
+										toast("Please select a date to filter")
+									}
+								
+	
+								} else {
+									const val = dataRef.current.value
+									if(val){
+										filterState.setFilter({
+											field : fieldRef.current.value, 
+											operator : operatorRef.current.value, 
+											value : dataRef.current.value, 
+											logicaloperator: 'or'
+										})
+									} else{
+										toast("Please input a value to filter")
+									}
+									
+								}
+							}
+						}}
                   	>
                         OR
                   	</button>
@@ -652,7 +718,7 @@ function Appointments() {
               	        className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" 
               	        onClick={() => { 
               	            console.log('clicked');
-              	            handleSearch(1);
+              	            handleClickFind(1, pageRows);
               	        }}
               	    >
               	        Find
@@ -665,7 +731,7 @@ function Appointments() {
 
                                     {/* ------------------Fiterchips div ------------------- */}
 
-          	<div className="w-full h-[10%] bg-[#005DB8] overflow-y-auto shadow my-5 flex flex-wrap items-center snap-mandatory snap-y py-2 px-2">
+          	<div className="w-full h-[10%] my-3 p-2 bg-[#005DB8] overflow-y-auto shadow flex flex-wrap items-center snap-mandatory snap-y">
 
                 { 
                   	filterState.filters[0] ? (
@@ -692,19 +758,15 @@ function Appointments() {
                             ref = {searchRef}
                             className="px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
                         >
-                            <option disabled selected>
+                            <option value="" disabled selected>
                               Choose option
                             </option>
-                            <option value="DOJ">Date Of Joining</option>
-                            <option value="firstName">First Name</option>
-                            <option value="secondName">Second Name</option>
+                            <option value="appointmentDate">Appointment Date</option>
+                            <option value="user_name">User Name</option>
                             <option value="UId">User Id</option>
-							<option value="total_distributed_coupons">Distributed coupon</option>
-                            <option value="coupons">Available Coupons</option>
-                            <option value="Level">Level</option>
-                            <option value="node_number">Node</option>
-							<option value="Status">Status</option>
- 
+                            <option value="payment">Fees Paid</option>
+                            <option value="discount">Coupons Redeemed</option>
+                            
                         </select>
  
                         <input
@@ -724,6 +786,14 @@ function Appointments() {
                                 }}
                             />
                         </div>
+						<p 
+							className="ms-2 text-xs text-red-400 underline cursor-pointer"
+							onClick={() => {
+								setFilterToggle(!filterToggle);
+								searchRef.current.value = "";
+								textRef.current.value = "";
+							}}
+						>clear</p>
                     </div>
                     <div className="w-[20%]">
                         <select name="newRow" id=""
@@ -739,10 +809,9 @@ function Appointments() {
                             <option value="30">30</option>
                         </select>
                     </div>
-                    <div className="w-[40%] flex items-center justify-between">
-                        
- 
-                    
+                    <div className="w-[40%] flex items-center justify-center">
+                        <p className="text-sm text-black font-medium">Total fees : <span className="font-bold">{ totalFeesToAshram }</span></p>
+
                     </div>
                 </div>
 
@@ -776,7 +845,7 @@ function Appointments() {
                         )
                       } */}
 
-{
+						{
                       	  ( !isFilteredData && !isSearchedData ) &&
                       	    <p className="text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
                       	}

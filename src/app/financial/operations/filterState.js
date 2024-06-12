@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 export const useOperationsFilterStore = create((set) => ({
 
-  	fieldValues : ["Expense Date", "Expense Type", "Employee Id", "Amount", "Total Expense"],
+  	fieldValues : ["Expense Date", "Expense Type", "Employee Id", "Amount"],
 
   	dojOperator : ["equal to", "between"],
   	stringOperator : ["starts with", "equal to"],

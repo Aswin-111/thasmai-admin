@@ -196,6 +196,8 @@ function Appointments() {
 			setIsFilteredData(true);
     	}	catch (error) {
       		console.error('Error occurred:', error);
+			appointmentState.setAppointments([]);
+			toast(error.response.data.message);
     	} 
   	};
 
@@ -544,7 +546,7 @@ function Appointments() {
 										endDate = endDate.split("-");
 										endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
 
-										if(startDate & endDate){
+										if(startDate && endDate){
 											console.log(startDate, endDate);
 									
 										    filterState.setFilter({
@@ -610,7 +612,7 @@ function Appointments() {
 										endDate = endDate.split("-");
 										endDate = `${endDate[0]}-${endDate[1]}-${endDate[2]}`;
 
-										if(startDate & endDate){
+										if(startDate && endDate){
 											console.log(startDate, endDate);
 									
 										    filterState.setFilter({
