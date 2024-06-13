@@ -177,7 +177,7 @@ function MeditatorList() {
                 const value = ( i.field.toLowerCase() ==="first name" || 
                                 i.field.toLowerCase() ==="second name" ||
                                 i.field.toLowerCase() ==="phone" ||
-                                i.field.toLowerCase() ==="email") ? `${i.value}%` : i.value;
+                                i.field.toLowerCase() ==="email") && (i.operator.toLowerCase() === "starts with") ? `${i.value}%` : i.value;
                 console.log(field,value,operator);
  
                 if(field.includes("DOJ") && operator === "between") {
@@ -239,174 +239,369 @@ function MeditatorList() {
     }
  
  
-    //handleDistribute to distribute coupons
- 
-    async function handleDistribute() {
-        try {
-            const couponCount = parseInt(distributeRef.current.value); 
-            const uidArray = filterState.meditatorsData.map((item) => item.UId); 
-            console.log("uidArray",uidArray);
- 
-            if(couponCount % filterState.distributedList.size === 0) {
-                const dl = []
-                filterState.distributedList.forEach((i) => { 
-                    dl.push(i)
-                });
- 
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/coupon-systemDistribute`, {
-                    totalCoupons: couponCount,
-                    distributedIds: dl
-                });
-                console.log(response.data ,"fbnujk")
-                filterState.setToastData(true, response.data.message); 
-                setFetchToggle(!fetchToggle)
- 
-                setTimeout(() => {
-                    filterState.setToastData(false)
-                },5000);
- 
-            }
- 
-        } catch (error) {
-            console.error('Error distributing coupons:', error);
-        }
-    };
+
  
  
     //handleRedeem to redeem meditators coupons
  
+    // async function handleRedeem() {
+ 
+    //     try {
+    //         const couponCount = parseInt(distributeRef.current.value); 
+    //         const uidArray = filterState.meditatorsData.map((item) => item.UId); 
+    //         console.log("uidArray",uidArray);
+ 
+    //         const dl = []
+ 
+    //         filterState.distributedList.forEach((i) => {
+    //             dl.push(i)
+    //         });
+    //         console.log(dl)
+    //         localStorage.setItem("redeem",JSON.stringify(dl))
+    //         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/redeem`, {
+    //             coupons: couponCount,
+    //             UIds: dl
+    //         });
+    //         console.log(response.data ,"fbnujk")
+    //         filterState.setToastData(true,response.data.message); 
+ 
+    //         setTimeout(() => {
+    //            filterState.setToastData(false)
+    //         },5000);
+ 
+    //     } catch (error) {
+    //         console.error('Error distributing coupons:', error);
+    //     }
+    // };
+
     async function handleRedeem() {
- 
         try {
-            const couponCount = parseInt(distributeRef.current.value); 
-            const uidArray = filterState.meditatorsData.map((item) => item.UId); 
-            console.log("uidArray",uidArray);
- 
-            const dl = []
- 
+            const couponCount = parseInt(distributeRef.current.value);
+            const uidArray = filterState.meditatorsData.map((item) => item.UId);
+            console.log("uidArray", uidArray);
+    
+            const dl = [];
+    
             filterState.distributedList.forEach((i) => {
-                dl.push(i)
+                dl.push(i);
             });
-            console.log(dl)
-            localStorage.setItem("redeem",JSON.stringify(dl))
+            console.log(dl);
+            localStorage.setItem("redeem", JSON.stringify(dl));
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/redeem`, {
                 coupons: couponCount,
-                UIds: dl
+                UIds: dl,
             });
-            console.log(response.data ,"fbnujk")
-            filterState.setToastData(true,response.data.message); 
- 
+
+            console.log(response.data, "fbnujk");
+            filterState.setToastData(true, response.data.message);
+            setFetchToggle(!fetchToggle);
             setTimeout(() => {
-               filterState.setToastData(false)
-            },5000);
- 
+                filterState.setToastData(false);
+            }, 5000);
+
         } catch (error) {
-            console.error('Error distributing coupons:', error);
+            console.error("Error distributing coupons:", error);
         }
     };
  
  
     //handleAdd
  
+    // async function handleAdd() {
+    //     try {
+    //         const couponCount = distributeRef.current.value
+    //         const uidArray = filterState.meditatorsData.map((item) => item.UId); 
+    //         console.log("uidArray", uidArray, couponCount);
+ 
+ 
+    //         const dl = []
+ 
+    //         filterState.distributedList.forEach((i) => {
+    //             dl.push(i)
+    //         });
+    //         console.log('qwerty',dl)
+    //         localStorage.setItem("redeem", JSON.stringify(dl))
+ 
+    //         const cart_data = JSON.parse(localStorage.getItem(`meditator_cart`));
+ 
+    //         if(cart_data) {
+    //             console.log(cart_data, "cart data");
+    //             const addcart = new Set([...cart_data, ...dl]);
+    //             const finaldl = []
+    //             for (const i of addcart) {
+    //                 finaldl.push(i)
+    //             }
+    //             localStorage.setItem("meditator_cart", JSON.stringify(finaldl));
+    //             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/coupons-cart`, {
+    //                 couponsToDistribute: couponCount,
+    //                 UIds: dl
+    //             });
+    //             console.log(response.data ,"fbnujk")
+    //             filterState.setToastData(true,response.data.message); 
+ 
+    //         } else {
+    //             localStorage.setItem("meditator_cart",JSON.stringify(dl))
+    //             const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE}coupons-cart`, {
+    //                 couponsToDistribute: couponCount,
+    //                 UIds: dl
+    //             });
+    //             console.log(response.data ,"fbnujk")
+    //             filterState.setToastData(true,response.data.message); 
+    //         }
+    //         setTimeout(() => {
+    //             filterState.setToastData(false)
+    //         }, 5000);
+ 
+    //         setFetchToggle(!fetchToggle)
+ 
+    //     } catch(error) {
+    //         console.error('Error distributing coupons:', error);
+    //     }
+    // };
+
     async function handleAdd() {
         try {
-            const couponCount = distributeRef.current.value
-            const uidArray = filterState.meditatorsData.map((item) => item.UId); 
-            console.log("uidArray", uidArray, couponCount);
- 
- 
-            const dl = []
- 
-            filterState.distributedList.forEach((i) => {
-                dl.push(i)
-            });
-            console.log('qwerty',dl)
-            localStorage.setItem("redeem", JSON.stringify(dl))
- 
-            const cart_data = JSON.parse(localStorage.getItem(`meditator_cart`));
- 
-            if(cart_data) {
-                console.log(cart_data, "cart data");
-                const addcart = new Set([...cart_data, ...dl]);
-                const finaldl = []
-                for (const i of addcart) {
-                    finaldl.push(i)
+            if(filterState.distributedList.size > 0 &&  distributeRef.current.value.length > 0) {
+    
+                const couponCount = distributeRef.current.value;
+                const uidArray = filterState.meditatorsData.map((item) => item.UId);
+                console.log("uidArray", uidArray, couponCount);
+    
+                const dl = [];
+    
+                filterState.distributedList.forEach((i) => {
+                    dl.push(i);
+                });
+                console.log("qwerty", dl);
+                localStorage.setItem("redeem", JSON.stringify(dl));
+    
+                const cart_data = JSON.parse(localStorage.getItem(`meditator_cart`));
+
+                if(cart_data) {
+                    console.log(cart_data, "cart data");
+                    const addcart = new Set([...cart_data, ...dl]);
+                    const finaldl = [];
+                    for (const i of addcart) {
+                        finaldl.push(i);
+                    }
+                    localStorage.setItem("meditator_cart", JSON.stringify(finaldl));
+                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/coupons-cart`, {
+                            couponsToDistribute: couponCount,
+                            UIds: dl,
+                    });
+                    console.log(response.data, "fbnujk");
+                    filterState.setToastData(true, response.data.message);
+                } else {
+                    localStorage.setItem("meditator_cart", JSON.stringify(dl));
+                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/coupons-cart`, {
+                        couponsToDistribute: couponCount,
+                        UIds: dl,
+                    });
+                    console.log(response.data, "fbnujk");
+                    filterState.setToastData(true, response.data.message);
                 }
-                localStorage.setItem("meditator_cart", JSON.stringify(finaldl));
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/coupons-cart`, {
-                    couponsToDistribute: couponCount,
-                    UIds: dl
-                });
-                console.log(response.data ,"fbnujk")
-                filterState.setToastData(true,response.data.message); 
- 
+
+                setTimeout(() => {
+                    filterState.setToastData(false);
+                }, 5000);
+    
+                setFetchToggle(!fetchToggle);
+    
             } else {
-                localStorage.setItem("meditator_cart",JSON.stringify(dl))
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE}coupons-cart`, {
-                    couponsToDistribute: couponCount,
-                    UIds: dl
-                });
-                console.log(response.data ,"fbnujk")
-                filterState.setToastData(true,response.data.message); 
+                console.log(filterState.distributedList,distributeRef.current.value,"apple");
+
+                if(filterState.distributedList.size === 0 ) {
+                    filterState.SetValidToastData(true,"Select atleast one user")
+                    setTimeout(()=>{
+                      filterState.SetValidToastData(false)
+                    }, 5000)
+                } else if( distributeRef.current.value.length === 0 ) {
+                    filterState.SetValidToastData(true,"Coupon is empty")
+                    setTimeout(()=>{
+                      filterState.SetValidToastData(false)
+                    }, 5000);
+                }
+      
             }
-            setTimeout(() => {
-                filterState.setToastData(false)
-            }, 5000);
+        } catch (error) {
+          console.error("Error distributing coupons:", error);
+        }
+    };
+
+
+    //handleDistribute to distribute coupons
  
-            setFetchToggle(!fetchToggle)
+    // async function handleDistribute() {
+    //     try {
+    //         const couponCount = parseInt(distributeRef.current.value); 
+    //         const uidArray = filterState.meditatorsData.map((item) => item.UId); 
+    //         console.log("uidArray",uidArray);
  
-        } catch(error) {
-            console.error('Error distributing coupons:', error);
+    //         if(couponCount % filterState.distributedList.size === 0) {
+    //             const dl = []
+    //             filterState.distributedList.forEach((i) => { 
+    //                 dl.push(i)
+    //             });
+ 
+    //             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/coupon-systemDistribute`, {
+    //                 totalCoupons: couponCount,
+    //                 distributedIds: dl
+    //             });
+    //             console.log(response.data ,"fbnujk")
+    //             filterState.setToastData(true, response.data.message); 
+    //             setFetchToggle(!fetchToggle)
+ 
+    //             setTimeout(() => {
+    //                 filterState.setToastData(false)
+    //             },5000);
+ 
+    //         }
+ 
+    //     } catch (error) {
+    //         console.error('Error distributing coupons:', error);
+    //     }
+    // };
+
+    async function handleDistribute() {
+        try {
+            if(filterState.distributedList.size > 0 &&  distributeRef.current.value.length > 0) {
+    
+                const couponCount = parseInt(distributeRef.current.value);
+                const uidArray = filterState.meditatorsData.map((item) => item.UId);
+                console.log("uidArray", uidArray);
+
+                if (couponCount % filterState.distributedList.size === 0) {
+                    const dl = [];
+                    filterState.distributedList.forEach((i) => {
+                        dl.push(i);
+                    });
+                    console.log(dl,couponCount);
+                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/coupon-systemDistribute`, {
+                        totalCoupons: couponCount,
+                        distributedIds: dl,
+                    });
+                    console.log(response.data, "fbnujk");
+                    filterState.setToastData(true, response.data.message);
+                    setFetchToggle(!fetchToggle);
+    
+                    setTimeout(() => {
+                        filterState.setToastData(false);
+                    }, 5000);
+                }
+            } else {
+                console.log(filterState.distributedList,distributeRef.current.value,"apple")
+                if(filterState.distributedList.size === 0 ) {
+                    filterState.SetValidToastData(true,"Select atleast one user")
+                    setTimeout(() => {
+                       filterState.SetValidToastData(false)
+                    }, 5000)
+                } else if( distributeRef.current.value.length === 0 ) {
+                    filterState.SetValidToastData(true, "Coupon is empty")
+                        setTimeout(()=>{
+                          filterState.SetValidToastData(false)
+                        },5000)
+                }
+        
+            }
+        } catch (error) {
+            console.error("Error distributing coupons:", error);
         }
     };
  
  
     //handleExport
  
+    // async function handleExport() {
+    //     try {
+    //         const couponCount = parseInt(distributeRef.current.value);
+    //         const redeemedList = localStorage.getItem("redeem");
+ 
+    //         let template = "";
+ 
+    //         for (let i = 0; i < JSON.parse(redeemedList).length; i++) {
+    //             template += `UIds[]=${JSON.parse(redeemedList)[i]}`;
+    //         }
+ 
+    //         console.log(template);
+ 
+    //         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/download?${template}`, {
+    //             responseType: 'blob', // Set the response type to blob
+    //         });
+ 
+    //         console.log(response.data, "fbnujk");
+ 
+    //         // Create a Blob from the response data
+    //         const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+ 
+    //         // Create a temporary URL for the Blob
+    //         const url = window.URL.createObjectURL(blob);
+ 
+    //         // Create a link element and click it to trigger the download
+    //         const link = document.createElement('a');
+    //         link.href = url;
+    //         link.setAttribute('download', 'export.xlsx');
+    //         document.body.appendChild(link);
+    //         link.click();
+ 
+    //         // Clean up resources
+    //         link.remove();
+    //         window.URL.revokeObjectURL(url);
+ 
+    //         filterState.setToastData(true, response.data.message);
+ 
+    //         setTimeout(() => {
+    //             filterState.setToastData(false);
+    //         }, 5000);
+ 
+    //     } catch (error) {
+    //         console.error('Error distributing coupons:', error);
+    //     }
+    // };
+
     async function handleExport() {
         try {
             const couponCount = parseInt(distributeRef.current.value);
             const redeemedList = localStorage.getItem("redeem");
- 
+    
             let template = "";
- 
+    
             for (let i = 0; i < JSON.parse(redeemedList).length; i++) {
                 template += `UIds[]=${JSON.parse(redeemedList)[i]}`;
             }
- 
+    
             console.log(template);
- 
+    
             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/download?${template}`, {
-                responseType: 'blob', // Set the response type to blob
+                responseType: "blob", // Set the response type to blob
             });
- 
             console.log(response.data, "fbnujk");
- 
+    
             // Create a Blob from the response data
-            const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
- 
+            const blob = new Blob([response.data], {
+                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            });
+    
             // Create a temporary URL for the Blob
             const url = window.URL.createObjectURL(blob);
- 
+    
             // Create a link element and click it to trigger the download
-            const link = document.createElement('a');
+            const link = document.createElement("a");
             link.href = url;
-            link.setAttribute('download', 'export.xlsx');
+            link.setAttribute("download", "export.xlsx");
             document.body.appendChild(link);
             link.click();
- 
+    
             // Clean up resources
             link.remove();
             window.URL.revokeObjectURL(url);
- 
+    
             filterState.setToastData(true, response.data.message);
- 
+    
             setTimeout(() => {
                 filterState.setToastData(false);
             }, 5000);
- 
         } catch (error) {
-            console.error('Error distributing coupons:', error);
+            console.error("Error distributing coupons:", error);
         }
     };
  
@@ -1185,19 +1380,34 @@ function MeditatorList() {
  
         {
             filterState.cartToggle  &&
-                <Cart setCartToggle={filterState.setCartToggle} setFetchToggle = {setFetchToggle} fetchToggle={fetchToggle} />
+                <Cart 
+                    setCartToggle={filterState.setCartToggle} 
+                    setFetchToggle = {setFetchToggle} 
+                    fetchToggle={fetchToggle} 
+                    distributedList={filterState.distributedList}
+                />
         }
  
-        {
-            filterState.toastData.toggle && 
-                <div className="toast toast-center toast-middle">
-                    <div className="alert alert-success">
-                        <span>
-                            { filterState.toastData.message }
-                        </span>
-                    </div>
-                </div>
-        }
+ { 
+        filterState.validToastData.validToastToggle && 
+        
+        <div className="toast toast-center toast-middle">
+    
+          <div className="alert alert-success">
+            <span>{filterState.validToastData.validToastText}</span>
+          </div>
+        </div>
+      }
+
+    
+      {
+        filterState.toastData.toggle && (
+        <div className="toast toast-center toast-middle">
+          <div className="alert alert-success">
+            <span>{filterState.toastData.message}</span>
+          </div>
+        </div>
+      )}
  
   	</div>
     );

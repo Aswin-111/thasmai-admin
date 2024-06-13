@@ -48,7 +48,7 @@ export const useApplicationFeedbackStore = create((set) => ({
   
 
   id: "",
-  setId :   (newId) => set((state) =>{ return ({ id:newId })}),
+  setId :   (newId) => set((state) =>{ return ({ id : newId })}),
 
   appointmentViewToggle: false,
   setAppointmentViewToggle : (toggle, appointment) => set((state) => { 

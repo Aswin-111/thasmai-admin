@@ -45,12 +45,17 @@ function AppointmentsTable(props) {
   }
 
 
-  async function handleCheckInClick(id, status) {
+  async function handleCheckInClick(regDate, id, status) {
     try {
+    const formattedRegDate = moment( regDate, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
+    console.log(formattedRegDate);
+
+
     const dateTime = `${moment().format('DD/MM/YYYY')}`;
     const formattedCheckinDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
-    console.log(formattedCheckinDate);
+    
     const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${id}`,{
+      register_date: formattedRegDate,
       appointment_status : status,
       appointmentDate: formattedCheckinDate
     })
@@ -173,7 +178,7 @@ function AppointmentsTable(props) {
                           <button 
                             className="w-[90px] h-[35px] rounded-3xl text-white bg-green-500 hover:bg-green-700"
                             onClick={(e) => {
-                              handleCheckInClick(appoint.id, "Checked In")
+                              handleCheckInClick(appoint.register_date, appoint.id, "Checked In")
                             }}
                           >Check In</button> 
                       }

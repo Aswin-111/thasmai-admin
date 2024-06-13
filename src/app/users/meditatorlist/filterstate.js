@@ -62,10 +62,14 @@ export const useFilterStore = create((set) => ({
     }),
  
  
-    couponCount:"",
-    setCouponCount : (count) => set(state => {
-        return ({
-            couponCount : count
+    couponCount: {
+        available_coupons: "",
+        distributed_coupon: ""
+    },
+    setCouponCount: (ac, dc) => set(state => {
+        console.log(ac,dc,"filterstate line118")
+        return ({ 
+            couponCount: {available_coupons : ac, distributed_coupon : dc }
         });
     }),
  
@@ -78,6 +82,18 @@ export const useFilterStore = create((set) => ({
         return ({
             toastData : {toggle : tog, message : message}
         });
+    }),
+
+    validToastData: {
+        validToastToggle :false,
+        validToastText : ""
+    },
+    SetValidToastData: (validToggle,validText) => set(state => {
+        //console.log(data);
+        return ({ validToastData: {
+          validToastToggle :validToggle,
+          validToastText : validText
+        }}) 
     }),
  
  

@@ -178,7 +178,7 @@ function UpdateEmployee(props) {
 					</div>
 					<div className='w-[50%] h-full p-4'>
 						<p>Username :</p>
-						{
+						{/* {
 							!isUpdateClicked ? (
 								<p className='mt-3 text-lg font-medium text-[#005DB8]'>{ data.username }</p>
 							) :  (
@@ -191,7 +191,8 @@ function UpdateEmployee(props) {
                 				  	onChange={handleOnChange}
                 				/>
 							)
-						}
+						} */}
+						<p className='mt-3 text-lg font-medium text-[#4b4c4c]'>{ data.username }</p>
 					</div>
 				</div>
 

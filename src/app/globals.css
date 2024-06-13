@@ -54,6 +54,9 @@ input[type=number] {
   border-radius: 10px;
 }
 
+.mahadhanam-ban{
+  filter: grayscale(1);
+}
 
 /* .rmdp-wrapper {
   width: 100% !important;

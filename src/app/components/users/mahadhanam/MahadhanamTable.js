@@ -75,8 +75,8 @@ function MahadhanamTable({ data, filterState }) {
                                             className="w-5 h-5" 
                                             onClick={() => {
                                                 (async function() {
-                                                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/closeuser`,{
-                                                        id:i.UId
+                                                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/closeuser`, {
+                                                        id: i.UId
                                                     });
      
                                                     filterState.setBanToggle(!filterState.banToggle)

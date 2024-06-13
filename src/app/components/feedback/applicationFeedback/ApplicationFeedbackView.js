@@ -20,12 +20,13 @@ function ApplicationFeedbackView() {
         const fetchData = async () => {
           try {
               const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/app-feedback-by-id/${feedbackState.id}`);
+            console.log(response);
               setData(response.data.feedbackWithUsernames);
-            // console.log(response);
             
   
           } catch (error) {
-            console.error('Error fetching data:', error);
+            console('Error fetching data:', error);
+            toast(error.response.data.message);
           }
         };
     

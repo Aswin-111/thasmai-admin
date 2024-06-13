@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
  
-function Cart({ setCartToggle, setFetchToggle, fetchToggle }) {
+function Cart({ setCartToggle, setFetchToggle, fetchToggle, distributedList }) {
  
     const [totalCouponsToDistribute, setTotalCouponsToDistribute] = useState(0);
     const [distributionRecords, setDistributionRecords] = useState([]);
@@ -11,7 +11,6 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle }) {
  
     useEffect(() => {
         (async function () {
-            console.log("1234", process.env);
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/view-cart`);
                 console.log(response.data.distributionRecords);
@@ -32,22 +31,45 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle }) {
  
     //handleRemove
  
+    // async function handleRemove(UId) {
+    //     try {
+    //         console.log(UId, "ioeppep");
+ 
+    //         console.log(localStorage.getItem("meditator_cart"));
+    //         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/revoke-coupons`, {
+    //             UIds: [UId],
+    //         });
+ 
+    //         console.log(response.data, "fbnujk");
+ 
+    //         const cart_data = JSON.parse(localStorage.getItem("meditator_cart"));
+    //         cart_data.splice(cart_data.indexOf(UId), 1);
+ 
+    //         localStorage.setItem("meditator_cart", JSON.stringify(cart_data));
+ 
+    //         setCartRemoveToggle(!cartremovetoggle);
+    //         setFetchToggle(!fetchToggle)
+    //     } catch (error) {
+    //         console.error("Error occurred while removing:", error);
+    //     }
+    // };
+
     async function handleRemove(UId) {
         try {
             console.log(UId, "ioeppep");
- 
+    
             console.log(localStorage.getItem("meditator_cart"));
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/revoke-coupons`, {
                 UIds: [UId],
             });
- 
+    
             console.log(response.data, "fbnujk");
- 
+    
             const cart_data = JSON.parse(localStorage.getItem("meditator_cart"));
             cart_data.splice(cart_data.indexOf(UId), 1);
- 
+    
             localStorage.setItem("meditator_cart", JSON.stringify(cart_data));
- 
+    
             setCartRemoveToggle(!cartremovetoggle);
             setFetchToggle(!fetchToggle)
         } catch (error) {
@@ -58,13 +80,33 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle }) {
  
     //handleRemoveAll
  
+    // async function handleRemoveAll() {
+    //     try {
+    //         // const UIdfrom = distributionRecords.map((i,ind) => {
+    //         //   return i.UId
+    //         // })
+    //         const data = localStorage.getItem("mahadhanam_cart");
+ 
+    //         const uidfrom = JSON.parse(data);
+    //         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/revoke-coupons`, {
+    //             UIds: [...uidfrom],
+    //         });
+    //         console.log(response.data, "fbnujk");
+    //         localStorage.removeItem("mahadhanam_cart");
+    //         setCartRemoveToggle(!cartremovetoggle);
+    //     } catch (error) {
+    //         console.error("Error occurred while removing:", error);
+    //     }
+    // };
+
     async function handleRemoveAll() {
         try {
-            // const UIdfrom = distributionRecords.map((i,ind) => {
+            // const UIdfrom = distributionRecords.map((i,ind)=>{
             //   return i.UId
+
             // })
             const data = localStorage.getItem("mahadhanam_cart");
- 
+
             const uidfrom = JSON.parse(data);
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/revoke-coupons`, {
                 UIds: [...uidfrom],
@@ -80,26 +122,50 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle }) {
  
     //handleSend
  
-    async function handleSend(UIds) {
+    // async function handleSend(UIds) {
+    //     try {
+    //         const UIdfrom = distributionRecords.map((i, ind) => {
+    //             return i.UId;
+    //         });
+    //         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/distributetousers`, {
+    //             UIds: [...UIdfrom],
+    //         });
+    //         console.log(response, "fbnujk");
+    //         if (response.data.message) {
+    //           setCartToggle(false);
+    //         }
+ 
+    //         localStorage.removeItem("meditator_cart");
+    //         setCartRemoveToggle(!cartremovetoggle);
+    //     } catch (error) {
+    //         console.error("Error occurred while removing:", error);
+    //     }
+    // };
+ 
+    async function handleSend() {
         try {
-            const UIdfrom = distributionRecords.map((i, ind) => {
-                return i.UId;
-            });
+            const distlist = [];
+
+            for(const i of distributedList){
+                distlist.push(i)
+            }
+            
+            // console.log(UIdfrom,"line 94");
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/distributetousers`, {
-                UIds: [...UIdfrom],
+                UIds: [...distlist],
             });
             console.log(response, "fbnujk");
             if (response.data.message) {
-              setCartToggle(false);
+                setCartToggle(false);
             }
- 
+            setFetchToggle(!fetchToggle)
+    
             localStorage.removeItem("meditator_cart");
             setCartRemoveToggle(!cartremovetoggle);
         } catch (error) {
             console.error("Error occurred while removing:", error);
         }
     };
- 
  
  
     return (
@@ -182,7 +248,7 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle }) {
                     <button
                         className="w-28 h-8 me-3 bg-[#FF7979] text-white hover:bg-[#fc6262] rounded"
                         onClick={() => {
-                            handleRemoveAll(item.UId);
+                            handleRemoveAll();
                         }}
                     >
                         Remove All
@@ -191,7 +257,7 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle }) {
                     <button
                         className="w-24 h-8 bg-[#5799FD] text-white hover:bg-[#577efd] rounded"
                         onClick={() => {
-                            handleSend(item.UId);
+                            handleSend();
                         }}
                     >
                         Send</button>
@@ -203,4 +269,4 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle }) {
     );
 }
  
-export default Cart;
+export default Cart

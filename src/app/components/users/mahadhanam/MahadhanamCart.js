@@ -22,12 +22,15 @@ function MahadhanamCart({ setCartToggle }) {
                 const data = JSON.parse(localStorage.getItem("mahadhanam_cart")).cart_data
  
                 let cart_coupon = 0;
-                data.forEach((i) => {
-                    cart_coupon = i.coupons_to_distribute
-                    console.log(i);
-                });
-                setDistributionRecords([...data]);
-                setTotalCouponsToDistribute(cart_coupon);
+                if (data) {
+                    data.forEach((i) => {
+                        cart_coupon = i.coupons_to_distribute;
+                        console.log(i);
+                    });
+          
+                    setDistributionRecords([...data]);
+                    setTotalCouponsToDistribute(cart_coupon);
+                }
             } catch (err) {
                 console.log('qwerty')
                 console.error('Error fetching data:', err);
@@ -38,50 +41,93 @@ function MahadhanamCart({ setCartToggle }) {
  
     //handleRemove
  
+    // async function handleRemove(UId) {
+    //     try {
+ 
+    //         const initial_data =  JSON.parse(localStorage.getItem("mahadhanam_cart")).cart_data
+    //         const retrieved_data = initial_data.filter(i => {
+    //             return  i.UId === UId
+    //         })
+    //         let coupon_revoke = [...filterState.meditatorsData];
+    //         console.log(retrieved_data);
+    //         coupon_revoke.forEach(i => {
+    //             if(i.UId === UId) {
+    //                 i.coupons = Number(i.coupons) + Number(retrieved_data[0].coupons_to_distribute)
+    //             }
+    //         })
+    //         const removed_data = initial_data.filter(i => {
+    //             return i.UId != UId
+    //         })
+    //         localStorage.removeItem("mahadhanam_cart")
+    //         localStorage.setItem("mahadhanam_cart", JSON.stringify({ cart_data : [...removed_data] }))
+    //         filterState.setMeditatorsData([...coupon_revoke])
+ 
+    //         setRemoveToggle(!removeToggle);
+    //         console.log(response.data, "fbnujk")
+ 
+    //     } catch (error) {
+    //         console.error('Error occurred while removing:', error);
+    //     }
+    // };
+
     async function handleRemove(UId) {
         try {
- 
-            const initial_data =  JSON.parse(localStorage.getItem("mahadhanam_cart")).cart_data
-            const retrieved_data = initial_data.filter(i => {
-                return  i.UId === UId
-            })
+            const initial_data = JSON.parse(localStorage.getItem("mahadhanam_cart")).cart_data;
+            const retrieved_data = initial_data.filter((i) => {
+                return i.UId === UId;
+            });
             let coupon_revoke = [...filterState.meditatorsData];
             console.log(retrieved_data);
-            coupon_revoke.forEach(i => {
-                if(i.UId === UId) {
-                    i.coupons = Number(i.coupons) + Number(retrieved_data[0].coupons_to_distribute)
+            coupon_revoke.forEach((i) => {
+                if (i.UId === UId) {
+                i.coupons = Number(i.coupons) + Number(retrieved_data[0].coupons_to_distribute);
                 }
-            })
-            const removed_data = initial_data.filter(i => {
-                return i.UId != UId
-            })
-            localStorage.removeItem("mahadhanam_cart")
-            localStorage.setItem("mahadhanam_cart", JSON.stringify({ cart_data : [...removed_data] }))
-            filterState.setMeditatorsData([...coupon_revoke])
- 
+            });
+            const removed_data = initial_data.filter((i) => {
+                return i.UId != UId;
+            });
+            localStorage.removeItem("mahadhanam_cart");
+            localStorage.setItem("mahadhanam_cart", JSON.stringify({ 
+                cart_data: [...removed_data] 
+            }));
+            filterState.setMeditatorsData([...coupon_revoke]);
+    
             setRemoveToggle(!removeToggle);
-            console.log(response.data, "fbnujk")
- 
+            // console.log(response.data, "fbnujk");
         } catch (error) {
-            console.error('Error occurred while removing:', error);
+            console.error("Error occurred while removing:", error);
         }
     };
  
  
     // handleRemoveAll
  
+    // async function handleRemoveAll(UIds) {
+    //     try {
+    //         const UIdfrom = distributionRecords.map((i, ind) => {
+    //             return i.UId
+    //         });
+ 
+    //         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/dummy-revoke`, {
+    //             UIds: [...UIdfrom]
+    //         });
+    //         console.log(response.data, "fbnujk")
+    //     } catch (error) {
+    //         console.error('Error occurred while removing:', error);
+    //     }
+    // };
+
     async function handleRemoveAll(UIds) {
         try {
             const UIdfrom = distributionRecords.map((i, ind) => {
-                return i.UId
+                return i.UId;
             });
- 
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/dummy-revoke`, {
-                UIds: [...UIdfrom]
+                UIds: [...UIdfrom],
             });
-            console.log(response.data, "fbnujk")
+            console.log(response.data, "fbnujk");
         } catch (error) {
-            console.error('Error occurred while removing:', error);
+            console.error("Error occurred while removing:", error);
         }
     };
  
@@ -89,20 +135,118 @@ function MahadhanamCart({ setCartToggle }) {
  
     //handleSend
  
+    // async function handleSend(UIds) {
+    //     try {
+    //         const UIdfrom = distributionRecords.map((i, ind) => {
+    //             return i.UId
+    //         })
+    //         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/dummy-distribution`, {
+    //             UIds: [...UIdfrom]
+    //         });
+    //         console.log(response, "fbnujk")
+    //         if (response.data.message) {
+    //             setCartToggle(false);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error occurred while removing:', error);
+    //     }
+    // };
+
     async function handleSend(UIds) {
         try {
-            const UIdfrom = distributionRecords.map((i, ind) => {
-                return i.UId
-            })
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/dummy-distribution`, {
-                UIds: [...UIdfrom]
-            });
-            console.log(response, "fbnujk")
-            if (response.data.message) {
-                setCartToggle(false);
+            if(distributionRecords.length >=1) {
+
+                const UIdfrom = distributionRecords.map((i, ind) => {
+                    return i.UId;
+                });
+    
+                const user_data = JSON.parse(localStorage.getItem("mahadhanam_cart")).cart_data;
+                if (user_data.length >= 1) {
+                    const dl = [];
+                    filterState.distributedList.forEach((i) => {
+                        dl.push(i);
+                    });
+                    console.log(dl, user_data);
+    
+                    const coupon_list = user_data.map((i) => Number(i.coupons_to_distribute));
+    
+                    const total_count = coupon_list.reduce(function (total, num) {
+                      return total + num;
+                    }, 0);
+                    // {firstName: 'Jane', UId: 12, coupons_to_distribute: '3'}1: {firstName: 'Jim', UId: 13, coupons_to_distribute: '3'}2: {firstName: 'Jack', UId: 14, coupons_to_distribute: '3'}length: 3[[Prototype]]: Array(0)
+    
+                    if (dl.length != 0) {
+    
+                        if (dl.length > 1) {
+                            const divisor = total_count % dl.length === 0;
+                            if (divisor) {
+                                let dld = [];
+    
+                                let cp = [...filterState.meditatorsData];
+    
+                                dl.forEach((i) => {
+                                    console.log("uid", i.UId, i, cp);
+                                    const index = cp.findIndex((j) => {
+                                        return j.UId == i;
+                                    });
+                              
+                                    cp[index].coupons = cp[index].coupons + total_count / dl.length;
+                                    localStorage.removeItem("mahadhanam_cart");
+                                });
+    
+                                filterState.setMeditatorsData([...cp]);
+    
+                                filterState.setToastData(true, "Coupons distributed successfully");
+                                setTimeout(() => {
+                                    filterState.setToastData(false);
+                                }, 5000);
+
+                            } else {
+                                filterState.setToastData(true,"Coupons cannot be distributed")         
+    
+                                setTimeout(() => {
+                                    filterState.setToastData(false)
+                                }, 5000)
+                            }
+
+                        } else {
+                           
+                            let cp = [...filterState.meditatorsData];
+                            const index = cp.findIndex((j) => { 
+                                return j.UId == dl[0];
+                            });
+    
+                            cp[index].coupons = cp[index].coupons + total_count / dl.length;
+                            localStorage.removeItem("mahadhanam_cart");
+                 
+    
+                            filterState.setToastData(true, "Coupon distributed successfully");
+                            setTimeout(() => {
+                              filterState.setToastData(false);
+                            }, 5000);
+                        }
+    
+                        setCartToggle(false);
+                    }
+    
+    
+                } else {
+                    filterState.setToastData(true, "Cart is empty");
+                    setTimeout(() => {
+                        filterState.setToastData(false)
+                    }, 5000);
+                }
+       
+            } else {
+                filterState.setToastData(true, "Cart is empty")  
+                setTimeout(() => {
+                    filterState.setToastData(false)
+                }, 5000)       
+    
             }
+
         } catch (error) {
-            console.error('Error occurred while removing:', error);
+            console.error("Error occurred while removing:", error);
         }
     };
  

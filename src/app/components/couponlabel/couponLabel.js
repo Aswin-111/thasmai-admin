@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
  
  
-function CouponLabel() {
+function CouponLabel({ coupons }) {
     return (
  
         <div className="flex h-full">
@@ -12,7 +12,7 @@ function CouponLabel() {
                 <Image src = '/admin/coupon-count.png' className="" width={24} height={24} alt="coupon"/>
             </div>
             <div className="bg-[#5799FD] w-24 h-8 rounded-r-xl font-bold text-white flex justify-center items-center ">
-                100K
+                { coupons.available_coupons }
             </div>
         </div>
     );

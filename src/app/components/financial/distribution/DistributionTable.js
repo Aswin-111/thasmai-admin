@@ -97,8 +97,12 @@ function DistributionTable(props) {
                     		    	<td className="text-center">{i.total_distributed_coupons}</td>
                     		    	<td className="text-center">{i.coupons}</td>
                     		    	<td className="text-center flex justify-evenly">
-                    		    	  <div className="bg-[#d9d9d9] w-10 h-7 p-1 me-1 rounded">L - { i.Level }</div>      
-                    		    	  <div className="bg-[#d9d9d9] w-10 h-7 p-1 rounded">N - { i.node_number }</div> 
+                    		    	  <p className="text-[10px] bg-[#d9d9d9] w-16 h-7  me-1 rounded flex justify-center items-center">
+										L - { i.Level }
+									  </p>      
+                    		    	  <p className="text-[10px] bg-[#d9d9d9] w-16 h-7  rounded flex justify-center items-center">
+										N - { i.node_number }
+									  </p> 
                     		    	</td>
                     		    	{/* <td className="text-center">
                     		    	  <div className="bg-[#d9d9d9] w-full h-7 p-1 rounded">{ i.description ? i.description : "" } </div>

@@ -76,6 +76,20 @@ export const useMahadhanamFilterStore = create((set) => ({
  
  
     setToastData:(tog,message) => set(state => {return ({toastData : {toggle : tog ,message: message}})}),
+
+    validToastData: {
+      validToastToggle :false,
+        validToastText : ""
+    },
+    SetValidToastData: (validToggle,validText) => set(state => {
+      //console.log(data);
+      return ({
+        validToastData: {
+          validToastToggle :validToggle,
+          validToastText : validText
+        }
+      })
+    }),
  
  
     selectAll: false,
@@ -103,14 +117,14 @@ export const useMahadhanamFilterStore = create((set) => ({
         name:"das",
         coupon:5
       },
-    {
+      {
       name:"Jeffin",
         coupon:5
-    }
-  ,{
-    name:"albin",
+      },
+      {
+      name:"albin",
         coupon:10
-  }],
+      }],
       setCartData: (data) => set(state => {//console.log(data);
         return ({cart_data:[...data]}) }),
  

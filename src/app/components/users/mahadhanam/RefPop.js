@@ -28,7 +28,7 @@ const RefPop = ({ refUserId }) => {
                 setRefDetails([...response.data.refs])
  
             } catch (error) {
-                toast.error("Error loading data.")
+                // toast.error("Error loading data.")
                 console.log("Error", error);
             }
  

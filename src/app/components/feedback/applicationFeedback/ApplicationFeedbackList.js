@@ -86,7 +86,7 @@ function ApplicationFeedbackList( props) {
                     <td 
                       className="text-center cursor-pointer flex"
                       onClick={() => {
-                          feedbackState.setFeedbackViewToggle(true, i.UId);
+                          feedbackState.setFeedbackViewToggle(true, i.id);
                       }}
                     >
                       { String(i.feedback).substring(0, 50) } <p className="ms-1 text-blue-400 hover:text-blue-600 hover:scale-105"> { "<" + "Read more..." +">" }</p>

@@ -1,10 +1,10 @@
 "use client";
  
 import React, {useState, useEffect, useRef} from 'react'
+import Image from "next/image";
 import { useMahadhanamFilterStore } from "./filterstate";
 import { useNavbarTextStore } from '../../state/navbar-state'
 import NavLink from '../navlink/navlink'
-import CouponLabel from '@/app/components/couponlabel/couponLabel';
 import FilterChip from './filterchips';
 import MahadhanamTable from '@/app/components/users/mahadhanam/MahadhanamTable';
 import MahadhanamCart from '@/app/components/users/mahadhanam/MahadhanamCart';
@@ -163,150 +163,114 @@ function Mahadhanam() {
  
  
  
-    //handleDistribute
- 
-    async function handleDistribute() {
- 
-        try {
-            if(filterState.distributedList.size > 0 &&  distributeRef.current.value.length > 0 ) {
-                const couponCount = parseInt(distributeRef.current.value); 
-                const uidArray = filterState.meditatorsData.map((item) => item.UId); 
-                console.log("uidArray",uidArray);
- 
-                if(couponCount % filterState.distributedList.size === 0) {
-                    const dl = []
-                    filterState.distributedList.forEach((i) => {
-                        dl.push(i)
-                    })
-                    console.log(response.data ,"fbnujk`")
-                    filterState.setToastData(true, response.data.message); 
- 
-                    setTimeout(() => {
-                        filterState.setToastData(false)
-                    }, 5000);
- 
-                }
-            } else {
- 
-                console.log(filterState.distributedList,distributeRef.current.value,"apple")
-                if(filterState.distributedList.size === 0 ) {
-                    filterState.SetValidToastData(true,"Select atleast one user")
-                    setTimeout(() => {
-                       filterState.SetValidToastData(false)
-                    }, 5000);
-                } else if( distributeRef.current.value.length === 0 ) {
-                    filterState.SetValidToastData(true,"Coupon is empty")
-                    setTimeout(() => {
-                        filterState.SetValidToastData(false)
-                    }, 5000);
-                }
-            }
- 
-        } catch (error) {
-          console.error('Error dstributing coupons:', error);
-        }
-    };
  
  
-    //handleRedeem
+    
  
-    async function handleRedeem() {
-        try {
-            const couponCount = parseInt(distributeRef.current.value); 
-            const uidArray = filterState.meditatorsData.map((item) => item.UId); 
-            console.log("uidArray",uidArray);
- 
-            const dl = [];
-            filterState.distributedList.forEach((i) => {
-                dl.push(i)
-            });
-            console.log(dl)
-            localStorage.setItem("redeem",JSON.stringify(dl))
- 
-            console.log(response.data ,"fbnujk")
-            filterState.setToastData(true,response.data.message); 
- 
-            setTimeout(() => {
-                filterState.setToastData(false)
-            }, 5000);
- 
-        } catch (error) {
-            console.error('Error distributing coupons:', error);
-        }
-    };
- 
- 
-    //handleExport
- 
-    async function handleExport() {
-        try {
-            const couponCount = parseInt(distributeRef.current.value);
-            const redeemedList = localStorage.getItem("redeem");
-            console.log(redeemedList);
- 
-            let template = '';
- 
-            for (let i = 0; i < JSON.parse(redeemedList).length; i++) {
-                template += `UIds[]=${JSON.parse(redeemedList)[i]}`;
-            }
- 
-            console.log(template);
- 
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE}download?${template}`, {
-                responseType: 'blob', // Set the response type to blob
-            });
- 
-            console.log(response.data, "fbnujk");
- 
-            // Create a Blob from the response data
-            const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
- 
-            // Create a temporary URL for the Blob
-            const url = window.URL.createObjectURL(blob);
- 
-            // Create a link element and click it to trigger the download
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'export.xlsx');
-            document.body.appendChild(link);
-            link.click();
- 
-            // Clean up resources
-            link.remove();
-            window.URL.revokeObjectURL(url);
- 
-            filterState.setToastData(true, response.data.message);
- 
-            setTimeout(() => {
-                filterState.setToastData(false);
-            }, 5000);
- 
-        } catch (error) {
-            console.error('Error distributing coupons:', error);
-        }
-    };
+
  
  
     //handleAdd
  
+    // async function handleAdd() {
+    //     try {
+    //         if(filterState.distributedList.size > 0 &&  distributeRef.current.value.length > 0 ) {
+ 
+    //             const couponCount = distributeRef.current.value
+    //             const uidArray = filterState.meditatorsData.map((item) => item.UId); 
+    //             console.log("uidArray",uidArray,couponCount);
+ 
+    //             let compeleteData = [];
+    //             let coupon_reduced = [...filterState.meditatorsData]
+ 
+    //             // {id: 2, firstName: 'das', secondName: 'K', UId: 11, coupons_to_distribute: 1, …}
+ 
+    //             const dl = [] 
+    //             filterState.distributedList.forEach((i) => {
+    //                 dl.push(i)
+    //             });
+ 
+    //             console.log('qwerty',dl)
+    //             dl.forEach(i => {
+    //                 coupon_reduced.forEach(j => {
+    //                     if(j.UId === i) {
+    //                         j.coupons = Number(j.coupons) - Number(couponCount)
+    //                     }
+    //                 });
+ 
+    //                 let userAddedData = filterState.meditatorsData.filter(j => {
+    //                     return j.UId === i
+    //                 });
+ 
+    //                 let firstName = userAddedData[0].firstName;
+    //                 compeleteData.push({ firstName:firstName, UId: i, coupons_to_distribute: couponCount}) 
+    //                 console.log(userAddedData,"asdzxcx")
+    //             });
+ 
+    //             let mahadhanam_cart;
+    //             console.log("asdfghjhgfds",compeleteData)
+ 
+    //             try {
+    //                 //  filterState.meditatorsData.find
+    //                 mahadhanam_cart =   JSON.parse(localStorage.getItem("mahadhanam_cart")).cart_data
+    //             } catch(err) {
+ 
+    //             }
+ 
+    //             filterState.setMeditatorsData([...coupon_reduced]);
+ 
+    //             if(mahadhanam_cart) {
+    //                 localStorage.setItem("mahadhanam_cart",JSON.stringify({cart_data:[...mahadhanam_cart,...compeleteData]}))
+    //             } else {
+    //                 localStorage.setItem("mahadhanam_cart",JSON.stringify({cart_data:[...compeleteData]}))
+    //             }
+ 
+    //             filterState.setToastData(true,"coupons added to the cart successfully"); 
+    //             setTimeout(() => {
+    //                 filterState.setToastData(false)
+    //             }, 5000);
+ 
+    //         } else {
+    //             console.log(filterState.distributedList, distributeRef.current.value, "apple")
+    //             if(filterState.distributedList.size === 0 ) {
+ 
+    //                 filterState.SetValidToastData(true, "Select atleast one user");
+    //                 setTimeout(() => {
+    //                     filterState.SetValidToastData(false)
+    //                 }, 5000);
+ 
+    //             } else if( distributeRef.current.value.length === 0 ) {
+ 
+    //                 filterState.SetValidToastData(true, "Coupon is empty");
+    //                 setTimeout(() => {
+    //                     filterState.SetValidToastData(false)
+    //                 }, 5000);
+    //             }
+ 
+    //         }
+ 
+    //     } catch (error) {
+    //         console.error('Error distributing coupons:', error);
+    //     }
+    // };
+
     async function handleAdd() {
         try {
             if(filterState.distributedList.size > 0 &&  distributeRef.current.value.length > 0 ) {
- 
+      
                 const couponCount = distributeRef.current.value
                 const uidArray = filterState.meditatorsData.map((item) => item.UId); 
                 console.log("uidArray",uidArray,couponCount);
- 
+      
                 let compeleteData = [];
                 let coupon_reduced = [...filterState.meditatorsData]
- 
                 // {id: 2, firstName: 'das', secondName: 'K', UId: 11, coupons_to_distribute: 1, …}
- 
-                const dl = [] 
+      
+                const dl = []
+          
                 filterState.distributedList.forEach((i) => {
                     dl.push(i)
-                });
- 
+                })
                 console.log('qwerty',dl)
                 dl.forEach(i => {
                     coupon_reduced.forEach(j => {
@@ -314,58 +278,61 @@ function Mahadhanam() {
                             j.coupons = Number(j.coupons) - Number(couponCount)
                         }
                     });
- 
-                    let userAddedData = filterState.meditatorsData.filter(j => {
+
+                    let userAddedData =  filterState.meditatorsData.filter(j => {
                         return j.UId === i
-                    });
- 
-                    let firstName = userAddedData[0].firstName;
-                    compeleteData.push({ firstName:firstName, UId: i, coupons_to_distribute: couponCount}) 
+                    })
+                    let firstName = userAddedData[0].firstName
+       
+                    compeleteData.push({ firstName: firstName, UId: i, coupons_to_distribute: couponCount}) 
+       
                     console.log(userAddedData,"asdzxcx")
                 });
- 
+           
                 let mahadhanam_cart;
                 console.log("asdfghjhgfds",compeleteData)
- 
+          
                 try {
                     //  filterState.meditatorsData.find
                     mahadhanam_cart =   JSON.parse(localStorage.getItem("mahadhanam_cart")).cart_data
                 } catch(err) {
- 
+        
                 }
- 
+
                 filterState.setMeditatorsData([...coupon_reduced]);
- 
+  
                 if(mahadhanam_cart) {
                     localStorage.setItem("mahadhanam_cart",JSON.stringify({cart_data:[...mahadhanam_cart,...compeleteData]}))
                 } else {
                     localStorage.setItem("mahadhanam_cart",JSON.stringify({cart_data:[...compeleteData]}))
                 }
- 
+          
+                // const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE}dummy-cart`, {
+                //   couponsToDistribute: couponCount,
+                //   UIds: dl
+                // });
                 filterState.setToastData(true,"coupons added to the cart successfully"); 
                 setTimeout(() => {
                     filterState.setToastData(false)
-                }, 5000);
- 
+                }, 5000)
             } else {
-                console.log(filterState.distributedList, distributeRef.current.value, "apple")
+                console.log(filterState.distributedList,distributeRef.current.value,"apple")
                 if(filterState.distributedList.size === 0 ) {
- 
-                    filterState.SetValidToastData(true, "Select atleast one user");
+
+                    filterState.SetValidToastData(true,"Select atleast one user")
                     setTimeout(() => {
-                        filterState.SetValidToastData(false)
+                      filterState.SetValidToastData(false)
                     }, 5000);
- 
+
                 } else if( distributeRef.current.value.length === 0 ) {
- 
-                    filterState.SetValidToastData(true, "Coupon is empty");
+
+                    filterState.SetValidToastData(true,"Coupon is empty")
                     setTimeout(() => {
                         filterState.SetValidToastData(false)
-                    }, 5000);
+                    }, 5000)
                 }
- 
+      
             }
- 
         } catch (error) {
             console.error('Error distributing coupons:', error);
         }
@@ -453,14 +420,21 @@ function Mahadhanam() {
                     <NavLink />
                 </div>
                 <div className="w-[30%] flex ">
-                    <CouponLabel coupons ={filterState.couponCount}/>
-                    <button 
+                    <div className="flex h-full">
+                        <div className="bg-[#5799FD] w-16 h-8 rounded-l-xl flex justify-center items-center border-r-4">
+                            <Image src = '/admin/coupon-count.png' className="" width={24} height={24} alt="coupon"/>
+                        </div>
+                        <div className="bg-[#5799FD] w-24 h-8 rounded-r-xl font-bold text-white flex justify-center items-center ">
+                            { filterState.couponCount.available_coupons }
+                        </div>
+                    </div>
+                    {/* <button 
                         className="w-[120px] h-8 ms-3 flex justify-center items-center rounded-full border-2 border-[#19AC65] hover:bg-[#19ac651e]"
-                        // onClick={handleExport}
+                        onClick={handleExport}
                     >
                         <span className="text-black">Export</span>
                         <PiShareFatLight className="ms-2 text-xl text-[#19AC65]"/>
-                    </button>
+                    </button> */}
                 </div>
                 <div className="w-[5%] flex justify-center items-center">
                     <MdOutlineShoppingCart 
@@ -1109,12 +1083,12 @@ function Mahadhanam() {
                                 </div>
                             </div>
  
-                            <button 
+                            {/* <button 
                                 className="w-24 h-8 text-[14px] text-white font-medium rounded bg-[#676967de] hover:bg-[#676967]" 
                                 onClick={handleRedeem}
                             >
                                 Redeem
-                            </button>
+                            </button> */}
  
                             <button 
                                 className="w-24 h-8 text-[14px] text-white font-medium rounded bg-[#676967de] hover:bg-[#676967]" 
@@ -1123,12 +1097,12 @@ function Mahadhanam() {
                               Add
                             </button>
  
-                            <button 
+                            {/* <button 
                                 className="w-24 h-8 text-[14px] text-white font-medium rounded bg-[#5799fdcf]  hover:bg-[#5799FD] " 
                                 onClick={handleDistribute}
                             >
                               Distribute
-                            </button>
+                            </button> */}
                         </div>
                     </div>
  
@@ -1203,22 +1177,30 @@ function Mahadhanam() {
                 filterState.cartToggle  &&
                     <MahadhanamCart setCartToggle={filterState.setCartToggle} setFetchToggle = {setFetchToggle} fetchToggle={fetchToggle} />
             }
- 
-            {/* {
-                filterState.toastData.toggle && 
-                    <div className="toast toast-center toast-middle">
-                        <div className="alert alert-success">
-                            <span>
-                                { filterState.toastData.message }
-                            </span>
-                        </div>
-                    </div>
-            } */}
- 
- 
+
             {
                 filterState.RefPopData.refPopupToggle &&
                         <RefPop refUserId = {filterState.RefPopData.refUserId} />
+            }
+
+            { 
+                filterState.toastData.toggle && 
+                <div className="toast toast-center toast-middle">
+                
+                  <div className="alert alert-success">
+                    <span>{filterState.toastData.message}</span>
+                  </div>
+                </div>
+            }
+
+            { 
+                filterState.validToastData.validToastToggle && 
+                <div className="toast toast-center toast-middle">
+                
+                  <div className="alert alert-success">
+                    <span>{filterState.validToastData.validToastText}</span>
+                  </div>
+                </div>
             }
  
   	    </div>
