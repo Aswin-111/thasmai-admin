@@ -642,7 +642,7 @@ function EventDetails() {
      
 
       		{
-      		  	addEventStatus && <AddEventPopUp setAddEventStatus={ setAddEventStatus }/>
+      		  	addEventStatus && <AddEventPopUp setAddEventStatus={ setAddEventStatus } setFilterToggle={setFilterToggle} />
       		}
 
       		{
@@ -650,11 +650,11 @@ function EventDetails() {
       		}
 
       		{
-      		 	 editEvent && <EditPopUp eventId={eventId} setEditEvent={setEditEvent} />
+      		 	 editEvent && <EditPopUp eventId={eventId} setEditEvent={setEditEvent} setFilterToggle={setFilterToggle} />
       		}
 
 			{
-				isDeleteEvent && <DeleteEventPopUp eventId={eventId} setIsDeleteEvent={setIsDeleteEvent} />
+				isDeleteEvent && <DeleteEventPopUp eventId={eventId} setIsDeleteEvent={setIsDeleteEvent} setFilterToggle={setFilterToggle} />
 			}
 
     	</div>

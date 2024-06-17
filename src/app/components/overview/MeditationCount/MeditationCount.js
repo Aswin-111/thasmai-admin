@@ -28,7 +28,7 @@ function MeditationCount() {
             try {
                 const response2 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/beneficiaries`);
                 // console.log(response2);
-                setBeneficiariesCount(response2.data.count);
+                setBeneficiariesCount(response2.data.list);
     
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -37,7 +37,7 @@ function MeditationCount() {
             try {
                 const response3 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/meditation`);
                 // console.log(response3);
-                setTotalMeditatorsCount(response3.data.list);
+                setTotalMeditatorsCount(response3.data.count);
     
             } catch (error) {
                 console.error('Error fetching data:', error);

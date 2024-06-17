@@ -48,7 +48,7 @@ function BroadcastMessageTable(props) {
         
         <div className='w-full h-[90%]'>
             <div className='w-full h-[90%] overflow-scroll'>
-                <table className='w-full'>
+                <table className='w-full text-black'>
                     <thead className='w-full sticky top-0'>
                         <tr className='h-12 text-left text-[14px] md:text-sm bg-[#005DB8] text-white'>
                             <th className='ps-2'>Date</th>
@@ -60,7 +60,7 @@ function BroadcastMessageTable(props) {
                         {
                             broadcastMessages.map((i, index) => {
                                 return (
-                                    <tr className='h-12 text-[12px] md:text-xs border-[#E0E2EC] border-b-2' key={index}>
+                                    <tr className='h-12 text-[12px] md:text-xs text-black border-[#E0E2EC] border-b-2' key={index}>
                                         <td className='ps-2'>{i.Date}</td>
                                         <td className='ps-2'>{i.title}</td>
                                         <td className='ps-2 text-center'>

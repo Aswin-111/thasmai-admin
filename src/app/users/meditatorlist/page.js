@@ -1215,7 +1215,7 @@ function MeditatorList() {
                             ref = {searchRef}
                             className="px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
                         >
-                            <option disabled selected>
+                            <option value="" disabled selected>
                               Choose option
                             </option>
                             <option value="DOJ">Date Of Joining</option>
@@ -1244,6 +1244,14 @@ function MeditatorList() {
                                 }}
                             />
                         </div>
+                        <p 
+							className="ms-2 text-xs text-red-400 underline cursor-pointer"
+							onClick={() => {
+								setFilterToggle(!filterToggle);
+								searchRef.current.value = "";
+								textRef.current.value = "";
+							}}
+						>clear</p>
                     </div>
                     <div className="w-[20%]">
                         <select name="newRow" id=""

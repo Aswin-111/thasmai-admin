@@ -53,7 +53,7 @@ function ApplicationFeedbackView() {
 
             <div className="w-full h-[15%] ps-10 text-white bg-[#005DB8] text-lg font-thin flex items-center">
                 Feedback from:
-                <h1 className="text-xl font-bold ms-5"> { data[0] && data[0].username }</h1>
+                <h1 className="text-xl text-black font-bold ms-5"> { data[0] && data[0].username }</h1>
             </div>
 
             <div className="w-full h-[85%] p-10 bg-white shadow-md overflow-y-auto">
@@ -63,12 +63,12 @@ function ApplicationFeedbackView() {
                 </div> */}
                 <div className='w-[220px] h-[10%] flex'>
                     <p className='w-[50%] text-[#44474E]'>Rating</p>
-                    <p className='w-[50%] font-medium'>: {data[0] && data[0].rating }</p>
+                    <p className='w-[50%] text-black font-medium'>: {data[0] && data[0].rating }</p>
                 </div>
                 <div className='h-[80%]'>
                     <p className='w-[50%] h-[10%] text-[#44474E]'>Message :</p>
                     <div className='h-[90%] p-4 bg-[#E0E2EC] rounded-[10px] overflow-y-auto'>
-                        <p className="">{data[0] && data[0].feedback }</p>
+                        <p className="text-black">{data[0] && data[0].feedback }</p>
                     </div>
                 </div>
             </div>

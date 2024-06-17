@@ -51,6 +51,7 @@ function AddEmployee(props) {
           });
           props.setPageNo(1);
           props.setAddPopup(false);
+          props.setsetRenderTableToggle(prevValue => !prevValue);
         } catch (error) {
             console.error('Error fetching data:', error);
             toast.error(error.response.data.message)

@@ -14,7 +14,7 @@ function NotificationMessageTable() {
 
     return (
    
-        <table className='w-full'>
+        <table className='w-full text-black'>
             <thead className='w-full p-0 sticky top-0'>
                 <tr className='h-12 text-left bg-[#005DB8] text-white'>
                     <th className='w-[25%] ps-2'>User ID</th>
@@ -31,7 +31,7 @@ function NotificationMessageTable() {
                             let isAdded = notificationState.selectedUsersIds.filter((id) => id === i.UId);
 
                             return (
-                                <tr className='h-12 text-sm border-[#E0E2EC] border-b-2' key={index}>
+                                <tr className='h-12 text-sm text-black border-[#E0E2EC] border-b-2' key={index}>
                                     <td className='ps-2'>{i.UId}</td>
                                     <td className='ps-2'>{ i.first_name } { i.last_name }</td>
                                     {

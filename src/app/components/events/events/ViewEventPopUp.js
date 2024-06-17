@@ -53,7 +53,7 @@ function ViewEventPopUp(props) {
             <div className='w-[40%] h-full px-5'>
                 <img
                     className='w-full h-[200px] object-cover rounded drop-shadow-md' 
-                    src={ eventData.image ? eventData.image : "/profile_dummy.jpeg" }
+                    src={ eventData.image ? eventData.image : "/admin/profile_dummy.jpeg" }
                     alt='Event Image'
                 />
 

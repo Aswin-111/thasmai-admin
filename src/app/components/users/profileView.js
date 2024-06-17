@@ -87,7 +87,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                     className={isProfile ? 
                         ('w-36 h-8 me-2 bg-[#005db8] text-white rounded-[8px] hover:scale-105')
                          : 
-                        ('w-36 h-8 me-2 bg-[#e0e2ec]  hover:scale-105 rounded-[8px]') 
+                        ('w-36 h-8 me-2 bg-[#e0e2ec] text-black hover:scale-105 rounded-[8px]') 
                     }
                     onClick={() => {
                       setIsMeditation(false);
@@ -100,7 +100,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                     className={isMeditation ? 
                         ('w-36 h-8 me-2 bg-[#005db8] text-white rounded-[8px] hover:scale-105')
                          : 
-                        ('w-36 h-8 me-2 bg-[#e0e2ec]  hover:scale-105 rounded-[8px]') 
+                        ('w-36 h-8 me-2 bg-[#e0e2ec] text-black hover:scale-105 rounded-[8px]') 
                     }
                     onClick={() => {
                       setIsProfile(false);
@@ -114,7 +114,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                     className={isBank ? 
                         ('w-36 h-8 me-2 bg-[#005db8] text-white rounded-[8px] hover:scale-105')
                          : 
-                        ('w-36 h-8 me-2 bg-[#e0e2ec]  hover:scale-105 rounded-[8px]') 
+                        ('w-36 h-8 me-2 bg-[#e0e2ec] text-black  hover:scale-105 rounded-[8px]') 
                     }
                     onClick={() => {
                       setIsProfile(false);
@@ -128,7 +128,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                     className={isPayment ? 
                         ('w-36 h-8 bg-[#005db8] text-white rounded-[8px] hover:scale-105')
                          : 
-                        ('w-36 h-8 bg-[#e0e2ec]  hover:scale-105 rounded-[8px]') 
+                        ('w-36 h-8 bg-[#e0e2ec] text-black  hover:scale-105 rounded-[8px]') 
                     }
                     onClick={() => {
                       setIsProfile(false);
@@ -180,7 +180,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
               </div>
               <div className='w-[50%] h-full'>
               <table className='w-full'>
-                  <tbody>
+                  <tbody className='text-black'>
                     <tr className='h-[40px]'>
                       <td className='w-[35%] text-left'>Card No.</td>
                       <td className='w-[65%] text-left'>: {profile.UId}</td>
@@ -241,15 +241,17 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                      </div>
                      <div className='w-[50%] h-[50%] '>
                      <table className="w-full">
-                    <tbody>
+                    <tbody className='text-black'>
                       <tr>
                         <td className="w-[35%] text-left ">Last 5 meditated days</td>
                       </tr>
                       { (meditationLog[0]) && 
                         meditationLog.map((medLog, index) => {
+                          let date = medLog.updatedAt.split("T");
+                          // console.log("meditation Date", date);
                           return(
                             <tr key={index} className="h-[40px]">
-                              <td className="w-[35%] text-left">{medLog.updatedAt}</td>
+                              <td className="w-[35%] text-left">{ date[0] }</td>
                             </tr>
                           )
                         })
@@ -395,14 +397,20 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
         </tr>
       </thead>
       <tbody>
-        {paymentDetails.map((payment, index) => (
-          <tr key={index} className='h-[40px]'>
-            {/* <td className='text-left'>{payment.UId}</td> */}
-            <td className='text-left'>{payment.amount}</td>
-            <td className='text-left'>{payment.payment_date}</td>
-            <td className='text-left'>{payment.payment_time}</td>
-          </tr>
-        ))}
+        {
+          paymentDetails.map((payment, index) => {
+            let paymentDate = payment.payment_date.split(" ");
+            // console.log("Payment Date", paymentDate);
+            return (
+              <tr key={index} className='h-[40px]'>
+                {/* <td className='text-left'>{payment.UId}</td> */}
+                <td className='text-left'>{payment.amount}</td>
+                <td className='text-left'>{ paymentDate[0] }</td>
+                <td className='text-left'>{payment.payment_time}</td>
+              </tr>
+            )
+          })
+        }
       </tbody>
     </table>
   </div>

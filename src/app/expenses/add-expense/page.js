@@ -97,15 +97,20 @@ import { MdOutlineFileUpload } from "react-icons/md";
 function AddExpense() {
 
     const [employeeId, setEmployeeId] = useState(null); // to attach employye id with expense created.
+    
     const [formData, setFormData] = useState({
         Expense_Date: '',
         emp_id : '',
+        name: '',
         expenseType: '',
         amount: '',
         description: '',
         invoice: null,
     });
+    const [balanceAmount, setBalanceAmount] = useState();
+    const [renderToggle, setRenderToggle] = useState(false);
 
+    console.log(formData);
 
     const loginState = useLoginStore(function(state) {
   	    return state
@@ -113,6 +118,8 @@ function AddExpense() {
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Financial / Expense");
+
+
 
     useEffect(() => {
         // Get today's date
@@ -122,19 +129,36 @@ function AddExpense() {
         const year = today.getFullYear();
         const todayDate = `${year}-${month}-${day}`;
 
-
         //set employee Id in form data
        const userData = localStorage.getItem('userdata')
        const empId = JSON.parse(userData).emp_Id;
-        
+       const empName = JSON.parse(userData).name;
+
         // Set today's date and employee id in your form data
         setFormData({
             ...formData,
             Expense_Date: todayDate,
             emp_id : empId,
+            name : empName,
         });
+
+
+
+        const fetchData = async () => {
+      
+            try {
+              const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/get-balance?emp_Id=${empId}`);
+              console.log(response);
+              setBalanceAmount(response.data.balance_amount);
+            } catch (error) {
+              // console.error('Error fetching data:', error);
+              toast.error("Error fetching data.");
+            }
+        };
+
+      fetchData();
         
-    }, []); // Run only once on component mount
+    }, [renderToggle]); // Run only once on component mount
 
 
 
@@ -168,6 +192,8 @@ function AddExpense() {
         form.append('description', formData.description);
         form.append('invoice', formData.invoice);
         form.append('emp_id', formData.emp_id);
+        form.append('name', formData.name);
+
 
         if(formData.invoice && formData.expenseType && formData.amount && formData.description) {
                 console.log(form);
@@ -179,14 +205,16 @@ function AddExpense() {
                 setFormData({
                     Expense_Date: '',
                     emp_id : '',
+                    name : '',
                     expenseType: '',
                     amount: '',
                     description: '',
                     invoice: null,
                 });
+                setRenderToggle(prevValue => !prevValue);
             } catch (error) {
                 console.error('Error creating expense:', error);
-                toast.error('Error while updating expense details.');
+                toast.error(error.response.data.message);
             }
 
         } else {
@@ -201,7 +229,10 @@ function AddExpense() {
                 <NavLink />
             </div>
             <div className='w-full h-[95%] mt-2 p-1 pb-6 md:p-4 bg-white rounded shadow drop-shadow-md overflow-y-auto'>
-                <div className='w-full md:h-[85%] px-2 md:px-16 py-6 md:flex '>
+                <div className='w-full h-[5%] px-2 md:px-16'>
+                    <p className='text-black font-medium'>Balance Amount: {balanceAmount}</p>
+                </div>
+                <div className='w-full md:h-[80%] px-2 md:px-16 py-6 md:flex '>
 
                     <div className='w-full md:w-[60%] flex flex-col'>
                         {/* <input

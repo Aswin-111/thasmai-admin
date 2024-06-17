@@ -8,17 +8,15 @@ function DeletePopUp(props) {
 
 
     console.log(props.blogId);
+
     const handleDelete = async () => {
         
         const blogId = props.blogId
         try {
             const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/delete-blogs/${blogId}`);
-            //   filterState.setBlogsData(response.data.blogs);
-            //   props.setTotalPages(response.data.totalPages);
-            //   props.setIsFilteredData(false);
-            //   props.setFilteredPageNo(1);
             console.log(response);
             toast.success("Successfully deleted the blog.");
+            props.setFilterToggle(prevValue => !prevValue);
             props.setIsDeleteBlog(false);
         } catch (error) {
                  // console.error('Error fetching data:', error);

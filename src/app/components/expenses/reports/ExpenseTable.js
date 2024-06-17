@@ -9,6 +9,7 @@ function ExpenseTable(props) {
                 <thead className="sticky top-0">
                     <tr className='min-w-full h-12 text-[10px] md:text-sm text-left bg-[#005DB8] text-white'>
                         <th className='ps-2'>Date</th>
+                        <th className='ps-2'>Operator</th>
                         <th className='ps-2'>Expense Type</th>
                         <th className='ps-2'>Amount</th>
                         <th className='ps-2 text-center'>Invoice</th>
@@ -24,6 +25,7 @@ function ExpenseTable(props) {
                                 return (
                                     <tr className='h-12 text-[10px] md:text-xs text-black border-[#E0E2EC] border-b-2' key={index}>
                                         <td className='ps-2'>{i.Expense_Date}</td>
+                                        <td className='ps-2'>{i.name}</td>
                                         <td className='ps-2'>{i.expenseType}</td>
                                         <td className='ps-2'>₹ {i.amount}</td>
                                         <td className='ps-2 text-center'>

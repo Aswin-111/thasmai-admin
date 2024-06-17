@@ -161,6 +161,7 @@ function ExpenseReports() {
 	async function handleSearch (newPageNo) {
 		try {
 		  	const config = {
+				"Name" : "name",
 				"Expense Type": "expenseType",
 				"Amount": "amount",
 				"Expense Date":"Expense_Date",
@@ -178,7 +179,7 @@ function ExpenseReports() {
 				const field = i.field;
 	
 				const operator = i.operator.toLowerCase();
-				const value = i.field.toLowerCase() ==="name" ? `${i.value}%` : i.value;
+				const value = (i.field.toLowerCase() ==="name" && i.operator.toLowerCase() === "starts with") ? `${i.value}%` : i.value;
 				console.log(field,value,operator);
 			
 				if(field.includes("Date") && operator === "between") {
@@ -261,6 +262,7 @@ function ExpenseReports() {
 
 
 
+
   	return (
 
     	<div className="w-full h-[85vh] md:px-7 overflow-y-auto">
@@ -311,6 +313,30 @@ function ExpenseReports() {
               				</select>
             			}
 
+						{
+                            filterState.FieldValue === "Name" && 
+                        
+                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                                ref = {operatorRef}
+                                onChange={e => {
+                                    filterState.setOperatorValue(e.target.value)
+                                }}
+                            >
+                                <option value="" disabled selected>
+                                      Choose operator
+                                </option>
+                                {
+                                      filterState.stringOperator.map((i, index) => {
+                                        return (
+                                              <option key={index} value={i}>
+                                                {i}
+                                              </option>
+                                        );
+                                      })
+                                }
+                            </select>
+                        }
+
             			{
             			  filterState.FieldValue === "Expense Type" && 
 						
@@ -323,15 +349,7 @@ function ExpenseReports() {
             			    <option disabled selected>
             			      Choose operator
             			    </option>
-            			    {
-            			      filterState.stringOperator.map((i, index) => {
-            			        return (
-            			          <option key={index} value={i}>
-            			            {i}
-            			          </option>
-            			        );
-            			      })
-            			    } 
+            			    <option value="equal to">equal to</option>
             			  </select>
 
             			}
@@ -387,13 +405,39 @@ function ExpenseReports() {
 
 
   						{
-							(filterState.FieldValue.length === 0 || filterState.operatorValue === "")  && 
+							(filterState.FieldValue === "")  && 
 							<>
 								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
 								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
 							</>
   						}
 
+						{
+                    	    ( filterState.FieldValue === "Name" && filterState.operatorValue === "") && 
+                    	        <>
+                    	            	<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+										<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+                    	{ 
+                    	    ( filterState.FieldValue  === "Name" && filterState.operatorValue !== "") && 
+                    	        <>
+                    	              <input
+                    	                type="text"
+                    	                placeholder="Value" ref = {dataRef}
+                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                    	              />
+                    	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                    	        </>
+                    	}
+
+						{
+                    	    ( filterState.FieldValue === "Expense Type" && filterState.operatorValue === "") && 
+                    	        <>
+                    	            	<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+										<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+                    	        </>
+                    	}
 						{
 							( filterState.FieldValue  === "Expense Type" && filterState.operatorValue === "starts with" ) &&
 							<>
@@ -405,7 +449,6 @@ function ExpenseReports() {
 								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
 							</>
   						}
-
 						{
 							( filterState.FieldValue  === "Expense Type" && filterState.operatorValue === "equal to" ) &&
 							<>
@@ -421,6 +464,13 @@ function ExpenseReports() {
 							</>
   						}
 
+						{
+                    	    ( filterState.FieldValue === "Amount" && filterState.operatorValue === "") && 
+                    	        <>
+                    	            	<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+										<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+                    	        </>
+                    	}
   						{ 
 							( filterState.FieldValue  === "Amount" && (filterState.operatorValue  === "greater than" || filterState.operatorValue  === "less than" || filterState.operatorValue  === "equal to" || filterState.operatorValue  === "not equal to") ) && 
 								<>
@@ -433,6 +483,13 @@ function ExpenseReports() {
 								</>
   						}
 
+						{
+                    	    ( filterState.FieldValue === "Expense Date" && filterState.operatorValue === "") && 
+                    	        <>
+                    	            	<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+										<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+                    	        </>
+                    	}
   						{
 							( filterState.FieldValue === "Expense Date" && filterState.operatorValue === "equal to") && 
 							<>
@@ -644,12 +701,12 @@ function ExpenseReports() {
 
         		<div className='w-full h-[80%] mt-2'>
 
-					<div className="w-full h-[5%] m-0 mb-1 p-2 flex flex-row-reverse">
+					{/* <div className="w-full h-[5%] m-0 mb-1 p-2 flex flex-row-reverse">
 						<div className='w-full md:w-[40%] flex justify-between items-center text-[12px] md:text-base font-medium'>
           				  	<p>Expense Amount: 3000</p>
           				  	<p>Received Amount: 5000</p>
           				</div>
-					</div>
+					</div> */}
 
 					
 					<div className="w-full h-[85%] m-0 p-0 overflow-scroll">

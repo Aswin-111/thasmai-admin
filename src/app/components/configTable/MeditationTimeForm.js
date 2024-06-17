@@ -772,7 +772,7 @@ function MeditationTimeForm(props) {
         setEveningImage(null);
       } catch (error) {
         console.error(error);
-        toast.error('Error submitting form. Please try again.');
+        toast.error(error.response.data.message);
       }
     } else {
       toast.error('Please fill in all fields.');

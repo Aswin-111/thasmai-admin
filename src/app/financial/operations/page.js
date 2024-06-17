@@ -13,6 +13,8 @@ import axios from "axios";
 import { toast } from 'react-hot-toast';
 import Image from "next/image";
 import data from './data.json'
+import OperatorPaymentPopUp from "@/app/components/financial/operations/OperatorPaymentPopUp";
+import InvoicelistPopup from "@/app/components/financial/operations/InvoicelistPopup";
 
 function Operations() {
 
@@ -24,11 +26,15 @@ function Operations() {
 	const [searchedPageNo, setSearchedPageNo] = useState(1);
 	const [isSearchedData, setIsSearchedData] = useState(false);
 	const [filterToggle, setFilterToggle] = useState(false);
-	const [userId, setUserId] = useState(null);
+	const [employeeId, setEmployeeId] = useState(null);
 	const [isViewProfile, setIsViewProfile] = useState(false);
+	const [isViewInvoiceList, setIsViewInvoiceList] = useState(false);
 	const [expenseId, setExpenseId] = useState(null);
 	const [isViewBill, setIsViewBill] = useState(false);
+	const [isPaymentPopUp, setIsPaymentPopUp] = useState(false);
 	const [tableRowToggle, setTableRowToggle] = useState(false);
+	const [selectedOperatorData, setSelectedOperatorData] = useState({})
+
 
 	
 
@@ -243,7 +249,8 @@ function Operations() {
             </div>
 
             <div className='w-full h-[90%] mt-2 p-4 bg-white rounded-[8px] shadow drop-shadow-md'>
-                <div className="w-full h-8 flex justify-between">
+				
+                {/* <div className="w-full h-8 flex justify-between">
 
                     <div className='w-[65%] flex'>
                         <select 
@@ -267,7 +274,7 @@ function Operations() {
                             }
                         </select>
 
-                            {/* -----------------operator select--------------- */}
+                            //  -----------------operator select--------------- 
                         {
 						    filterState.fieldValue === "" && 
 						
@@ -363,7 +370,7 @@ function Operations() {
                             </select>
                         }
 
-						{/* {
+						{
                             filterState.fieldValue === "Total Expense" && 
                         
                             <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
@@ -385,11 +392,11 @@ function Operations() {
                                       })
                                 }
                             </select>
-                        } */}
+                        }
 
 
 
-                                    {/* ----------------value input/select---------------- */}
+                                    // ----------------value input/select----------------
 
                     	{
                     	    filterState.fieldValue === "" && (
@@ -488,7 +495,7 @@ function Operations() {
                     	        </>
                     	}
 
-						{/* {
+						{
                     	    ( filterState.fieldValue === "Total Expense" && filterState.operatorValue === "") && 
                     	        <>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
@@ -505,12 +512,12 @@ function Operations() {
                     	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
-                    	} */}
+                    	}
 
 
               		</div>
 
-                                      {/* ---------------------------AND / OR button------------------------ */}
+                                    //   --------------------------AND / OR button------------------------ 
 
                		<div className='w-[15%]  flex'>
 
@@ -647,7 +654,7 @@ function Operations() {
                   	</button>
 
               	</div>
-                                        {/* --------------Find button---------------- */}
+                                        // {/* --------------Find button---------------- 
 
               	<div className='w-[20%] h-full text-right'>
               	    <button 
@@ -661,13 +668,13 @@ function Operations() {
               	    </button>
               	</div>
 
-          	</div>
+          	</div> */}
 
 
 
                                     {/* ------------------Fiterchips div ------------------- */}
 
-          	<div className="w-full h-[10%] my-3 p-2 bg-[#005DB8] overflow-y-auto shadow  flex flex-wrap items-center snap-mandatory snap-y">
+          	{/* <div className="w-full h-[10%] my-3 p-2 bg-[#005DB8] overflow-y-auto shadow  flex flex-wrap items-center snap-mandatory snap-y">
 
                 { 
                   	filterState.filters[0] ? (
@@ -682,12 +689,12 @@ function Operations() {
                   	)
                 }
 
-            </div>
+            </div> */}
 
-            	<div className='w-full h-[80%] mt-2'>
+            	<div className='w-full h-full mt-2'>
 
 					{/* -----search bar------- */}
-					<div className="w-full h-[10%] flex items-center">
+					{/* <div className="w-full h-[10%] flex items-center">
  
 						 <div className="w-[40%] h-full flex items-center">
 							 <select 
@@ -701,7 +708,7 @@ function Operations() {
 								 <option value="expenseType">Expense Type</option>
 								 <option value="emp_id">Employee Id</option>
 								 <option value="amount">Amount</option>
-								 {/* <option value="totalAmount">Total Expense</option> */}
+								 <option value="totalAmount">Total Expense</option> 
 							 </select>
 
 							 <input
@@ -749,11 +756,11 @@ function Operations() {
 							 
 							 
 						 </div>
-					</div>
+					</div> */}
 
-                	<div className="w-full h-[80%] m-0 p-0 overflow-scroll">
+                	<div className="w-full h-[90%] m-0 p-0 overflow-scroll">
                 	    <OperationsTable
-							setUserId={ setUserId }
+							setEmployeeId={ setEmployeeId }
 							setIsViewProfile={ setIsViewProfile } 
 							setExpenseId={ setExpenseId }
 							setIsViewBill = { setIsViewBill }
@@ -769,11 +776,14 @@ function Operations() {
                         	setSearchedPageNo={setSearchedPageNo}
 							pageRows={pageRows}
                         	tableRowToggle={tableRowToggle}
+							setIsPaymentPopUp={setIsPaymentPopUp}
+							setSelectedOperatorData={setSelectedOperatorData}
+							setIsViewInvoiceList={setIsViewInvoiceList}
                 	    />
                		</div>
 
 
-              		<div className="w-full h-[10%] px-2 py-1 flex justify-between items-center border-t-[1px] border-[#005DB8]">
+              		{/* <div className="w-full h-[10%] px-2 py-1 flex justify-between items-center border-t-[1px] border-[#005DB8]">
 					  	<div>
                       		{
                       		  ( !isFilteredData && !isSearchedData ) &&
@@ -830,19 +840,35 @@ function Operations() {
                     	            >Next</button>
                     	        </div>
                     	}
-              		</div>
+              		</div> */}
+					
           		</div>
 
 
         	</div>
 
-			{
-				isViewProfile && <ProfileView UId={ userId } setIsViewProfile={ setIsViewProfile } />
-			}
+			{/* {
+				isViewProfile && <ProfileView UId={ employeeId } setIsViewProfile={ setIsViewProfile } />
+			} */}
 
 			{
         	  	isViewBill && <ExpenseDetail selectedId={expenseId} setIsViewDetail={ setIsViewBill } />
         	} 
+
+			{
+				isPaymentPopUp && 
+				<OperatorPaymentPopUp 
+					employeeId={ employeeId } 
+					setIsPaymentPopUp={setIsPaymentPopUp} 
+					selectedOperatorData={selectedOperatorData}
+					setTableRowToggle={setTableRowToggle} 
+				/>
+			}
+			{/* <OperatorPaymentPopUp employeeId={ employeeId } setIsPaymentPopUp={setIsPaymentPopUp} /> */}
+
+			{
+				isViewInvoiceList && <InvoicelistPopup employeeId={employeeId} setIsViewInvoiceList={setIsViewInvoiceList} />
+			}
    
 
   		</div>

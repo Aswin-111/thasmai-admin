@@ -369,6 +369,7 @@ import { BiCloudUpload } from "react-icons/bi";
 import axios from 'axios';
 import moment from 'moment';
 import { toast } from 'react-hot-toast'
+import useImageCompressor from '../../ImageCompression/useImageCompressor';
 
 function AddEventPopUp(props) {
 
@@ -383,6 +384,8 @@ function AddEventPopUp(props) {
     image: null,
     event_time: ""
   });
+
+  const { compressImage } = useImageCompressor();
 
   console.log(eventData);
 
@@ -412,15 +415,19 @@ function AddEventPopUp(props) {
   //   }));
   // };
 
-  const uploadEventImage = (event) => {
+  const uploadEventImage = async (event) => {
     const file = event.target.files[0];
-    setEventData((prevValue) => ({
-      ...prevValue,
-      image: file
-    }));
 
-    setPreviewImage(URL.createObjectURL(file));
+    const compressedFile = await compressImage(file);
 
+    if (compressedFile) {
+      console.log(compressedFile);
+      setEventData((prevValue) => ({
+        ...prevValue,
+        image: compressedFile
+      }));
+      setPreviewImage(URL.createObjectURL(compressedFile));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -453,7 +460,7 @@ function AddEventPopUp(props) {
         props.setAddEventStatus(false);
         // alert(response.data.message);
         toast.success(response.data.message);
-        window.location = "/admin/events/events";
+        props.setFilterToggle(prevValue => !prevValue);
 
       } catch (error) {
         // console.error('Error uploading event:', error);

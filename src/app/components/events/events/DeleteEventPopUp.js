@@ -8,21 +8,20 @@ import { toast } from "react-hot-toast";
 function DeleteEventPopUp(props) {
 
 
-    console.log(props.eventId);
+
+
     const handleDelete = async () => {
         
-        const eventId = props.eventId
+        const eventId = props.eventId;
+
         try {
             const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/delete-events/${eventId}`);
-            //   filterState.setBlogsData(response.data.blogs);
-            //   props.setTotalPages(response.data.totalPages);
-            //   props.setIsFilteredData(false);
-            //   props.setFilteredPageNo(1);
             console.log(response);
             toast.success("Successfully deleted the blog.");
             props.setIsDeleteEvent(false);
+            props.setFilterToggle(prevValue => !prevValue);
         } catch (error) {
-                 // console.error('Error fetching data:', error);
+                 console.error('Error fetching data:', error);
                 toast.error("Error while deleting blog.");
         }
         

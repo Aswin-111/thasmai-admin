@@ -55,16 +55,16 @@ function AppointmentFeedbackView() {
             <div className="w-full h-[85%] p-10 bg-white shadow-md overflow-y-auto">
                 <div className='w-[220px] h-[10%] flex'>
                     <p className='w-[50%] text-[#44474E]'>Date</p>
-                    <p className='w-[50%] font-medium'>: { data.check_out }</p>
+                    <p className='w-[50%] font-medium text-black'>: { data.check_out }</p>
                 </div>
                 <div className='w-[220px] h-[10%] flex'>
                     <p className='w-[50%] text-[#44474E]'>Rating</p>
-                    <p className='w-[50%] font-medium'>: { data.rating }</p>
+                    <p className='w-[50%] font-medium text-black'>: { data.rating }</p>
                 </div>
                 <div className='h-[80%]'>
                     <p className='w-[50%] h-[10%] text-[#44474E]'>Message :</p>
                     <div className='h-[90%] p-4 bg-[#E0E2EC] rounded-[10px] overflow-y-auto'>
-                        <p className="">{ data.feedback }</p>
+                        <p className="text-black">{ data.feedback }</p>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@
  import axios from 'axios'
  import { toast } from 'react-hot-toast'
  import moment from 'moment';
+ import useImageCompressor from '../../ImageCompression/useImageCompressor';
 
 
 
@@ -16,6 +17,9 @@
   const [edittedData, setEdittedData] = useState({});
 
   const [previewImage, setPreviewImage] = useState();
+
+  const { compressImage } = useImageCompressor();
+
 
   console.log(edittedData);
 
@@ -56,15 +60,27 @@ function handleChange(e) {
     }));
 }
 
-function uploadImage(event) {
+async function uploadImage(event) {
     const file = event.target.files[0];
+
+    // const compressedFile = await compressImage(file);
+
+    // if (compressedFile) {
+    //   console.log(compressedFile);
+    //   setEdittedData((prevValue) => ({
+    //     ...prevValue,
+    //     image: compressedFile
+    //   }));
+    //   setPreviewImage(URL.createObjectURL(compressedFile));
+    // }
 
     setEdittedData((prevValue) => ({
       ...prevValue,
       image: file
     }));
-
     setPreviewImage(URL.createObjectURL(file));
+
+
 
 }
 
@@ -84,6 +100,7 @@ const handleSubmit = async (e) => {
 
     
       const formData = new FormData();
+      
       formData.append('event_name', event_name);
       formData.append('event_description', event_description);
       formData.append('priority', priority);
@@ -99,7 +116,7 @@ const handleSubmit = async (e) => {
         console.log(response);
         // alert(response.data.message);
         toast.success(response.data.message);
-        window.location = "/admin/events/events";
+        props.setFilterToggle(prevValue => !prevValue);
         
       } catch (error) {
         console.error('Error uploading event:', error);

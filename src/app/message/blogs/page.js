@@ -641,7 +641,7 @@ function Blogs() {
 		      </div>
      
       		{
-      		  	addBlogStatus && <AddBlogPopUp setAddBlogStatus={ setAddBlogStatus }/>
+      		  	addBlogStatus && <AddBlogPopUp setAddBlogStatus={ setAddBlogStatus } setFilterToggle={setFilterToggle} />
       		}
 
       		{
@@ -649,11 +649,11 @@ function Blogs() {
       		}
 
       		{
-      		 	 editBlog && <EditBlogPopUp blogId={blogId} setEditBlog={setEditBlog} />
+      		 	 editBlog && <EditBlogPopUp blogId={blogId} setEditBlog={setEditBlog} setFilterToggle={setFilterToggle} />
       		}
 
 			{
-				isDeleteBlog && <DeletePopUp blogId={blogId} setIsDeleteBlog={setIsDeleteBlog} />
+				isDeleteBlog && <DeletePopUp blogId={blogId} setIsDeleteBlog={setIsDeleteBlog} setFilterToggle={setFilterToggle} />
 			}
 
     	</div>

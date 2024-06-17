@@ -102,7 +102,7 @@ function MeditatorListTable(props) {
                                             props.setIsViewProfile(true);
                                         }}
                                     >
-                                        { i.firstName } { i.secondName }
+                                        { i.firstName + " " + i.secondName }
                                     </td>
                                     <td className="text-center">{ i.UId } </td>
                                     <td className="text-center">{ i.coupons } </td>

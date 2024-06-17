@@ -38,7 +38,7 @@ function ViewBroadcastMessage(props) {
             </div>
             <div className='w-full h-[90%] p-8'>
                 <p className='text-black'>Date of broadcast : &nbsp; &nbsp; &nbsp; &nbsp;  <span className='font-medium'>{messageData.Date}</span></p>
-                <p className='mt-5'>Message</p>
+                <p className='mt-5 text-black'>Message</p>
                 <div className='w-full h-[80%] mt-2 p-4 bg-[#E0E2EC] text-black rounded-xl overflow-y-auto'>
                     <p className='w-full'>{ messageData.message }</p>
                 </div>

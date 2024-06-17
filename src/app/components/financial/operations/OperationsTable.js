@@ -20,10 +20,12 @@ function OperationsTable(props) {
         	const pageRows = props.pageRows;
         
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-operation?page=${pageNo}&pageSize=${pageRows}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-admin?page=${pageNo}&pageSize=${pageRows}`);
+                // console.log(response);
+                // const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-operation?page=${pageNo}&pageSize=${pageRows}`);
                     
-                filterState.setExpenseData(response.data.expense);
-                props.setTotalPages(response.data.totalPages);
+                filterState.setExpenseData(response.data);
+                // props.setTotalPages(response.data.totalPages);
                 props.setIsFilteredData(false);
                 props.setIsSearchedData(false);
                 props.setFilteredPageNo(1);
@@ -47,15 +49,15 @@ function OperationsTable(props) {
             >
                 <tr className="rounded-3xl">
 		        	<th className="text-center">Sl. No</th>
-                    <th className="text-center">Expense Date</th>
+                    <th className="text-center">Date of Joining</th>
                     <th className="text-center">Emp. Name</th>
                     <th className="text-center">Emp. Id</th>
-                    <th className="text-center">Expense Type</th>
-                    <th className="text-center">Amount</th>
-                    <th className="text-center">Bills</th>
+                    <th className="text-center">User name</th>
+                    <th className="text-center">Location</th>
+                    <th className="text-center">Balance amount</th>
                     {/* <th className="text-center">Remarks</th> */}
-                    <th className="text-center">Total Expense</th>
-                    <th className="text-center">Saturation Limit</th>
+                    <th className="text-center">Invoice list</th>
+                    {/* <th className="text-center">Saturation Limit</th> */}
                     <th className="text-center">Status</th>
                 </tr>
                 </thead>
@@ -84,26 +86,50 @@ function OperationsTable(props) {
 										    	)
 										    }
                                         </td>
-                                        <td className="text-center">{i.Expense_Date}</td>
-                                        <td className="text-center text-indigo-600">{i.emp_name} </td>
-                                        <td className="text-center text-indigo-600">{i.emp_id} </td>
-                                        <td className="text-center">{i.expenseType} </td>
-                                        <td className="text-center">{i.amount} </td>
+                                        <td className="text-center">{i.dateOfJoining}</td>
+                                        <td className="text-center text-indigo-600">{i.name} </td>
+                                        <td className="text-center text-indigo-600">{i.emp_Id} </td>
+                                        <td className="text-center">{i.username} </td>
+                                        <td className="text-center">{i.location} </td>
+                                        <td className="text-center">{i.balance_amount}</td>
                                         <td className="text-center  hover:scale-105">
 											<span 
 												className="text-purple-500 underline cursor-pointer"
 												onClick={() => {
-													props.setExpenseId(expenseId);
-													props.setIsViewBill(true);
+													// props.setExpenseId(expenseId);
+													// props.setIsViewBill(true);
+                                                    props.setEmployeeId(i.emp_Id);
+                                                    props.setIsViewInvoiceList(true);                                                    
 												}}
-											>Bill link</span>
+											>View</span>
 										</td>
-                                        <td className="text-center">{i.totalAmount}</td>
 										{/* saturation limit is a configurable parameter  */}
-                                        <td className="text-center">{i.saturationLimit}5000</td>  
-                                        <td className="text-center">
-                                          <div className="bg-[#55ee9b] w-full h-7 p-1 text-white rounded">Pay</div>
-                                        </td>
+                                        {/* <td className="text-center">{i.saturationLimit}5000</td>   */}
+                                        
+                                        {
+                                            (i.balance_amount  <= 1000) ? (
+                                                <td className="text-center">
+                                                    <p 
+                                                        className="bg-[#55ee9b] w-full h-7 p-1 text-white rounded cursor-pointer hover:bg-[#48c982]"
+                                                        onClick={() => {
+                                                            props.setEmployeeId(i.emp_Id);
+                                                            props.setIsPaymentPopUp(true);
+                                                            props.setSelectedOperatorData(i);
+                                                            console.log(i);
+                                                        }}
+                                                    >Pay</p>
+                                                </td>
+                                            ) : (
+                                                <td className="text-center">
+                                                    <p 
+                                                        className="bg-[#b1b3b2] w-full h-7 p-1 text-white rounded"
+                                                        onClick={() => {
+                                                            return;
+                                                        }}
+                                                    >Pay</p>
+                                                </td>
+                                            )
+                                        }
                                     
                                     </tr>
                                 );

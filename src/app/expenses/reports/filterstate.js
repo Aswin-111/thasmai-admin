@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 export const useExpenseFilterStore = create((set) => ({
 
-    FieldValues :["Expense Type","Amount","Expense Date"],
+    FieldValues :["Name", "Expense Type","Amount","Expense Date"],
 
     dateOperator: ["equal to", "between"],
     stringOperator: ["starts with", "equal to"],
