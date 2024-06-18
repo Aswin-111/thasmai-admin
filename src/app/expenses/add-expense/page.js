@@ -230,7 +230,9 @@ function AddExpense() {
             </div>
             <div className='w-full h-[95%] mt-2 p-1 pb-6 md:p-4 bg-white rounded shadow drop-shadow-md overflow-y-auto'>
                 <div className='w-full h-[5%] px-2 md:px-16'>
-                    <p className='text-black font-medium'>Balance Amount: {balanceAmount}</p>
+                    <p className={balanceAmount <=1000 ? 'p-2 text-red-400 font-medium' : 'p-2 text-blue-400 font-medium'}>
+                        Balance Amount: {balanceAmount}
+                    </p>
                 </div>
                 <div className='w-full md:h-[80%] px-2 md:px-16 py-6 md:flex '>
 

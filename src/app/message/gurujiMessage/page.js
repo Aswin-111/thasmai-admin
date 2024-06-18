@@ -151,6 +151,11 @@ function GurujiMessage() {
                                 const val = e.target.value;
                                 setGurujiMessage(val);
                             }}
+                            onKeyDown={(e) => {
+                                if(e.key === "Enter") {
+                                    handleGurujiMessage();
+                                }
+                            }}
                         />
                         <button 
                             className='w-[100px] h-11 bg-[#005DB8] text-sm rounded-2xl text-white flex items-center justify-center hover:bg-[#005cb8e4]'

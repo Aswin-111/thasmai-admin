@@ -16,6 +16,11 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-color: #d3d6dd;
+  border-radius: 2px;
+  color: rgb(250, 245, 245);
+}
 
  
 .link{
