@@ -316,7 +316,7 @@ function ExpenseReports() {
 						{
                             filterState.FieldValue === "Name" && 
                         
-                            <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                            <select className="m-0 md:ms-3 px-2 w-36 md:40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
                                 ref = {operatorRef}
                                 onChange={e => {
                                     filterState.setOperatorValue(e.target.value)
@@ -407,8 +407,8 @@ function ExpenseReports() {
   						{
 							(filterState.FieldValue === "")  && 
 							<>
-								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
-								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100"'></div>
+								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+								<div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
 							</>
   						}
 
@@ -425,7 +425,7 @@ function ExpenseReports() {
                     	              <input
                     	                type="text"
                     	                placeholder="Value" ref = {dataRef}
-                    	                className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                    	                className="placeholder:text-black m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
                     	              />
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
@@ -509,7 +509,7 @@ function ExpenseReports() {
 
   						{/* ---------------------------AND / OR button------------------------ */}
 
-					<div className='w-full md:w-[15%]  flex'>
+					<div className='w-full md:w-[15%] flex'>
 					  	<button 
 							className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" 
 							onClick={(e) => {

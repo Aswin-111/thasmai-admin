@@ -97,15 +97,15 @@ function GurujiAvalability() {
 
 
   return (
-    <div className='w-full h-[85vh] m-0 px-7 overflow-y-auto '>
+    <div className='w-full h-[85vh] m-0 md:px-7 overflow-y-auto '>
 
         <div className="w-full sticky top-0">
             <NavLink />
         </div>
 
-      <div className='w-full mt-2 p-5 bg-white rounded shadow drop-shadow-md flex'>
+      <div className='w-full mt-2 py-5 px-1 md:p-5 bg-white rounded shadow drop-shadow-md flex flex-col md:flex-row'>
 
-        <div className="w-[60%] h-full">
+        <div className="w-full md:w-[60%] h-full">
 
           <div className='w-full mb-2 flex justify-between items-center'>
             <p>Select the dates from the calendar and “Save”.</p>
@@ -115,7 +115,7 @@ function GurujiAvalability() {
             >Save</button>
           </div>
           
-          <div className='w-full '>
+          <div className='w-full'>
 
             {/* <Calendar
               multiple
@@ -158,40 +158,40 @@ function GurujiAvalability() {
 
 
 
-<Calendar
-  multiple
-  format="DD/MM/YYYY"
-  value={value[0] ? value : []}
-  onChange={setValue}
-  mapDays={({ date }) => {
-    const disabled = unavailableDates.some(unavailableDate => {
-      const [year, month, day] = unavailableDate.split(",");
-      return (
-        date.year === Number(year) &&
-        date.month.number === Number(month) &&
-        date.day === Number(day)
-      );
-    });
-    
-    if (disabled) {
-      return {
-        disabled: true,
-        style: { color: "#ddd" },
-        onClick: () => toast("The selected date is unavailable 📆")
-      };
-    }
-  }}
-  plugins={[
-    <DatePanel
-      header="Selected Dates"
-    />
-  ]}
-/>
+            <Calendar
+              multiple
+              format="DD/MM/YYYY"
+              value={value[0] ? value : []}
+              onChange={setValue}
+              mapDays={({ date }) => {
+                const disabled = unavailableDates.some(unavailableDate => {
+                  const [year, month, day] = unavailableDate.split(",");
+                  return (
+                    date.year === Number(year) &&
+                    date.month.number === Number(month) &&
+                    date.day === Number(day)
+                  );
+                });
+
+                if (disabled) {
+                  return {
+                    disabled: true,
+                    style: { color: "#ddd", fontSize: "10px" },
+                    onClick: () => toast("The selected date is unavailable 📆")
+                  };
+                }
+              }}
+              plugins={[
+                <DatePanel
+                  header="Selected Dates"
+                />
+              ]}
+            />
           </div>
       
         </div>
         
-        <div className='w-[40%] min-h-full ps-5'>
+        <div className='w-full md:w-[40%] min-h-full mt-5 md:mt-0 md:ps-5'>
             <div className="w-full h-[10%] bg-[#93000A] text-white flex justify-center items-center">Unavailable Dates</div>
             <div className="w-full h-[90%] p-5 bg-[#E0E2EC]">
               <div className="w-full flex flex-wrap justify-between">

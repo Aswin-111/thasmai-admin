@@ -41,9 +41,9 @@ function ApplicationFeedbackView() {
 
     
   return (
-    <div className="w-[100vw] h-[100vh] absolute top-0 left-0 bg-[#00000096] backdrop-blur-sm flex justify-center items-center">
+    <div className="w-[100vw] h-[100vh] px-2 md:p-0 absolute top-0 left-0 bg-[#00000096] backdrop-blur-sm flex justify-center items-center">
         
-        <div className="w-[800px] h-[600px] relative rounded-xl">
+        <div className="w-full h-[80vh] md:w-[800px] md:h-[600px] relative rounded-xl">
             <button 
                 className="w-8 h-8 text-white text-2xl font-bold hover:bg-white hover:text-[#005DB8] absolute top-[15px] right-[15px]"
                 onClick={() => {
@@ -51,9 +51,9 @@ function ApplicationFeedbackView() {
                 }}
             >X</button>
 
-            <div className="w-full h-[15%] ps-10 text-white bg-[#005DB8] text-lg font-thin flex items-center">
+            <div className="w-full h-[15%] ps-10 text-[#d4d8e3] bg-[#005DB8] text-lg font-thin flex items-center">
                 Feedback from:
-                <h1 className="text-xl text-black font-bold ms-5"> { data[0] && data[0].username }</h1>
+                <h1 className="text-xl text-[#ffffff] font-bold ms-5"> { data[0] && data[0].username }</h1>
             </div>
 
             <div className="w-full h-[85%] p-10 bg-white shadow-md overflow-y-auto">

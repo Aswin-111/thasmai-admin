@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { useNavbarTextStore } from '../../state/navbar-state'
 import { useLoginStore } from "@/app/loginstate/loginState";
-import { IoMdMenu } from "react-icons/io";
+import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { FaAngleDown , FaAngleRight } from "react-icons/fa";
 import LogoutPopUp from "./LogoutPopUp";
 
@@ -41,8 +41,21 @@ function Navbar() {
 				  	</div> 
 				  	<div className="drawer-side z-50">
 				    	<label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+
 				    	<ul className="menu p-4 w-80 min-h-full bg-white text-base-content">
+
 				      		{/* Sidebar content here */}
+
+
+							{/* custom code for close button */}
+							<div className="w-full mb-3 ps-3 flex justify-between">
+								<img className="w-[45%]" src="/admin/logo.png" alt="star-life logo" />
+				  				<input id="my-drawer" type="checkbox" className="drawer-toggle" />
+								<label htmlFor="my-drawer" className="drawer-button bg-white flex justify-center items-center">
+									<IoMdClose className="text-4xl text-[#757677]" />
+								</label>
+							</div>
+
 				      		<Link href="/overview">
                   				<li className={`${pathname.startsWith('/overview') ? 'bg-[#005DB8] text-white py-3 px-5 ' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Overview</li>
                 			</Link>
@@ -91,7 +104,7 @@ function Navbar() {
 						<button 
 							className="w-6 h-6 text-[#afafaf] text-xl flex justify-center items-center rounded-sm hover:text-white  hover:bg-[#dadadae4] "
 							onMouseEnter={()=>{
-								setIsDropDown(prevValue => !prevValue)
+								setIsDropDown(prevValue => !prevValue);
 							}}
 							
 

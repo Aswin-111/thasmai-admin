@@ -153,19 +153,19 @@ function handleFilteredNextPage() {
 
 
   return (
-    <div className="w-full h-[85vh] px-7 overflow-y-auto">
+    <div className="w-full h-[85vh] md:px-7 overflow-y-auto">
       <div className="w-full sticky top-0">
         <NavLink />
       </div>
 
-      <div className='w-full h-[90%] mt-2 p-4  bg-white rounded shadow drop-shadow-md '>
+      <div className='w-full min-h-[90vh] md:min-h-0 md:h-[90%] mt-2 p-4 bg-white rounded shadow drop-shadow-md'>
 
-        <div className="w-full h-8 flex justify-between">
+        <div className="w-full md:h-8 flex flex-col md:flex-row justify-between">
 
-          <div className='w-[65%]  flex'>
+          <div className='w-full md:w-[65%] flex flex-wrap md:flex-nowrap justify-evenly md:justify-normal'>
             <select 
               ref = {fieldRef}
-              className="px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]"
+              className="px-2 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]"
               onChange={(e) => {
                 handleFieldChange(e);
               }}
@@ -188,7 +188,7 @@ function handleFilteredNextPage() {
             {
               feedbackState.FieldValue === "" && 
 
-              <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+              <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
                 disabled  
               >
                 <option disabled selected>
@@ -201,7 +201,7 @@ function handleFilteredNextPage() {
               feedbackState.FieldValue === "User Id" && 
 
 
-              <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+              <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
                 ref = {operatorRef}
                 onChange={e => {
                   feedbackState.setOperatorValue(e.target.value)
@@ -218,7 +218,7 @@ function handleFilteredNextPage() {
             {
               feedbackState.FieldValue === "Name" && 
 
-              <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+              <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
                 ref = {operatorRef}
                 onChange={e => {
                   feedbackState.setOperatorValue(e.target.value)
@@ -242,7 +242,7 @@ function handleFilteredNextPage() {
             {/* {
               feedbackState.FieldValue === "Appointment Date" && 
 
-              <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+              <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
                 ref = {operatorRef}
                 onChange={e => {
                   feedbackState.setOperatorValue(e.target.value)
@@ -267,7 +267,7 @@ function handleFilteredNextPage() {
             {
               feedbackState.FieldValue === "Rating" && 
 
-              <select className="ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+              <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
                 ref = {operatorRef}
                 onChange={e => {
                   feedbackState.setOperatorValue(e.target.value)
@@ -287,8 +287,8 @@ function handleFilteredNextPage() {
             {
               feedbackState.FieldValue === "" && (
                 <>
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] text-black  border-none text-slate-100"'></div>
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] text-black border-none text-slate-100"'></div>
+                  <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                  <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
                 </>
               )
             }
@@ -298,18 +298,9 @@ function handleFilteredNextPage() {
                   <input
                           type="text"
                           placeholder="Value" ref = {dataRef}
-                          className={`${ feedbackState.FieldValue === "Appointment Date" ||
-                          feedbackState.FieldValue === "Checkin Date" ||
-                          feedbackState.FieldValue === "Checkout Date" ||
-                          feedbackState.FieldValue === "Status" ? "placeholder:text-slate-200 ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100":"placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"}`}
-                          disabled={
-                            feedbackState.FieldValue === "Appointment Date" ||
-                            feedbackState.FieldValue === "Checkin Date" ||
-                            feedbackState.FieldValue === "Checkout Date" ||
-                            feedbackState.FieldValue === "Status"
-                          }
+                          className="placeholder:text-black m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
                   />
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                  <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
                 </>
                         
               )
@@ -318,21 +309,21 @@ function handleFilteredNextPage() {
             {/* {
               ( feedbackState.FieldValue === "Appointment Date" && feedbackState.operatorValue === "") && 
                 <>
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                  <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                  <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
                 </>
             }
             {
               ( feedbackState.FieldValue === "Appointment Date" && feedbackState.operatorValue === "equal to") &&
                 <>
-                  <input type="date" ref = {dataRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                  <input type="date" ref = {dataRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                  <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
                 </>
             }
             {   ( feedbackState.FieldValue === "Appointment Date" && feedbackState.operatorValue === "between") && 
                 <>
-                  <input type="date" ref={startDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-                  <input type="date" ref={endDateRef} className='ms-3 w-40 h-8 text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                  <input type="date" ref={startDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                  <input type="date" ref={endDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
                 </>
             } */}
 
@@ -341,7 +332,7 @@ function handleFilteredNextPage() {
             {
               feedbackState.FieldValue  === "Rating" && (
                 <>
-                  <select className='ms-3 px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
+                  <select className='m-0 md:ms-3 px-2 w-36 md:w-40 h-8 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
                     <option value="" disabled selected>
                       Choose rating
                     </option>
@@ -353,7 +344,7 @@ function handleFilteredNextPage() {
                       }) 
                     }
                   </select>
-                  <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
+                  <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
                 </>
               )
                   
@@ -364,7 +355,7 @@ function handleFilteredNextPage() {
 
           {/* ---------------------------AND / OR button------------------------ */}
 
-          <div className='w-[15%]  flex'>
+          <div className='w-full md:w-[15%] flex'>
 
             <button className="w-[60px] h-8 px-3 text-[12px] bg-[#D6E3FF] text-black rounded-2xl" 
                onClick={(e) => {
@@ -499,9 +490,15 @@ function handleFilteredNextPage() {
           </div>
                         {/* --------------Find button---------------- */}
 
-          <div className='w-[20%] h-full text-right'>
+          <div className='w-full md:w-[20%] h-full text-right flex items-center justify-end md:justify-between'>
             
-            <button className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" onClick={()=>{console.log('clicked');handleSearch()}}>
+            <button 
+              className="px-6 h-8 me-2 md:me-0 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" 
+              onClick={() => {
+                console.log('clicked');
+                handleSearch()
+              }}
+            >
               Find
             </button>
 
@@ -513,7 +510,7 @@ function handleFilteredNextPage() {
                   {/* ------------------Fiterchips div ------------------- */}
 
         {/* <div className="w-full h-[10%] bg-[#005DB8] overflow-y-auto shadow my-5 grid grid-cols-2 items-center snap-mandatory snap-y py-2"> */}
-        <div className="w-full h-[10%] bg-[#005DB8] overflow-y-auto shadow my-5 flex flex-wrap items-center snap-mandatory snap-y py-2 px-2">
+        <div className="w-full min-h-20 md:min-h-0 md:h-[10%] my-2 py-2 px-2 bg-[#005DB8] overflow-y-auto shadow flex flex-wrap items-center snap-mandatory snap-y">
         
           { 
             feedbackState.filters[0] ? (
@@ -524,7 +521,7 @@ function handleFilteredNextPage() {
               })
 
             ) : (
-              <p className="ms-3 text-[#94a3b8] font-light">No filters applied</p>
+              <p className="ms-3 text-[#94a3b8] font-light text-sm md:text-md">No filters applied</p>
             )
           
           }

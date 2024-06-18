@@ -13,6 +13,7 @@ function GlobalMessage() {
     const [pageNo, setPageNo] = useState(1);
     const [gurujiGlobalMessage, setGurujiGlobalMessage] = useState("");
     const [renderMessageToggle, setRenderMessageToggle] = useState(false);
+    const [isBtnDisabled, setIsBtnDiasabled] = useState(false);
 
     // console.log(gurujiGlobalMessage);
 
@@ -77,11 +78,19 @@ function GlobalMessage() {
                   UId: 0
                 });
                 console.log(response);
-                setGurujiGlobalMessage("");
+                setIsBtnDiasabled(true);
                 setPageNo(1);
+                setGurujiGlobalMessage("");
                 setRenderMessageToggle(!renderMessageToggle);
-                // alert(response.data.message);
-                toast.success("Message send successfully.");
+
+
+
+                setTimeout(() => {
+                    // alert(response.data.message);
+                    setIsBtnDiasabled(false);
+                    toast.success("Message send successfully.");
+                }, 2000);
+                
             } catch (error) {
                 console.error('Error fetching data:', error);
                 toast.error("Error while sending message.");
@@ -185,6 +194,9 @@ function GlobalMessage() {
                         <button 
                             className='w-[100px] h-11 bg-[#005DB8] text-sm rounded-2xl text-white flex items-center justify-center hover:bg-[#005cb8e4]'
                             onClick={handleGurujiGlobalMessage}
+                            disabled={
+                                isBtnDisabled ? "true" : "false"
+                            }
                         >
                             <IoMdSend className='text-2xl me-2'/>
                         Send</button>
