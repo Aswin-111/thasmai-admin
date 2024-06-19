@@ -15,10 +15,10 @@ function LogoutPopUp(props) {
 	const router = useRouter()
 
   return (
-    <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center z-20">
-    <div className='w-[700px] h-[300px] bg-white rounded hover:bg-[#cfcdcc]'>
+    <div className="w-screen h-screen px-2 md:px-0 bg-[#000000af] absolute left-0 top-0 flex justify-center items-center z-20">
+    <div className='w-full md:w-[700px] h-[30vh] md:h-[300px] bg-white rounded hover:bg-[#cfcdcc]'>
         <div className='w-full h-[50%] flex justify-center items-center'>
-            <p className='text-lg font-medium text-black'>Are you sure you want to logout?</p>
+            <p className='textsm md:text-lg font-medium text-black'>Are you sure you want to logout?</p>
         </div>
         <div className='w-full h-[50%] flex justify-evenly items-center'>
             <button 

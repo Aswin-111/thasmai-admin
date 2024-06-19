@@ -30,10 +30,11 @@ function DeleteEventPopUp(props) {
 
 
     return (
-        <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
-            <div className='w-[450px] h-[200px] bg-white rounded hover:bg-[#cfcdcc]'>
+        <div className="w-screen h-screen px-2 md:px-0 bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
+            <div className='w-full md:w-[450px] h-[200px] bg-white rounded hover:bg-[#cfcdcc]'>
+
                 <div className='w-full h-[50%] flex justify-center items-center'>
-                    <p className='text-lg font-medium text-black'>Are you sure you want to delete this blog?</p>
+                    <p className='text-sm md:text-lg font-medium text-black'>Are you sure you want to delete this blog?</p>
                 </div>
                 <div className='w-full h-[50%] flex justify-evenly items-center'>
                     <button 

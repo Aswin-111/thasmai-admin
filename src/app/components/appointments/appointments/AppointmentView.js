@@ -41,10 +41,12 @@ function AppointmentView() {
 
 
   return (
-    <div className='w-[100vw] h-[100vh] backdrop-blur-sm bg-[#0000003b] absolute top-0 left-0 flex justify-center items-center '>
-        <div className='w-[1000px] h-[550px] bg-white rounded'>
-            <div className='bg-[#5799FD] h-[85px] relative'>
-                <h1 className='text-white text-3xl ps-10 py-6 '>Appointment Details</h1>
+    <div className='w-screen min-h-screen md:h-screen px-2 py-10 md:px-0 backdrop-blur-sm bg-[#000000af] absolute top-0 left-0 flex justify-center items-center '>
+
+        <div className='w-full md:w-[1000px] md:h-[550px] bg-white rounded'>
+
+            <div className='bg-[#5799FD] h-[85px] relative rounded-t'>
+                <h1 className='text-white text-lg md:text-3xl ps-10 py-6 '>Appointment Details</h1>
                 <button 
                     className='h-8 w-8 bg-white text-2xl absolute right-[20px] top-[20px] rounded hover:bg-blue-700 hover:text-white'
                     onClick = {(e) => { filterState.setAppointmentViewToggle(false, undefined); }}
@@ -52,7 +54,7 @@ function AppointmentView() {
             </div>
 
 
-            <div className='flex w-full pt-5 ps-10'>
+            <div className='flex w-full pt-5 px-2 md:ps-10'>
                 <button 
                     className={isBasicDetails ? 
                         ('w-40 h-8 bg-[#005db8] text-white rounded-xl hover:scale-105')
@@ -79,8 +81,8 @@ function AppointmentView() {
                 {
                     isBasicDetails  && data.appointment ? 
                     (
-                        <div className='h-[75%] w-[90%] flex m-auto'>
-                            <div className='w-[50%] mt-4 text-black'>
+                        <div className='md:h-[75%] md:w-[90%] px-2 md:px-0 py-5 md:py-0 flex flex-col md:flex-row m-auto'>
+                            <div className='w-full md:w-[50%] mt-4 text-black'>
                                 <div className='flex pt-4'><p className='w-[50%]'>Appointment Id </p><p>: {data.appointment.id}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Appointment Date </p><p>: {data.appointment.appointmentDate}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Username </p><p>: {data.appointment.user_name}</p></div>
@@ -91,7 +93,7 @@ function AppointmentView() {
                                 <div className='flex pt-4'><p className='w-[50%]'>No.of.peoples </p><p>: {data.appointment.num_of_people}</p></div>
                             </div>
 
-                            <div className=' w-[50%] mt-4 text-black'>
+                            <div className='w-full md:w-[50%] mt-4 text-black'>
                                 <div className='flex pt-4'><p className='w-[50%]'>Emergency contact</p><p>: {data.appointment.emergencyNumber}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Rewards</p><p>: {data.appointment.discount}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Check-in date</p><p>: {data.appointment.appointmentDate}</p></div>
@@ -105,8 +107,8 @@ function AppointmentView() {
 
                     ) : (
 
-                        <div className='h-[75%] w-[90%] mx-auto pt-5'>
-                            <table className='w-[80%]'>
+                        <div className='md:h-[75%] w-[90%] mx-auto pt-5 py-5 md:py-0'>
+                            <table className='min-w-full md:w-[80%]'>
                                 <thead className='h-12 bg-[#005db8] text-white'>
                                     <th>Sl. No</th>
                                     <th>Full Name</th>
@@ -118,7 +120,7 @@ function AppointmentView() {
                                         data.appointment && 
                                         data.appointment.groupMembers.map((member, index) => {
                                             return (
-                                                <tr className='h-12 border-gray-100 border-b-2 text-black'>
+                                                <tr className='h-12 text-sm md:text-lg text-black border-gray-100 border-b-2 '>
                                                     <td>{ index + 1}</td>
                                                     <td>{ member.name }</td>
                                                     <td>{ member.age }</td>

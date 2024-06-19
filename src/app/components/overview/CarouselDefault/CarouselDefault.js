@@ -30,94 +30,49 @@ export default function CarouselDefault() {
 
   return (
     <Carousel className="rounded w-full h-[85%]" autoplay="true" autoplayDelay="3000" loop="true"
-      settings={{
-        navigationType: "buttons", // Ensure that navigationType is set to "buttons"
-        prevButtonClasses: "bg-blue-500 text-white", // Customize the style of the previous button
-        nextButtonClasses: "bg-green-500 text-white", // Customize the style of the next button
-      }}
+        settings={{
+            navigationType: "buttons", // Ensure that navigationType is set to "buttons"
+            prevButtonClasses: "bg-blue-500 text-white", // Customize the style of the previous button
+            nextButtonClasses: "bg-green-500 text-white", // Customize the style of the next button
+        }}
  
     >
 
         {
-            events[0] && 
-			events.map((i, index) => {
-				return (
-          <Link href="/events/events" className="w-full h-full">
+            events[0] ? (
+                events.map((i, index) => {
+                    return (
+                        <Link href="/events/events" className="w-full h-full">
+    
+                            <div className="h-full flex justify-center items-center bg-blue-gray-100">
+                                <div className="w-[35%] h-full flex justify-end items-center pe-5">
+                                    <img className="w-20 h-20 md:w-32 md:h-32 object-cover" src={i.image} alt="" />
+                                </div>
+                                <div className="w-[65%] h-full text-left text-[14px] font-bold flex flex-col justify-center">
+                                    <div className="flex justify-start h-8 pe-1">
+                                        <h3 className='text-sm md:text-base text-nowrap overflow-hidden'>{i.event_name}</h3>
+                                        <div className="w-20 h-5 ms-3 px-2 text-sm md:text-base bg-[#FF7979] text-white font-normal rounded-xl  flex justify-center items-center">{i.priority}</div>
+                                    </div>
+                                    <p className="text-[#A4A4A4] text-xs md:text-base">{i.event_description.substring(0,30) + "..." }</p>
+                                    <p className="text-[#1A69A6]">{i.place}</p>
+                                </div>
+                            </div>
+                        </Link>
+                    )
+                })
 
-					<div className="h-full flex justify-center items-center bg-blue-gray-100">
-            			<div className="w-[35%] h-full flex justify-end items-center pe-5">
-                			<img className="w-32 h-32 object-cover" src={i.image} alt="" />
-            			</div>
-            			<div className="w-[65%] h-full text-left text-[14px] font-bold flex flex-col justify-center">
-                			<div className="flex justify-start h-8">
-                    			<h3>{i.event_name}</h3>
-                    			<div className="ms-5 bg-[#FF7979] text-white font-normal rounded-xl w-20 h-5 flex justify-center items-center">{i.priority}</div>
-                			</div>
-                			<p className="text-[#A4A4A4]">{i.event_description.substring(0,30) + "..." }</p>
-                			<p className="text-[#1A69A6]">{i.place}</p>
-            			</div>
-        			</div>
-              </Link>
-				)
-			})
+            ) : (
+                <div className='w-full h-full bg-blue-gray-400 flex justify-center items-center'>
+                    No events to display
+                </div>
+            )
+			
+
+
+
         }
 
         
-
-        
-        {/* <div className="h-full flex justify-center items-center bg-blue-gray-100">
-            <div className="w-[35%] h-full flex justify-end items-center pe-5">
-                <img className="w-[60%]" src="../images/happy-new-year-1.png" alt="" />
-            </div>
-            <div className="w-[65%] h-full text-left text-[14px] font-bold flex flex-col justify-center">
-                <div className="flex justify-start h-8">
-                    <h3>New Year Program</h3>
-                    <div className="ms-5 bg-[#FF7979] text-white font-normal rounded-xl w-20 h-5 flex justify-center items-center">High</div>
-                </div>
-                <p className="text-[#A4A4A4]">New year program is held at trust</p>
-                <p className="text-[#1A69A6]">Bangalore, Thasmai Trust</p>
-            </div>
-        </div>
-
-
-        <div className="h-full flex justify-center items-center bg-blue-gray-100">
-            <div className="w-[35%] h-full flex justify-end items-center pe-5">
-                <img className="w-[60%]" src="../morning-meditators.png" alt="" />
-            </div>
-            <div className="w-[65%] h-full text-left text-[14px] font-bold flex flex-col justify-center">
-                <div className="flex justify-start h-8">
-                    <h3>New Year Program</h3>
-                    <div className="ms-5 bg-[#FF7979] text-white font-normal rounded-xl w-20 h-5 flex justify-center items-center">High</div>
-                </div>
-                <p className="text-[#A4A4A4]">New year program is held at trust</p>
-                <p className="text-[#1A69A6]">Bangalore, Thasmai Trust</p>
-            </div>
-        </div> */}
-
-        
-       
-
-
-
-
-
-
-
-      {/* <img
-        src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-        alt="image 1"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-        alt="image 3"
-        className="h-full w-full object-cover"
-      /> */}
 
     </Carousel>
   );

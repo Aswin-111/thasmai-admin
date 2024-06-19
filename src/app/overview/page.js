@@ -50,7 +50,7 @@ export default function Overview() {
             <div className="w-full md:h-[35%] mb-4 md:m-0 md:flex justify-around">
 
 
-                <div className="w-full h-[250px] md:w-[54%] md:h-full ps-4 pe-1 py-2 mb-4 md:m-0 bg-white rounded-xl shadow-md  overflow-y-auto md:overflow-hidden">
+                <div className="w-full h-[220px] md:w-[54%] md:h-full ps-4 pe-1 py-2 mb-4 md:m-0 bg-white rounded-xl shadow-md  overflow-y-auto md:overflow-hidden">
                     <Link href="/message/globalMessage" className="w-full">
                     <h3 className="h-[15%] font-bold text-black">Meditation Notes</h3>
                     </Link>
@@ -60,7 +60,7 @@ export default function Overview() {
                 </div>
 
 
-                <div className="w-full h-[250px] md:w-[40%] md:h-full bg-white rounded-xl shadow-md py-2 ps-4 pe-3">
+                <div className="w-full h-[210px] md:w-[40%] md:h-full bg-white rounded-xl shadow-md py-2 ps-4 pe-3">
                     <Link href="/events/events" className="w-full">
                         <h3 className="h-[15%] font-bold text-black">Recent Events</h3>
                     </Link>

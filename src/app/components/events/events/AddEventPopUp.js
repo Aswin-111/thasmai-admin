@@ -476,10 +476,12 @@ function AddEventPopUp(props) {
 
  
   return (
-    <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
-      <div className='w-[1000px] h-[550px] bg-[#D9D9D9] rounded'>
-        <div className='w-full h-[10%] px-10 bg-[#5799fd] rounded-t flex items-center justify-between'>
-          <h1 className='text-xl text-white font-bold'>Add New Event</h1>
+    <div className="w-screen min-h-screen md:h-screen px-2 py-10 md:p-0 bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
+
+      <div className='w-full md:w-[1000px] md:h-[550px] bg-[#D9D9D9] rounded'>
+
+        <div className='w-full h-16 md:h-[10%] px-5 md:px-10 bg-[#5799fd] rounded-t flex items-center justify-between'>
+          <h1 className='text-lg md:text-xl text-white font-bold'>Add New Event</h1>
           <button
             className='w-8 h-8 rounded bg-blue-600 text-white hover:bg-white hover:text-black'
             onClick={() => {
@@ -488,18 +490,19 @@ function AddEventPopUp(props) {
           >X</button>
         </div>
 
-        <div className='w-full h-[90%] px-20 rounded-b'>
-          <form className='w-full h-full'>
-            <div className='w-full h-[15%] flex justify-between items-center'>
+        <div className='w-full md:h-[90%] px-2 md:px-20 py-5 md:py-0 rounded-b'>
+
+          
+            <div className='w-full h-[15%] flex flex-col md:flex-row justify-between items-center'>
               <input
-                className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
+                className='w-full md:w-[45%] h-[40px] mb-2 md:mb-0 px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
                 type="text"
                 placeholder="Name"
                 name="event_name"
                 value={eventData.event_name}
                 onChange={handleChange}
               />
-              <div className='w-[45%] h-full flex justify-between items-center'>
+              <div className='w-full md:w-[45%] h-full mb-2 md:mb-0 flex justify-between items-center'>
                 <input
                   className='w-[45%] h-[40px] px-1 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
                   type="date"
@@ -518,9 +521,10 @@ function AddEventPopUp(props) {
                 />
               </div>
             </div>
-            <div className='w-full h-[15%] flex justify-between items-center'>
+
+            <div className='w-full h-[15%] flex flex-col md:flex-row justify-between items-center'>
               <input
-                className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
+                className='w-full md:w-[45%] h-[40px] mb-2 md:mb-0 px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
                 type="text"
                 placeholder="Location"
                 name="place"
@@ -528,7 +532,7 @@ function AddEventPopUp(props) {
                 onChange={handleChange}
               />
               <select
-                className='w-[45%] h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
+                className='w-full md:w-[45%] h-[40px] mb-2 md:mb-0 px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]'
                 name="priority"
                 value={eventData.priority}
                 onChange={handleChange}
@@ -539,6 +543,7 @@ function AddEventPopUp(props) {
                 <option value="High">High</option>
               </select>
             </div>
+
             <div className='w-full h-[30%]'>
               <textarea
                 className="w-full h-full p-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]"
@@ -550,8 +555,10 @@ function AddEventPopUp(props) {
                 placeholder="Description"
               ></textarea>
             </div>
-            <div className='w-full h-[40%] py-6 rounded relative'>
-              <div className="w-[35%] h-full rounded flex justify-center items-center bg-[#999393]">
+
+            <div className='w-full md:h-[40%] mb-2 md:mb-0 md:py-6 rounded relative'>
+
+              <div className="w-full md:w-[35%] h-[35vh] md:h-full rounded flex justify-center items-center bg-[#999393]">
                 <label className="w-full h-full relative" htmlFor="image">
 
                   {
@@ -576,13 +583,13 @@ function AddEventPopUp(props) {
                 </label>
               </div>
               <button
-                className="w-[120px] h-[40px] mb-6 bg-[#ff8710] hover:bg-[#ff8810d1] text-white font-semibold rounded absolute bottom-0 right-0"
+                className="w-full md:w-[120px] h-[40px] mt-4 md:mt-0 mb-6 bg-[#ff8710] hover:bg-[#ff8810d1] text-white font-semibold rounded md:absolute bottom-0 right-0"
                 onClick={handleSubmit}
               >
                 Save
               </button>
             </div>
-          </form>
+          
         </div>
       </div>
     </div>
