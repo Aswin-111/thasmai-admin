@@ -58,6 +58,9 @@ function GlobalMessage() {
 
     async function handleGurujiGlobalMessage() {
 
+        setIsBtnDiasabled(true);
+
+
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleString('en-US', {
             month: 'long',
@@ -78,25 +81,24 @@ function GlobalMessage() {
                   UId: 0
                 });
                 console.log(response);
-                setIsBtnDiasabled(true);
                 setPageNo(1);
                 setGurujiGlobalMessage("");
                 setRenderMessageToggle(!renderMessageToggle);
-
-
-
+                toast.success("Message send successfully.");
+                
                 setTimeout(() => {
                     // alert(response.data.message);
                     setIsBtnDiasabled(false);
-                    toast.success("Message send successfully.");
-                }, 2000);
+                }, 1000);
                 
             } catch (error) {
                 console.error('Error fetching data:', error);
                 toast.error("Error while sending message.");
+                setIsBtnDiasabled(false);
             }
         } else {
             toast("Message field is empty!");
+            setIsBtnDiasabled(false);
         }
         
     };
@@ -192,11 +194,11 @@ function GlobalMessage() {
                             }}
                         />
                         <button 
-                            className='w-[100px] h-11 bg-[#005DB8] text-sm rounded-2xl text-white flex items-center justify-center hover:bg-[#005cb8e4]'
-                            onClick={handleGurujiGlobalMessage}
-                            disabled={
-                                isBtnDisabled ? "true" : "false"
-                            }
+                            className={isBtnDisabled ? 'w-[100px] h-11 bg-[#8e908ede] text-sm text-[#b4b8b4e1] rounded-2xl  flex items-center justify-center': 'w-[100px] h-11 bg-[#005DB8] text-sm rounded-2xl text-white flex items-center justify-center hover:bg-[#005cb8e4]'}
+                            onClick={() => {
+                                handleGurujiGlobalMessage();
+                            }}
+                            disabled={ isBtnDisabled }
                         >
                             <IoMdSend className='text-2xl me-2'/>
                         Send</button>

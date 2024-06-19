@@ -13,6 +13,8 @@ function GurujiMessage() {
     const [pageNo, setPageNo] = useState(1);
     const [gurujiMessage, setGurujiMessage] = useState("");
     const [renderMessageToggle, setRenderMessageToggle] = useState(false);
+    const [isBtnDisabled, setIsBtnDiasabled] = useState(false);
+
     
     // console.log(pageNo);
 
@@ -56,6 +58,8 @@ function GurujiMessage() {
 
     async function handleGurujiMessage() {
 
+        setIsBtnDiasabled(true);
+
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleString('en-US', {
             month: 'long',
@@ -80,12 +84,19 @@ function GurujiMessage() {
                 setPageNo(1);
                 setRenderMessageToggle(!renderMessageToggle);
                 toast.success("Message send successfully.");
+
+                setTimeout(() => {
+                    setIsBtnDiasabled(false);
+                }, 1000);
+
             } catch (error) {
                 console.error('Error fetching data:', error);
                 toast.error("Error while sending message.");
+                setIsBtnDiasabled(false);
             }
         } else {
             toast("Message field is empty!");
+            setIsBtnDiasabled(false);
         }    
     };
 
@@ -158,8 +169,11 @@ function GurujiMessage() {
                             }}
                         />
                         <button 
-                            className='w-[100px] h-11 bg-[#005DB8] text-sm rounded-2xl text-white flex items-center justify-center hover:bg-[#005cb8e4]'
-                            onClick={handleGurujiMessage}
+                            className={isBtnDisabled ? 'w-[100px] h-11 bg-[#8e908ede] text-sm text-[#b4b8b4e1] rounded-2xl  flex items-center justify-center': 'w-[100px] h-11 bg-[#005DB8] text-sm rounded-2xl text-white flex items-center justify-center hover:bg-[#005cb8e4]'}
+                            onClick={() => {
+                                handleGurujiMessage();
+                            }}
+                            disabled={ isBtnDisabled }
                         >
                             <IoMdSend className='text-2xl me-2'/>
                             Send
