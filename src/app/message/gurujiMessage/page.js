@@ -126,7 +126,7 @@ function GurujiMessage() {
                                         </div> */}
                                         <div className="chat-bubble bg-white text-black">{ i.message }</div>
                                         <div className="chat-footer">
-                                            <time className="text-xs opacity-75">{ i.messageTime }</time>
+                                            <time className="text-xs opacity-75 text-black">{ i.messageTime }</time>
                                         </div>
                                     </div>               
                             );

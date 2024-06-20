@@ -107,7 +107,7 @@ function AppointmentView() {
 
                     ) : (
 
-                        <div className='md:h-[75%] w-[90%] mx-auto pt-5 py-5 md:py-0'>
+                        <div className='md:h-[75%] w-[90%] mx-auto py-5'>
                             <table className='min-w-full md:w-[80%]'>
                                 <thead className='h-12 bg-[#005db8] text-white'>
                                     <th>Sl. No</th>

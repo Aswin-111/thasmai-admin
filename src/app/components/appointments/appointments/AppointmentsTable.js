@@ -9,7 +9,9 @@ import toast from 'react-hot-toast'
 
 
 function AppointmentsTable(props) {
-  const [isCheckinRender,setIsCheckinRender] = useState(false)
+  const [isCheckinRender,setIsCheckinRender] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const filterState = useAppointFilterStore((state) => {
     return state;
   });
@@ -46,66 +48,77 @@ function AppointmentsTable(props) {
 
 
   async function handleCheckInClick(regDate, id, status) {
+
+    setIsButtonDisabled(true);
+
     try {
-    const formattedRegDate = moment( regDate, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
-    console.log(formattedRegDate);
+        const formattedRegDate = moment( regDate, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
+        console.log(formattedRegDate);
 
 
-    const dateTime = `${moment().format('DD/MM/YYYY')}`;
-    const formattedCheckinDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
-    
-    const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${id}`,{
-      register_date: formattedRegDate,
-      appointment_status : status,
-      appointmentDate: formattedCheckinDate
-    })
-    toast.success("User Checkedin Successfully")
-    
-    if (!props.isFilteredData) {
-      // setIsCheckinRender(!isCheckinRender)
-      fetchData()
-      
-    } else{
-      props.handleSearch(props.filteredPageNo)
-    }
-    
+        const dateTime = `${moment().format('DD/MM/YYYY')}`;
+        const formattedCheckinDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
+
+        const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${id}`,{
+          register_date: formattedRegDate,
+          appointment_status : status,
+          appointmentDate: formattedCheckinDate
+        })
+        setTimeout(() => {
+            toast.success("User Checkedin Successfully")
+            setIsButtonDisabled(false);
+        }, 1000);
+
+        if (!props.isFilteredData) {
+          // setIsCheckinRender(!isCheckinRender)
+          fetchData()
+
+        } else{
+          props.handleSearch(props.filteredPageNo)
+        }
     
 
       
     } catch (error) {
       toast.error("Error while checkin a user")
+      setIsButtonDisabled(false);
     }
     
   }
 
 
-  async function handleCheckOutClick(id, status){
-    try {
-    const dateTime = `${moment().format('DD/MM/YYYY')}`;
-    const formattedCheckoutDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
-    console.log(formattedCheckoutDate);
-     await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${id}`,{
-      appointment_status : status,
-      check_out: formattedCheckoutDate
-    })
-    toast.success("User Checked out Successfully")
-    
-    if (!props.isFilteredData) {
-      // props.setFilterToggle(!props.filterToggle)
-      fetchData();
-     
-      
-    } else{
-      props.handleSearch(props.filteredPageNo)
-    }
-      
-    } catch (error) {
-      toast.error("Error while checkin a user")
+    async function handleCheckOutClick(id, status) {
 
-      
-    }
+        setIsButtonDisabled(true);
+
+        try {
+            const dateTime = `${moment().format('DD/MM/YYYY')}`;
+            const formattedCheckoutDate = moment( dateTime, 'DD/MM/YYYY',true).format("YYYY-MM-DD");
+            console.log(formattedCheckoutDate);
+             await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/update-payment/${id}`,{
+              appointment_status : status,
+              check_out: formattedCheckoutDate
+            })
+
+            setTimeout(() => {
+                toast.success("User Checked out Successfully")
+                setIsButtonDisabled(false);
+            }, 1000);
+
+            if (!props.isFilteredData) {
+                // props.setFilterToggle(!props.filterToggle)
+                fetchData();
+            
+            } else {
+                props.handleSearch(props.filteredPageNo)
+            }
+        
+        } catch (error) {
+            toast.error("Error while checkin a user")
+            setIsButtonDisabled(false);    
+        }
     
-  }
+    }
 
 
 
@@ -176,10 +189,11 @@ function AppointmentsTable(props) {
                         appoint.appointment_status === "Not Arrived" && 
     
                           <button 
-                            className="w-[90px] h-[35px] rounded-3xl text-white bg-green-500 hover:bg-green-700"
+                            className={isButtonDisabled ? "w-[90px] h-[35px] rounded-3xl text-white bg-[#a4a2a2]" : "w-[90px] h-[35px] rounded-3xl text-white bg-green-500 hover:bg-green-700"}
                             onClick={(e) => {
                               handleCheckInClick(appoint.register_date, appoint.id, "Checked In")
                             }}
+                            disabled={isButtonDisabled}
                           >Check In</button> 
                       }
     
@@ -187,10 +201,11 @@ function AppointmentsTable(props) {
                         // appoint.appointment.appointment_status.startsWith("Checked In") &&
                         appoint.appointment_status === "Checked In" &&  
                           <button 
-                            className="w-[90px] h-[35px] rounded-3xl text-white bg-red-500 hover:bg-red-700"
+                            className={isButtonDisabled ? "w-[90px] h-[35px] rounded-3xl text-white bg-[#a4a2a2]" : "w-[90px] h-[35px] rounded-3xl text-white bg-red-500 hover:bg-red-700"}
                             onClick={(e) => {
                               handleCheckOutClick(appoint.id, "Checked Out")
                             }}
+                            disabled={isButtonDisabled}
                           >Check Out</button>
                          
                       }
@@ -199,10 +214,11 @@ function AppointmentsTable(props) {
                         // appoint.appointment.appointment_status.startsWith("Checked Out") &&
                         appoint.appointment_status === "Checked Out" &&  
                           <button 
-                            className="w-[90px] h-[35px] rounded-3xl text-white bg-blue-500 hover:bg-blue-700"
+                            className={isButtonDisabled ?"w-[90px] h-[35px] rounded-3xl text-white bg-[#a4a2a2]" : "w-[90px] h-[35px] rounded-3xl text-white bg-blue-500 hover:bg-blue-700"}
                             onClick={(e) => {
                               filterState.setPaymentToggle(true, appoint.id);
                             }}
+                            disabled={isButtonDisabled}
                           >Payment</button>
                          
                       }

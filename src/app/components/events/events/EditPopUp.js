@@ -117,6 +117,7 @@ const handleSubmit = async (e) => {
         // alert(response.data.message);
         toast.success(response.data.message);
         props.setFilterToggle(prevValue => !prevValue);
+        props.setEditEvent(false);
         
       } catch (error) {
         console.error('Error uploading event:', error);

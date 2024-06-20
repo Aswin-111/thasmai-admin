@@ -849,7 +849,7 @@ function MeditatorList() {
                     	      </option>
                     	    </select>
                     	}
- 
+
                                     {/* ----------------value input/select---------------- */}
  
                     	{

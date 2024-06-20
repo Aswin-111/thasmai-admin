@@ -93,7 +93,7 @@ function EdiReferencePopUp(props) {
               name='question'
               value={data.question}
               placeholder= {"Q. " + data.question}
-              className='w-full h-12  mt-10 px-2 bg-white text-black border-b-2  border-amber-800 outline-none placeholder:text-xl '
+              className='w-full h-12  mt-10 px-2 bg-white text-black border-b-2  border-blue-800 outline-none placeholder:text-xl '
               onChange={handleOnChange}
             />
             <input 
@@ -101,7 +101,7 @@ function EdiReferencePopUp(props) {
               name='ans1'
               value={data.ans1}
               placeholder= {"A. " + data.ans1}
-              className='w-[60%] h-12  mt-10 px-2 bg-white text-black border-b-2 border-amber-800 outline-none placeholder:text-xl '
+              className='w-[60%] h-12  mt-10 px-2 bg-white text-black border-b-2 border-blue-800 outline-none placeholder:text-xl '
               onChange={handleOnChange}
             />
             <input
@@ -109,7 +109,7 @@ function EdiReferencePopUp(props) {
               value={data.ans2}
               type='text'
               placeholder= {"B. " + data.ans2}
-              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-amber-800 outline-none placeholder:text-xl '
+              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-blue-800 outline-none placeholder:text-xl '
               onChange={handleOnChange}
             />
             <input 
@@ -117,7 +117,7 @@ function EdiReferencePopUp(props) {
               value={data.ans3}
               type='text'
               placeholder= {"C. " + data.ans3}
-              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-amber-800 outline-none placeholder:text-xl '
+              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-blue-800 outline-none placeholder:text-xl '
               onChange={handleOnChange}
             />
             <input 
@@ -125,7 +125,7 @@ function EdiReferencePopUp(props) {
               name='ans4'
               value={data.ans4}
               placeholder= {"D. " + data.ans4}
-              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-amber-800 outline-none placeholder:text-xl '
+              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-blue-800 outline-none placeholder:text-xl '
               onChange={handleOnChange}
             />
             <input 
@@ -133,7 +133,7 @@ function EdiReferencePopUp(props) {
               name='ans5'
               value={data.ans5}
               placeholder= {"E. " + data.ans5}
-              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-amber-800 outline-none placeholder:text-xl '
+              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-blue-800 outline-none placeholder:text-xl '
               onChange={handleOnChange}
             />
             <div className='w-full h-[10%] flex justify-end mt-5'>

@@ -131,7 +131,7 @@ function GlobalMessage() {
                                         </div> */}
                                         <div className="chat-bubble bg-[#DDC2A1] text-[#312411]">{ i.message }</div>
                                         <div className="chat-footer">
-                                            <time className="text-xs opacity-75">{ i.messageTime }</time>
+                                            <time className="text-xs opacity-75 text-black">{ i.messageTime }</time>
                                         </div>
                                     </div>
                                 ) : (
@@ -142,14 +142,14 @@ function GlobalMessage() {
                                                 <img alt="Tailwind CSS chat bubble component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                             </div>
                                         </div> */}
-                                        <div className="chat-header">
+                                        <div className="chat-header text-black">
                                             {i.userName}
                                             {/* <time className="text-xs opacity-50">{ i.messageTime }</time> */}
                                         </div>
                                         <div className="chat-bubble bg-white text-black">{ i.message }</div>
 
                                         <div className="chat-footer">
-                                            <time className="text-xs opacity-75">{ i.messageDate } at { i.messageTime }</time>
+                                            <time className="text-xs opacity-75 text-black">{ i.messageDate } at { i.messageTime }</time>
                                         </div>
                                     </div>
                                 )

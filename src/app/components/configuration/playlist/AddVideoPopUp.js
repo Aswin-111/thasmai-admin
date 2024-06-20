@@ -103,7 +103,7 @@ function AddVideoPopUp(props) {
             <div className='w-[800px] h-[400px] absolute  bg-[#C5D8FF] rounded-xl'>
                  <p className='text-[#00193B] font-medium text-2xl p-4'>Add Video</p>
                  <input
-                  className='w-[80%] h-16 mx-16 mt-4 ps-5 rounded-md border-[1px] bg-white border-black placeholder:text-xl placeholder:text-[#44474E]'
+                  className='w-[80%] h-16 mx-16 mt-4 ps-5 rounded-md border-[1px] bg-white text-black border-black placeholder:text-xl placeholder:text-[#44474E]'
                   placeholder='Video Heading' 
                   type='text'
                   name='videoHeading'
@@ -111,7 +111,7 @@ function AddVideoPopUp(props) {
                   onChange={handleVideoDataChange}
                  />
                  <input
-                  className='w-[80%] h-16 mx-16 mt-10 ps-5 rounded-md border-[1px] bg-white border-black placeholder:text-xl placeholder:text-[#44474E]'
+                  className='w-[80%] h-16 mx-16 mt-10 ps-5 rounded-md border-[1px] bg-white text-black border-black placeholder:text-xl placeholder:text-[#44474E]'
                   placeholder='Video URL' 
                   type='text'
                   name='videoLink'

@@ -1,89 +1,3 @@
-// "use client"
-// import React, { useState } from 'react';
-// import NavLink from '../navlink/navlink'
-// import { MdOutlineFileUpload } from "react-icons/md";
-
-
-// function AddExpense() {
-
-//     const [image, setImage] = useState(null);
-//     const handleImageChange = (e) => {
-//       const file = e.target.files[0];
-//       const reader = new FileReader();
-  
-//       reader.onloadend = () => {
-//         setImage(reader.result); 
-//       };
-  
-//       if (file) {
-//         reader.readAsDataURL(file); 
-//       }
-//     };
-
-//   return (
-//     <div className="w-full h-[85vh] px-7 overflow-y-auto">
-//       <div className="w-full sticky top-0">
-//         <NavLink />
-//       </div>
-//       <div className='w-full h-[93%] mt-2 p-4  bg-white rounded shadow drop-shadow-md '>
-
-//         <div className='w-full h-[85%] px-16 py-6 flex '>
-//             <div className='w-[60%] flex flex-col'>
-//                 <select className='w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px] '>
-//                     <option className='' disabled>Expense Type</option>
-//                     <option className=''>Water bill</option>
-//                     <option className=''>Electricity bill</option>
-
-        
-//             </select>
-//             <input type='number'
-//                 className='w-[45%] h-12 p-2 mb-5 bg-white text-black border-[1px] border-black rounded-[6px] placeholder:text-black '
-//                 placeholder='Amount'
-//             />
-//             <div className='w-[45%] h-12 px-2 mb-5 bg-[#565F71] text-white rounded-2xl'>
-//                 <label 
-//                     htmlFor="bill"
-//                     className='w-full h-full flex items-center'
-//                 >
-//                     <MdOutlineFileUpload  className='text-2xl me-2'/>
-//                     Upload Invoice
-//                 </label>
-//                 <input id="bill" className="w-full h-full" type="file" hidden onChange={handleImageChange} />
-//             </div>
-//             <textarea 
-//                 className='w-[95%] p-3 bg-white text-black border-[1px] border-black rounded-[6px] placeholder:text-black '
-//                 placeholder='Description'
-//                 rows={8}
-//             />
-//         </div>
-//         <div className='w-[40%] bg-slate-200 flex justify-center items-center rounded-[8px] border-[1px] border-black'>
-//             {/* <img className='w-full h-full' alt='bill image'/> */}
-
-//             {image ? (
-//               <img className="w-full h-full " src={image} alt="bill image" />
-//             ) : (
-//               <div className="text-gray-500 text-center">No bills uploaded</div>
-//             )}
-
-//         </div>
-        
-//        </div>
-
-//        <div className='w-full h-[15%] ps-16'>
-//             <div className='w-[60%] h-full'>
-//                 <button className='w-[90%] h-12 bg-[#005DB8] text-white rounded-2xl'>Save to Expense</button>
-//             </div>
-//        </div>
-
-//         </div>
-//     </div>
-//   )
-// }
-
-// export default AddExpense
-
-
-
 "use client"
 
 import React, { useState, useEffect } from 'react';
@@ -93,6 +7,7 @@ import { useLoginStore } from '@/app/loginstate/loginState';
 import { useNavbarTextStore } from '../../state/navbar-state';
 import { toast } from 'react-hot-toast';
 import { MdOutlineFileUpload } from "react-icons/md";
+import useImageCompressor from '@/app/components/ImageCompression/useImageCompressor';
 
 function AddExpense() {
 
@@ -109,6 +24,7 @@ function AddExpense() {
     });
     const [balanceAmount, setBalanceAmount] = useState();
     const [renderToggle, setRenderToggle] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     console.log(formData);
 
@@ -118,6 +34,8 @@ function AddExpense() {
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Financial / Expense");
+
+    const { compressImage } = useImageCompressor();
 
 
 
@@ -141,6 +59,7 @@ function AddExpense() {
             emp_id : empId,
             name : empName,
         });
+
 
 
 
@@ -171,16 +90,20 @@ function AddExpense() {
         });
     };
 
-    const handleImageChange = (e) => {
+    const handleImageChange = async (e) => {
         const file = e.target.files[0];
+
+        const compressedFile = await compressImage(file);
+
         setFormData({
             ...formData,
-            invoice: file,
+            invoice: compressedFile,
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsButtonDisabled(true);
 
         
         console.log('Submitting form data:', formData); // Log the form data before submission
@@ -200,25 +123,33 @@ function AddExpense() {
             try {
                 const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/expense`, form);
                 console.log(response);
-                toast.success('Expense created successfully');
-                // Clear form fields after successful submission
-                setFormData({
-                    Expense_Date: '',
-                    emp_id : '',
-                    name : '',
-                    expenseType: '',
-                    amount: '',
-                    description: '',
-                    invoice: null,
-                });
-                setRenderToggle(prevValue => !prevValue);
+
+
+                setTimeout(() => {
+                    toast.success('Expense created successfully');
+                    // Clear form fields after successful submission
+                    setFormData({
+                        Expense_Date: '',
+                        emp_id : '',
+                        name : '',
+                        expenseType: '',
+                        amount: '',
+                        description: '',
+                        invoice: null,
+                    });
+                    setRenderToggle(prevValue => !prevValue);
+                    setIsButtonDisabled(false);
+                }, 1000);
+                
             } catch (error) {
                 console.error('Error creating expense:', error);
                 toast.error(error.response.data.message);
+                setIsButtonDisabled(false);
             }
 
         } else {
             toast("Please enter the required expense details.");
+            setIsButtonDisabled(false);
         }
     };
 
@@ -299,7 +230,13 @@ function AddExpense() {
 
                 <div className='w-full md:h-[15%] px-2 md:ps-16'>
                     <div className='w-full md:w-[60%] h-full'>
-                        <button className='w-full md:w-[90%] h-12 bg-[#005DB8] text-white rounded-2xl' onClick={handleSubmit}>Create Expense</button>
+                        <button 
+                            className={isButtonDisabled ? 'w-full md:w-[90%] h-12 bg-[#9b9b9c] text-white rounded-2xl' :'w-full md:w-[90%] h-12 bg-[#005DB8] text-white rounded-2xl'} 
+                            onClick={handleSubmit}
+                            disabled={isButtonDisabled}
+                        >
+                            Create Expense
+                        </button>
                     </div>
                 </div>
             </div>

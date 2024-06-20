@@ -23,6 +23,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgb(250, 245, 245);
 }
 
+input[type="time"]::-webkit-calendar-picker-indicator{
+  background-color:#89c0f6;
+  border-radius: 2px;
+  color: rgb(250, 245, 245);
+}
+
  
 .link{
   border-radius:7px;

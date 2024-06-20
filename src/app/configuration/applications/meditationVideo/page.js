@@ -119,7 +119,7 @@ function MeditationVideo() {
                  <div className='w-full flex'>
                    <div className='w-[80%] h-full pt-4 flex'>
                       <input
-                       className='w-[300px] h-10 ms-8 p-2 rounded border-[1px] bg-white border-black'
+                       className='w-[300px] h-10 ms-8 p-2 rounded border-[1px] text-black bg-white border-black'
                        name='playlistHeading'
                        value={playlistData.playlistHeading}
                        placeholder='Playlist Heading'

@@ -1,11 +1,12 @@
 "use client"
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import {toast} from 'react-hot-toast'
+import useImageCompressor from '../../ImageCompression/useImageCompressor'
 
 function OperatorPaymentPopUp(props) {
 
-    
+    const [operatorSaturationLimit, setOperatorSaturationLimit] = useState()
     const [invoiceData, setInvoiceData] = useState({
         payment_Date: '',
         emp_id : '',
@@ -13,19 +14,43 @@ function OperatorPaymentPopUp(props) {
         invoice: null,
         emp_name :''
     });
+
+    
     console.log(invoiceData);
     console.log(props.selectedOperatorData);
 
+    const { compressImage } = useImageCompressor();
 
-    const handleImageChange = (e) => {
+    useEffect(() => {
+
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/financialconfig`);
+                console.log(response);
+
+                // operator saturation limit at index 4 
+                setOperatorSaturationLimit(response.data.finconfig[4].value);  
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                toast.error("Error fetching data");
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
+
+    const handleImageChange = async (e) => {
         const file = e.target.files[0];
 
+        const compressedFile = await compressImage(file);
        
         setInvoiceData({
                 ...invoiceData,
-                invoice: file,
+                invoice: compressedFile,
             });
-        };
+    };
 
 
 
@@ -47,7 +72,7 @@ function OperatorPaymentPopUp(props) {
       const formData = new FormData();
       formData.append('emp_Name', data.name);
       formData.append('emp_Id',data.emp_Id);
-      formData.append('amount', 5000);
+      formData.append('amount', operatorSaturationLimit);
       formData.append('date', formattedDate);
       formData.append('image', invoiceData.invoice);
 
@@ -88,8 +113,7 @@ function OperatorPaymentPopUp(props) {
                     <div className='w-[60%] h-full p-5 flex flex-col justify-between'>
                         <div className='w-full'>
                             <div className='flex pt-4'>
-                                <p className='w-[50%] text-black'>Amount payable :</p>
-                                {/* <p>: {date}</p> */}
+                                <p className='w-[50%] text-black'>Amount payable : { operatorSaturationLimit }</p>
                             </div>
 
                             <div className='flex pt-4'>
@@ -119,7 +143,7 @@ function OperatorPaymentPopUp(props) {
                                 handleSubmit(e)
                             }}
                         >
-                            Pay Rs. 5000
+                            Pay Rs. { operatorSaturationLimit }
                             {/* Payment of Rs. { String((Number(paymentAmountRef.current.value) - discount)).startsWith('-') ? "" : String((Number(paymentAmountRef.current.value) - discount)) } */}
                         </button>
                     </div>

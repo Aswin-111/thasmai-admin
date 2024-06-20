@@ -87,7 +87,7 @@ function Playlist(props) {
                         item.video[0] && 
                         item.video.map((vid, ind) => {
                           return(
-                            <tr className="text-xs">
+                            <tr className="text-xs py-2 border-b-2 border-gray-300">
                               <td className="ps-2">{ ind + 1}</td>
                               <td>{ vid.video_heading }</td>
 

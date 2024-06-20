@@ -6,6 +6,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import { useAppointFilterStore } from "@/app/appointments/appointments/filterstate";
 import { toast } from 'react-hot-toast'
 import axios  from 'axios';
+import useImageCompressor from '../../ImageCompression/useImageCompressor';
  
  
 function AppointmentCheckOut(props) {
@@ -17,15 +18,15 @@ function AppointmentCheckOut(props) {
     const filterState = useAppointFilterStore((state) => {
         return state;
     });
- 
- 
+    
     const [data, setData] = useState([]);
  
     const [date, setDate] = useState("");
  
     const [image, setImage] = useState(null);
  
-    const [finalPayment,setFinalPayment] = useState(0)
+    const [finalPayment,setFinalPayment] = useState(0);
+
     console.log("Image STATE", image);
  
     const paymentAmountRef = useRef("")
@@ -39,6 +40,9 @@ function AppointmentCheckOut(props) {
  
     const discount = data.discount;
     // console.log(discount);
+
+    const { compressImage } = useImageCompressor();
+
  
     useEffect(() => {
  
@@ -50,6 +54,8 @@ function AppointmentCheckOut(props) {
     };
  
     }, []);
+
+    
  
  
  
@@ -57,13 +63,16 @@ function AppointmentCheckOut(props) {
         const file = event.target.files[0]; // Get the first file from the input
  
         try {
-            setImage(file); // Set the image file itself, not its URL
+            const compressedFile = await compressImage(file);
+
+            setImage(compressedFile); // Set the image file itself, not its URL
         } catch (error) {
             console.error('Error uploading image:', error);
         }
     }
  
     async function paymentClickHandler(totalAmount, paymentType, status, days) {
+
         if (image) {
             const formData = new FormData();
             formData.append('payment', totalAmount);
@@ -80,15 +89,13 @@ function AppointmentCheckOut(props) {
                 // window.location.reload();
                 if(!props.isFilteredData){
                     // return;
-                // window.location.reload();
-                props.setFilterToggle(!props.filterToggle)
-                filterState.setPaymentToggle(false, undefined);
-
+                    // window.location.reload();
+                    props.setFilterToggle(!props.filterToggle)
+                    filterState.setPaymentToggle(false, undefined);
 
                 } else {
                     props.handleSearch(props.filteredPageNo)
-                    filterState.setPaymentToggle(false, undefined);
-                    
+                    filterState.setPaymentToggle(false, undefined);    
                 }
                 toast.success("Payment updated successfully!")
 
@@ -138,9 +145,9 @@ function AppointmentCheckOut(props) {
  
  
   return (
-    <div className='w-[100vw] h-[100vh] backdrop-blur-sm bg-[#0000003b] absolute top-0 left-0 flex justify-center items-center '>
-        <div className='w-[600px] h-[500px] bg-white rounded'>
-            <div className='w-full h-[15%] ps-8 font-semibold text-xl text-white bg-[#5799FD] rounded relative flex items-center'>
+    <div className='w-full min-h-screen h-screen px-2 md:px-0 backdrop-blur-sm bg-[#0000003b] absolute top-0 left-0 flex justify-center items-center '>
+        <div className='w-full md:w-[600px] h-[500px] bg-white rounded'>
+            <div className='w-full h-16 md:h-[15%] ps-8 font-semibold text-xl text-white bg-[#5799FD] rounded-t relative flex items-center'>
                 Check-out Payment
                 <button 
                     className="w-[30px] h-[30px] text-black font-medium bg-white hover:text-white hover:bg-blue-700 rounded absolute right-[30px]"
@@ -151,12 +158,13 @@ function AppointmentCheckOut(props) {
             </div>
  
             <div className='w-full h-[85%] text-center'>
-                <div className='w-[75%] mt-4 mx-auto'>
-                        <div className='flex pt-4'>
+
+                <div className='w-full md:w-[75%] mt-4 mx-auto text-sm md:text-base'>
+                        <div className='flex items-center pt-4'>
                             <p className='w-[50%] text-black'>Number of days stayed</p>
                             <p>: {date}</p>
                         </div>
-                        <div className='flex pt-4'>
+                        <div className='flex items-center pt-4'>
                             <p className='w-[50%] text-black'>Ashram stay payment</p>
  
                             <input 
@@ -175,16 +183,16 @@ function AppointmentCheckOut(props) {
                                     }}
                             />
                         </div>
-                        <div className='flex pt-4'>
+                        <div className='flex items-center pt-4'>
                             <p className='w-[50%] text-black'>Reward/Discount received</p>
                             <p>: Rs. {data.discount ? data.discount : "0"}</p>
                         </div>
-                        <div className='flex pt-4'>
+                        <div className='flex items-center pt-4'>
                             <p className='w-[50%] font-semibold text-black'>Total payment</p>
                             <p>: Rs. { finalPayment}
                             </p>
                         </div>  
-                        <div className='flex pt-4'>
+                        <div className='flex items-center pt-4'>
                             <p className='w-[50%] text-black'>Type of Payment</p>
                             {/* <p>: njhgfd</p> */}
                             <select 
@@ -198,7 +206,7 @@ function AppointmentCheckOut(props) {
                                 <option value="card">Card</option>
                             </select>
                         </div> 
-                        <div className='flex pt-4'>
+                        <div className='flex items-center pt-4'>
                             <p className='w-[50%] text-black'>Upload Bill:</p>
  
                             <input 
@@ -217,7 +225,7 @@ function AppointmentCheckOut(props) {
  
  
                 <button 
-                    className='mt-10 w-[50%] h-[50px] bg-[#23A058] text-white rounded-xl hover:bg-[#23a057d0]'
+                    className='mt-10 w-[75%] md:w-[50%] h-[50px] bg-[#23A058] text-white rounded-xl hover:bg-[#23a057d0]'
                     disabled = { String((Number(paymentAmountRef.current.value) - discount)).startsWith("-") || String((Number(paymentAmountRef.current.value) - discount)).startsWith("0")}
                     onClick={() => {
                         // console.log(appointmentImageRef.current.value);

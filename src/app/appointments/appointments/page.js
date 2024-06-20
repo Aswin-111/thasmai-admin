@@ -196,149 +196,288 @@ function handleFilteredNextPage() {
 
             {/* -----------------operator select--------------- */}
 
-            <select 
-              className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
-              ref = {operatorRef}
-              onChange={e => {
-                filterState.setOperatorValue(e.target.value)
-              }}
-            >
-                <option disabled selected>
-                  Choose operator
-                </option>
+            {
+						    filterState.FieldValue === "" && 
+						
+						    <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+              				  disabled  
+              				>
+						      <option disabled selected>
+						        Choose operator
+						      </option>
+						    </select>
+						}
 
-                { filterState.FieldValue === "Appointment Id" && 
-                    <option value="equal to">Equal to</option>  
-                }
+            {
+            		filterState.FieldValue === "Appointment Id" && 
+ 
+            		<select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+            		  ref = {operatorRef}
+            		  onChange={e => {
+								    filterState.setOperatorValue(e.target.value)
+            		  }}
+            		>
+            		  <option disabled selected>
+            		    Choose operator
+            		  </option>
+            		  <option value="equal to">Equal to</option>  
+            		</select>
+ 
+            }
 
-                { filterState.FieldValue === "Appointment Date" &&
-                  filterState.dateOperator.map((i, index) => {
-                    return (
-                      <option key={index} value={i}>
-                        {i}
-                      </option>
-                    );
-                  })
-                }
+            {
+                filterState.FieldValue === "Name" && 
+ 
+                <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                    ref = {operatorRef}
+                    onChange={e => {
+                        filterState.setOperatorValue(e.target.value)
+                    }}
+                >
+                    <option disabled selected>
+                          Choose operator
+                    </option>
+                    {
+                          filterState.stringOperator.map((i, index) => {
+                            return (
+                                  <option key={index} value={i}>
+                                    {i}
+                                  </option>
+                            );
+                          })
+                    }
+                </select>
+            }
 
-                { filterState.FieldValue === "Name" && 
-                  filterState.stringOperator.map((i, index) => {
-                    return (
-                      <option key={index} value={i}>
-                        {i}
-                      </option>
-                    );
-                  })
-                }
-                { filterState.FieldValue === "Checkin Date" &&
-                  filterState.dateOperator.map((i, index) => {
-                    return (
-                      <option key={index} value={i}>
-                        {i}
-                      </option>
-                    );
-                  })
-                }
-                { filterState.FieldValue === "Checkout Date" &&
-                  filterState.dateOperator.map((i, index) => {
-                    return (
-                      <option key={index} value={i}>
-                        {i}
-                      </option>
-                    );
-                  })
-                }
-                { filterState.FieldValue === "Status" &&
-                 
-                      <option value="equal to">
+            {
+                filterState.FieldValue === "Appointment Date" && 
+                
+                <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                    ref = {operatorRef}
+                    onChange={e => {
+                        filterState.setOperatorValue(e.target.value)
+                    }}
+                >
+                    <option disabled selected>
+                          Choose operator
+                    </option>
+                    {
+                        filterState.dateOperator.map((i, index) => {
+                            return (
+                                <option key={index} value={i}>
+                                    {i}
+                                </option>
+                            )
+                        })
+                    }
+                </select>
+            }
+
+            {
+                filterState.FieldValue === "Checkin Date" && 
+                
+                <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                    ref = {operatorRef}
+                    onChange={e => {
+                        filterState.setOperatorValue(e.target.value)
+                    }}
+                >
+                    <option disabled selected>
+                          Choose operator
+                    </option>
+                    {
+                        filterState.dateOperator.map((i, index) => {
+                            return (
+                                <option key={index} value={i}>
+                                    {i}
+                                </option>
+                            )
+                        })
+                    }
+                </select>
+            }
+
+            {
+                filterState.FieldValue === "Checkout Date" && 
+                
+                <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                    ref = {operatorRef}
+                    onChange={e => {
+                        filterState.setOperatorValue(e.target.value)
+                    }}
+                >
+                    <option disabled selected>
+                          Choose operator
+                    </option>
+                    {
+                        filterState.dateOperator.map((i, index) => {
+                            return (
+                                <option key={index} value={i}>
+                                    {i}
+                                </option>
+                            )
+                        })
+                    }
+                </select>
+            }
+
+            {
+                filterState.FieldValue === "Status" && 
+
+                <select className="m-0 md:ms-3 px-2 w-36 md:w-40 h-8  mb-2 md:mb-0 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]" 
+                  ref = {operatorRef}
+                  onChange={e => {
+                        filterState.setOperatorValue(e.target.value)
+                  }}
+                >
+                  <option disabled selected>
+                        Choose operator
+                  </option>
+                  <option value="equal to">
                         equal to
-                      </option>
-                   
-                }
-            </select>
+                  </option>
+                </select>
+            }
 
   										{/* ----------------value input/select---------------- */}
             
 
-            {
-              (filterState.FieldValue.length === 0)  && 
-              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
-            }
+                {
+                    filterState.FieldValue === "" && (
+                        <>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                    )
+                }
 
-            { (filterState.FieldValue  === "Name" || filterState.FieldValue  === "Appointment Id") && 
-                        <input
-                          type="text"
-                          placeholder="Value" ref = {dataRef}
-                          className={`${ filterState.FieldValue === "Appointment Date" ||
-                            filterState.FieldValue === "Checkin Date" ||
-                            filterState.FieldValue === "Checkout Date" ||
-                            filterState.FieldValue === "Status" ? "placeholder:text-slate-200 m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-[#EEEAEA] border-none text-slate-100":"placeholder:text-black m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"}`}
-                          disabled={
-                            filterState.FieldValue === "Appointment Date" ||
-                            filterState.FieldValue === "Checkin Date" ||
-                            filterState.FieldValue === "Checkout Date" ||
-                            filterState.FieldValue === "Status"
-                          }
-                        />
-            }
+                {
+                    ( filterState.FieldValue === "Appointment Id" && filterState.operatorValue === "") && 
+                        <>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                }
+                { 
+                    ( filterState.FieldValue  === "Appointment Id" && filterState.operatorValue !== "") && 
+                        <>
+                              <input
+                                type="text"
+                                placeholder="Value" ref = {dataRef}
+                                className="placeholder:text-black m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                              />
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                }
 
-            {
-              ( filterState.FieldValue === "Appointment Date" && filterState.operatorValue === "") && 
-                <input type="date" disabled className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-            }
-            {
-              ( filterState.FieldValue === "Appointment Date" && filterState.operatorValue === "equal to") && 
-                <input type="date" ref = {dataRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-            }
-            {   ( filterState.FieldValue === "Appointment Date" && filterState.operatorValue === "between") && 
-                <>
-                <input type="date" ref={startDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-                <input type="date" ref={endDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-                </>
-            }
+                {
+                    ( filterState.FieldValue === "Name" && filterState.operatorValue === "") && 
+                        <>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                }
+                { 
+                    ( filterState.FieldValue  === "Name" && filterState.operatorValue !== "") && 
+                        <>
+                              <input
+                                type="text"
+                                placeholder="Value" ref = {dataRef}
+                                className="placeholder:text-black m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center bg-white text-black px-4  focus:outline-none rounded border-[1px] border-[#44474E]"
+                              />
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                }
 
-            {
-              ( filterState.FieldValue === "Checkin Date" && filterState.operatorValue === "") && 
-                <input type="date" disabled className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-            }
-            {
-              ( filterState.FieldValue === "Checkin Date" && filterState.operatorValue === "equal to") && 
-                <input type="date" ref = {dataRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-            }
-            {   ( filterState.FieldValue === "Checkin Date" && filterState.operatorValue === "between") && 
-                <>
-                <input type="date" ref={startDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-                <input type="date" ref={endDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-                </>
-            }
+                {
+                    (filterState.FieldValue === "Appointment Date" && filterState.operatorValue === "") && 
+                        <>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                }
+                {
+                  	( filterState.FieldValue === "Appointment Date" && filterState.operatorValue === "equal to") &&
+                    <>
+                      <input type="date" ref = {dataRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                      <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                    </>
+                }
+                {   ( filterState.FieldValue === "Appointment Date" && filterState.operatorValue === "between") && 
+                    <>
+                      <input type="date" ref={startDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                      <input type="date" ref={endDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                    </>
+                }
 
-            {
-              ( filterState.FieldValue === "Checkout Date" && filterState.operatorValue === "") && 
-                <input type="date" disabled className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-            }
-            {
-              ( filterState.FieldValue === "Checkout Date" && filterState.operatorValue === "equal to") && 
-                <input type="date" ref = {dataRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-            }
-            {   ( filterState.FieldValue === "Checkout Date" && filterState.operatorValue === "between") && 
-                <>
-                <input type="date" ref={startDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-                <input type="date" ref={endDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
-                </>
-            }
+                {
+                    (filterState.FieldValue === "Checkin Date" && filterState.operatorValue === "") && 
+                        <>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                }
+                {
+                  	( filterState.FieldValue === "Checkin Date" && filterState.operatorValue === "equal to") &&
+                    <>
+                      <input type="date" ref = {dataRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                      <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                    </>
+                }
+                {   ( filterState.FieldValue === "Checkin Date" && filterState.operatorValue === "between") && 
+                    <>
+                      <input type="date" ref={startDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                      <input type="date" ref={endDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                    </>
+                }
 
-            {
-              filterState.FieldValue  === "Status" &&
-                  <select className='m-0 md:ms-3 px-2 w-36 md:w-40 h-8 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
-                    {
-                      filterState.statusValues.map((i, index) => {
-                        return <option value={i}>
-                          {i}
-                        </option>
-                      }) 
-                    }
-                  </select>
-            }
+                {
+                    (filterState.FieldValue === "Checkout Date" && filterState.operatorValue === "") && 
+                        <>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                }
+                {
+                  	( filterState.FieldValue === "Checkout Date" && filterState.operatorValue === "equal to") &&
+                    <>
+                      <input type="date" ref = {dataRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                      <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                    </>
+                }
+                {   ( filterState.FieldValue === "Checkout Date" && filterState.operatorValue === "between") && 
+                    <>
+                      <input type="date" ref={startDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                      <input type="date" ref={endDateRef} className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-[10px] md:text-[12px] text-center px-4  focus:outline-none  rounded bg-white text-black border-[1px] border-[#44474E]' />
+                    </>
+                }
+
+                {
+                    ( filterState.FieldValue === "Status" && filterState.operatorValue === "") && 
+                        <>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                }
+                {
+                    (filterState.FieldValue  === "Status" && filterState.operatorValue !== "") && (
+                        <>
+                              <select className='m-0 md:ms-3 px-2 w-36 md:w-40 h-8 text-[10px] md:text-[12px] focus:outline-none rounded bg-white text-black border-[1px] border-[#44474E]' ref = {dataRef}>
+                                <option value="" disabled selected>
+                                      Choose value
+                                </option>
+                                {
+                                      filterState.statusValues.map((i, index) => {
+                                        return <option value={i}>
+                                              {i}
+                                        </option>
+                                      }) 
+                                }
+                              </select>
+                              <div className='m-0 md:ms-3 w-36 md:w-40 h-8 mb-2 md:mb-0 text-center px-4 rounded bg-gray-300 border-none text-slate-100'></div>
+                        </>
+                    )
+                }
 
           </div>
 
@@ -571,7 +710,6 @@ function handleFilteredNextPage() {
 					</div>
           </div>
         
-
       </div>
 
       

@@ -803,7 +803,7 @@ function MeditationTimeForm(props) {
             name="general_video"
             value={formData.general_video}
             onChange={handleChange}
-            className='w-[20%] h-10 ms-2 border-[1px] bg-[#FDFBFF] border-black rounded-md'
+            className='w-[20%] h-10 ms-2 border-[1px] bg-[#FDFBFF] text-black border-black rounded-md'
             type='text'
           />
           <label className="h-10 ms-12 flex justify-center items-center p-4 border-2 border-dashed border-gray-800 rounded-lg cursor-pointer hover:bg-gray-50">
@@ -826,7 +826,7 @@ function MeditationTimeForm(props) {
             name="morning_time_from"
             value={formData.morning_time_from}
             onChange={handleChange}
-            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] border-black rounded-md ps-3'
+            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] text-black border-black rounded-md px-3'
             placeholder='From'
             type={!isFocusedMorningFrom ? 'text' : 'time'}
             onFocus={() => setIsFocusedMorningFrom(true)}
@@ -836,7 +836,7 @@ function MeditationTimeForm(props) {
             name="morning_time_to"
             value={formData.morning_time_to}
             onChange={handleChange}
-            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] border-black rounded-md ps-3'
+            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] text-black border-black rounded-md px-3'
             placeholder='To'
             type={!isFocusedMorningTo ? 'text' : 'time'}
             onFocus={() => setIsFocusedMorningTo(true)}
@@ -847,7 +847,7 @@ function MeditationTimeForm(props) {
             name="morning_video"
             value={formData.morning_video}
             onChange={handleChange}
-            className='w-[30%] h-10 ms-2 border-[1px] bg-[#FDFBFF] border-black rounded-md'
+            className='w-[30%] h-10 ms-2 border-[1px] bg-[#FDFBFF] text-black border-black rounded-md'
             type='text'
           />
           <label className="h-10 ms-12 flex justify-center items-center p-4 border-2 border-dashed border-gray-800 rounded-lg cursor-pointer hover:bg-gray-50">
@@ -870,7 +870,7 @@ function MeditationTimeForm(props) {
             name="evening_time_from"
             value={formData.evening_time_from}
             onChange={handleChange}
-            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] border-black rounded-md ps-3'
+            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] text-black border-black rounded-md px-3'
             placeholder='From'
             type={!isFocusedEveningFrom ? 'text' : 'time'}
             onFocus={() => setIsFocusedEveningFrom(true)}
@@ -880,7 +880,7 @@ function MeditationTimeForm(props) {
             name="evening_time_to"
             value={formData.evening_time_to}
             onChange={handleChange}
-            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] border-black rounded-md ps-3'
+            className='w-32 h-10 ms-8 border-[1px] bg-[#FDFBFF] text-black border-black rounded-md px-3'
             placeholder='To'
             type={!isFocusedEveningTo ? 'text' : 'time'}
             onFocus={() => setIsFocusedEveningTo(true)}
@@ -891,7 +891,7 @@ function MeditationTimeForm(props) {
             name="evening_video"
             value={formData.evening_video}
             onChange={handleChange}
-            className='w-[30%] h-10 ms-2 border-[1px] bg-[#FDFBFF] border-black rounded-md'
+            className='w-[30%] h-10 ms-2 border-[1px] bg-[#FDFBFF] text-black border-black rounded-md'
             type='text'
           />
           <label className="h-10 ms-12 flex justify-center items-center p-4 border-2 border-dashed border-gray-800 rounded-lg cursor-pointer hover:bg-gray-50">

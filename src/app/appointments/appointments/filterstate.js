@@ -3,14 +3,15 @@ import { create } from "zustand";
 
 export const useAppointFilterStore = create((set) => ({
 
-  FieldValues :["Appointment Id","Name","Appointment Date","Checkin Date","Checkout Date","Status"],
+  FieldValues :["Appointment Id", "Name", "Appointment Date", "Checkin Date", "Checkout Date", "Status"],
+  
   dateOperator: [
     "equal to",
     "between",
   ],
   stringOperator: ["starts with", "equal to"],
   
-  integerOperator: ["greater than","less than","equal to","not equalto"],
+  integerOperator: ["greater than", "less than", "equal to", "not equalto"],
 
   statusValues: ["Not Arrived", "Checked In", "Checked Out", "Completed"],
 
