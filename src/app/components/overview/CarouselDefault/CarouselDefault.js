@@ -46,15 +46,15 @@ export default function CarouselDefault() {
     
                             <div className="h-full flex justify-center items-center bg-blue-gray-100">
                                 <div className="w-[35%] h-full flex justify-end items-center pe-5">
-                                    <img className="w-20 h-20 md:w-32 md:h-32 object-cover" src={i.image} alt="" />
+                                    <img className="w-[90px] h-[90px] md:w-32 md:h-32 object-cover" src={i.image} alt="" />
                                 </div>
                                 <div className="w-[65%] h-full text-left text-[14px] font-bold flex flex-col justify-center">
                                     <div className="flex justify-start h-8 pe-1">
-                                        <h3 className='text-sm md:text-base text-nowrap overflow-hidden'>{i.event_name}</h3>
+                                        <h3 className='text-black text-sm md:text-base text-nowrap overflow-hidden'>{i.event_name}</h3>
                                         <div className="w-20 h-5 ms-3 px-2 text-sm md:text-base bg-[#FF7979] text-white font-normal rounded-xl  flex justify-center items-center">{i.priority}</div>
                                     </div>
                                     <p className="text-[#A4A4A4] text-xs md:text-base">{i.event_description.substring(0,30) + "..." }</p>
-                                    <p className="text-[#1A69A6]">{i.place}</p>
+                                    <p className="text-[#1A69A6] text-xs md:text-base">{i.place}</p>
                                 </div>
                             </div>
                         </Link>

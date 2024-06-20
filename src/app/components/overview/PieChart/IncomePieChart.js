@@ -27,7 +27,7 @@ export default function IncomePieChart() {
  
   const dataValues = pieChartData.map((i, index) => {
       return(
-          i.value
+          Math.round(i.value)
       )
   });
  
@@ -78,6 +78,15 @@ export default function IncomePieChart() {
       colors: ["#597EDD", "#26CC7C", "#f59e0b", "#d81b60"],
       legend: {
         show: false,
+      },
+      labels: ["Donation", "Fees", "Dakshina", "Ashram Appointments"], // Custom labels for pie chart
+      tooltip: {
+        enabled: true,
+        y: {
+          formatter: function (val) {
+            return val + "%";
+          },
+        },
       },
     },
   };

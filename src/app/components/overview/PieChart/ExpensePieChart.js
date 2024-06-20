@@ -27,7 +27,7 @@ export default function ExpensePieChart() {
  
   const dataValues = pieChartData.map((i, index) => {
       return(
-          i.value
+          Math.round(i.value)
       )
   });
  
@@ -78,6 +78,15 @@ export default function ExpensePieChart() {
       colors: ["#597EDD", "#f59e0b"],
       legend: {
         show: false,
+      },
+      labels: ["Distribution", "Ashramam Expense"], // Custom labels for pie chart
+      tooltip: {
+        enabled: true,
+        y: {
+          formatter: function (val) {
+            return val + "%";
+          },
+        },
       },
     },
   };
