@@ -58,7 +58,7 @@ function MeditationNotes() {
                     })
                     
                 ) : (
-                    <div className='w-full h-full text-white bg-blue-400 flex justify-center items-center'>
+                    <div className='w-full h-full text-white bg-red-300 flex justify-center items-center'>
                         No priority messages to display
                     </div>
                 )

@@ -79,7 +79,7 @@ export default function ExpensePieChart() {
       legend: {
         show: false,
       },
-      labels: ["Distribution", "Ashramam Expense"], // Custom labels for pie chart
+      labels: ["Distribution", "Ashram Expense"], // Custom labels for pie chart
       tooltip: {
         enabled: true,
         y: {
@@ -129,7 +129,7 @@ export default function ExpensePieChart() {
           </div>
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#f59e0b]"></div>
-              <Link href="" className="text-sm text-black">Ashramam Expense</Link>
+              <Link href="" className="text-sm text-black">Ashram Expense</Link>
           </div>
         </div>
       </CardBody>
