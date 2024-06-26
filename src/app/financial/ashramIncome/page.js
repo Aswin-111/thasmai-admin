@@ -81,7 +81,7 @@ function AshramIncome() {
         } else {
             setFilteredPageNo(prevPageNo => {
                 const newPageNo = prevPageNo - 1;
-                handleSearch(newPageNo);
+                handleClickFind(newPageNo);
                 return newPageNo;
             });
         }
@@ -93,17 +93,17 @@ function AshramIncome() {
         } else {
             setFilteredPageNo(prevPageNo => {
                 const newPageNo = prevPageNo + 1;
-                handleSearch(newPageNo);
+                handleClickFind(newPageNo);
                 return newPageNo;
             });
         }
     };
 
 	function handleSearchedPreviousPage() {
-        if(filteredPageNo <= 1) {
+        if(searchedPageNo <= 1) {
             return;
         } else {
-            setFilteredPageNo(prevPageNo => {
+            setSearchedPageNo(prevPageNo => {
                 const newPageNo = prevPageNo - 1;
                 handleSearch(newPageNo, pageRows);
                 return newPageNo;
@@ -112,10 +112,10 @@ function AshramIncome() {
     };
  
     function handleSearchedNextPage() {
-        if(filteredPageNo >= totalPages ) {
+        if(searchedPageNo >= totalPages ) {
             return;
         } else {
-            setFilteredPageNo(prevPageNo => {
+            setSearchedPageNo(prevPageNo => {
                 const newPageNo = prevPageNo + 1;
                 handleSearch(newPageNo, pageRows);
                 return newPageNo;
@@ -140,7 +140,7 @@ function AshramIncome() {
         }
     };
 
-	async function handleSearch (newPageNo, newRow) {
+	async function handleClickFind (newPageNo, newRow) {
 		try {
 		  	const config = {
 				"DOJ" : "DOJ",
@@ -745,7 +745,7 @@ function AshramIncome() {
               	        className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" 
               	        onClick={() => { 
               	            console.log('clicked');
-              	            handleSearch(1);
+              	            handleClickFind(1);
               	        }}
               	    >
               	        Find

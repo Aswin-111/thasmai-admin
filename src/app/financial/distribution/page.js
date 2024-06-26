@@ -82,7 +82,7 @@ function Distribution() {
         } else {
             setFilteredPageNo(prevPageNo => {
                 const newPageNo = prevPageNo - 1;
-                handleSearch(newPageNo);
+                handleClickFind(newPageNo);
                 return newPageNo;
             });
         }
@@ -94,17 +94,17 @@ function Distribution() {
         } else {
             setFilteredPageNo(prevPageNo => {
                 const newPageNo = prevPageNo + 1;
-                handleSearch(newPageNo);
+                handleClickFind(newPageNo);
                 return newPageNo;
             });
         }
     };
 
 	function handleSearchedPreviousPage() {
-        if(filteredPageNo <= 1) {
+        if(searchedPageNo <= 1) {
             return;
         } else {
-            setFilteredPageNo(prevPageNo => {
+            setSearchedPageNo(prevPageNo => {
                 const newPageNo = prevPageNo - 1;
                 handleSearch(newPageNo, pageRows);
                 return newPageNo;
@@ -113,10 +113,10 @@ function Distribution() {
     };
  
     function handleSearchedNextPage() {
-        if(filteredPageNo >= totalPages ) {
+        if(searchedPageNo >= totalPages ) {
             return;
         } else {
-            setFilteredPageNo(prevPageNo => {
+            setSearchedPageNo(prevPageNo => {
                 const newPageNo = prevPageNo + 1;
                 handleSearch(newPageNo, pageRows);
                 return newPageNo;

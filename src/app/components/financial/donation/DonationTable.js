@@ -45,7 +45,7 @@ function DonationTable(props) {
               style={{ borderRadius: "11px" }}
             >
                 <tr className="">
-					<th className="text-center">Sl. No</th>
+					{/* <th className="text-center">Sl. No</th> */}
                     <th className="text-center">DOJ</th>
                     <th className="text-center">Name</th>
                     <th className="text-center">User Id</th>
@@ -70,7 +70,7 @@ function DonationTable(props) {
                                     key={index}
                                     className="font-medium text-xs text-black my-10 "
                                 >
-								    <td className="text-center">
+								    {/* <td className="text-center">
                                         { 	
 											!props.isFilteredData ? (
 
@@ -82,7 +82,7 @@ function DonationTable(props) {
 
 											)
 										}
-                                    </td>
+                                    </td> */}
                                     <td className="text-center">{ i.DOJ }</td>
                                     <td 
                                         className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"

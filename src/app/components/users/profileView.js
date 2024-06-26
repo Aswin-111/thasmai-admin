@@ -71,7 +71,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
           <div className='w-full md:h-[50%] flex justify-center items-center bg-[#E0E2EC]'>
             {/* <img className='rounded-full h-[180px] w-[180px] border-4 object-cover' src={ (profilePic === "" || profilePic === null)  ? `${profilePic}` : "/admin/profile_dummy.jpeg"} alt='Profile photo' /> */}
                {/* sometimes need to paste " data:image/png;base64, " infront of base64 code */}
-            <img className='w-full h-full object-cover object-center overflow-hidden' src={ (profilePic === "" || profilePic === null)  ? "/admin/profile_dummy.jpeg" : `${profilePic}` } alt='Profile photo' />
+            <img className='w-full h-full object-cover object-center overflow-hidden' src={ (profilePic === "" || !profilePic[0]  || profilePic === null)  ? "/admin/profile_dummy.jpeg" : `${profilePic}` } alt='Profile photo' />
 
           </div>
           <div className='w-full md:h-[50%] p-3 pt-5 text-black'>
