@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* overridden number arrows  */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -17,50 +16,53 @@ input[type=number] {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  /* background-color: #d3d6dd; */
   background-color: #89c0f6;
   border-radius: 2px;
   color: rgb(250, 245, 245);
 }
 
-input[type="time"]::-webkit-calendar-picker-indicator{
-  background-color:#89c0f6;
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background-color: #89c0f6;
   border-radius: 2px;
   color: rgb(250, 245, 245);
 }
 
- 
-.link{
-  border-radius:7px;
+.link {
+  border-radius: 7px;
   text-decoration: none;
 }
 
-/* * :root {
+:root {
   --primary: transparent;
   --secondary: #8686862f;
-} */
+}
 
-*{
-  font-family: "Poppins" ,sans-serif;
-  /* scrollbar-width: thin; */
- /* scrollbar-color: var(--secondary) var(--primary); */
-} 
+* {
+  font-family: "Poppins", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
 
 *::-webkit-scrollbar {
   width: 4px;
-
 }
 
 *::-webkit-scrollbar-track {
   background: var(--primary);
-   border-radius: 5px;
+  border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background-color: var(--secondary);
   border-radius: 14px;
   border: 3px solid var(--primary);
 }
+
+body, html {
+  overflow-x: hidden;
+}
+
+
 
 .rounded-class{
   border-radius: 10px;

@@ -105,10 +105,10 @@ function MeditatorList() {
     };
  
     function handleSearchedPreviousPage() {
-        if(filteredPageNo <= 1) {
+        if(searchedPageNo <= 1) {
             return;
         } else {
-            setFilteredPageNo(prevPageNo => {
+            setSearchedPageNo(prevPageNo => {
                 const newPageNo = prevPageNo - 1;
                 handleSearch(newPageNo, pageRows);
                 return newPageNo;
@@ -117,10 +117,10 @@ function MeditatorList() {
     };
  
     function handleSearchedNextPage() {
-        if(filteredPageNo >= totalPages ) {
+        if(searchedPageNo >= totalPages ) {
             return;
         } else {
-            setFilteredPageNo(prevPageNo => {
+            setSearchedPageNo(prevPageNo => {
                 const newPageNo = prevPageNo + 1;
                 handleSearch(newPageNo, pageRows);
                 return newPageNo;
@@ -228,7 +228,7 @@ function MeditatorList() {
             console.log(textRef.current.value)
  
             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/searchfield?field=${searchRef.current.value}&value=${textRef.current.value}&page=${searchPage}&limit=${rows}`);
-            console.log(response);
+            // console.log(response);
             filterState.setMeditatorsData(response.data.data); 
             setIsSearchedData(true);
             setIsFilteredData(false);
@@ -1327,12 +1327,17 @@ function MeditatorList() {
               	<div className="w-full h-[10%] px-2 py-1 flex justify-between items-center border-t-[1px] border-[#005DB8]">
                    <div>
                         {
-                            !isFilteredData ? (
-                                <p className="text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
-                            ) : (
-                                <p className="text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
-                            )
-                        }
+                      	  ( !isFilteredData && !isSearchedData ) &&
+                      	    <p className="text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
+                      	}
+						{
+                        	(!isSearchedData && isFilteredData) &&
+							<p className="text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
+						}
+						{
+                        	(!isFilteredData && isSearchedData) &&
+							<p className="text-sm text-gray-500">Page { searchedPageNo } of { totalPages }</p>
+						}
                     </div>
  
                     {

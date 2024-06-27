@@ -161,10 +161,6 @@ function Mahadhanam() {
         }
     };
  
- 
- 
- 
- 
     
  
 
@@ -1023,7 +1019,7 @@ function Mahadhanam() {
                     <div className="w-full h-[10%] flex items-center">
  
                         <div className="w-[40%] h-full flex items-center">
-                            <select 
+                            {/* <select 
                                 ref = {searchRef}
                                 className="px-2 w-40 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
                             >
@@ -1038,27 +1034,27 @@ function Mahadhanam() {
                                 <option value="phone">Phone</option>
                                 <option value="email">Email</option>
  
-                            </select>
+                            </select> */}
  
-                            <input
+                            {/* <input
                         	    type="text"
                         	    placeholder="Value" ref = {textRef}
                         	    className="placeholder:text-black ms-3 w-40 h-8 text-[12px] text-center bg-[#EEEAEA] text-black px-4  focus:outline-none rounded"
-                        	/>
+                        	/> */}
  
                             <div className="h-full flex items-center">
-                                <img 
+                                {/* <img 
                                     src="/admin/search.png" 
                                     alt="search icon" 
                                     className="w-8 h-8 ms-3 cursor-pointer hover:scale-105"
                                     // onClick={() => {
                                     //     handleSearch(1, pageRows);
                                     // }}
-                                />
+                                /> */}
                             </div>
                         </div>
                         <div className="w-[20%]">
-                            <select name="newRow" id=""
+                            {/* <select name="newRow" id=""
                                 className="px-2 w-20 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
                                 onChange={(event) => {
                                     handleChangeRow(event);
@@ -1068,7 +1064,7 @@ function Mahadhanam() {
                                 <option value="10">10</option>
                                 <option value="20">20</option>
                                 <option value="30">30</option>
-                            </select>
+                            </select> */}
                         </div>
                         <div className="w-[40%] flex items-center justify-between">
                             <div className="w-24 h-8 flex justify-between items-center bg-[#EEEAEA] rounded">

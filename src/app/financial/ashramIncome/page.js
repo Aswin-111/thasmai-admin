@@ -890,7 +890,7 @@ function AshramIncome() {
                         	(!isFilteredData && isSearchedData) &&
 							<p className="text-sm text-gray-500">Page { searchedPageNo } of { totalPages }</p>
 						}
-                    </div>
+                    </div> 
 
                     {/* {
                           !isFilteredData ? (

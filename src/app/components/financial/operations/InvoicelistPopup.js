@@ -48,7 +48,7 @@ function InvoicelistPopup(props) {
 
         <div className="w-full h-[85%] p-4 overflow-scroll">
           <table className="w-full">
-            <thead>
+            <thead className="text-black">
               <tr>
                 <th className="text-start">Date</th>
                 <th className="text-start">Amount</th>
@@ -56,7 +56,7 @@ function InvoicelistPopup(props) {
               </tr>
             </thead>
 
-            <tbody>
+            <tbody className="tetx-black">
               {invoiceData[0] &&
                 invoiceData.map((i, index) => {
                   return (
