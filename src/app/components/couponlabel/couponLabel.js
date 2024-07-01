@@ -12,7 +12,7 @@ function CouponLabel({ coupons }) {
                 <Image src = '/admin/coupon-count.png' className="" width={24} height={24} alt="coupon"/>
             </div>
             <div className="bg-[#5799FD] w-24 h-8 rounded-r-xl font-bold text-white flex justify-center items-center ">
-                { coupons.available_coupons }
+                { coupons.available_coupons } 
             </div>
         </div>
     );
