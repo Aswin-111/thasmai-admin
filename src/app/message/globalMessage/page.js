@@ -5,6 +5,9 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import NavLink from '../navlink/navlink';
 import { useNavbarTextStore } from '../../state/navbar-state';
+import { IoIosArrowDown } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
+import MessageDeletePopUp from '@/app/components/message/globalMessage/MessageDeletePopUp';
 
 function GlobalMessage() {
 
@@ -14,6 +17,9 @@ function GlobalMessage() {
     const [gurujiGlobalMessage, setGurujiGlobalMessage] = useState("");
     const [renderMessageToggle, setRenderMessageToggle] = useState(false);
     const [isBtnDisabled, setIsBtnDiasabled] = useState(false);
+    const [isDropDownToggle, setIsDropDownToggle] = useState(false);
+    const [isDeleteMessageToggle ,setIsDeleteMessageToggle] = useState(false);
+    const [selectedMessageId, setSelectedMessageId] = useState("");
 
     // console.log(gurujiGlobalMessage);
 
@@ -129,7 +135,35 @@ function GlobalMessage() {
                                             Thasmai Guruji
                                             <time className="text-xs opacity-50">12:46</time>
                                         </div> */}
-                                        <div className="chat-bubble bg-[#DDC2A1] text-[#312411]">{ i.message }</div>
+                                        <div className="chat-bubble bg-[#DDC2A1] text-[#312411] flex justify-center items-center">
+                                            { i.message } 
+                                            
+                                            <div className='relative'>
+                                                <div className='ms-2 hover:text-gray-500 '
+                                                    onClick={()=>{
+                                                        setIsDropDownToggle(prevVal => !prevVal)
+                                                        setSelectedMessageId(i.id)
+                                                    }}
+                                                >
+                                                    <IoIosArrowDown/>
+                                                    
+                                                 
+                                                </div>
+                                               
+                                                {
+                                                       ( isDropDownToggle && selectedMessageId === i.id) &&  
+                                                         <span className=' h-10 p-2 flex items-center bg-blue-gray-50 absolute -bottom-9 right-0 rounded-lg z-10 hover:text-black '
+                                                            onClick={()=>{
+                                                                setIsDeleteMessageToggle(true)
+                                                                setSelectedMessageId(i.id)
+
+                                                            }}
+                                                         ><MdDelete className='me-2'/>Delete</span>
+    
+                                                    }
+                                            
+                                            </div>
+                                        </div>
                                         <div className="chat-footer">
                                             <time className="text-xs opacity-75 text-black">{ i.messageTime }</time>
                                         </div>
@@ -146,7 +180,34 @@ function GlobalMessage() {
                                             {i.userName}
                                             {/* <time className="text-xs opacity-50">{ i.messageTime }</time> */}
                                         </div>
-                                        <div className="chat-bubble bg-white text-black">{ i.message }</div>
+                                        <div className="chat-bubble bg-white text-black flex justify-center items-center ">
+                                            { i.message } 
+                                            <div className='relative'>
+                                                <div className='ms-2 hover:text-gray-500 '
+                                                    onClick={()=>{
+                                                        setIsDropDownToggle(prevVal => !prevVal)
+                                                        setSelectedMessageId(i.id)
+                                                    }}
+                                                >
+                                                    <IoIosArrowDown/>
+                                                    
+                                                 
+                                                </div>
+                                               
+                                                {
+                                                       ( isDropDownToggle && selectedMessageId === i.id) &&  
+                                                         <span className=' h-10 p-2 flex items-center bg-blue-gray-50 absolute -bottom-9 -right-20 rounded-lg z-10 hover:text-black '
+                                                            onClick={()=>{
+                                                                setIsDeleteMessageToggle(true)
+                                                                setSelectedMessageId(i.id)
+
+                                                            }}
+                                                         ><MdDelete className='me-2'/>Delete</span>
+    
+                                                    }
+                                            
+                                            </div>
+                                        </div>
 
                                         <div className="chat-footer">
                                             <time className="text-xs opacity-75 text-black">{ i.messageDate } at { i.messageTime }</time>
@@ -204,9 +265,22 @@ function GlobalMessage() {
                         Send</button>
                     </div>
                 
-                </div>
+                </div> 
             
             </div>
+
+                        {
+                            isDeleteMessageToggle &&  
+                             <MessageDeletePopUp 
+                                selectedMessageId={selectedMessageId}
+                                setIsDeleteMessageToggle={setIsDeleteMessageToggle}
+                                setSelectedMessageId={setSelectedMessageId}
+                                setIsDropDownToggle={setIsDropDownToggle}
+                                setRenderMessageToggle={setRenderMessageToggle}
+                                
+                            />
+                        }
+
         </div>
     );
 }

@@ -144,7 +144,11 @@ function SideBar() {
                 </Link>
                 
                 <Link href="/events/events">
-                  <li className={`${pathname.startsWith('/events') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Events</li>
+                  <li className={`${pathname.startsWith('/events') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Events / Blogs</li>
+                </Link>
+
+                <Link href="/videos">
+                  <li className={`${pathname.startsWith('/videos') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Videos</li>
                 </Link>
                 {/* <Link href="/analytics">
                   <li className={`${pathname.startsWith('/analytics') ? ' bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`}>Analytics / Insights</li>

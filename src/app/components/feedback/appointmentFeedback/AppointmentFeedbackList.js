@@ -34,19 +34,19 @@ function AppointmentFeedbackList( props) {
     console.log(props.pageNo);
 
     
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/list-all-appointment?page=${props.pageNo}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/appointmentFeedback?page=${props.pageNo}`);
 
     console.log(response);
     props.setTotalPages(response.data.totalPages)
     props.setIsFilteredData(false)
     props.setFilteredPageNo(1)
 
-    const data = response.data.appointments;
-    const filteredData = data.filter((i) => {
-      return i.appointment_status === "Completed";
-    })
+    const data = response.data.feedback;
+    // const filteredData = data.filter((i) => {
+    //   return i.appointment_status === "Completed" && i.rating != null;
+    // })
 
-    feedbackState.setAppointments(filteredData);
+    feedbackState.setAppointments(data);
     
    } catch (error) {
 
@@ -93,7 +93,7 @@ function AppointmentFeedbackList( props) {
             <th className="text-center ">Appoint Id</th>
             <th className="text-center">Username</th>
             <th className="text-center">Rating</th>
-            <th className="text-center">Date</th>
+            {/* <th className="text-center"> Date</th> */}
             <th className="text-center">Feedback</th>
            
           </tr>
@@ -114,7 +114,7 @@ function AppointmentFeedbackList( props) {
                     <td className="text-center">{ i.rating } </td>
                     
     
-                    <td className="text-center">{ i.check_out }</td>
+                    {/* <td className="text-center">{ i.check_out }</td> */}
     
                     <td 
                       className="text-center cursor-pointer flex"

@@ -5,15 +5,15 @@ import NavLink from '../navlink/navlink'
 import { useNavbarTextStore } from '../../state/navbar-state'
 import CouponLabel from '@/app/components/couponlabel/couponLabel'
 import { MdAddCircleOutline } from "react-icons/md";
-import ViewBlogPopUp from '@/app/components/message/blogs/ViewBlogPopUp'
-import EditBlogPopUp from '@/app/components/message/blogs/EditBlogPopUp'
-import DeletePopUp from '@/app/components/message/blogs/DeletePopUp'
+import ViewBlogPopUp from '@/app/components/events/blogs/ViewBlogPopUp'
+import EditBlogPopUp from '@/app/components/events/blogs/EditBlogPopUp'
+import DeletePopUp from '@/app/components/events/blogs/DeletePopUp'
 import { useBlogFilterStore } from "./filterstate";
 import {toast} from 'react-hot-toast';
 import FilterChip from "./filterchips";
 import axios from 'axios';
-import BlogDetailsTable from '@/app/components/message/blogs/blogDetailsTable'
-import AddBlogPopUp from '@/app/components/message/blogs/AddBlogPopUp'
+import BlogDetailsTable from '@/app/components/events/blogs/blogDetailsTable'
+import AddBlogPopUp from '@/app/components/events/blogs/AddBlogPopUp'
 
 
 

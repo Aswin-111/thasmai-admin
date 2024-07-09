@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { useBlogFilterStore } from "@/app/message/blogs/filterstate";
+import { useBlogFilterStore } from "@/app/events/blogs/filterstate";
 import axios from 'axios';
 import { toast } from 'react-hot-toast'
 import { TbEdit } from "react-icons/tb";

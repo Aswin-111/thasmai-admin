@@ -158,11 +158,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useNavbarTextStore } from '../../state/navbar-state';
 import { useLoginStore } from "@/app/loginstate/loginState";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
-import { FaAngleDown, FaAngleRight } from "react-icons/fa";
 import LogoutPopUp from "./LogoutPopUp";
+import { FiLogOut } from "react-icons/fi";
 
 function Navbar() {
-  const [isDropDown, setIsDropDown] = useState(false);
+
   const [isLogoutPopUp, setIsLogoutPopUp] = useState(false);
   const state = useLoginStore(state => state);
 
@@ -246,33 +246,16 @@ function Navbar() {
             <img src="/admin/starlife-logo.png" className="h-10 w-0 md:w-10 rounded-full" />
             <p className="text-[#afafaf]">Thasmai</p>
             <button
-              className="w-6 h-6 text-[#afafaf] text-xl flex justify-center items-center rounded-sm hover:text-white hover:bg-[#dadadae4]"
-              onMouseEnter={() => {
-                setIsDropDown(prevValue => !prevValue);
+              className="w-6 h-6 text-[#e95757] text-xl flex justify-center items-center rounded-sm hover:scale-110"
+              onClick={() => {
+                setIsLogoutPopUp(true);
               }}
-            >
-              {isDropDown ? <FaAngleRight /> : <FaAngleDown />}
+             >  <FiLogOut />
             </button>
           </div>
         </nav>
       </div>
-      {isDropDown && (
-        <div
-          className="w-44 z-10 p-2 bg-white border-[1px] border-[#afafaf] rounded absolute top-[44px] right-[20px] md:right-[40px]"
-          onMouseLeave={() => {
-            setIsDropDown(prevValue => !prevValue);
-          }}
-        >
-          <button
-            className='w-full h-[34px] bg-[#d34b4b] hover:bg-[#d34b4bd2] text-white flex items-center justify-center rounded'
-            onClick={() => {
-              setIsLogoutPopUp(true);
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      )}
+      
 
       {isLogoutPopUp && <LogoutPopUp setIsLogoutPopUp={setIsLogoutPopUp} />}
     </div>

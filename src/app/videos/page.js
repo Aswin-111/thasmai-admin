@@ -1,17 +1,17 @@
 "use client"
 
 import React, { useState } from 'react'
-import NavLink from '../../navlink/navlink'
-import NavLinkApp from '../NavlinkApp/navlinkApp'
+
 import { useNavbarTextStore } from '@/app/state/navbar-state'
 import { BsImage } from "react-icons/bs";
-import Playlist from '@/app/components/configuration/playlist/Playlist'
-import AddVideoPopUp from '@/app/components/configuration/playlist/AddVideoPopUp'
+import Playlist from '@/app/components/videos/playlist/Playlist'
+import AddVideoPopUp from '@/app/components/videos/playlist/AddVideoPopUp'
 import axios from 'axios';
 import { toast } from "react-hot-toast";
-import DeletePlaylistPopUp from '@/app/components/configuration/playlist/DeletePlaylistPopUp'
-import DeleteVideoPopUp from '@/app/components/configuration/playlist/DeleteVideoPopUp'
-import EditVideoPopUp from '@/app/components/configuration/playlist/EditVideoPopUp'
+import DeletePlaylistPopUp from '@/app/components/videos/playlist/DeletePlaylistPopUp'
+import DeleteVideoPopUp from '@/app/components/videos/playlist/DeleteVideoPopUp'
+import EditVideoPopUp from '@/app/components/videos/playlist/EditVideoPopUp'
+import NavLink from './navlink/navlink';
 
 
 function MeditationVideo() {
@@ -27,7 +27,7 @@ function MeditationVideo() {
       head : "",
       category : "",
       videoArray : [],
-      index : ""
+      index : ""    
     })
 
     const [isDeletePlaylistPopup, setIsDeletePlaylistPopup] = useState(false)
@@ -105,12 +105,10 @@ function MeditationVideo() {
   return (
     <div className="w-full h-[85vh] px-7 overflow-y-auto ">
       <div className="w-full flex items-center justify-between ">
-        <NavLink />
+        <NavLink/>
       </div>
-      <div className='w-full'>
-        <NavLinkApp />
-      </div>
-      <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md'>
+      
+      <div className='w-full h-[90%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md'>
           
           <div className='w-full h-[20%] bg-[#E1E2EB] rounded-md'>
               
