@@ -1224,6 +1224,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { PiShareFatLight } from "react-icons/pi";
 import axios from "axios";
 import {toast} from 'react-hot-toast'
+import CouponLabel from '@/app/components/couponlabel/couponLabel';
  
  
  
@@ -1649,14 +1650,17 @@ function Mahadhanam() {
                     <NavLink />
                 </div>
                 <div className="w-[30%] flex ">
-                    <div className="flex h-full">
+
+                    <CouponLabel/>
+
+                    {/* <div className="flex h-full">
                         <div className="bg-[#5799FD] w-16 h-8 rounded-l-xl flex justify-center items-center border-r-4">
                             <Image src = '/admin/coupon-count.png' className="" width={24} height={24} alt="coupon"/>
                         </div>
                         <div className="bg-[#5799FD] w-24 h-8 rounded-r-xl font-bold text-white flex justify-center items-center ">
                             { filterState.couponCount.available_coupons }
                         </div>
-                    </div>
+                    </div> */}
                     {/* <button 
                         className="w-[120px] h-8 ms-3 flex justify-center items-center rounded-full border-2 border-[#19AC65] hover:bg-[#19ac651e]"
                         onClick={handleExport}

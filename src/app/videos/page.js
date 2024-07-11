@@ -37,7 +37,7 @@ function MeditationVideo() {
     
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
-	setNavbarText("Configuration parameters");
+	setNavbarText("Videos");
 
     const handlePlaylistDataChange = (e) => {
         const { name, value } = e.target;

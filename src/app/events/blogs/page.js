@@ -45,7 +45,7 @@ function Blogs() {
   	});
 
 	const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
-	setNavbarText("Message");
+	setNavbarText("Events / Blogs");
 
 
     function handleFieldChange(e) {
