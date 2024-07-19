@@ -107,7 +107,7 @@ function SideBar() {
       console.log("Parsed role:", parsedRole); // Log the parsed role to check its value
       setRole(parsedRole); // Set the role state
     }
-  }, []);
+  }, []); 
 
   // console.log("Current role:", role); // Log the current role state
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import ColumnChart from "@/app/components/overview/ColumnChart/ColumnChart"
 import CarouselDefault from "@/app/components/overview/CarouselDefault/CarouselDefault"
@@ -14,10 +14,22 @@ import { BsToggle2Off,BsToggle2On } from "react-icons/bs";
 
 export default function Overview() {
 
+    const [role, setRole] = useState('');
     const [pieChartToggle , setPieChartToggle] =useState(false)
 
     const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
 	setNavbarText("Overview");
+
+    useEffect(() => {
+        setRole('')
+        let role_text = localStorage.getItem('userdata');
+        console.log("Role from local storage:", role_text); // Log the role_text to check if it's retrieved correctly
+        if (role_text) {
+          const parsedRole = JSON.parse(role_text).role; // Parse the role from the stored userdata
+          console.log("Parsed role:", parsedRole); // Log the parsed role to check its value
+          setRole(parsedRole); // Set the role state
+        }
+      }, []); 
     
 
     return (
@@ -51,11 +63,14 @@ export default function Overview() {
 
 
                 <div className="w-full h-[220px] md:w-[54%] md:h-full ps-4 pe-1 py-2 mb-4 md:m-0 bg-white rounded-xl shadow-md  overflow-y-auto md:overflow-hidden">
-                    <Link href="/message/globalMessage" className="w-full">
-                    <h3 className="h-[15%] font-bold text-black">Meditation Notes</h3>
-                    <div className="comments w-[100%] h-[85%] rounded overflow-y-auto p-1 bg-gray-200 text-white">
-                        <MeditationNotes />
-                    </div>
+                    <Link 
+                        href={(role === 'operator' || role === "Operator") ? "/overview" : "/message/globalMessage"} 
+                        className="w-full"
+                    >
+                        <h3 className="h-[15%] font-bold text-black">Meditation Notes</h3>
+                        <div className="comments w-[100%] h-[85%] rounded overflow-y-auto p-1 bg-gray-200 text-white">
+                            <MeditationNotes />
+                        </div>
                     </Link>
 
                 </div>

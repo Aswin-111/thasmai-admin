@@ -5,7 +5,10 @@ import Link from "next/link";
 
 
 function NavLink() {
-    const pathname = usePathname()
+
+    const pathname = usePathname();
+
+  
 
   return (
     <nav className='w-full h-full flex items-center'>

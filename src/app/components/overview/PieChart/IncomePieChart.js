@@ -21,7 +21,7 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
  
 export default function IncomePieChart() {
  
- 
+  const [role, setRole] = useState('');
  
   const [ pieChartData, setPieChartData ] = useState([]);
  
@@ -37,6 +37,15 @@ export default function IncomePieChart() {
   useEffect(() => {
  
     const fetchData = async () => {
+
+        setRole('')
+        let role_text = localStorage.getItem('userdata');
+        console.log("Role from local storage:", role_text); // Log the role_text to check if it's retrieved correctly
+        if (role_text) {
+          const parsedRole = JSON.parse(role_text).role; // Parse the role from the stored userdata
+          console.log("Parsed role:", parsedRole); // Log the parsed role to check its value
+          setRole(parsedRole); // Set the role state
+        }
  
         try {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/incomePiechart`);
@@ -126,20 +135,32 @@ export default function IncomePieChart() {
           
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#597EDD]"></div>
-              <Link href="financial/donation" className="text-sm text-black">Donation</Link>                 
+              <Link 
+                href={(role === 'operator' || role === "Operator") ? "/overview" : "financial/donation"}
+                className="text-sm text-black"
+              >Donation</Link>                 
           </div>
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#26CC7C]"></div>
-              <Link href="financial/ashramIncome" className="text-sm text-black">Fees</Link>
+              <Link 
+                href={(role === 'operator' || role === "Operator") ? "/overview" : "financial/ashramIncome"}
+                className="text-sm text-black"
+              >Fees</Link>
  
           </div>
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#f59e0b]"></div>
-              <Link href="financial/ashramIncome" className="text-sm text-black">Dakshina</Link>
+              <Link 
+                href={(role === 'operator' || role === "Operator") ? "/overview" : "financial/ashramIncome"} 
+                className="text-sm text-black"
+              >Dakshina</Link>
           </div>
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#d81b60]"></div>
-              <Link href="financial/appointments" className="text-sm text-black">Ashram Appointments</Link>
+              <Link 
+                href={(role === 'operator' || role === "Operator") ? "/overview" : "financial/appointments"} 
+                className="text-sm text-black"
+              >Ashram Appointments</Link>
           </div>
           
         </div>
