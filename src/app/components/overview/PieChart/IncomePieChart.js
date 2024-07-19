@@ -126,20 +126,20 @@ export default function IncomePieChart() {
           
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#597EDD]"></div>
-              <Link href="" className="text-sm text-black">Donation</Link>                 
+              <Link href="financial/donation" className="text-sm text-black">Donation</Link>                 
           </div>
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#26CC7C]"></div>
-              <Link href="" className="text-sm text-black">Fees</Link>
+              <Link href="financial/ashramIncome" className="text-sm text-black">Fees</Link>
  
           </div>
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#f59e0b]"></div>
-              <Link href="" className="text-sm text-black">Dakshina</Link>
+              <Link href="financial/ashramIncome" className="text-sm text-black">Dakshina</Link>
           </div>
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#d81b60]"></div>
-              <Link href="" className="text-sm text-black">Ashram Appointments</Link>
+              <Link href="financial/appointments" className="text-sm text-black">Ashram Appointments</Link>
           </div>
           
         </div>

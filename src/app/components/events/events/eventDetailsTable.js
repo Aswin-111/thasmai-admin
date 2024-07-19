@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast'
 import { TbEdit } from "react-icons/tb";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 
+
 function EventDetailsTable(props) {
 
   const [events, setEvents] = useState([]);

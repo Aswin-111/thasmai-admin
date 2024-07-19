@@ -161,10 +161,10 @@ function EventDetails() {
   	return (
    
     	<div className="w-full h-[85vh] md:px-7 overflow-y-auto">
-      		<div className='flex items-center justify-between'>
+      		<div className='flex items-center justify-between flex-wrap md:flex-nowrap'>
         		<NavLink />
         		<button 
-        		  className="w-[150px] md:w-[180px] h-[32px] md:h-[35px] px-2 bg-green-500 md:bg-[#5799fd] hover:bg-[#5799fdd3] text-white rounded-[6px] text-[10px] md:text-[18px] font-semibold flex items-center justify-center hover:scale-105"
+        		  className="w-[150px] md:w-[180px] h-[32px] md:h-[35px] mt-2 md:mt-0 px-2 bg-green-500 md:bg-[#5799fd] hover:bg-[#5799fdd3] text-white rounded-[6px] text-[10px] md:text-[18px] font-semibold flex items-center justify-center hover:scale-105"
         		  onClick={() => {
         		    setAddEventStatus(true);
         		  }}
@@ -482,7 +482,7 @@ function EventDetails() {
 							onClick={(e) => {
     							if(filterState.FieldValue === "" || filterState.operatorValue === "") {
 									toast("Please choose a field and an operator to filter")
-								} else{
+								} else {
 									if(filterState.operatorValue === "between") {
 										let startDate = startDateRef.current.value;
 										startDate = startDate.split("-");
@@ -564,7 +564,6 @@ function EventDetails() {
 
   										{/* ------------------Fiterchips div ------------------- */}
 
-        		{/* <div className="w-full h-[10%] bg-[#005DB8] overflow-y-auto shadow my-5 grid grid-cols-2 items-center snap-mandatory snap-y py-2"> */}
         		<div className="w-full min-h-20 md:min-h-0 md:h-[10%] my-2 py-2 px-2 bg-[#005DB8] overflow-y-auto shadow flex flex-wrap items-center snap-mandatory snap-y">
 
         		  	{ 

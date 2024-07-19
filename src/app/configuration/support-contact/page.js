@@ -97,7 +97,7 @@ function SupportContact() {
 		  	className='h-[80%] w-28 ms-6 text-white rounded-lg bg-[#5799FD]'
 			onClick={handleSubmit}
 		  >
-			Sumbit
+			Submit
 		  </button>
         </div>
           <SupportContactConfigTable renderTableToggle={renderTableToggle} setRenderTableToggle={ setRenderTableToggle} />

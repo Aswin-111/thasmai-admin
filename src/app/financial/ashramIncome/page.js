@@ -128,13 +128,16 @@ function AshramIncome() {
  
         const newRow = event.target.value;
         if(!isFilteredData && !isSearchedData) {
+            setPageNo(1);
             setPageRows(newRow);
             setTableRowToggle(!tableRowToggle);
             return;
         } else if(!isSearchedData && isFilteredData) {
+            setFilteredPageNo(1);
             setPageRows(newRow);
             handleClickFind(1, newRow);
         } else if(!isFilteredData && isSearchedData) {
+            setSearchedPageNo(1);
             setPageRows(newRow);
             handleSearch(1, newRow);
         }

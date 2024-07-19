@@ -3,7 +3,12 @@
 import React, { useState, useEffect, use } from 'react'
 import { useAdminAppointmentStore } from '@/app/users/ashram-appointments/appointmentState'
 import axios from 'axios'
-import Image from 'next/image'
+import { BsArrowRightCircleFill } from "react-icons/bs";
+import PaymentPopUp from './PaymentPopUp';
+import toast from 'react-hot-toast';
+import { IoMdCloseCircleOutline, IoMdCheckmarkCircleOutline  } from "react-icons/io";
+
+
 
 function ProfileView({ selectedId, UId, setIsViewProfile }) {
 
@@ -14,13 +19,14 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
     const [paymentDetails,setPaymentDetails] = useState([])
     const [zoomDetails,setZoomDetails] = useState([])
     const [meditationLog, setMeditationLog] = useState([])
+    const [feePaymentStatus, setFeePaymentStatus] = useState();
 
     const [isProfile, setIsProfile] = useState(true);
     const [isMeditation, setIsMeditation] = useState(false);
     const [isBank, setIsBank] = useState(false);
     const [isPayment, setIsPayment] = useState(false);
     
-
+    const [paymentToggle, setPaymentToggle] = useState(false);
 
 
     console.log(UId);
@@ -30,25 +36,38 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
       }); 
 
 
-      useEffect(() =>{
+      useEffect(() => {
         fetchData()
         
       }, [])
     
-      async function fetchData(){
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/profiledetails/${UId}`);
-        setProfile(response.data.user);
-        setProfilePic(response.data.profilePic)
-        setMeditationDetails(response.data.meditationData)
-        setBankDetails(response.data.bankDetails)
-        setPaymentDetails(response.data.transactions)
-        setZoomDetails(response.data.zoomrecord)
-        setMeditationLog(response.data.meditationlog)
-        console.log(response.data);
-        // console.log(`${process.env.NEXT_PUBLIC_API_URL}`)
+      async function fetchData() {
+        try {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/profiledetails/${UId}`);
+
+          const resp = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin//check-payment-flag?UId=${UId}`);
+          console.log(resp);
+          setFeePaymentStatus(resp.data.fee_payment_status);
+
+          
+          setProfile(response.data.user);
+          setProfilePic(response.data.profilePic)
+          setMeditationDetails(response.data.meditationData)
+          setBankDetails(response.data.bankDetails)
+          setPaymentDetails(response.data.transactions)
+          setZoomDetails(response.data.zoomrecord)
+          setMeditationLog(response.data.meditationlog)
+          console.log(response.data);
+          
+        } catch (error) {
+          toast.error(error.message);
+        }
+
+        
+        
         return;
     
-      }
+      };
  
      
 
@@ -333,43 +352,88 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
 
             {
               isPayment && 
-              <div className='w-full h-full overflow-y-auto'>
-                <table className='w-full text-black'>
-                  <thead>
-                    <tr className='h-[40px] text-sm md:text-base'>
-                      {/* <th className='w-[20%] text-left'>UID</th> */}
-                      <th className='w-[35%] text-left'>Payment Date</th>
-                      <th className='w-[35%] text-center'>Payment Time</th>
-                      <th className='w-[30%] text-center'>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      paymentDetails.map((payment, index) => {
-                        let paymentDate = payment.payment_date.split(" ");
-                        // console.log("Payment Date", paymentDate);
-                        return (
-                          <tr key={index} className='h-[40px] text-sm md:text-base'>
-                            {/* <td className='text-left'>{payment.UId}</td> */}
-                            <td className='text-left'>{ paymentDate[0] }</td>
-                            <td className='text-center'>{payment.payment_time}</td>
-                            <td className='text-center'>{payment.amount}</td>
-                          </tr>
-                        )
-                      })
-                    }
-                  </tbody>
-                </table>
+              <div className='w-full h-full'>
+
+                <div className='w-full h-[80%] overflow-y-auto'>
+                  <table className='w-full text-black'>
+                    <thead>
+                      <tr className='h-[40px] text-sm md:text-base'>
+                        {/* <th className='w-[20%] text-left'>UID</th> */}
+                        <th className='w-[35%] text-left'>Payment Date</th>
+                        <th className='w-[35%] text-center'>Payment Time</th>
+                        <th className='w-[30%] text-center'>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      { 
+                        paymentDetails[0] &&
+                        paymentDetails.map((payment, index) => {
+                          let paymentDate = payment.payment_date ? payment.payment_date.split(" ") : "";
+                          // console.log("Payment Date", paymentDate);
+                          return (
+                            <tr key={index} className='h-[40px] text-sm md:text-base'>
+                              {/* <td className='text-left'>{payment.UId}</td> */}
+                              <td className='text-left'>{ paymentDate[0] }</td>
+                              <td className='text-center'>{payment.payment_time}</td>
+                              <td className='text-center'>{payment.amount}</td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
+
+                </div>
+ 
+                <div className='w-full h-[20%] p-2 border-t-2 border-white'>
+                  {
+                    !feePaymentStatus ? (
+                      <>
+                            <div className='w-full flex flex-col md:flex-row gap-2 md:gap-x-6'>
+                              <p className='text-left flex items-center'>
+                                Class Attented : 
+                                <IoMdCheckmarkCircleOutline  className='ms-2 text-3xl text-teal-500' />
+                              </p>
+                              <p className='text-left flex items-center'>
+                                Payment :
+                                <IoMdCloseCircleOutline className='ms-2 text-3xl text-red-500' />
+                              </p>
+                            </div>
+                            
+                            <div className='w-full flex items-center mt-2'>
+                              <p className='text-black text-sm md:text-base'>Make payment for this meditator true?</p>
+                              <button 
+                                className='size-6 ms-3 text-teal-500'
+                                onClick={() => {
+                                  setPaymentToggle(true);
+                                }}
+                              >
+                                <BsArrowRightCircleFill className='text-2xl hover:text-3xl' />
+                              </button>
+                            </div>
+                        
+                      </>
+                    ) : (
+                      <>
+                        <div className='w-full flex flex-col md:flex-row gap-2 md:gap-x-6'>
+                          <p className='text-left flex items-center'>
+                            Class Attented 
+                            <IoMdCheckmarkCircleOutline  className='ms-2 text-3xl text-teal-500' />
+                          </p>
+                          <p className='text-left flex items-center'>
+                            Payment
+                            <IoMdCheckmarkCircleOutline className='ms-2 text-3xl text-teal-500' />
+                          </p>
+                        </div>
+                        
+                      </>
+                    )
+                  }
+                  
+                </div>
+
               </div>
             }
-
-
-
-
-
-
-            
-
 
 
 
@@ -378,8 +442,11 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
         </div>
 
 
-
       </div>
+
+      {
+        paymentToggle && <PaymentPopUp setPaymentToggle={ setPaymentToggle } profile={ profile } />
+      }
     </div>
   )
 }

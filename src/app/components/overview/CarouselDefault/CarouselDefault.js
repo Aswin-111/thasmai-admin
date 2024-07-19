@@ -44,7 +44,7 @@ export default function CarouselDefault() {
                     return (
                         <Link href="/events/events" className="w-full h-full">
     
-                            <div className="h-full flex justify-center items-center bg-blue-gray-100">
+                            <div className="h-full flex justify-center items-center bg-gray-300">
                                 <div className="w-[35%] h-full flex justify-end items-center pe-5">
                                     <img className="w-[90px] h-[90px] md:w-32 md:h-32 object-cover" src={i.image} alt="" />
                                 </div>

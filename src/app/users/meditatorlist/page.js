@@ -1567,13 +1567,16 @@ function MeditatorList() {
  
         const newRow = event.target.value;
         if(!isFilteredData && !isSearchedData) {
+            setPageNo(1);
             setPageRows(newRow);
             setTableRowToggle(!tableRowToggle);
             return;
         } else if(!isSearchedData && isFilteredData) {
+            setFilteredPageNo(1);
             setPageRows(newRow);
             handleClickFind(1, newRow);
         } else if(!isFilteredData && isSearchedData) {
+            setSearchedPageNo(1);
             setPageRows(newRow);
             handleSearch(1, newRow);
         }
@@ -1593,6 +1596,7 @@ function MeditatorList() {
 				// "Distributed coupon" : "total_distributed_coupons",
 				"Phone" : "phone",
 				"Email" : "email",
+				"Status" : "ban",
 				// "Donation Paid So Far" : "total_donation",
 				// "Latest Donation" : "latest_donation",
 				// "Level" : "Level",
@@ -1670,6 +1674,7 @@ function MeditatorList() {
 			setTotalPages(response.data.pagination.totalPages);
         } catch (error) {
             console.error('Error fetching data:', error);
+            t
         }
     }
  
@@ -1949,6 +1954,7 @@ function MeditatorList() {
             }
         } catch (error) {
             console.error("Error distributing coupons:", error);
+            toast(error.message);
         }
     };
  
@@ -2457,18 +2463,20 @@ function MeditatorList() {
                     	                <option value="" disabled selected>
                     	                      Choose value
                     	                </option>
-                    	                {
+                    	                {/* {
                     	                      filterState.statusValues.map((i, index) => {
                     	                        return <option value={i}>
                     	                              {i}
                     	                        </option>
                     	                      }) 
-                    	                }
+                    	                } */}
+                                        <option value="false">Active</option>
+                                        <option value="true">Banned</option>
                     	              </select>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
                     	    )
-                    	}
+                    	} 
  
               		</div>
  
@@ -2701,7 +2709,7 @@ function MeditatorList() {
                         <select name="newRow" id=""
                             className="px-2 w-20 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
                             onChange={(event) => {
-                                // console.log(e.target.value);
+                                // console.log(event.target.value);
                                 handleChangeRow(event);
                             }}
                         >

@@ -105,9 +105,9 @@ const handleSubmit = async (e) => {
 
   return (
 
-    <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
-        <div className='w-[1000px] h-[550px] bg-[#D9D9D9] rounded'>
-            <div className='w-full h-[10%] px-10 bg-[#5799fd] rounded-t flex items-center justify-between'>
+    <div className="w-screen min-h-screen md:h-screen px-2 py-10 md:p-0 bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
+        <div className='w-full md:w-[1000px] md:h-[550px] bg-[#D9D9D9] rounded'>
+            <div className='w-full h-16 md:h-[10%] px-5 md:px-10 bg-[#5799fd] rounded-t flex items-center justify-between'>
                 <h1 className='text-xl text-white font-bold'>Edit Blog</h1>
                 <button 
                     className='w-8 h-8 rounded bg-blue-600 text-white hover:bg-white hover:text-black'
@@ -116,7 +116,7 @@ const handleSubmit = async (e) => {
                     }}
                 >X</button>
             </div>
-            <div className='w-full h-[90%] px-20 rounded-b'>
+            <div className='w-full md:h-[90%] px-2 md:px-20 py-5 md:py-0 rounded-b'>
                 <div className='w-full h-[15%] flex justify-between items-center'>
                     <input 
                         className='w-full h-[40px] px-2 bg-white text-black rounded border-[2px] border-[rgba(0,0,0,0.36)]' 

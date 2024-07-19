@@ -125,11 +125,11 @@ export default function ExpensePieChart() {
         <div className="w-full md:w-[50%] h-full">
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#58C2D9]"></div>
-              <Link href="" className="text-sm text-black">Distribution</Link>
+              <Link href="financial/distribution" className="text-sm text-black">Distribution</Link>
           </div>
           <div className="m-2 flex items-center ">
               <div className="h-3 w-3 m-2 bg-[#f59e0b]"></div>
-              <Link href="" className="text-sm text-black">Ashram Expense</Link>
+              <Link href="expenses/reports" className="text-sm text-black">Ashram Expense</Link>
           </div>
         </div>
       </CardBody>

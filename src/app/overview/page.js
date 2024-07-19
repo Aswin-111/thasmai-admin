@@ -53,10 +53,11 @@ export default function Overview() {
                 <div className="w-full h-[220px] md:w-[54%] md:h-full ps-4 pe-1 py-2 mb-4 md:m-0 bg-white rounded-xl shadow-md  overflow-y-auto md:overflow-hidden">
                     <Link href="/message/globalMessage" className="w-full">
                     <h3 className="h-[15%] font-bold text-black">Meditation Notes</h3>
-                    </Link>
-                    <div className="comments w-[100%] h-[85%] rounded overflow-y-auto p-1 bg-red-100 text-white">
+                    <div className="comments w-[100%] h-[85%] rounded overflow-y-auto p-1 bg-gray-200 text-white">
                         <MeditationNotes />
                     </div>
+                    </Link>
+
                 </div>
 
 

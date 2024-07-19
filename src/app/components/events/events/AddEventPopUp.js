@@ -375,7 +375,7 @@ function AddEventPopUp(props) {
 
   const [previewImage, setPreviewImage] = useState();
 
-  const [eventData, setEventData] = useState({
+  const [eventData, setEventData] = useState({ 
     event_name: "",
     event_description: "",
     priority: "",

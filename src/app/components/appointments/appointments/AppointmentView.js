@@ -91,9 +91,12 @@ function AppointmentView() {
                                 <div className='flex pt-4'><p className='w-[50%]'>Payment </p><p>: {data.appointment.payment}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>Pay Method </p><p>: {data.appointment.payment_method}</p></div>
                                 <div className='flex pt-4'><p className='w-[50%]'>No.of.peoples </p><p>: {data.appointment.num_of_people}</p></div>
-                                <div className='flex pt-4'>
-                                    <a href={data.appointment.imageUrl} target= "_blank" className='text-blue-500 hover:text-blue-800' > Click here to see the invoice.</a>   
-                                </div>
+                                {
+                                    data.appointment.imageUrl &&
+                                    <div className='flex pt-4'>
+                                        <a href={data.appointment.imageUrl} target= "_blank" className='text-blue-500 hover:text-blue-800 cursor-pointer' > Click here to see the invoice.</a>   
+                                    </div>
+                                }
                             </div>
 
                             <div className='w-full md:w-[50%] mt-4 text-black'>

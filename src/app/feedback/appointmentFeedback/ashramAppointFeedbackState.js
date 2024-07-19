@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 export const useAppointFeedbackStore = create((set) => ({
 
-  FieldValues :["Appointment Id","Name","Appointment Date","Checkout Date","Rating"],
+  FieldValues :["Appointment Id","Name","Rating"],
   dateOperator: [
     "equal to",
     "between",

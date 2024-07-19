@@ -221,7 +221,7 @@ function Navbar() {
               </Link>
               <Link href="/events/events">
                 <li className={`${pathname.startsWith('/events') ? 'bg-[#005DB8] text-white py-3 px-5' : 'py-3 px-5 text-black hover:bg-[#dbeafe]'}`} onClick={handleCloseDrawer}>
-                  Events
+                  Events / Blogs
                 </li>
               </Link>
               <Link href="/expenses/add-expense">

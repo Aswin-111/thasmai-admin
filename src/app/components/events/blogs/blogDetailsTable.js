@@ -45,8 +45,8 @@ function BlogDetailsTable(props) {
   
    
       <table className="table rounded-3xl">
-        <thead className="bg-[#5799FD] text-white sticky top-0 gap-x-20 text-[0.9rem]" style={{ borderRadius: "11px" }}>
-          <tr className="rounded-3xl">
+        <thead className="bg-[#5799FD] sticky top-0">
+          <tr className="min-w-full h-12 text-[10px] md:text-sm text-left bg-[#5799FD] text-white">
             <th className="text-center">Sl. No</th>
             <th className="text-center">Date</th>
             <th className="text-center">Title</th>
@@ -59,7 +59,10 @@ function BlogDetailsTable(props) {
         <tbody className="my-10 text-black">
           {
             filterState.blogsData.map((blog, index) => (
-            <tr key={index + 1}>
+            <tr 
+              key={index + 1}
+              className='text-[10px] md:text-xs'
+            >
 
               <td>{index + 1}</td>
               <td className="text-center">{blog.date}</td>

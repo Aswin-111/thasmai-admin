@@ -41,15 +41,15 @@ function MeditationNotes() {
                         return(
                             <div
                                 // className={(index % 2 === 0) ? "w-full min-h-[80px] bg-red-400 mb-2 rounded flex" : "w-full min-h-[80px] bg-blue-400 mb-2 rounded flex"}
-                                className="w-full min-h-[80px] bg-red-400 mb-2 rounded flex"
+                                className="w-full min-h-[80px] bg-gray-300 mb-2 rounded flex border-gray-400 border-[0.1px]"
                             >
                                 <div className="w-full">
                                     <div className="flex justify-between ps-2 pt-2">
                                         <div className="text-[14px] p-1 font-medium text-blue-700 bg-blue-gray-100 rounded">{note.userName}</div>
-                                        <div className="pe-2 text-[10px] font-normal">{note.messageDate}, {note.messageTime}</div>
+                                        <div className="pe-2 text-[10px] font-normal text-black">{note.messageDate}, {note.messageTime}</div>
                                     </div>
                                     <div className="p-2">
-                                        <p className="text-xs">{ note.message }</p>
+                                        <p className="text-xs text-black">{ note.message }</p>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@ function MeditationNotes() {
                     <div className='w-full h-full text-white bg-red-300 flex justify-center items-center'>
                         No priority messages to display
                     </div>
-                )
+                ) 
             }
 
 
