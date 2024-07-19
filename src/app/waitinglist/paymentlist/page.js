@@ -7,7 +7,7 @@ import {toast} from 'react-hot-toast'
 import axios from "axios";
 import PaymentListTable from "@/app/components/waitinglist/paymentlist/PaymentListTable";
 import UserProfile from "@/app/components/waitinglist/userProfile/UserProfile";
-import PaymentPopUp from "@/app/components/users/PaymentPopUp";
+import PaymentTruePopUp from "@/app/components/waitinglist/paymentlist/PaymentTruePopUp";
 
 
 
@@ -285,7 +285,13 @@ function PaymentList() {
 		    }
 
             {
-              paymentToggle && <PaymentPopUp setPaymentToggle={ setPaymentToggle } profile={ selectedUser } />
+              paymentToggle && 
+                <PaymentTruePopUp 
+                    setPaymentToggle={ setPaymentToggle } 
+                    profile={ selectedUser }
+                    setIsUserDetails={setIsUserDetails}
+                    setTableRowToggle={setTableRowToggle}
+                />
             }
    
 
