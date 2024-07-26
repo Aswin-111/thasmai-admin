@@ -46,7 +46,7 @@ function MeditationTimeConfigTable(props) {
                                 return (
                                     <tr 
                                         key={index}
-                                        className='h-12 text-black ' 
+                                        className='h-12 text-black border-b-[1px] border-[#eeeeee]' 
                                     >
                                         <td className='ps-2'>{ index + 1 }</td>
                                         <td>{ meditationTime.country }</td>

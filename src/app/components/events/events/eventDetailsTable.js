@@ -48,8 +48,8 @@ function EventDetailsTable(props) {
       <table className="table">
         <thead className="bg-[#5799FD] sticky top-0">
           <tr className="min-w-full h-12 text-[10px] md:text-sm text-left bg-[#5799FD] text-white">
-            <th className="text-center">Event Name</th>
             <th className="text-center">Date</th>
+            <th className="text-center">Event Name</th>
             <th className="text-center">Location</th>
             <th className="text-center">Time</th>
             <th className="text-center">Priority</th>
@@ -61,7 +61,8 @@ function EventDetailsTable(props) {
         <tbody className="my-10 text-black">
           {
             filterState.eventsData.map(event => (
-            <tr key={event.id} className='text-[10px] md:text-xs'>
+            <tr key={event.id} className='text-[10px] md:text-xs border-b-[1px] border-[#eeeeee]'>
+              <td className="text-center">{event.date}</td>
               <td 
                 title="View event details"
                 className="text-center font-semibold cursor-pointer hover:text-[#5799FD] hover:scale-105"
@@ -72,7 +73,6 @@ function EventDetailsTable(props) {
               >
                 {event.event_name}
               </td>
-              <td className="text-center">{event.date}</td>
               <td className="text-center">{event.place}</td>
               <td className="text-center">{event.event_time}</td>
               <td className="text-center">{event.priority}</td>

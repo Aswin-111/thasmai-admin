@@ -40,7 +40,7 @@ function ZoomMeet(props) {
                         <th className='w-[] text-start'>To</th>
                         <th className='w-[] text-start'>URL</th>
 
-                        <th className='w-[] text-start'>Edit</th>
+                        <th className='w-[] px-2 text-start'>Delete</th>
                     </tr>
                 </thead>
                 <tbody className='w-full bg-[#F9F9FF] border-b-2 border-[#C1C6D4] text-black'>
@@ -51,7 +51,7 @@ function ZoomMeet(props) {
                                 return (
                                     <tr 
                                         key={index}
-                                        className='h-12' 
+                                        className='h-12 border-b-[1px] border-[#eeeeee]' 
                                     >
                                         <td className='ps-2'>{ index + 1 }</td>
                                         <td>{ zoomMeet.zoomdate }</td>
@@ -60,7 +60,7 @@ function ZoomMeet(props) {
                                         <td className='text-[#7698ef] hover:text-[#005DB8]'>
                                             <a href={ zoomMeet.zoomLink } target="_blank">{ zoomMeet.zoomLink }</a>
                                         </td>
-                                        <td>
+                                        <td className=''>
                                             <RiDeleteBin6Line className='text-2xl cursor-pointer hover:text-red-500'
                                                 onClick={() => {
                                                     props.setZoomMeetId(zoomMeet.id);

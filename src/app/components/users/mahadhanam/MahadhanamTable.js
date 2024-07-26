@@ -183,7 +183,7 @@ function MahadhanamTable({ data, filterState }) {
                             return (
                                 <tr
                                     key={index}
-                                    className="font-medium text-xs bg-white text-black"
+                                    className="font-medium text-xs bg-white text-black border-b-[1px] border-[#eeeeee]"
                                 >
  
                                     <td className="text-center">{ i.DOJ }</td>

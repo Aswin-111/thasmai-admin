@@ -56,7 +56,7 @@ function NewJoineesTable(props) {
                     		return (
                                 <tr
                                     key={index}
-                                    className="font-medium text-xs text-black my-10 "
+                                    className="font-medium text-xs text-black my-10 border-b-[1px] border-[#eeeeee]"
                                 >
 								    {/* <td className="text-center">
                                         { 	
@@ -73,7 +73,7 @@ function NewJoineesTable(props) {
                                     </td> */}
                                     <td className="text-center">{ i.DOJ }</td>
                                     <td 
-                                        className="text-center text-indigo-600 hover:text-indigo-800"
+                                        className="text-center text-black"
                                         // onClick={() => {
                                         //     props.setSelectedUser(i);
                                         //     props.setIsUserDetails(true);

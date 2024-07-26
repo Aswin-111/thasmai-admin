@@ -40,7 +40,7 @@ function OperatorCreationTable(props) {
             <tbody className='text-black'>
                 {   props.operatorData[0] ? (
                     props.operatorData.map((operator, index) => (
-                        <tr key={index} className='h-12 text-black border-[#E0E2EC] border-b-2'>
+                        <tr key={index} className='h-12 text-black border-b-[1px] border-[#eeeeee]'>
                             <td className='w-[10%] ps-2'>{operator.emp_Id}</td>
                             <td className='w-[15%] ps-2'>{operator.dateOfJoining}</td>
                             <td className='w-[20%] ps-2'>

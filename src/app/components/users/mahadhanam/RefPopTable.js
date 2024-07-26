@@ -28,7 +28,7 @@ function RefPopTable({ data, filterState }) {
                             return (
                                 <tr
                                     key={index}
-                                    className="h-12 font-medium text-xs bg-white text-black"
+                                    className="h-12 font-medium text-xs bg-white text-black border-b-[1px] border-[#eeeeee]"
                                 >
  
                                     <td className="text-center">{ i.DOJ }</td>

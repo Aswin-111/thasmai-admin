@@ -23,7 +23,7 @@ function ExpenseTable(props) {
                         props.expenseData[0] ? (
                             props.expenseData.map((i,index) => { 
                                 return (
-                                    <tr className='h-12 text-[10px] md:text-xs text-black border-[#E0E2EC] border-b-2' key={index}>
+                                    <tr className='h-12 text-[10px] md:text-xs text-black border-b-[1px] border-[#eeeeee]' key={index}>
                                         <td className='ps-2'>{i.Expense_Date}</td>
                                         <td className='ps-2'>{i.name}</td>
                                         <td className='ps-2'>{i.expenseType}</td>

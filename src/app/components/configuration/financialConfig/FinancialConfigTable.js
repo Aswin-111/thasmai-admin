@@ -95,7 +95,7 @@ function FinancialConfigTable() {
                     parameters[0] ? (
                         parameters.map((data, index) => { 
                             return (
-                                <tr className="font-medium text-xs text-black" key={index}>
+                                <tr className="font-medium text-xs text-black border-b-[1px] border-[#eeeeee]" key={index}>
                                     <td className="text-left ps-5">{data.field}</td>
                                     <td className="text-center text-indigo-600">
                                         {

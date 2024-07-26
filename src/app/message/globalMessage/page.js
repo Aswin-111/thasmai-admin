@@ -377,6 +377,7 @@ function GlobalMessage() {
       minute: '2-digit',
       hour12: true,
     });
+    console.log(formattedDate);
 
     if (gurujiGlobalMessage) {
       try {

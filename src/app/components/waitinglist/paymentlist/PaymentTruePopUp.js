@@ -8,13 +8,44 @@ function PaymentTruePopUp(props) {
     const profile = props.profile;
     console.log(profile);
 
+    
+
     const handlePaymentTrue = async () => {
         const UId = profile.UId;
         console.log(UId);
 
+        
+        const now = new Date();
+      
+        const pad = (num, size) => {
+            let s = "000" + num;
+            return s.substr(s.length - size);
+        };
+      
+        const year = now.getFullYear();
+        const month = pad(now.getMonth() + 1, 2);
+        const day = pad(now.getDate(), 2);
+        const hours = pad(now.getHours(), 2);
+        const minutes = pad(now.getMinutes(), 2);
+        const seconds = pad(now.getSeconds(), 2);
+        const milliseconds = pad(now.getMilliseconds(), 3);
+        const microseconds = pad(now.getMilliseconds() * 1000, 6);
+      
+        const date = `${year}-${month}-${day}`;
+        const time = `${hours}:${minutes}:${seconds}`;
+        const fullTime = `${time}.${milliseconds}`
+        const  payment_date= `${date} ${fullTime}`;
+        const  payment_time= time;
+        console.log(payment_date, payment_time);
+         
+      
+      
         try {
           const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/admin/processPayment`, {
-            UId: UId
+            UId: UId,
+            amount:2500,
+            payment_date: payment_date,
+            payment_time: payment_time,
           });
           console.log(response);
           if(response.data.message) {

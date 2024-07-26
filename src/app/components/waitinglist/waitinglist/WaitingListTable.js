@@ -60,7 +60,7 @@ function WaitingListTable(props) {
                     		return (
                                 <tr
                                     key={index}
-                                    className="font-medium text-xs text-black my-10 "
+                                    className="font-medium text-xs text-black my-10 border-b-[1px] border-[#eeeeee]"
                                 >
 								    {/* <td className="text-center">
                                         { 	

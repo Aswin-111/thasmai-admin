@@ -92,7 +92,7 @@ function SupportContactConfigTable(props) {
           			{
             			developers.map((data, index) => {
               				return (
-                				<tr className="font-semibold text-[0.8rem] text-black my-10 ">
+                				<tr className="font-semibold text-[0.8rem] text-black my-10 border-b-[1px] border-[#eeeeee]">
                   					<td className="text-center ps-5">
                     					{
                     					  	editableId === data.id ? (

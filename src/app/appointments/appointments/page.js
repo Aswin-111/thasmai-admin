@@ -657,6 +657,7 @@ function handleFilteredNextPage() {
 
 
       <div className='w-full h-[80%] mt-2'>
+        
           <AppointmentsTable 
            filterToggle={filterToggle}
            pageNo={pageNo} 

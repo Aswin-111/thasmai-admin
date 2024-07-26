@@ -95,9 +95,9 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
           </div>
           <div className='w-full md:h-[50%] p-3 pt-5 text-black'>
             <p className='mb-4 font-semibold'>{`${profile.first_name}  ${profile.last_name}`}</p>
-            <p className='mb-4'>{ profile.email} </p>
-            <p className='mb-4'>+91 { profile.phone} </p>
-            <p className='mb-4'>Card No: { profile.UId} </p>
+            <p className='mb-4 break-words'>{ profile.email }</p>
+            <p className='mb-4'>+91 { profile.phone }</p>
+            <p className='mb-4'>Card No: { profile.UId }</p>
           </div>
         </div>
 
@@ -128,7 +128,6 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                       setIsBank(false);
                       setIsMeditation(true);
                       setIsPayment(false);
-
                     }}
                 >Meditation</button>
                 <button 
@@ -171,9 +170,9 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
             {
               isProfile && 
                 <>
-                <div className='w-full flex flex-col md:flex-row'>
+                <div className='w-full flex flex-col'>
 
-                  <div className='w-full md:w-[50%] h-full'>
+                  <div className='w-full md:w-[80%] h-full'>
                     <table className='w-full text-black'>
                       <tbody className='text-sm md:text-base'>
                         <tr className='h-[40px]'>
@@ -186,7 +185,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                         </tr>
                         <tr className='h-[40px]'>
                           <td className='w-[35%] text-left'>Email</td>
-                          <td className='w-[65%] text-left'>: {profile.email}</td>
+                          <td className='w-[65%] text-left'><p className='break-words'>: {profile.email}</p></td>
                         </tr>
                         <tr className='h-[40px]'>
                           <td className='w-[35%] text-left'>DOB</td>
@@ -201,7 +200,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                     </table>
                   </div>
 
-                  <div className='w-full md:w-[50%] h-full'>
+                  <div className='w-full md:w-[80%] h-full'>
                     <table className='w-full'>
                       <tbody className='text-black text-sm md:text-base'>
                         <tr className='h-[40px]'>
