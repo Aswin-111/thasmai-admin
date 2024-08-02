@@ -18,7 +18,7 @@ function UserProfile(props) {
             <div className='w-full md:w-[1200px] md:h-[650px] p-2 md:p-5 bg-white rounded flex flex-col md:flex-row relative'>
 
                 <button 
-                      className='h-8 w-8 bg-blue-200 text-2xl absolute right-[5px] top-[5px] hover:bg-blue-700 hover:text-white z-20' 
+                      className='h-8 w-8 bg-blue-200 text-black text-2xl absolute right-[5px] top-[5px] hover:bg-blue-700 hover:text-white z-10' 
                       onClick=  {() => { props.setIsUserDetails(false) }}
                 >x</button>
 
@@ -152,85 +152,3 @@ function UserProfile(props) {
 
 export default UserProfile
 
-
-
-
-
-// DOB
-// : 
-// "12/5/2020"
-// DOJ
-// : 
-// "2024-07-22"
-// UId
-// : 
-// 1
-// UserId
-// : 
-// 1
-// address
-// : 
-// ""
-// ans
-// : 
-// null
-// classAttended
-// : 
-// false
-// country
-// : 
-// "india"
-// district
-// : 
-// ""
-// email
-// : 
-// "ste@gmail.com"
-// expiredDate
-// : 
-// "2029-05-22T08:29:10.000Z"
-// first_name
-// : 
-// "stephy"
-// gender
-// : 
-// "m"
-// isans
-// : 
-// false
-// languages
-// : 
-// "malayalam,english"
-// last_name
-// : 
-// "qwefg"
-// maintanance_fee
-// : 
-// false
-// other
-// : 
-// null
-// password
-// : 
-// "$2b$10$w54Yk.V2/VyRsz.SCs/K7eaddgV0ygzKmhOe4TpjYWMpnaS6XamUG"
-// phone
-// : 
-// "1234"
-// pincode
-// : 
-// 0
-// profilePicUrl
-// : 
-// ""
-// reference
-// : 
-// "social"
-// remark
-// : 
-// "qwert"
-// state
-// : 
-// ""
-// verify
-// : 
-// true

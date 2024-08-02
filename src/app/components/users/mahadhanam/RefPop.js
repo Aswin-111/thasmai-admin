@@ -22,7 +22,7 @@ const RefPop = ({ refUserId }) => {
  
             try {
                 const response= await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/findrefs`, {
-                    id: refUserId
+                    UserId: refUserId
                 })
  
                 setRefDetails([...response.data.refs])

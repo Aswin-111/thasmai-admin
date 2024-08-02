@@ -91,7 +91,7 @@ function OperatorCreation() {
 				<div className='w-full h-[8%] flex items-center'>
     	      		<div className='w-[70%] h-full flex'>
 					    <select 
-    	        	  	 	className='w-[250px] h-full px-2 bg-[#EEEAEA] rounded-xl'
+    	        	  	 	className='w-[250px] h-full px-2 bg-[#EEEAEA] text-black rounded-xl'
 							name='searchField'
 							value={searchData.searchField}
 							onChange={handleSearchChange}
@@ -103,7 +103,7 @@ function OperatorCreation() {
 			  		    </select>
     	      		  	<input 
     	      		  	  	type='text'
-    	      		  	  	className='w-[250px] h-full ms-6 px-2 bg-[#EEEAEA] rounded-xl'
+    	      		  	  	className='w-[250px] h-full ms-6 px-2 bg-[#EEEAEA] text-black rounded-xl'
 					  		placeholder='Values'
 							name='searchValue'
 							value={searchData.searchValue}

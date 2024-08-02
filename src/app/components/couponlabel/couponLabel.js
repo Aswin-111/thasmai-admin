@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
  
  
-function CouponLabel({ coupons }) {
+function CouponLabel({ coupons, fetchToggle }) {
     const [totalCoupons,setTotalCoupons] = useState('')
     useEffect(()=>{
         (async ()=>{
@@ -14,7 +14,7 @@ function CouponLabel({ coupons }) {
         setTotalCoupons(response.data.totalCoupons);
                 
         })()
-    },[])
+    },[fetchToggle])
 
     return (
  

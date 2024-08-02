@@ -15,7 +15,7 @@ function RefPopTable({ data, filterState }) {
                     <th className="text-center">Phone</th>
                     <th className="text-center">Email</th>
                     <th className="text-center">Status</th>
-                    <th className="text-center">Ban</th>
+                    {/* <th className="text-center">Ban</th> */}
  
                 </tr>
             </thead>
@@ -33,7 +33,7 @@ function RefPopTable({ data, filterState }) {
  
                                     <td className="text-center">{ i.DOJ }</td>
                                     <td 
-                                        className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
+                                        className="text-center text-indigo-600"
                                         // onClick={() => {
                                         //     filterState.setRefPopData(i.UId, true);
                                         // }}
@@ -44,8 +44,10 @@ function RefPopTable({ data, filterState }) {
                                     <td className="text-center">{ i.coupons } </td>
                                     <td className="text-center">{ i.phone } </td>
                                     <td className="text-center">{ i.email }</td>
-                                    <td className="text-center">{ i.user_Status }</td>
-                                    <td className="text-center">
+                                    <td className={(i.user_Status === "BANNED" || i.user_Status === "DELETED") ? "text-center text-red-600" : "text-center text-green-600"}>
+                                            { i.user_Status }
+                                    </td>
+                                    {/* <td className="text-center">
                                         <button 
                                             className="w-5 h-5" 
                                             // onClick={() => {
@@ -61,7 +63,7 @@ function RefPopTable({ data, filterState }) {
                                         >
                                             <img src="/admin/ban.png" className={`${i.ban === true ? "mahadhanam-ban" : ""}`}/>
                                         </button>
-                                    </td>
+                                    </td> */}
  
                                 </tr>
                             );
@@ -76,7 +78,7 @@ function RefPopTable({ data, filterState }) {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
+                            {/* <td></td> */}
  
                         </tr>
                     )

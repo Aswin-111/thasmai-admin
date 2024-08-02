@@ -1433,6 +1433,7 @@
 
 
 
+
 "use client";
  
 import React, { useState, useEffect, useRef } from "react";
@@ -1596,7 +1597,7 @@ function MeditatorList() {
 				// "Distributed coupon" : "total_distributed_coupons",
 				"Phone" : "phone",
 				"Email" : "email",
-				"Status" : "ban",
+				"Status" : "user_Status",
 				// "Donation Paid So Far" : "total_donation",
 				// "Latest Donation" : "latest_donation",
 				// "Level" : "Level",
@@ -1653,6 +1654,7 @@ function MeditatorList() {
  
         } catch (error) {
             console.error('Error occurred:', error);
+            // toast.error(error.message);
         } 
     };
  
@@ -1716,31 +1718,58 @@ function MeditatorList() {
  
     async function handleRedeem() {
         try {
-            const couponCount = parseInt(distributeRef.current.value);
-            const uidArray = filterState.meditatorsData.map((item) => item.UId);
-            console.log("uidArray", uidArray);
- 
-            const dl = [];
- 
-            filterState.distributedList.forEach((i) => {
-                dl.push(i);
-            });
-            console.log(dl);
-            localStorage.setItem("redeem", JSON.stringify(dl));
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/redeem`, {
-                coupons: couponCount,
-                UIds: dl,
-            });
- 
-            console.log(response.data, "fbnujk");
-            filterState.setToastData(true, response.data.message);
-            setFetchToggle(!fetchToggle);
-            setTimeout(() => {
-                filterState.setToastData(false);
-            }, 5000);
+
+            if(filterState.distributedList.size > 0 &&  distributeRef.current.value.length > 0) {
+
+                const couponCount = parseInt(distributeRef.current.value);
+                const uidArray = filterState.meditatorsData.map((item) => item.UId);
+                console.log("uidArray", uidArray);
+                
+                const dl = [];
+                
+                filterState.distributedList.forEach((i) => {
+                    dl.push(i);
+                });
+                console.log(dl);
+                localStorage.setItem("redeem", JSON.stringify(dl));
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/redeem`, {
+                    coupons: couponCount,
+                    UIds: dl,
+                });
+            
+                console.log(response.data, "fbnujk");
+                filterState.setToastData(true, response.data.message);
+                setFetchToggle(!fetchToggle);
+                setTimeout(() => {
+                    filterState.setToastData(false);
+                }, 5000);
+
+                filterState.distributedList.clear();
+                distributeRef.current.value = "";
+                
+            } else {
+                if(filterState.distributedList.size === 0 ) {
+                    filterState.SetValidToastData(true,"Select atleast one user")
+                    setTimeout(()=>{
+                      filterState.SetValidToastData(false)
+                    }, 5000)
+                } else if( distributeRef.current.value.length === 0 ) {
+                    filterState.SetValidToastData(true,"Coupon is empty")
+                    setTimeout(()=>{
+                      filterState.SetValidToastData(false)
+                    }, 5000);
+                }
+            }
+            
  
         } catch (error) {
             console.error("Error distributing coupons:", error);
+
+            filterState.SetValidToastData(true, error.response.data.message);
+            setTimeout(()=>{
+              filterState.SetValidToastData(false);
+            }, 5000);
+            
         }
     };
  
@@ -1846,14 +1875,17 @@ function MeditatorList() {
  
                 setTimeout(() => {
                     filterState.setToastData(false);
-                    window.location.reload()
 
                 }, 2000);
  
                 setFetchToggle(!fetchToggle);
+                
+                
+                filterState.distributedList.clear();
+                distributeRef.current.value = "";
  
             } else {
-                console.log(filterState.distributedList,distributeRef.current.value,"apple");
+                console.log(filterState.distributedList, distributeRef.current.value, "apple");
  
                 if(filterState.distributedList.size === 0 ) {
                     filterState.SetValidToastData(true,"Select atleast one user")
@@ -1869,7 +1901,12 @@ function MeditatorList() {
  
             }
         } catch (error) {
-          console.error("Error distributing coupons:", error);
+            console.error("Error distributing coupons:", error);
+
+            filterState.SetValidToastData(true, error.response.data.message);
+            setTimeout(()=>{
+              filterState.SetValidToastData(false)
+            }, 5000);
         }
     };
  
@@ -1936,7 +1973,17 @@ function MeditatorList() {
                     setTimeout(() => {
                         filterState.setToastData(false);
                     }, 5000);
+
+                    filterState.distributedList.clear();
+                    distributeRef.current.value = "";
+
+                } else {
+                    filterState.SetValidToastData(true, "Cannot distribute coupons evenly")
+                    setTimeout(() => {
+                       filterState.SetValidToastData(false)
+                    }, 5000)
                 }
+
             } else {
                 console.log(filterState.distributedList,distributeRef.current.value,"apple")
                 if(filterState.distributedList.size === 0 ) {
@@ -2016,7 +2063,11 @@ function MeditatorList() {
             let template = "";
  
             for (let i = 0; i < JSON.parse(redeemedList).length; i++) {
-                template += `UIds[]=${JSON.parse(redeemedList)[i]}`;
+                template += `UIds[]=${JSON.parse(redeemedList)[i]}&`;
+            }
+            // Remove the trailing '&'
+            if (template.endsWith('&')) {
+                template = template.slice(0, -1);
             }
  
             console.log(template);
@@ -2045,11 +2096,12 @@ function MeditatorList() {
             link.remove();
             window.URL.revokeObjectURL(url);
  
-            filterState.setToastData(true, response.data.message);
+            filterState.setToastData(true, "Data exported successfully");
  
             setTimeout(() => {
                 filterState.setToastData(false);
             }, 5000);
+
         } catch (error) {
             console.error("Error distributing coupons:", error);
         }
@@ -2066,7 +2118,7 @@ function MeditatorList() {
                     <NavLink />
                 </div>
                 <div className="w-[30%] flex ">
-                    <CouponLabel coupons ={filterState.couponCount}/>
+                    <CouponLabel coupons ={filterState.couponCount} fetchToggle={ fetchToggle } />
                     <button 
                         className="w-[120px] h-8 ms-3 flex justify-center items-center rounded-full border-2 border-[#19AC65] hover:bg-[#19ac651e]"
                         onClick={handleExport}
@@ -2470,8 +2522,9 @@ function MeditatorList() {
                     	                        </option>
                     	                      }) 
                     	                } */}
-                                        <option value="false">Active</option>
-                                        <option value="true">Banned</option>
+                                        <option value="ACTIVE">Active</option>
+                                        <option value="BANNED">Banned</option>
+                                        <option value="DELETED">Deleted</option>
                     	              </select>
                     	              <div className='ms-3 w-40 h-8 text-center px-4 rounded bg-[#e0e2ec] border-none text-slate-100"'></div>
                     	        </>
@@ -2745,7 +2798,7 @@ function MeditatorList() {
                             className="w-24 h-8 text-[14px] text-white font-medium rounded bg-[#04AA6D] hover:bg-[#5ae0af]" 
                             onClick={handleAdd}
                         >
-                          Add
+                          Add to cart
                         </button>
  
                         <button 
@@ -2759,8 +2812,8 @@ function MeditatorList() {
  
                 <div className="w-full h-[80%] m-0 p-0 overflow-y-auto">
                     <MeditatorListTable
-                    bantoggle = {bantoggle}
-                    setBanToggle = {setBanToggle}
+                        bantoggle = {bantoggle}
+                        setBanToggle = {setBanToggle}
 						setUserId={ setUserId }
 						setIsViewProfile={ setIsViewProfile }
 						isFilteredData={ isFilteredData } 
@@ -2853,6 +2906,7 @@ function MeditatorList() {
                 <Cart 
                     setCartToggle={filterState.setCartToggle} 
                     fetchToggle={fetchToggle} 
+                    setFetchToggle={setFetchToggle}
                     distributedList={filterState.distributedList}
                 />
         }
@@ -2884,9 +2938,4 @@ function MeditatorList() {
     );
 }
  
-export default MeditatorList;
-
-
-
-
-
+export default MeditatorList; 

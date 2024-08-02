@@ -199,7 +199,12 @@ function MahadhanamTable({ data, filterState }) {
                                     <td className="text-center">{ i.coupons } </td>
                                     <td className="text-center">{ i.phone } </td>
                                     <td className="text-center">{ i.email }</td>
-                                    <td className={i.ban === true ? "text-center text-red-600" : "text-center text-green-600"}>{ i.ban === true ? "Banned" : "Active" }</td>
+                                    {/* <td className={i.ban === true || i.ban === 1 ? "text-center text-red-600" : "text-center text-green-600"}>{ i.ban === true  ? "Banned" : "Active" }</td> */}
+                                    <td className={(i.user_Status === "BANNED" || i.user_Status === "DELETED") ? "text-center text-red-600" : "text-center text-green-600"}>
+                                            {i.user_Status === "BANNED" && "Banned"}
+                                            {i.user_Status === "DELETED" && "Deleted"}
+                                            {i.user_Status === "ACTIVE" && "Active"}
+                                    </td>
                                     
                                     {/* <td className="text-center">
                                         <button 
@@ -219,9 +224,9 @@ function MahadhanamTable({ data, filterState }) {
                                                 }
                                                 })()
                                             }} 
-                                            disabled={ i.ban === true }
+                                            disabled={ i.ban === true || i.ban === 1 }
                                         >
-                                            <img src="/admin/ban.png" className={`${i.ban === true ? "mahadhanam-ban" : ""}`}/>
+                                            <img src="/admin/ban.png" className={`${i.ban === true || i.ban === 1 ? "mahadhanam-ban" : ""}`}/>
                                         </button>
                                     </td> */}
  
@@ -230,7 +235,7 @@ function MahadhanamTable({ data, filterState }) {
                                             <input
                                                 type="checkbox"
                                                 className={filterState.selectAll ? `w-4 h-4 checkbox checkbox-md text-2xl outline-none  focus:outline-none text-[#34d399] border-none shadow-none focus:ring-0 bg-gray-800 opacity-20 checkbox-accent` : `w-4 checkbox-accent h-4 checkbox checkbox-md text-2xl outline-none  focus:outline-none text-[#34d399] border-none shadow-none px-[0.7rem] py-[0.7rem] focus:ring-0 bg-gray-500`}
-                                                disabled={filterState.selectAll}
+                                                disabled={filterState.selectAll || i.user_Status === "DELETED" || i.user_Status === "BANNED"}
                                                 onClick = {(e) => {
                                                     if(e.target.checked) {
                                                         filterState.setDistributedList(i.UId)

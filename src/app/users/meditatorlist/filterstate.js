@@ -46,7 +46,14 @@ export const useFilterStore = create((set) => ({
         });
     }),
  
- 
+    // distributedListUserId: new Set(),
+    // setDistributedListUserId :  (UserId) => set(state => {
+    //     state.distributedList.add(UserId);
+    //     return ({
+    //         distributedList : state.distributedListUserId
+    //     }); 
+    // }),
+
     distributedList : new Set(),
     setDistributedList : (UId) => set(state => {
         state.distributedList.add(UId);
@@ -69,7 +76,7 @@ export const useFilterStore = create((set) => ({
     setCouponCount: (ac, dc) => set(state => {
         console.log(ac,dc,"filterstate line118")
         return ({ 
-            couponCount: {available_coupons : ac, distributed_coupon : dc }
+            couponCount: { available_coupons : ac, distributed_coupon : dc }
         });
     }),
  

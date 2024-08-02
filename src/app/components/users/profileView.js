@@ -19,7 +19,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
     const [paymentDetails,setPaymentDetails] = useState([])
     const [zoomDetails,setZoomDetails] = useState([])
     const [meditationLog, setMeditationLog] = useState([])
-    const [feePaymentStatus, setFeePaymentStatus] = useState();
+    const [feePaymentStatus, setFeePaymentStatus] = useState(true);
 
     const [isProfile, setIsProfile] = useState(true);
     const [isMeditation, setIsMeditation] = useState(false);
@@ -44,12 +44,6 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
       async function fetchData() {
         try {
           const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/profiledetails/${UId}`);
-
-          const resp = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin//check-payment-flag?UId=${UId}`);
-          console.log(resp);
-          setFeePaymentStatus(resp.data.fee_payment_status);
-
-          
           setProfile(response.data.user);
           setProfilePic(response.data.profilePic)
           setMeditationDetails(response.data.meditationData)
@@ -58,6 +52,11 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
           setZoomDetails(response.data.zoomrecord)
           setMeditationLog(response.data.meditationlog)
           console.log(response.data);
+
+
+          // const resp = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin//check-payment-flag?UId=${UId}`);
+          // console.log(resp);
+          // setFeePaymentStatus(resp.data.fee_payment_status);
           
         } catch (error) {
           toast.error(error.message);
@@ -80,7 +79,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
      <div className='w-full md:w-[1200px] md:h-[650px] p-2 md:p-5 bg-white rounded flex flex-col md:flex-row relative'>
 
         <button 
-              className='h-8 w-8 bg-blue-200 text-2xl absolute right-[5px] top-[5px] hover:bg-blue-700 hover:text-white' 
+              className='h-8 w-8 bg-blue-200 text-black text-2xl absolute right-[5px] top-[5px] hover:bg-blue-700 hover:text-white' 
               onClick=  {() => { setIsViewProfile(false) }}
         >x</button>
 
@@ -389,11 +388,11 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                     !feePaymentStatus ? (
                       <>
                             <div className='w-full flex flex-col md:flex-row gap-2 md:gap-x-6'>
-                              <p className='text-left flex items-center'>
+                              <p className='text-left flex items-center text-black'>
                                 Class Attented : 
                                 <IoMdCheckmarkCircleOutline  className='ms-2 text-3xl text-teal-500' />
                               </p>
-                              <p className='text-left flex items-center'>
+                              <p className='text-left flex items-center text-black'>
                                 Payment :
                                 <IoMdCloseCircleOutline className='ms-2 text-3xl text-red-500' />
                               </p>
@@ -415,11 +414,11 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                     ) : (
                       <>
                         <div className='w-full flex flex-col md:flex-row gap-2 md:gap-x-6'>
-                          <p className='text-left flex items-center'>
+                          <p className='text-left flex items-center text-black'>
                             Class Attented 
                             <IoMdCheckmarkCircleOutline  className='ms-2 text-3xl text-teal-500' />
                           </p>
-                          <p className='text-left flex items-center'>
+                          <p className='text-left flex items-center text-black'>
                             Payment
                             <IoMdCheckmarkCircleOutline className='ms-2 text-3xl text-teal-500' />
                           </p>

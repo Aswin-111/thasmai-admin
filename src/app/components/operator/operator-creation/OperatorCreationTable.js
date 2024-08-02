@@ -26,8 +26,8 @@ function OperatorCreationTable(props) {
 
     return (
         <table className='w-full text-sm'>
-            <thead className="sticky top-0">
-                <tr className='h-12 text-left bg-[#005DB8] text-white'>
+            <thead className="sticky top-0 border-none">
+                <tr className='h-12 text-left bg-[#005DB8] text-white border-none'>
                     <th className='w-[10%] ps-2'>Emp Id</th>
                     <th className='w-[15%] ps-2'>DOJ</th>
                     <th className='w-[20%] ps-2'>Name</th>

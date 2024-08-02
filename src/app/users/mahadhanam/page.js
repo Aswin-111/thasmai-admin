@@ -1263,7 +1263,7 @@ function Mahadhanam() {
  
     useEffect(() => {
        fetchData();
-    }, [pageNo, filterToggle, filterState.banToggle]);
+    }, [pageNo, filterToggle, filterState.banToggle, tableRowToggle]);
  
     async function fetchData() {
         try {
@@ -1486,28 +1486,13 @@ function Mahadhanam() {
                         if(j.UId === i) {
                             
                             if(j.coupons >= Number(couponCount) ){
-                            j.coupons = Number(j.coupons) - Number(couponCount)}
-                        
-
-                            
-                            
-                        
-                        
-
-
-
-                        
-
-
-
-                            else{
+                                j.coupons = Number(j.coupons) - Number(couponCount)
+                            } else {
                                 toast.error("Don't have enough coupons")
                             }
                         }
                     });
 
-
-                
 
                     let userAddedData =  filterState.meditatorsData.filter(j => {
                         return j.UId === i
@@ -2330,7 +2315,7 @@ function Mahadhanam() {
                                 className="w-24 h-8 text-[14px] text-white font-medium rounded bg-[#04AA6D] hover:bg-[#5ae0af]" 
                                 onClick={handleAdd}
                             >
-                              Add
+                              Add to cart
                             </button>
  
                             {/* <button 
@@ -2348,7 +2333,7 @@ function Mahadhanam() {
  
  
                   	<div className="w-full h-[10%] px-2 py-1 flex justify-between items-center border-t-[1px] border-[#005DB8]">
-                       <div>
+                       <div className='flex items-center'>
                             {
                                 !isFilteredData ? (
                                     <p className="text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
@@ -2356,6 +2341,19 @@ function Mahadhanam() {
                                     <p className="text-sm text-gray-500">Page { filteredPageNo } of { totalPages }</p>
                                 )
                             }
+
+                            <select name="newRow" id=""
+                                className="ms-3 px-2 w-20 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
+                                onChange={(event) => {
+                                    handleChangeRow(event);
+                                }}
+                            >
+                                <option value="" selected disabled>Rows</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
                         </div>
  
                         {

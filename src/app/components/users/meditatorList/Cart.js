@@ -277,6 +277,7 @@
  
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
  
 function Cart({ setCartToggle, setFetchToggle, fetchToggle, distributedList }) {
  
@@ -394,6 +395,7 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle, distributedList }) {
 
         } catch (error) {
             console.error("Error occurred while removing:", error);
+            // toast.error(error.message);
         }
     };
  
@@ -445,6 +447,8 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle, distributedList }) {
             setCartRemoveToggle(!cartremovetoggle);
         } catch (error) {
             console.error("Error occurred while removing:", error);
+            toast.error(error.response.data.error);
+
         }
     };
  

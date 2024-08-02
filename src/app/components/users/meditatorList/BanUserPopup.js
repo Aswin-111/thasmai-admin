@@ -23,7 +23,7 @@ console.log(props)
                             (async function() {
                                 try{
                                 const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/closeuser`, {
-                                    UserId: props.userId
+                                    UId: props.userId
                                 });
                                 // filterState.setBanToggle(!filterState.banToggle)
                                 

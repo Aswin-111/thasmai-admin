@@ -158,7 +158,7 @@ function UpdateEmployee(props) {
 
 				<div className='w-full h-[20%] bg-white flex items-center'>
 					<div className='w-[50%] h-full p-4'>
-						<p>Employee Name :</p>
+						<p className='text-black'>Employee Name :</p>
 						{
 							!isUpdateClicked ? (
 								<p className='mt-3 text-lg font-medium text-[#005DB8]'>{ data.name }</p>
@@ -177,7 +177,7 @@ function UpdateEmployee(props) {
 
 					</div>
 					<div className='w-[50%] h-full p-4'>
-						<p>Username :</p>
+						<p className='text-black'>Username :</p>
 						{/* {
 							!isUpdateClicked ? (
 								<p className='mt-3 text-lg font-medium text-[#005DB8]'>{ data.username }</p>
@@ -198,7 +198,7 @@ function UpdateEmployee(props) {
 
 				<div className='w-full h-[20%] flex items-center'>
 					<div className='w-[50%] h-full p-4'>
-						<p>Location :</p>
+						<p className='text-black'>Location :</p>
 						{
 							!isUpdateClicked ? (
 								<p className='mt-3 text-lg font-medium text-[#005DB8]'>{ data.location }</p>
@@ -215,7 +215,7 @@ function UpdateEmployee(props) {
 						}
 					</div>
 					<div className='w-[50%] h-full p-4'>
-						<p>Date of Joining :</p>
+						<p className='text-black'>Date of Joining :</p>
 						{
 							!isUpdateClicked ? (
 								<p className='mt-3 text-lg font-medium text-[#005DB8]'>{ data.dateOfJoining }</p>
