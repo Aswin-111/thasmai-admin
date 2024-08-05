@@ -2,7 +2,7 @@
  
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useMahadhanamFilterStore } from "@/app/users/mahadhanam/filterstate";
+import { useMahadhanamFilterStore } from "@/app/users/maha/filterstate";
 import RefPopTable from "./RefPopTable";
 import toast from "react-hot-toast";
  

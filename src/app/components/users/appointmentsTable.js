@@ -137,7 +137,7 @@ useEffect(()=>{
      
                     <td className="text-center flex justify-center">
                       {
-                        appoint.appointment_status === "Checked Out" ? (
+                        (appoint.appointment_status === "Checked Out" && (appoint.discount === "" || appoint.discount === null)) ? (
                           <input 
                             type="number"
                             min="0"
@@ -164,7 +164,7 @@ useEffect(()=>{
      
                     <td className="text-center">
                       {
-                        appoint.appointment_status === "Checked Out" ? (
+                        (appoint.appointment_status === "Checked Out" && (appoint.discount === "" || appoint.discount === null)) ? (
                           <button className=" px-5 py-1 text-white rounded bg-[#10b981] hover:scale-105" 
                             onClick={(e) => {
                               e.preventDefault();

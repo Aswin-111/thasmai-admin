@@ -455,7 +455,7 @@ function  MeditatorListTable(props) {
                                     <td className={(i.user_Status === "BANNED" || i.user_Status === "DELETED") ? "text-center text-red-600" : "text-center text-green-600"}>
                                             {i.user_Status === "BANNED" && "Banned"}
                                             {i.user_Status === "DELETED" && "Deleted"}
-                                            {i.user_Status === "ACTIVE" && "Active"}
+                                            {(i.user_Status === "ACTIVE" || i.user_Status === null) && "Active"}
                                     </td>
 
                                     <td className="text-center">

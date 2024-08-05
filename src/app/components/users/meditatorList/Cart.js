@@ -445,6 +445,8 @@ function Cart({ setCartToggle, setFetchToggle, fetchToggle, distributedList }) {
  
             localStorage.removeItem("meditator_cart");
             setCartRemoveToggle(!cartremovetoggle);
+            toast.success(response.data.message);
+            
         } catch (error) {
             console.error("Error occurred while removing:", error);
             toast.error(error.response.data.error);
