@@ -78,7 +78,7 @@ function ApplicationFeedbackList( props) {
                   > 
 
                     <td className="text-center">{ i.UId }</td>
-                    <td className="text-center text-indigo-600">{ i.username } </td>
+                    <td className="text-center">{ i.username } </td>
                     <td className="text-center">{ i.rating } </td>
                     
     

@@ -7,7 +7,7 @@ import NavLink from "../navlink/navlink";
 import FilterChip from "./filterchips";
 import MahadhanamTable from "@/app/components/users/mahadhanam/MahadhanamTable";
 import MahadhanamCart from "@/app/components/users/mahadhanam/MahadhanamCart";
-import ProfileView from "@/app/components/users/profileView";
+// import ProfileView from "@/app/components/users/profileView";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { PiShareFatLight } from "react-icons/pi";
 import { TbRefresh } from "react-icons/tb";
@@ -15,6 +15,7 @@ import axios from "axios";
 import {toast} from 'react-hot-toast'
 import MahadhanamBan from "@/app/components/users/mahadhanam/MahadhanamBan";
 import MahadhanamCouponLabel from "@/app/components/couponlabel/MahadhanamCouponLabel";
+import MahadhanamRefPop from "@/app/components/users/mahadhanam/MahadhanamRefPop";
 // import data from "./data.json";
 // import BanUserPopup from "@/app/components/users/meditatorList/BanUserPopup";
  
@@ -233,7 +234,7 @@ function Mahadhanam() {
             filteredData[filteredData.length-1].logicaloperator = "null";
             console.log(filteredData);   
  
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/execute-query`, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/mahadhanam-execute-query`, {
                 queryConditions : filteredData,
                 page : newPageNo,
                 pageSize : newRow ? newRow : pageRows,
@@ -1257,7 +1258,10 @@ function Mahadhanam() {
                         <button 
                             className="px-2 w-24 h-8 flex items-center gap-2 text-[14px] focus:outline-none rounded bg-[#4758f4] text-white hover:bg-[#4758f4d4]"
                             onClick={() => {
-                                setCopyTableToggle(prevValue => !prevValue);
+                                // setCopyTableToggle(prevValue => !prevValue);
+                                // setTableRowToggle(prevValue => !prevValue);
+                                // toast.success("Data refreshed successfully");
+                                window.location.reload();
                             }}
                         >
                             Refresh 
@@ -1446,9 +1450,9 @@ function Mahadhanam() {
  
         </div>
  
-		{
+		{/* {
 			isViewProfile && <ProfileView UId={ userId } setIsViewProfile={ setIsViewProfile } />
-		}
+		} */}
  
         {
             filterState.cartToggle  &&
@@ -1480,9 +1484,16 @@ function Mahadhanam() {
           </div>
         </div>
       )}
-{
-    bantoggle && <MahadhanamBan userId={ userId } bantoggle = {bantoggle} setBanToggle = {setBanToggle}/>
-}
+        
+        {
+            bantoggle && <MahadhanamBan userId={ userId } bantoggle = {bantoggle} setBanToggle = {setBanToggle}/>
+        }
+
+
+        {
+            filterState.RefPopData.refPopupToggle && 
+                <MahadhanamRefPop refUserId={filterState.RefPopData.refUserId} />
+        }
   	</div>
     );
 }

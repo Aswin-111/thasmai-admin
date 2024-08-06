@@ -95,8 +95,9 @@ function  MahadhanamTable(props) {
                                     <td
                                         className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
                                         onClick={() => {
-                                            props.setUserId(i.UId);
-                                            props.setIsViewProfile(true);
+                                            // props.setUserId(i.UId);
+                                            // props.setIsViewProfile(true);
+                                            filterState.setRefPopData(i.UserId, true);
                                         }}
                                     >
                                         {i.firstName + " " + i.secondName}
@@ -117,7 +118,7 @@ function  MahadhanamTable(props) {
                                             onClick={() => {
                                                 props.setBanToggle(true);
                                                 props.setUserId(i.UId);
-                                                console.log(i.UserId);
+                                                // console.log(i.UserId);
                                             }}
                                             disabled={i.ban === true || i.ban === 1}
                                         >

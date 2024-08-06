@@ -14,7 +14,7 @@ import { PiShareFatLight } from "react-icons/pi";
 import axios from "axios";
 import {toast} from 'react-hot-toast'
 import data from "./data.json";
-import BanUserPopup from "@/app/components/users/meditatorList/BanUserPopup";
+import MahadhanamBanUserPopup from "@/app/components/users/mahadhanam/MahadhanamBan";
  
  
  
@@ -1210,7 +1210,7 @@ function MeditatorList() {
 						>clear</p>
                     </div>
                     <div className="w-[20%]">
-                        <select name="newRow" id=""
+                        {/* <select name="newRow" id=""
                             className="px-2 w-20 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
                             onChange={(event) => {
                                 // console.log(event.target.value);
@@ -1223,7 +1223,7 @@ function MeditatorList() {
                             <option value="50">50</option>
                             <option value="100">100</option>
 
-                        </select>
+                        </select> */}
                     </div>
                     <div className="w-[40%] flex items-center justify-between">
                         <div className="w-24 h-8 flex justify-between items-center bg-[#EEEAEA] rounded">
@@ -1286,7 +1286,7 @@ function MeditatorList() {
  
  
               	<div className="w-full h-[10%] px-2 py-1 flex justify-between items-center border-t-[1px] border-[#005DB8]">
-                   <div>
+                   <div className="flex items-center gap-2">
                         {
                       	  ( !isFilteredData && !isSearchedData ) &&
                       	    <p className="text-sm text-gray-500">Page { pageNo } of { totalPages }</p>
@@ -1299,6 +1299,20 @@ function MeditatorList() {
                         	(!isFilteredData && isSearchedData) &&
 							<p className="text-sm text-gray-500">Page { searchedPageNo } of { totalPages }</p>
 						}
+                        <select name="newRow" id=""
+                            className="px-2 w-20 h-8 text-[12px] focus:outline-none rounded bg-[#EEEAEA] text-black"
+                            onChange={(event) => {
+                                // console.log(event.target.value);
+                                handleChangeRow(event);
+                            }}
+                        >
+                            <option value="" selected disabled>Rows</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+
+                        </select>
                     </div>
  
                     {
@@ -1383,7 +1397,7 @@ function MeditatorList() {
         </div>
       )}
 {
-    bantoggle && <BanUserPopup userId={ userId } bantoggle = {bantoggle} setBanToggle = {setBanToggle}/>
+    bantoggle && <MahadhanamBanUserPopup userId={ userId } bantoggle = {bantoggle} setBanToggle = {setBanToggle}/>
 }
   	</div>
     );

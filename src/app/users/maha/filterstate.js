@@ -141,19 +141,13 @@ export const useMahadhanamFilterStore = create((set) => ({
         refPopupToggle :false,
         refUserId : 0
       },
-      setRefPopData: (id,refToggle) => set(state => {//console.log(data);
-        return ({RefPopData:{
-          refPopupToggle :refToggle,
+      setRefPopData: (id,refToggle) => set(state => {
+        //console.log(data);
+        return ({ RefPopData: {
+          refPopupToggle : refToggle,
           refUserId : id
- 
- 
- 
- 
- 
- 
- 
- 
-        }}) }),
+        }}) 
+      }),
  
  
  
