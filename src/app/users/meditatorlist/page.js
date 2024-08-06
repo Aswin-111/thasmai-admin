@@ -1226,7 +1226,7 @@ function MeditatorList() {
                         </select> */}
                     </div>
                     <div className="w-[40%] flex items-center justify-between">
-                        <div className="w-24 h-8 flex justify-between items-center bg-[#EEEAEA] rounded">
+                        <div className="w-24 h-8 pe-2 flex justify-between items-center bg-[#EEEAEA] rounded">
                             <input
                                 type="number"
                                 placeholder="Coupons"
