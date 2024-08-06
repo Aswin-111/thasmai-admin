@@ -137,7 +137,7 @@ function Appointments() {
   	};
 
 
-  	async function handleSearch () {
+  	async function handleClickFind (newPageNo) {
     	try {
       		const config = {
         		"Appointment Id": "id",
@@ -187,7 +187,7 @@ function Appointments() {
       
       		const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/appointment-query`, {
         		queryConditions: filteredData, 
-				page :1, 
+				page : newPageNo, 
 				pageSize: 10
       		})
      		console.log(response,"sdfghnbg");
@@ -671,7 +671,7 @@ function Appointments() {
 							className="px-6 h-8 text-[12px] bg-[#005DB8] rounded-xl text-white font-semibold shadow-lg" 
 							onClick={() => { 
 								console.log('clicked');
-								handleSearch();
+								handleClickFind();
 							}}
 						>
 					    	Find
