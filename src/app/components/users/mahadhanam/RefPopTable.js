@@ -31,7 +31,7 @@ function RefPopTable({ data, filterState }) {
                                     className="h-12 font-medium text-xs bg-white text-black border-b-[1px] border-[#eeeeee]"
                                 >
  
-                                    <td className="text-center">{ i.DOJ }</td>
+                                    <td className="text-center">{ i.DOJ ? i.DOJ : "-" }</td>
                                     <td 
                                         className="text-center text-indigo-600"
                                         // onClick={() => {

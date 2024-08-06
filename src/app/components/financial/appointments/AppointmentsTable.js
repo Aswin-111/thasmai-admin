@@ -85,7 +85,7 @@ function AppointmentsTable(props) {
 											)
 										}
                                     </td> */}
-                                    <td className="text-center">{ i.appointmentDate }</td>
+                                    <td className="text-center">{ i.appointmentDate ? i.appointmentDate : "-" }</td>
                                     <td 
                                         className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
                                         onClick={() => {

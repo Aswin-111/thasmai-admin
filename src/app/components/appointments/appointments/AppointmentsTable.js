@@ -156,14 +156,14 @@ function AppointmentsTable(props) {
                   > 
                     
                     <td className="text-center">{appoint.UId} </td>
-                    <td className="text-center">{appoint.register_date} </td>
+                    <td className="text-center">{appoint.register_date ? appoint.register_date : "-"} </td>
                     <td className="text-center text-indigo-600 cursor-pointer hover:scale-110"
                       onClick={()=>{
                         filterState.setprofileViewToggle(true,appoint.UId);
                       }}
                     >{appoint.user_name} </td>
-                    <td className="text-center">{appoint.appointmentDate}</td>
-                    <td className="text-center">{appoint.check_out} </td>
+                    <td className="text-center">{appoint.appointmentDate ? appoint.appointmentDate : "-"}</td>
+                    <td className="text-center">{appoint.check_out ? appoint.check_out : "-"} </td>
                     <td className="text-center flex justify-center">
                       
                       <div className={ appoint.appointment_status === "Not Arrived" && "w-[120px] h-[35px] m-0  text-amber-500 flex justify-center items-cente"

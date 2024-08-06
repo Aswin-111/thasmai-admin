@@ -81,7 +81,7 @@ function DistributionTable(props) {
 											)
 										}
 									</td> */}
-                    		    	<td className="text-center">{ i.DOJ }</td>
+                    		    	<td className="text-center">{ i.DOJ ? i.DOJ : "-" }</td>
                     		    	<td 
 										className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
 										onClick={() => {
