@@ -122,12 +122,12 @@ export default function ExpensePieChart() {
  
       <CardBody className="h-[85%] m-0 p-0 px-2  flex flex-col md:flex-row justify-around items-center">
         {
-          pieChartData[0] ? (
+          dataValues[0] ? (
             <Chart {...chartConfig} />
  
           ) : (
-            <div className="w-32 h-32 flex justify-center items-center">
-              <span className="w-full h-full loading loading-spinner text-[#5799FD]"></span>
+            <div className="w-32 h-32 mb-4 flex justify-center items-center">
+              <span className="w-full h-full loading loading-spinner text-gray-200"></span>
             </div>
           )
         }

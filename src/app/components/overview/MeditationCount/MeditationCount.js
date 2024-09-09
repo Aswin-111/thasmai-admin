@@ -23,8 +23,16 @@ function MeditationCount() {
                   const parsedRole = JSON.parse(role_text).role; // Parse the role from the stored userdata
                   console.log("Parsed role:", parsedRole); // Log the parsed role to check its value
                   setRole(parsedRole); // Set the role state
-                }
-        
+                }   
+
+        };
+    
+        fetchData();
+    }, []);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
             try {
                 const response1 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/this-month`);
                 // console.log(response1);
@@ -33,8 +41,13 @@ function MeditationCount() {
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
+        };
+        fetchData();
+    }, []);
 
 
+    useEffect(() => {
+        const fetchData = async () => {
             try {
                 const response2 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/beneficiaries`);
                 // console.log(response2);
@@ -43,16 +56,27 @@ function MeditationCount() {
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
+        };
+        fetchData();
+    }, []);
 
+
+    useEffect(() => {
+        const fetchData = async () => {
             try {
                 const response3 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/meditation`);
                 // console.log(response3);
-                setTotalMeditatorsCount(response3.data.count);
+                setTotalMeditatorsCount(response3.data.result);
     
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
+        };
+        fetchData();
+    }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
             try {
                 const response4 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/waiting-list`);
                 // console.log(response4.data.list);
@@ -61,9 +85,7 @@ function MeditationCount() {
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-
         };
-    
         fetchData();
     }, []);
     
@@ -79,7 +101,7 @@ function MeditationCount() {
                     <img className="w-full rounded-full" src="/admin/new-joinees.png" alt="" />       
                 </div>
                 <div className="w-[75%] ps-2">
-                    <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ newJoineesCount }</h3>
+                    <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ newJoineesCount ? newJoineesCount : "-" }</h3>
                     <p className="text-[20px] md:text-[16px] text-gray-400 font-medium">New Joinees</p>
                 </div>
             </Link>
@@ -95,7 +117,7 @@ function MeditationCount() {
 
                 </div>
                 <div className="w-[75%] ps-2">
-                    <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ beneficiariesCount }</h3>
+                    <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ beneficiariesCount ? beneficiariesCount : "-" }</h3>
                     <p className="text-[20px] md:text-[16px] text-gray-400 font-medium">Beneficiaries</p>
                 </div>
             </Link>
@@ -110,7 +132,7 @@ function MeditationCount() {
                     <img className="w-[100%]" src="/admin/total-meditators.png" alt="" />   
                 </div>
                 <div className="w-[75%] ps-2">
-                    <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ totalMeditatorsCount }</h3>
+                    <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ totalMeditatorsCount ? totalMeditatorsCount : "-" }</h3>
                     <p className="text-[20px] md:text-[16px] text-gray-400 font-medium">Total Meditators</p>
                 </div>
             </Link>
@@ -125,7 +147,7 @@ function MeditationCount() {
                     <img className="w-[100%]" src="/admin/waiting-list.png" alt="" />    
                 </div>
                 <div className="w-[75%] ps-2">
-                    <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ waitingListCount }</h3>
+                    <h3 className="text-[32px] md:text-[28px] text-black font-medium">{ waitingListCount ? waitingListCount : "-" }</h3>
                     <p className="text-[20px] md:text-[16px] text-gray-400 font-medium">Waiting List</p>
                 </div>
             </Link>

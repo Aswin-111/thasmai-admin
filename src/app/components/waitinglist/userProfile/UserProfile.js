@@ -18,7 +18,7 @@ function UserProfile(props) {
             <div className='w-full md:w-[1200px] md:h-[650px] p-2 md:p-5 bg-white rounded flex flex-col md:flex-row relative'>
 
                 <button 
-                      className='h-8 w-8 bg-blue-200 text-black text-2xl absolute right-[5px] top-[5px] hover:bg-blue-700 hover:text-white z-10' 
+                      className='h-8 w-8 bg-blue-200 text-black text-2xl absolute right-[5px] top-[5px] hover:bg-blue-700 hover:text-white' 
                       onClick=  {() => { props.setIsUserDetails(false) }}
                 >x</button>
 
