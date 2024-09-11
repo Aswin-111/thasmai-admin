@@ -91,7 +91,8 @@ function Page() {
     zoomdate: '',
     zoomStartTime: '',
     zoomStopTime: '',
-    zoomLink: ''
+    zoomLink: '',
+    languages: '',
   });
 
   const [isFocusedZoomFrom, setIsFocusedZoomFrom] = useState(false);
@@ -117,7 +118,7 @@ function Page() {
     e.preventDefault();
 
     // Check if any required field is empty
-    if (!formData.zoomdate || !formData.zoomStartTime || !formData.zoomStopTime || !formData.zoomLink) {
+    if (!formData.zoomdate || !formData.zoomStartTime || !formData.zoomStopTime || !formData.zoomLink || !formData.languages) {
       toast.error('Please fill all the required fields.');
       return;
     }
@@ -141,7 +142,8 @@ function Page() {
         zoomdate: '',
         zoomStartTime: '',
         zoomStopTime: '',
-        zoomLink: ''
+        zoomLink: '',
+        languages:''
       });
       setZoomTableRenderToggle(prevValue => !prevValue);
 
@@ -162,20 +164,35 @@ function Page() {
         <NavLinkApp />
       </div>
       <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md overflow-y-auto'>
-        <div className='w-full h-[20%] bg-[#E1E2EB] rounded-md'>
+        <div className='w-full bg-[#E1E2EB] rounded-md'>
           <p className='text-black font-medium px-2 pt-1'>Create Zoom Meet Link</p>
-          <div className='w-full h-full flex'>
-            <div className='w-[80%] h-full pt-4 flex'>
+          <div className='w-full h-full'>
+            <div className='w-full h-full pt-4 flex flex-wrap gap-2'>
+              <select 
+                name="languages" 
+                id=""
+                className='w-48 h-10 ms-4 p-2 rounded border-[1px] bg-white text-black border-black'
+                value={formData.languages}
+                onChange={handleChange}
+              >
+                <option value="" selected>Select language</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Kannada">Kannada</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Telugu">Telugu</option>
+              </select>
               <input
                 name="zoomdate"
-                className='w-40 h-10 ms-8 p-2 rounded border-[1px] bg-white text-black border-black'
+                className='w-40 h-10 ms-4 p-2 rounded border-[1px] bg-white text-black border-black'
                 type='date'
                 value={formData.zoomdate}
                 onChange={handleChange}
               />
               <input
                 name="zoomStartTime"
-                className='w-32 h-10 ms-8 p-2 rounded border-[1px] bg-white text-black border-black'
+                className='w-32 h-10 ms-4 p-2 rounded border-[1px] bg-white text-black border-black'
                 placeholder='From'
                 type={!isFocusedZoomFrom ? 'text' : 'time'}
                 onFocus={() => setIsFocusedZoomFrom(true)}
@@ -185,7 +202,7 @@ function Page() {
               />
               <input
                 name="zoomStopTime"
-                className='w-32 h-10 ms-8 p-2 rounded border-[1px] bg-white text-black border-black'
+                className='w-32 h-10 ms-4 p-2 rounded border-[1px] bg-white text-black border-black'
                 placeholder='To'
                 type={!isFocusedZoomTo ? 'text' : 'time'}
                 onFocus={() => setIsFocusedZoomTo(true)}
@@ -195,14 +212,14 @@ function Page() {
               />
               <input
                 name="zoomLink"
-                className='w-[300px] h-10 ms-8 p-2 rounded border-[1px] bg-white text-black  border-black'
+                className='w-[400px] h-10 ms-4 p-2 rounded border-[1px] bg-white text-black  border-black'
                 placeholder='Zoom URL'
                 type='text'
                 value={formData.zoomLink}
                 onChange={handleChange}
               />
             </div>
-            <div className='w-[20%] h-full'>
+            <div className='w-full h-full px-6 pb-4 flex justify-end'>
               <button
                 onClick={handleSubmit}
                 className='w-[150px] h-12 ms-8 mt-2 bg-[#6EA5FF] text-white rounded-2xl hover:scale-105 hover:bg-[#629bf7]'

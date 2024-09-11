@@ -38,12 +38,13 @@ function ZoomMeet(props) {
                         <th className='w-[] text-start'>From</th>
 
                         <th className='w-[] text-start'>To</th>
-                        <th className='w-[] text-start'>URL</th>
+                        <th className='w-[] text-start'>Language</th>
+                        <th className='w-[40%] text-start'>URL</th>
 
                         <th className='w-[] px-2 text-start'>Delete</th>
                     </tr>
                 </thead>
-                <tbody className='w-full bg-[#F9F9FF] border-b-2 border-[#C1C6D4] text-black'>
+                <tbody className='w-full bg-[#F9F9FF] border-b-2 border-[#C1C6D4] text-black text-sm'>
 
                     {
                         zoomMeetData[0] ? (
@@ -57,7 +58,8 @@ function ZoomMeet(props) {
                                         <td>{ zoomMeet.zoomdate }</td>
                                         <td>{ zoomMeet.zoomStartTime }</td>
                                         <td>{ zoomMeet.zoomStopTime }</td>
-                                        <td className='text-[#7698ef] hover:text-[#005DB8]'>
+                                        <td>{ zoomMeet.languages }</td>
+                                        <td className='w-[40%] text-[#7698ef] hover:text-[#005DB8]'>
                                             <a href={ zoomMeet.zoomLink } target="_blank">{ zoomMeet.zoomLink }</a>
                                         </td>
                                         <td className=''>
