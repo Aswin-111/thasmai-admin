@@ -126,15 +126,24 @@ const handleEditSubmit = async (e) => {
 
   return (
     <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
-                 <button
+                 {/* <button
                   className="w-8 h-8 m-0 p-0 absolute top-6 right-6 hover:scale-110 text-5xl text-white rotate-45"
                    onClick={() => {
                        props.setEditMeditationTimePopUp(false);
                      }}
                  >+
-                 </button>
+                 </button> */}
            
-                     <div className='w-[1000px] h-[550px] p-8 bg-white rounded text-black '>
+                     <div className='w-[1000px] h-[550px] p-8 bg-white rounded text-black relative'>
+
+                        <button
+                          className="w-8 h-8 m-0 p-0 absolute top-2 right-2 hover:scale-110 text-5xl text-black rotate-45"
+                           onClick={() => {
+                               props.setEditMeditationTimePopUp(false);
+                             }}
+                        >+
+                        </button>
+
                         <p className='text-2xl font-medium'>Country : {edittedData.country}</p>
                         <div>
                           <p className='mt-4 font-bold'>General Video</p>

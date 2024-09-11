@@ -142,15 +142,21 @@ function UpdateEmployee(props) {
 
   return (
     <div className="w-screen h-screen p-5 flex flex-col justify-center items-center absolute top-0 left-0 bg-[#000000d2] backdrop-blur-[1px]">
-        <button
+        {/* <button
                 className="w-8 h-8 m-0 p-0 absolute top-6 right-6 hover:scale-110 text-5xl text-white rotate-45"
                 onClick={() => {
                     props.setUpdateEmployee(false);
                 }}
-        >+</button>
+        >+</button> */}
 
         <div className="w-[60%] h-[90%] bg-white">
-            <div className='w-full h-[10%] bg-[#005DB8]  text-white flex items-center px-10'>
+            <div className='w-full h-[10%] bg-[#005DB8]  text-white flex items-center px-10 relative'>
+				<button
+        		        className="w-8 h-8 m-0 p-0 absolute top-2 right-2 hover:scale-110 text-5xl text-white rotate-45"
+        		        onClick={() => {
+        		            props.setUpdateEmployee(false);
+        		        }}
+        		>+</button>
                 <p className='text-xl'>Update Employee</p>
             </div>
 

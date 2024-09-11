@@ -6,7 +6,10 @@ function DeletePlaylistPopUp(props) {
     
     const handleDelete = async () => {
         
+        
         const playlistId = props.selectedPlaylistId
+        console.log(playlistId);
+
         try {
             const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/delete-video/${playlistId}`);
            

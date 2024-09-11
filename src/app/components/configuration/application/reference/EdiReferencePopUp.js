@@ -80,14 +80,21 @@ function EdiReferencePopUp(props) {
 
   return (
     <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
-        <button
+            {/* <button
                 className="w-8 h-8 m-0 p-0 absolute top-6 right-6 hover:scale-110 text-5xl text-white rotate-45"
+                onClick={() => {
+                    props.setIsEdit(false);
+                }}
+            >+</button> */}
+
+          <div className='w-[1000px] h-[600px] px-10 bg-white relative'>
+            <button
+                className="w-8 h-8 m-0 p-0 absolute top-2 right-2 hover:scale-110 text-5xl text-black rotate-45"
                 onClick={() => {
                     props.setIsEdit(false);
                 }}
             >+</button>
 
-        <div className='w-[1000px] h-[600px] px-10 bg-white'>
             <input 
               type='text'
               name='question'

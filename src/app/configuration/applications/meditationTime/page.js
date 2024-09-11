@@ -55,6 +55,7 @@ function MeditationTime() {
           />
           
       </div>
+      
       {
        editMeditationTimePopUp && 
         <EditMeditationTimePopUp  

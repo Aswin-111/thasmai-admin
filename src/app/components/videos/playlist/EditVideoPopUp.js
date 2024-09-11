@@ -102,15 +102,22 @@ try {
     
         <div className="w-[100vw] h-[100vh] bg-[#000000af] absolute left-0 top-0 flex justify-center items-center">
  
-            <button
+            {/* <button
                 className="w-8 h-8 m-0 p-0 absolute top-6 right-6 hover:scale-110 text-5xl text-white rotate-45"
                 onClick={() => {
                     props.setIsEditVideoPopup(false);
                 }}
             
-            >+</button>
-            <div className='w-[800px] h-[400px] absolute  bg-[#C5D8FF] rounded-xl'>
-                 <p className='text-[#00193B] font-medium text-2xl p-4'>Add Video</p>
+            >+</button> */}
+            <div className='w-[800px] h-[400px]  bg-[#C5D8FF] rounded-xl relative'>
+                <button
+                    className="w-8 h-8 m-0 p-0 absolute top-2 right-2 hover:scale-110 text-5xl text-[#00193B] rotate-45"
+                    onClick={() => {
+                        props.setIsEditVideoPopup(false);
+                    }}
+                
+                >+</button>
+                 <p className='text-[#00193B] font-medium text-2xl p-4'>Edit Video</p>
                  <input
                   className='w-[80%] h-16 mx-16 mt-4 ps-5 rounded-md border-[1px] bg-white text-black border-black placeholder:text-xl placeholder:text-[#44474E]'
                   placeholder='Video Heading' 

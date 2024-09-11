@@ -14,7 +14,7 @@ import { PiShareFatLight } from "react-icons/pi";
 import axios from "axios";
 import {toast} from 'react-hot-toast'
 import data from "./data.json";
-import MahadhanamBanUserPopup from "@/app/components/users/mahadhanam/MahadhanamBan";
+import BanUserPopup from "@/app/components/users/meditatorList/BanUserPopup";
  
  
  
@@ -1396,9 +1396,14 @@ function MeditatorList() {
           </div>
         </div>
       )}
-{
-    bantoggle && <MahadhanamBanUserPopup userId={ userId } bantoggle = {bantoggle} setBanToggle = {setBanToggle}/>
-}
+
+
+        {
+            bantoggle && <BanUserPopup userId={ userId } bantoggle = {bantoggle} setBanToggle = {setBanToggle}/>
+        }
+
+
+
   	</div>
     );
 }

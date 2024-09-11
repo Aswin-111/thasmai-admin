@@ -77,16 +77,23 @@ function ViewBlogPopUp(props) {
 
 
     return (
-        <div className="w-screen h-screen p-5 flex flex-col justify-center items-center absolute top-0 left-0 bg-[#000000d2] backdrop-blur-[1px]">
-            <button
+        <div className="w-screen h-screen p-2 md:p-5 flex flex-col justify-center items-center absolute top-0 left-0 bg-[#000000d2] backdrop-blur-[1px]">
+            {/* <button
                 className="w-8 h-8 m-0 p-0 absolute top-6 right-6 hover:scale-110 text-5xl text-white rotate-45"
                 onClick={() => {
                     props.setIsViewBlog(false);
                 }}
-            >+</button>
+            >+</button> */}
 
             
-            <div className='w-[80%] h-full pt-5 bg-white overflow-scroll'>
+            <div className='w-full md:w-[90%] h-full pt-5 bg-white overflow-scroll relative'>
+                <button
+                    className="w-8 h-8 m-0 p-0 absolute top-2 right-2 hover:scale-110 text-5xl text-black rotate-45"
+                    onClick={() => {
+                        props.setIsViewBlog(false);
+                    }}
+                >+</button>
+
                 <div className='w-full h-[20%] p-4 px-6 border-l-8 border-[#f1bb00]'>
                     <h1 className='w-full text-4xl font-bold text-black'>{ blogData.blog_name }</h1>
                     <p className='mt-2'><i>{ formattedDateString }</i></p>
