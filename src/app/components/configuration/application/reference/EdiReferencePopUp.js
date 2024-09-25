@@ -143,7 +143,15 @@ function EdiReferencePopUp(props) {
               className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-blue-800 outline-none placeholder:text-xl '
               onChange={handleOnChange}
             />
-            <div className='w-full h-[10%] flex justify-end mt-5'>
+            <div className='w-full h-[10%] flex justify-end gap-2 mt-5'>
+                <button 
+                    className='w-[150px] h-[40px] border-2 border-red-500 text-red-500 text-xl font-medium rounded hover:bg-red-50'
+                    onClick={() => {
+                      props.setIsEdit(false);
+                  }}
+                > 
+                    Cancel
+                </button>
                 <button 
                     className='w-[150px] h-[40px] bg-green-600 text-white text-xl font-medium rounded hover:bg-green-700'
                     onClick={handleSubmit}

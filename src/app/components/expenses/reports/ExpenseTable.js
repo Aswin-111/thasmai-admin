@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react'
+import DateFormatter from '../../utils/DateFormatter';
 
 function ExpenseTable(props) {
         // console.log(props.expenseData);
@@ -24,10 +25,12 @@ function ExpenseTable(props) {
                             props.expenseData.map((i,index) => { 
                                 return (
                                     <tr className='h-12 text-[10px] md:text-xs text-black border-b-[1px] border-[#eeeeee]' key={index}>
-                                        <td className='ps-2'>{i.Expense_Date}</td>
+                                        <td className='ps-2'>
+                                            <DateFormatter date={i.Expense_Date}/>
+                                        </td>
                                         <td className='ps-2'>{i.name}</td>
                                         <td className='ps-2'>{i.expenseType}</td>
-                                        <td className='ps-2'>₹ {i.amount}</td>
+                                        <td className='ps-2'>Rs. {i.amount}</td>
                                         <td className='ps-2 text-center'>
                                             <img 
                                                 className="w-8 h-8 mx-auto rounded-md hover:scale-110"

@@ -4,6 +4,7 @@ import React from 'react'
 import toast from 'react-hot-toast';
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { IoMdCloseCircleOutline, IoMdCheckmarkCircleOutline  } from "react-icons/io";
+import DateFormatter from '../../utils/DateFormatter';
 
 
 function UserProfile(props) {
@@ -57,7 +58,7 @@ function UserProfile(props) {
                         </tr>
                         <tr className='h-[40px]'>
                           <td className='w-[35%] text-left'>DOB</td>
-                          <td className='w-[65%] text-left'>: {profile.DOB}</td>
+                          <td className='w-[65%] text-left'>: <DateFormatter date={profile.DOB}/> </td>
                         </tr>
                         <tr className='h-[40px]'>
                           <td className='w-[35%] text-left'>Gender</td>

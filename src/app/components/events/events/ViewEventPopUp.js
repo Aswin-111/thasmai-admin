@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { BsCalendarDateFill } from "react-icons/bs";
 import { MdAccessTimeFilled, MdLocationPin } from "react-icons/md";
+import DateFormatter from '../../utils/DateFormatter';
 
 function ViewEventPopUp(props) {
 
@@ -63,7 +64,7 @@ function ViewEventPopUp(props) {
                     <div className='w-full md:w-[50%]'>
                         <p className='flex items-center mb-2 text-blue-600'>
                             <BsCalendarDateFill className='me-2 text-xl'/>
-                            { eventData.date }
+                            <DateFormatter date={ eventData.date }/>
                         </p>
                         <p className='flex items-center mb-2 text-blue-600'>
                             <MdAccessTimeFilled className='me-2 text-xl'/>

@@ -51,15 +51,15 @@ function MeditationTimeConfigTable(props) {
                                         <td className='ps-2'>{ index + 1 }</td>
                                         <td>{ meditationTime.country }</td>
                                         <td className='text-[#7698ef] hover:text-[#005DB8]'>
-                                        <a href={ meditationTime.general_video } target="_blank">{ meditationTime.general_video }</a>
+                                        <a href={ meditationTime.general_video } target="_blank">Video Link</a>
                                         </td>
                                         <td className='text-[#7698ef] hover:text-[#005DB8]'>
-                                          <a href={ meditationTime.morning_video } target="_blank">{ meditationTime.morning_video }</a>
+                                          <a href={ meditationTime.morning_video } target="_blank">Video Link</a>
                                         </td>
                                         <td>{ meditationTime.morning_time_from }</td>
                                         <td>{ meditationTime.morning_time_to }</td>
                                         <td className='text-[#7698ef] hover:text-[#005DB8]'>
-                                          <a href={ meditationTime.evening_video } target="_blank">{ meditationTime.evening_video }</a>
+                                          <a href={ meditationTime.evening_video } target="_blank">Video Link</a>
                                         </td>
                                         <td>{ meditationTime.evening_time_from }</td>
                                         <td>{ meditationTime.evening_time_to }</td>

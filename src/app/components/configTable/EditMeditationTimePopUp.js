@@ -217,15 +217,25 @@ const handleEditSubmit = async (e) => {
 
                           
                         </div>
-                        <div className=' mt-16 flex justify-center items-center'>
+                        <div className=' mt-16 flex justify-evenly items-center '>
                             <button 
                               type="submit" 
-                              className='h-12 w-[450px]  bg-[#005DB8] hover:bg-[#005cb8d1] text-white rounded-2xl'
+                              className='h-12 w-[350px]  border-2 border-red-500 hover:bg-red-50 text-red-500 rounded-2xl'
+                              onClick={() => {
+                                props.setEditMeditationTimePopUp(false);
+                              }}
+                            >
+                                 Cancel
+                            </button>
+                            <button 
+                              type="submit" 
+                              className='h-12 w-[350px]  bg-[#005DB8] hover:bg-[#005cb8d1] text-white rounded-2xl'
                               onClick={handleEditSubmit}
                             >
                                  Update Meditation Time
                             </button>
-              </div>
+                      </div>
+
                      </div>
 
 

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast'
 import { TbEdit } from "react-icons/tb";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import DateFormatter from '../../utils/DateFormatter';
 
 
 function EventDetailsTable(props) {
@@ -62,7 +63,9 @@ function EventDetailsTable(props) {
           {
             filterState.eventsData.map(event => (
             <tr key={event.id} className='text-[10px] md:text-xs border-b-[1px] border-[#eeeeee]'>
-              <td className="text-center">{event.date}</td>
+              <td className="text-center">
+                <DateFormatter date={event.date}/>
+              </td>
               <td 
                 title="View event details"
                 className="text-center font-semibold cursor-pointer hover:text-[#5799FD] hover:scale-105"

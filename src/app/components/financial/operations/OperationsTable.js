@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import axios from 'axios';
 import { toast } from "react-hot-toast";
 import { useOperationsFilterStore } from "@/app/financial/operations/filterState";
+import DateFormatter from "../../utils/DateFormatter";
 
 function OperationsTable(props) {
 
@@ -86,7 +87,9 @@ function OperationsTable(props) {
 										    	)
 										    }
                                         </td>
-                                        <td className="text-center">{i.dateOfJoining}</td>
+                                        <td className="text-center">
+                                            <DateFormatter date={i.dateOfJoining}/>
+                                        </td>
                                         <td className="text-center text-indigo-600">{i.name} </td>
                                         <td className="text-center text-indigo-600">{i.emp_Id} </td>
                                         <td className="text-center">{i.username} </td>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import DateFormatter from "../../utils/DateFormatter";
 
 function NewJoineesTable(props) {
 
@@ -71,7 +72,7 @@ function NewJoineesTable(props) {
 											)
 										}
                                     </td> */}
-                                    <td className="text-center">{ i.DOJ }</td>
+                                    <td className="text-center"><DateFormatter date={ i.DOJ }/></td>
                                     <td 
                                         className="text-center text-black"
                                         // onClick={() => {

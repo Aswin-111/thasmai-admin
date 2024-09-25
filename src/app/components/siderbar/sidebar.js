@@ -209,7 +209,7 @@ function SideBar() {
                     <li className={`${pathname.startsWith('/expenses') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Financial / Expense</li>
                   </Link>
                   <Link href="/operator/operator-creation">
-                    <li className={`${pathname.startsWith('/operator') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Operator Management</li>
+                    <li className={`${pathname.startsWith('/operator') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>User Management</li>
                   </Link>
                   <Link href="/configuration/financial">
                     <li className={`${pathname.startsWith('/configuration') ? ' bg-[#005DB8] text-white py-2 px-5' : 'py-2 px-5 text-black hover:bg-[#dbeafe]'}`}>Configuration Parameters</li>

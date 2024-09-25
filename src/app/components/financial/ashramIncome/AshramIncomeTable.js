@@ -4,6 +4,7 @@ import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useAshramIncomeFilterStore } from "@/app/financial/ashramIncome/filterState";
+import DateFormatter from "../../utils/DateFormatter";
 
 function AshramIncomeTable(props) {
  
@@ -84,7 +85,7 @@ function AshramIncomeTable(props) {
 											)
 										}
                                     </td> */}
-                                    <td className="text-center">{ i.DOJ ? i.DOJ : "-" }</td>
+                                    <td className="text-center">{ i.DOJ ? <DateFormatter date={i.DOJ}/> : "-" }</td>
                                     <td 
                                         className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
                                         onClick={() => {

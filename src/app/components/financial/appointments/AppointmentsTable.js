@@ -4,6 +4,7 @@ import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useAppointmentsFilterStore } from "@/app/financial/appointments/filterState";
+import DateFormatter from "../../utils/DateFormatter";
 
 function AppointmentsTable(props) {
 
@@ -85,7 +86,7 @@ function AppointmentsTable(props) {
 											)
 										}
                                     </td> */}
-                                    <td className="text-center">{ i.appointmentDate ? i.appointmentDate : "-" }</td>
+                                    <td className="text-center">{ i.appointmentDate ? <DateFormatter date={i.appointmentDate}/> : "-" }</td>
                                     <td 
                                         className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
                                         onClick={() => {

@@ -5,6 +5,7 @@ import React, { useEffect, useRef,useState } from "react";
 import { useAdminAppointmentStore } from "@/app/users/ashram-appointments/appointmentState";
 import axios from "axios";
 import { toast } from 'react-hot-toast'
+import DateFormatter from "../utils/DateFormatter";
 
  
  
@@ -95,7 +96,7 @@ useEffect(()=>{
                   > 
      
                     <td className="text-center">{appoint.UId} </td>
-                    <td className="text-center">{appoint.register_date ? appoint.register_date : "-"} </td>
+                    <td className="text-center">{appoint.register_date ? <DateFormatter date={appoint.register_date}/> : "-"} </td>
                     <td 
                       className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
                       onClick = {() => {
@@ -106,7 +107,7 @@ useEffect(()=>{
                     >
                       {appoint.user_name} 
                     </td>
-                    <td className="text-center">{appoint.appointmentDate}</td>
+                    <td className="text-center"><DateFormatter date={appoint.appointmentDate}/></td>
                     
                     <td 
                       className={

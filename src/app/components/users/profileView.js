@@ -7,6 +7,7 @@ import { BsArrowRightCircleFill } from "react-icons/bs";
 import PaymentPopUp from './PaymentPopUp';
 import toast from 'react-hot-toast';
 import { IoMdCloseCircleOutline, IoMdCheckmarkCircleOutline  } from "react-icons/io";
+import DateFormatter from '../utils/DateFormatter';
 
 
 
@@ -188,7 +189,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                         </tr>
                         <tr className='h-[40px]'>
                           <td className='w-[35%] text-left'>DOB</td>
-                          <td className='w-[65%] text-left'>: {profile.DOB}</td>
+                          <td className='w-[65%] text-left'>: <DateFormatter date={profile.DOB}/></td>
                         </tr>
                         <tr className='h-[40px]'>
                           <td className='w-[35%] text-left'>Gender</td>
@@ -297,7 +298,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                           <tbody>
                             {zoomDetails.map((zoom, index) => (
                               <tr key={index} className='h-[40px]'>
-                                <td className='text-left'>{zoom.zoom_date}</td>
+                                <td className='text-left'><DateFormatter date={zoom.zoom_date}/></td>
                                 <td className='text-left'>{zoom.zoom_time}</td>
                             
                               </tr>
@@ -371,7 +372,7 @@ function ProfileView({ selectedId, UId, setIsViewProfile }) {
                           return (
                             <tr key={index} className='h-[40px] text-sm md:text-base'>
                               {/* <td className='text-left'>{payment.UId}</td> */}
-                              <td className='text-left'>{ paymentDate[0] }</td>
+                              <td className='text-left'><DateFormatter date={ paymentDate[0] }/></td>
                               <td className='text-center'>{payment.payment_time}</td>
                               <td className='text-center'>{payment.amount}</td>
                             </tr>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useAppointFeedbackStore } from '@/app/feedback/appointmentFeedback/ashramAppointFeedbackState'
+import DateFormatter from '../../utils/DateFormatter';
 
 
 function AppointmentFeedbackView() {
@@ -55,7 +56,9 @@ function AppointmentFeedbackView() {
             <div className="w-full h-[85%] p-10 bg-white shadow-md overflow-y-auto">
                 <div className='w-[220px] h-[10%] flex'>
                     <p className='w-[50%] text-[#44474E]'>Date</p>
-                    <p className='w-[50%] font-medium text-black'>: { data.check_out }</p>
+                    <p className='w-[50%] font-medium text-black'>: 
+                        <DateFormatter date={ data.check_out }/>
+                    </p>
                 </div>
                 <div className='w-[220px] h-[10%] flex'>
                     <p className='w-[50%] text-[#44474E]'>Rating</p>

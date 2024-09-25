@@ -171,12 +171,22 @@ const handleSubmit = async (e) => {
                         </div>
                  
                      
+                   <div className='flex md:absolute bottom-0 right-0 gap-2'>
                    <button
-                       className="w-[120px] h-[40px] mb-6 bg-[#ff8710] hover:bg-[#ff8810d1] text-white font-semibold rounded absolute bottom-0 right-0"
+                       className="w-[120px] h-[40px] mb-6 bg-transparent border-2 border-red-500  text-red-500 font-semibold rounded "
+                       onClick={() => {
+                        props.setEditBlog(false);
+                    }}
+                   >
+                       Cancel
+                   </button>
+                   <button
+                       className="w-[120px] h-[40px] mb-6 bg-[#ff8710] hover:bg-[#ff8810d1] text-white font-semibold rounded "
                        onClick={handleSubmit}
                    >
                        Save
                    </button>
+                   </div> 
                 </div>
             </div>
         </div>

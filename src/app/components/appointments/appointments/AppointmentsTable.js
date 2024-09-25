@@ -4,6 +4,7 @@ import { useAppointFilterStore } from "@/app/appointments/appointments/filtersta
 import axios from "axios";
 import moment from 'moment'
 import toast from 'react-hot-toast'
+import DateFormatter from "../../utils/DateFormatter";
 
 
 
@@ -162,8 +163,8 @@ function AppointmentsTable(props) {
                         filterState.setprofileViewToggle(true,appoint.UId);
                       }}
                     >{appoint.user_name} </td>
-                    <td className="text-center">{appoint.appointmentDate ? appoint.appointmentDate : "-"}</td>
-                    <td className="text-center">{appoint.check_out ? appoint.check_out : "-"} </td>
+                    <td className="text-center">{appoint.appointmentDate ? <DateFormatter date={appoint.appointmentDate}/> : "-"}</td>
+                    <td className="text-center">{appoint.check_out ? <DateFormatter date={appoint.check_out}/> : "-"} </td>
                     <td className="text-center flex justify-center">
                       
                       <div className={ appoint.appointment_status === "Not Arrived" && "w-[120px] h-[35px] m-0  text-amber-500 flex justify-center items-cente"

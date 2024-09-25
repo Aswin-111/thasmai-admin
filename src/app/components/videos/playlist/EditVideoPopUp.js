@@ -134,9 +134,17 @@ try {
                   value={videoData.videoLink}
                   onChange={handleVideoDataChange}
                  />
-                 <div className='w-[80%] mt-16 mx-16 flex justify-end'>
+                 <div className='w-[80%]  mt-16 mx-16 flex justify-between '>
                     <button 
-                        className='w-[320px] h-[60px]  bg-[#00193B] text-white text-xl rounded-2xl hover:bg-[#00193bcc]'
+                        className='w-[280px] h-[60px]  border-2 border-[#00193B] text-[#00193B] text-xl rounded-2xl hover:bg-[#00193b34] '
+                        onClick={() => {
+                            props.setIsEditVideoPopup(false);
+                        }}
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        className='w-[280px] h-[60px]  bg-[#00193B] text-white text-xl rounded-2xl hover:bg-[#00193bcc]'
                         onClick={handleUpdateVideo}
                     >
                         Update

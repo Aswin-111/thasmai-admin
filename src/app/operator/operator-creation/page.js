@@ -26,7 +26,7 @@ function OperatorCreation() {
 	// console.log(operatorData);
 
 	const setNavbarText = useNavbarTextStore((state) => state.setNavbarText);
-	setNavbarText("Operator Management");
+	setNavbarText("User Management");
 
 	function handleSearchChange(event) {
         const { name, value } = event.target

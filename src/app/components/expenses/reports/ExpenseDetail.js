@@ -59,6 +59,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import DateFormatter from '../../utils/DateFormatter';
 
 function ExpenseDetail({ selectedId, setIsViewDetail }) {
     const [data, setData] = useState({});
@@ -107,7 +108,7 @@ function ExpenseDetail({ selectedId, setIsViewDetail }) {
 
             <div className="w-full p-5 flex justify-center items-center text-white">
                 <p className="w-full h-full text-center font-bold">
-                    {data.Expense_Date}, {data.expenseType}, ₹ {data.amount}, <span className="font-light">{data.description}</span>
+                    <DateFormatter date={data.Expense_Date}/>, {data.expenseType}, Rs.{data.amount}, <span className="font-light">{data.description}</span>
                 </p>
             </div>
         </div>

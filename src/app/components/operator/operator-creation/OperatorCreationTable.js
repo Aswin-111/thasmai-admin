@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 // import { FaEdit } from "react-icons/fa";
 import { TbEyeEdit } from "react-icons/tb";
 import axios from 'axios';
+import DateFormatter from '../../utils/DateFormatter';
 
 function OperatorCreationTable(props) {
 
@@ -42,7 +43,9 @@ function OperatorCreationTable(props) {
                     props.operatorData.map((operator, index) => (
                         <tr key={index} className='h-12 text-black border-b-[1px] border-[#eeeeee]'>
                             <td className='w-[10%] ps-2'>{operator.emp_Id}</td>
-                            <td className='w-[15%] ps-2'>{operator.dateOfJoining}</td>
+                            <td className='w-[15%] ps-2'>
+                                <DateFormatter  date={operator.dateOfJoining}/>
+                            </td>
                             <td className='w-[20%] ps-2'>
                                 <div className='w-full h-full text-nowrap'>{operator.name}</div>
                             </td>

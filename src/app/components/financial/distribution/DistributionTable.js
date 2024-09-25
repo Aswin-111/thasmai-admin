@@ -3,6 +3,7 @@ import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useDistributionFilterStore } from "@/app/financial/distribution/filterState"; 
+import DateFormatter from "../../utils/DateFormatter";
 
 function DistributionTable(props) {
 
@@ -81,7 +82,7 @@ function DistributionTable(props) {
 											)
 										}
 									</td> */}
-                    		    	<td className="text-center">{ i.DOJ ? i.DOJ : "-" }</td>
+                    		    	<td className="text-center">{ i.DOJ ? <DateFormatter date={i.DOJ }/> : "-" }</td>
                     		    	<td 
 										className="text-center text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer"
 										onClick={() => {
