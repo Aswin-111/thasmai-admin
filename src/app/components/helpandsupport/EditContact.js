@@ -4,26 +4,25 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-function AddNewContact(props) {
-  const [departmentList, setDepartmentList] = useState([]);
+function EditContact(props) {
 
-  const [newContactDetails, setNewContactDetails] = useState({
-      departments: "",
-      name : "",
-      contact: "",
+  const [edittedData, setEdittedData] = useState({
+    id:"",
+    departments:"",
+    name: "",
+    contact: ""    
   });
-  console.log(newContactDetails);
   
-
 
   useEffect(() => {
     const fetchData = async () => {
-
+       const contactId = props.selectedContactId;
+        console.log(contactId);
+        
         try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/listDepartments`);
-                
-                console.log(response.data.departmentsList);
-                setDepartmentList(response.data.departmentsList);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/contact/${contactId}`);
+            console.log(response.data.contact);
+            setEdittedData(response.data.contact);
         } catch (error) {
             console.error('Error fetching data:', error);
             //   toast.error("Error fetching data.");
@@ -31,45 +30,35 @@ function AddNewContact(props) {
     };
 
     fetchData();
-  }, []);
+}, []);
 
-
-  function handleOnChange(e) {
-    const { name, value } = e.target;
-    setNewContactDetails((prevValue) => {
-      return({
+function handleOnChange(event) {
+  const { name, value } = event.target;
+  setEdittedData((prevValue) => {
+    return (
+      {
         ...prevValue,
-        [name] : value,
-      })
-    })
-  }
-
-
-  async function handleAddNewContact() {
-    const {departments, name, contact} = newContactDetails;
-    if(departments && name && contact) {
-      try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/addContact`, newContactDetails);
-        
-        console.log(response);
-        if(response) {
-          setNewContactDetails({
-            departments : "",
-            name : "",
-            contact : ""
-          });
-          props.setIsContactTableRenderToggle(prevValue => !prevValue);
-          toast.success("Successfully added new contact.");
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-          toast.error("Error while creating contact");
+        [name] : value
       }
-    } else {
-      toast("Enter the required fields");
-    }
-  }
+    )
+  })
+}
 
+async function handleEditContact() {
+  try {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/superadmin/updateContacts`, edittedData);
+      console.log(response);
+      if(response) {
+        toast.success("Contact updated successfully");
+        props.setIsContactTableRenderToggle(prevValue => !prevValue);
+        props.setIsEditContactOpen(false);
+      }
+      
+  } catch (error) {
+      console.error('Error fetching data:', error);
+        toast.error("Error while updating contact");
+  }
+}
 
   return (
     <div className="w-screen h-screen p-5 flex flex-col justify-center items-center absolute top-0 left-0 bg-[#000000d2] backdrop-blur-[1px]">
@@ -80,18 +69,18 @@ function AddNewContact(props) {
             <button
                     className="w-8 h-8  absolute top-4 right-4 hover:scale-110 text-4xl text-white "
                     onClick={() => {
-                        props.setIsAddNewDepartmentOpen(false);
+                        props.setIsEditContactOpen(false);
                     }}
             ><IoCloseCircleOutline/></button>
-            <p className='text-xl font-semibold'>ADD SUPPORT</p>
+            <p className='text-xl font-semibold'>Edit Contact</p>
         </div>
         <div className='w-full h-[344px] px-10 py-8 flex flex-col justify-between'>
             
-            <select
+            {/* <select
               className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-2 border-[#74777F] rounded-[8px]'
               name="departments"
-              value={newContactDetails.departments}
-              onChange={handleOnChange}
+              // value={edittedDetails.departments}
+              // onChange={handleOnChange}
             >
                 <option  value="" selected disabled>Select Department</option>
                 {
@@ -99,8 +88,11 @@ function AddNewContact(props) {
                     return <option key={dept.id} value={dept.departments}>{dept.departments}</option>
                   })
                 }
-            </select>
+            </select> */}
             
+            <div className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-2 border-[#74777F] rounded-[8px] flex items-center'>
+                {edittedData.departments}
+            </div>
             
              
              <input 
@@ -108,7 +100,7 @@ function AddNewContact(props) {
               placeholder='Name'
               className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-[1px] border-[#74777F] rounded-[8px] placeholder:text-[#44474E]'
               name="name"
-              value={newContactDetails.name}
+              value={edittedData.name}
               onChange={handleOnChange}
             />
             <input 
@@ -116,14 +108,14 @@ function AddNewContact(props) {
               placeholder='Phone Number'
               className='w-full h-10 ps-2 bg-[#E0E2EC] text-black border-[1px] border-[#74777F] rounded-[8px] placeholder:text-[#44474E]'
               name="contact"
-              value={newContactDetails.contact}
+              value={edittedData.contact}
               onChange={handleOnChange}
             />
            
          
             <button
              className='w-full sm:w-[400px] h-14 bg-[#005cb8e6] text-white rounded-xl hover:bg-[#005DB8]'
-                onClick={handleAddNewContact}
+                onClick={handleEditContact}
             >
                  Submit
             </button>
@@ -131,9 +123,9 @@ function AddNewContact(props) {
         </div>
 
     </div>
+    </div>
     
-</div>
   )
 }
 
-export default AddNewContact
+export default EditContact
