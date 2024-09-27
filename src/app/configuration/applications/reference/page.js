@@ -50,13 +50,15 @@ function RefQuestionConfiguration() {
       </div>
 
       <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md'>
-          <div className='w-full h-[60%] p-5 flex flex-col justify-between'>
+          <div className='w-full h-[65%] p-5 flex flex-col justify-between'>
               <p className='text-2xl text-black'>Q. { referenceData.question }</p>
               <p className='ps-6 text-xl text-black'>A. { referenceData.ans1 }</p>
               <p className='ps-6 text-xl text-black'>B. { referenceData.ans2 }</p>
               <p className='ps-6 text-xl text-black'>C. { referenceData.ans3 }</p>
               <p className='ps-6 text-xl text-black'>D. { referenceData.ans4 }</p>
               <p className='ps-6 text-xl text-black'>E. { referenceData.ans5 }</p>
+              <p className='ps-6 text-xl text-black'>F. { referenceData.ans6 }</p>
+
           </div>
 
           <button 

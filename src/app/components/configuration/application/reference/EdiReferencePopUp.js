@@ -14,6 +14,7 @@ function EdiReferencePopUp(props) {
         ans3: "",
         ans4: "",
         ans5: "",
+        ans6: "",
         conditions : "",
     });
 
@@ -51,7 +52,7 @@ function EdiReferencePopUp(props) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-            const { id, question, ans1, ans2, ans3, ans4, ans5 } = data;
+            const { id, question, ans1, ans2, ans3, ans4, ans5, ans6 } = data;
             console.log(data);
      
           try {
@@ -62,6 +63,7 @@ function EdiReferencePopUp(props) {
                 ans3: ans3,
                 ans4: ans4,
                 ans5: ans5,
+                ans6: ans6
             });
             // console.log(response);
             props.setRefDataToggle(prevValue => !prevValue);
@@ -140,6 +142,14 @@ function EdiReferencePopUp(props) {
               name='ans5'
               value={data.ans5}
               placeholder= {"E. " + data.ans5}
+              className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-blue-800 outline-none placeholder:text-xl '
+              onChange={handleOnChange}
+            />
+            <input 
+              type='text'
+              name='ans6'
+              value={data.ans6}
+              placeholder= {"F. " + data.ans6}
               className='w-[60%] h-12  mt-5 px-2 bg-white text-black border-b-2 border-blue-800 outline-none placeholder:text-xl '
               onChange={handleOnChange}
             />

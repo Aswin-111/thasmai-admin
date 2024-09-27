@@ -69,6 +69,9 @@
 // }
 
 // export default page
+
+
+
 "use client";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -80,6 +83,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import DeleteZoomMeetPopUp from "@/app/components/configuration/zoomMeet/DeleteZoomMeetPopUp";
 import Select from "react-select";
+import AddZoomMeet from "@/app/components/configuration/zoomMeet/AddZoomMeet";
+
 
 const daysOptions = [
   { value: "Sunday", label: "Sunday" },
@@ -112,6 +117,7 @@ function Page() {
   const [isFocusedZoomTo, setIsFocusedZoomTo] = useState(false);
   const [isFocusedDateFrom, setIsFocusedDateFrom] = useState(false);
   const [isFocusedDateTo, setIsFocusedDateTo] = useState(false);
+  const [isAddZoomMeet, setIsAddZoomMeet] = useState(false);
 
   const [zoomTableRenderToggle, setZoomTableRenderToggle] = useState(false);
 
@@ -201,6 +207,7 @@ function Page() {
         <NavLinkApp />
       </div>
       <div className="w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md overflow-y-auto">
+     
         <div className="w-full bg-[#E1E2EB] rounded-md">
           <p className="text-black font-medium px-2 pt-1">
             Create Zoom Meet Link
@@ -339,8 +346,169 @@ function Page() {
           setZoomTableRenderToggle={setZoomTableRenderToggle}
         />
       )}
+
+      {isAddZoomMeet && (
+        <AddZoomMeet/>
+      )}
     </div>
   );
 }
 
 export default Page;
+
+
+
+
+
+// "use client"
+// import { useEffect, useState } from "react";
+// import NavLink from "../../navlink/navlink";
+// import NavLinkApp from "../NavlinkApp/navlinkApp";
+// import { BsImage } from "react-icons/bs";
+// import ZoomMeet from "@/app/components/configuration/zoomMeet/ZoomMeet";
+// import axios from "axios";
+// import { toast } from "react-hot-toast";
+// import DeleteZoomMeetPopUp from "@/app/components/configuration/zoomMeet/DeleteZoomMeetPopUp";
+// import Select from "react-select";
+// import AddZoomMeet from "@/app/components/configuration/zoomMeet/AddZoomMeet";
+
+// const daysOptions = [
+//   { value: "Sunday", label: "Sunday" },
+//   { value: "Monday", label: "Monday" },
+//   { value: "Tuesday", label: "Tuesday" },
+//   { value: "Wednesday", label: "Wednesday" },
+//   { value: "Thursday", label: "Thursday" },
+//   { value: "Friday", label: "Friday" },
+//   { value: "Saturday", label: "Saturday" },
+// ];
+
+// function Page() {
+//   const [zoomMeetId, setZoomMeetId] = useState("");
+//   const [isZoomMeetPopUp, setIsZoomMeetPopUp] = useState(false);
+//   const [formData, setFormData] = useState({
+//     zoomdatefrom: "",
+//     zoomdateto: "",
+//     zoomStartTime: "",
+//     zoomStopTime: "",
+//     zoomLink: "",
+//     languages: "",
+//     daysOfWeek: [],
+//   });
+
+//   const [isFocusedZoomFrom, setIsFocusedZoomFrom] = useState(false);
+//   const [isFocusedZoomTo, setIsFocusedZoomTo] = useState(false);
+//   const [isFocusedDateFrom, setIsFocusedDateFrom] = useState(false);
+//   const [isFocusedDateTo, setIsFocusedDateTo] = useState(false);
+//   const [isAddZoomMeet, setIsAddZoomMeet] = useState(false);
+
+//   const [zoomTableRenderToggle, setZoomTableRenderToggle] = useState(false);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevState) => ({
+//       ...prevState,
+//       [name]: value,
+//     }));
+//   };
+
+//   const handleDaysOfWeekChange = (selectedDays) => {
+//     setFormData((prevState) => ({
+//       ...prevState,
+//       daysOfWeek: selectedDays,
+//     }));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     if (
+//       !formData.zoomdatefrom ||
+//       !formData.zoomdateto ||
+//       !formData.zoomStartTime ||
+//       !formData.zoomStopTime ||
+//       !formData.zoomLink ||
+//       !formData.languages ||
+//       !formData.daysOfWeek.length
+//     ) {
+//       toast.error("Please fill all the required fields.");
+//       return;
+//     }
+
+//     const formattedData = {
+//       ...formData,
+//       zoomdatefrom: new Date(formData.zoomdatefrom).toISOString().split("T")[0],
+//       zoomdateto: new Date(formData.zoomdateto).toISOString().split("T")[0],
+//     };
+
+//     try {
+//       const response = await axios.post(
+//         `${process.env.NEXT_PUBLIC_API_URL}/user/zoom`,
+//         formattedData,
+//         {
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
+
+//       setFormData({
+//         zoomdatefrom: "",
+//         zoomdateto: "",
+//         zoomStartTime: "",
+//         zoomStopTime: "",
+//         zoomLink: "",
+//         languages: "",
+//         daysOfWeek: [],
+//       });
+//       setZoomTableRenderToggle((prevValue) => !prevValue);
+//       toast.success(response.data.message);
+//     } catch (error) {
+//       toast.error("Failed to add meeting. Please try again.");
+//     }
+//   };
+
+//   return (
+//     <div className="w-full h-[85vh] px-7 overflow-y-auto">
+//       <div className="w-full flex items-center justify-between">
+//         <NavLink />
+//       </div>
+//       <div className="w-full">
+//         <NavLinkApp />
+//       </div>
+//       <div className="w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md overflow-y-auto">
+//         <button 
+//           onClick={() => setIsAddZoomMeet(true)}
+//           className="bg-blue-500 text-white p-2 rounded"
+//         >
+//           Add Zoom Meet
+//         </button>
+
+//         <div className="w-full bg-[#E1E2EB] rounded-md mt-4">
+//           {/* Form fields and other content */}
+//         </div>
+
+//         <ZoomMeet
+//           setZoomMeetId={setZoomMeetId}
+//           zoomTableRenderToggle={zoomTableRenderToggle}
+//           setIsZoomMeetPopUp={setIsZoomMeetPopUp}
+//         />
+//       </div>
+
+//       {isZoomMeetPopUp && (
+//         <DeleteZoomMeetPopUp
+//           zoomMeetId={zoomMeetId}
+//           setIsZoomMeetPopUp={setIsZoomMeetPopUp}
+//           zoomTableRenderToggle={zoomTableRenderToggle}
+//           setZoomTableRenderToggle={setZoomTableRenderToggle}
+//         />
+//       )}
+
+//       {isAddZoomMeet && (
+//         <AddZoomMeet setIsAddZoomMeet={setIsAddZoomMeet} />
+//       )}
+//     </div>
+//   );
+// }
+
+// export default Page;
+

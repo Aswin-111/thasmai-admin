@@ -132,7 +132,7 @@ function HelpAndSupportList() {
 
 
 				{Object.keys(groupedByDepartment).map((department, index) => (
-				        <div key={index} className='w-[373px] h-[448px]'>
+				        <div key={index} className='w-[373px] h-[448px] shadow-xl '>
 				          <div className='w-full h-14 flex items-center justify-center bg-gradient-to-b from-[#858B9C] to-[#2E3036]'>
 				            <p className='text-white text-sm font-semibold leading-6'>{department}</p>
 				          </div>

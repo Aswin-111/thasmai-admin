@@ -45,6 +45,7 @@ function MeditationTime() {
         <NavLinkApp />
       </div>
       <div className='w-full h-[85%] mt-4 p-4 bg-white rounded-[8px] shadow drop-shadow-md overflow-y-auto'>
+        
         <MeditationTimeForm setMeditationTimeRenderToggle={setMeditationTimeRenderToggle}/>
           <MeditationTimeConfigTable  
           setEditMeditationTimePopUp={setEditMeditationTimePopUp} 
