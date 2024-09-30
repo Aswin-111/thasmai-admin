@@ -1,12 +1,9 @@
-"use client";
+"use client"
 import React, { useState, useEffect } from 'react';
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { toast }  from 'react-hot-toast';
 import axios from 'axios';
-
-
-
 
 
 function HelpAndSupportTable(props) {
@@ -20,7 +17,7 @@ function HelpAndSupportTable(props) {
                 props.setContactList(response.data.list);
             } catch (error) {
                 console.error('Error fetching data:', error);
-                //   toast.error("Error fetching data.");
+                  toast.error("Error fetching data.");
             }
         };
     
@@ -29,7 +26,8 @@ function HelpAndSupportTable(props) {
 
     
   return (
-    <table className="table rounded-3xl">
+      <>
+        <table className="table rounded-3xl">
             <thead className="w-full h-[56px] bg-gradient-to-b from-[#858B9C] to-[#2E3036] text-white sticky top-0 gap-x-20 text-[0.9rem]">
               <tr className="rounded-3xl">
                 <th className="text-center w-[10%]">Sl No.</th>
@@ -49,7 +47,7 @@ function HelpAndSupportTable(props) {
                       <td className="text-center w-[20%]">{contact.departments}</td>
                       <td className="text-center w-[20%]">{contact.name}</td>
                       <td className="text-center w-[20%]">{contact.contact}</td>
-                      <td className="  ">
+                      <td className="">
                         <span className="flex justify-between text-xl">
                           <MdDelete 
                             className="text-[#BA1A1A] hover:scale-125 cursor-pointer"
@@ -73,11 +71,11 @@ function HelpAndSupportTable(props) {
               }
               
 
-              
-              
+
             </tbody>
           </table>
+        </>
   )
 }
 
-export default HelpAndSupportTable
+export default HelpAndSupportTable;

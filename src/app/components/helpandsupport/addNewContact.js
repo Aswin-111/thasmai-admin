@@ -5,15 +5,18 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 function AddNewContact(props) {
+
+    const [newContactDetails, setNewContactDetails] = useState({
+        departments: "",
+        name : "",
+        contact: "",
+    });
+
+  console.log(newContactDetails);
+
   const [departmentList, setDepartmentList] = useState([]);
 
-  const [newContactDetails, setNewContactDetails] = useState({
-      departments: "",
-      name : "",
-      contact: "",
-  });
-  console.log(newContactDetails);
-  
+
 
 
   useEffect(() => {
@@ -26,7 +29,7 @@ function AddNewContact(props) {
                 setDepartmentList(response.data.departmentsList);
         } catch (error) {
             console.error('Error fetching data:', error);
-            //   toast.error("Error fetching data.");
+              toast.error("Error fetching data.");
         }
     };
 
@@ -58,9 +61,9 @@ function AddNewContact(props) {
             name : "",
             contact : ""
           });
-          props.setIsContactTableRenderToggle(prevValue => !prevValue);
           toast.success("Successfully added new contact.");
         }
+        props.setIsContactTableRenderToggle(prevValue => !prevValue);
       } catch (error) {
         console.error('Error fetching data:', error);
           toast.error("Error while creating contact");
@@ -80,7 +83,7 @@ function AddNewContact(props) {
             <button
                     className="w-8 h-8  absolute top-4 right-4 hover:scale-110 text-4xl text-white "
                     onClick={() => {
-                        props.setIsAddNewDepartmentOpen(false);
+                        props.setIsAddNewContactOpen(false);
                     }}
             ><IoCloseCircleOutline/></button>
             <p className='text-xl font-semibold'>ADD SUPPORT</p>
@@ -136,4 +139,4 @@ function AddNewContact(props) {
   )
 }
 
-export default AddNewContact
+export default AddNewContact;

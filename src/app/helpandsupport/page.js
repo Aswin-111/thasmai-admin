@@ -1,17 +1,16 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import toast from "react-hot-toast";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavbarTextStore } from "../state/navbar-state";
 
-import AddNewContact from "../components/helpandsupport/AddNewContact";
 import AddNewDepartment from "../components/helpandsupport/AddNewDepartment";
-import HelpAndSupportTable from "../components/helpandsupport/HelpAndSupportTable";
 import EditContact from "../components/helpandsupport/EditContact";
 import DeleteContactPopUp from "../components/helpandsupport/DeleteContactPopUp";
 import DeleteDepartmentPopUp from "../components/helpandsupport/DeleteDepartmentPopUp";
 import EditDepartmentPopUp from "../components/helpandsupport/EditDepartmentPopUp";
+import HelpAndSupportTable from "../components/helpandsupport/HelpAndSupportTable";
+import AddNewContact from "../components/helpandsupport/AddNewContact";
 
 export default function HelpAndSupport() {
 
@@ -23,6 +22,8 @@ export default function HelpAndSupport() {
 
 
   const [isAddNewDepartmentOpen, setIsAddNewDepartmentOpen] = useState(false);
+  const [isAddNewContactOpen, setIsAddNewContactOpen] = useState(false);
+
   const [isEditContactOpen, setIsEditContactOpen] = useState(false);
   const [isDeleteContactOpen, setIsDeleteContactOpen] = useState(false);
 
@@ -62,7 +63,7 @@ export default function HelpAndSupport() {
           <button 
             className="w-[213px] h-14 bg-[#165DB2] text-white text-base font-medium rounded-lg"
             onClick={() => {
-              setIsAddNewDepartmentOpen(true);
+              setIsAddNewContactOpen(true);
             }}
           >
             + ADD NEW CONTACT
@@ -92,6 +93,7 @@ export default function HelpAndSupport() {
                setSelectedContactId={ setSelectedContactId }
                isContactTableRenderToggle={isContactTableRenderToggle}    
             />
+            
           </div>
         </div>
         <div className="w-[40%] h-full mx-4 pb-6 border-[1px] border-[#727783] rounded-lg drop-shadow-sm shadow-md bg-[#F9F9FF]">
@@ -108,9 +110,9 @@ export default function HelpAndSupport() {
       </div>
 
       {
-        isAddNewDepartmentOpen &&
+        isAddNewContactOpen &&
         <AddNewContact 
-          setIsAddNewDepartmentOpen={setIsAddNewDepartmentOpen} 
+          setIsAddNewContactOpen={setIsAddNewContactOpen} 
           isContactTableRenderToggle={isContactTableRenderToggle}
           setIsContactTableRenderToggle={setIsContactTableRenderToggle}
         />
